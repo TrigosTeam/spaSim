@@ -1,10 +1,16 @@
 Package: spaSim
-Title: What the Package Does (One Line, Title Case)
+Title: Spatial point data simulator for tissue images
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Yuzhou", "Feng", "yuzhou.feng@petermac.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-2955-4053"))
+    person("Anna", "Trigos", "anna.trigos@petermac.org", role = c("aut"),
+           comment = c(ORCID = "xxxx-xxxx-xxxx-xxxx"))
+Description: A suite of functions for simulating spatial patterns of cells in 
+    tissue images. Output imagesare multitype point data in SingleCellExperiment 
+    format. Each point represents a cell, with its 2D locations and cell type. 
+    Potential cell patterns include background cells, tumour/immune cell clusters, 
+    immune rings, and blood/lymphatic vessels.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
