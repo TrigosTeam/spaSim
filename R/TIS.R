@@ -1,4 +1,35 @@
-##### function #####
+#' TIS
+#'
+#' @param background_sample (OPTIONAL) Data.frame with locations of points
+#' representing background cells. If NULL, background cells will be simulated
+#' in this function.
+#' @param n_cells (OPTIONAL) Number of background cells to simulate. If NULL,
+#' already have a background image.
+#' @param width (OPTIONAL) Number The width of the image.
+#' @param height (OPTIONAL) Number The height of the image.
+#' @param min_d (OPTIONAL) Number The minimum distance between two cells.
+#' @param names_of_bg_cells (OPTIONAL) Vector The cell types of the background
+#' cells. If NULL, the background cells are of one type.
+#' @param proportions_of_bg_cells (OPTIONAL) Vector The corresponding proportion
+#' of each cell type in the background cells.
+#' @param n_clusters (OPTIONAL) Number of cell clusters. If NULL, no clusters to
+#' simulate.
+#' @param properties_of_clusters (OPTIONAL) List of parameters to define the
+#' clusters.
+#' @param n_immune_rings (OPTIONAL) Number of immune rings. If NULL, no immune
+#' rings to simulate.
+#' @param properties_of_immune_rings (OPTIONAL) List of parameters to define the
+#' immune rings.
+#' @param n_stripe_type (OPTIONAL) Number of stripe (vessel) types. If NULL, no
+#' stripes to simulate.
+#' @param properties_of_stripes (OPTIONAL) List of parameters to define the stripes.
+#' @param image_name (OPTIONAL) String to name the output tissue image.
+#'
+#' @importFrom SPIAT format_colData_to_sce
+#' @return
+#' @export
+#'
+#' @examples
 TIS <- function(background_sample = NULL,
                 n_cells = NULL,
                 width = NULL,
