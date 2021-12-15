@@ -69,7 +69,7 @@ TIS <- function(background_sample = NULL,
                              shape = "Rectangle",
                              size = bg_size,
                              centre_loc = data.frame("x" = X/2, "y" = Y/2),
-                             win = owin(c(0,X),c(0,Y)))
+                             win = spatstat::owin(c(0,X),c(0,Y)))
   }
   # simulate clusters
   if (!is.null(n_clusters)){
