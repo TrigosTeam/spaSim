@@ -6,7 +6,6 @@
 #' the window of the background image.
 #' @param properties_of_stripes List of the properties of the stripes
 #'
-#' @importFrom spatstat owin
 #' @return
 #' @export
 simulate_stripes <- function(background_sample = sample2,
@@ -33,7 +32,7 @@ simulate_stripes <- function(background_sample = sample2,
   if (is.null(win)) {
     X <- max(background_sample$Cell.X.Position)
     Y <- max(background_sample$Cell.Y.Position)
-    win <- owin(c(0, X), c(0,Y))
+    win <- spatstat::owin(c(0, X), c(0,Y))
   }
 
 

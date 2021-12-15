@@ -2,4 +2,3 @@
 
 export(TIS)
 export(simulate_stripes)
-importFrom(spatstat,owin)
