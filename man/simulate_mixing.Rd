@@ -30,7 +30,7 @@ simulate_mixing(
 \item{win}{owin object output from spatstat::owin function}
 }
 \value{
-
+A data.frame of the simulated image
 }
 \description{
 simulate_mixing

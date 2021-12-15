@@ -6,7 +6,7 @@
 #' the window of the background image.
 #' @param properties_of_stripes List of the properties of the stripes
 #'
-#' @return
+#' @return A data.frame of the simulated image
 #' @export
 simulate_stripes <- function(background_sample,
                              n_stripe_type,

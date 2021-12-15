@@ -8,7 +8,7 @@
 #' default is the window of the background image
 #' @param properties_of_clusters List of properties of the clusters
 #'
-#' @return
+#' @return A data.frame of the simulated image
 #' @export
 
 simulate_clusters <- function(background_sample,

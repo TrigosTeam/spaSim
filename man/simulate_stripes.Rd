@@ -26,7 +26,7 @@ the window of the background image.}
 \item{properties_of_stripes}{List of the properties of the stripes}
 }
 \value{
-
+A data.frame of the simulated image
 }
 \description{
 simulate_stripes

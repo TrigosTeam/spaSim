@@ -31,7 +31,7 @@ default is the window of the background image}
 \item{properties_of_clusters}{List of properties of the clusters}
 }
 \value{
-
+A data.frame of the simulated image
 }
 \description{
 simulate_clusters

@@ -18,7 +18,7 @@ simulate_background_cells(n_cells, width, height, min_d, oversample = 1.2)
 \item{oversample}{Number The multiplier for oversampling}
 }
 \value{
-
+A data.frame of the simulated image
 }
 \description{
 simulate_background_cells

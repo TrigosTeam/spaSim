@@ -8,7 +8,7 @@
 #' @param centre_loc Data.frame The 2D location of the centre of the mixed area
 #' @param win owin object output from spatstat::owin function
 #'
-#' @return
+#' @return A data.frame of the simulated image
 #' @export
 #'
 simulate_mixing <- function(background_sample,

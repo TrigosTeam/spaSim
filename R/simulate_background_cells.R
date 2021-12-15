@@ -7,7 +7,7 @@
 #' @param oversample Number The multiplier for oversampling
 #'
 #' @importFrom ggplot2 ggplot aes geom_point
-#' @return
+#' @return A data.frame of the simulated image
 #' @export
 #'
 simulate_background_cells <- function(n_cells, width, height, min_d, oversample = 1.2){

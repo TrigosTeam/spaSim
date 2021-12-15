@@ -25,7 +25,7 @@
 #' @param properties_of_stripes (OPTIONAL) List of parameters to define the stripes.
 #' @param image_name (OPTIONAL) String to name the output tissue image.
 #'
-#' @return
+#' @return An sce object of the simulated image
 #' @export
 #'
 TIS <- function(background_sample = NULL,

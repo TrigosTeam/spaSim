@@ -36,7 +36,7 @@ default is the window of the background image}
 \item{properties_of_immune_rings}{List of properties of the immune rings}
 }
 \value{
-
+A data.frame of the simulated image
 }
 \description{
 simulate_immune_rings

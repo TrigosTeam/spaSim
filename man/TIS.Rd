@@ -61,7 +61,7 @@ stripes to simulate.}
 \item{image_name}{(OPTIONAL) String to name the output tissue image.}
 }
 \value{
-
+An sce object of the simulated image
 }
 \description{
 TIS
