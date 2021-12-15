@@ -29,7 +29,6 @@
 #' @return
 #' @export
 #'
-#' @examples
 TIS <- function(background_sample = NULL,
                 n_cells = NULL,
                 width = NULL,
