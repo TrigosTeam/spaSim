@@ -6,7 +6,7 @@
 #' @param min_d Number The minimum distance between two cells
 #' @param oversample Number The multiplier for oversampling
 #'
-#' @importFrom ggplots ggplot aes geom_point
+#' @importFrom ggplot2 ggplot aes geom_point
 #' @return
 #' @export
 #'
