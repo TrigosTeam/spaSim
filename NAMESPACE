@@ -2,5 +2,4 @@
 
 export(TIS)
 export(simulate_stripes)
-importFrom(SPIAT,format_colData_to_sce)
 importFrom(spatstat,owin)

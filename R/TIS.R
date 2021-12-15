@@ -25,7 +25,6 @@
 #' @param properties_of_stripes (OPTIONAL) List of parameters to define the stripes.
 #' @param image_name (OPTIONAL) String to name the output tissue image.
 #'
-#' @importFrom SPIAT format_colData_to_sce
 #' @return
 #' @export
 #'
@@ -96,7 +95,7 @@ TIS <- function(background_sample = NULL,
                               properties_of_stripes = properties_of_stripes)}
 
   # format sce object
-  sce <- format_colData_to_sce(image)
+  sce <- SPIAT::format_colData_to_sce(image)
   attr(sce, "name") <- image_name
   return(sce)
 }
