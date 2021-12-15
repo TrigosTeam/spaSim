@@ -1,3 +1,14 @@
+#' simulate_stripes
+#'
+#' @param background_sample Data.Frame The image that the stripes are simulated on
+#' @param n_stripe_type Number of the types of the stripes
+#' @param win (OPTIONAL) owin object from spatstat owin method. By default it is
+#' the window of the background image.
+#' @param properties_of_stripes List of the properties of the stripes
+#'
+#' @importFrom spatstat owin
+#' @return
+#' @export
 simulate_stripes <- function(background_sample = sample2,
                              n_stripe_type,
                              win = NULL,
