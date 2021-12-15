@@ -1,3 +1,15 @@
+#' simulate_immune_rings
+#'
+#' @param background_sample Data.Frame The image that the stripes are simulated on
+#' @param bg_type (OPTIONAL) String The name of the background cell type. By
+#' default is "Others".
+#' @param n_immune_rings Number of immune rings
+#' @param win (OPTIONAL) owin object output from spatstat::owin function. By
+#' default is the window of the background image
+#' @param properties_of_immune_rings List of properties of the immune rings
+#'
+#' @return
+#' @export
 simulate_immune_rings <- function(background_sample,
                                   bg_type = "Others",
                                   n_immune_rings = 2,
@@ -43,7 +55,7 @@ simulate_immune_rings <- function(background_sample,
   if (is.null(win)) {
     X <- max(background_sample$Cell.X.Position)
     Y <- max(background_sample$Cell.Y.Position)
-    win <- owin(c(0, X), c(0,Y))
+    win <- spatstat::owin(c(0, X), c(0,Y))
   }
 
   # Default phenotype is specified by bg_type
@@ -70,7 +82,7 @@ simulate_immune_rings <- function(background_sample,
 
     # generate a location as the centre of the cluster
     if (is.null(centre_loc)){
-      seed_point <- runifpoint(1, win=win)}
+      seed_point <- spatstat::runifpoint(1, win=win)}
     else seed_point <- centre_loc
     a <- seed_point$x
     b <- seed_point$y
@@ -102,7 +114,7 @@ simulate_immune_rings <- function(background_sample,
       # determine which region the point falls in
       if (D < R){
         # generate random number to decide the phenotype
-        random <- runif(1)
+        random <- stats::runif(1)
         n_infiltration_types <- length(infiltration_types)
         pheno <- cluster_cell_type
         n <- 1
@@ -119,7 +131,7 @@ simulate_immune_rings <- function(background_sample,
 
       else if(D < I_R){
         # generate random number to decide the phenotype
-        random <- runif(1)
+        random <- stats::runif(1)
         n_ring_infiltration_types <- length(ring_infiltration_types)
         pheno <- ring_cell_type
         n <- 1

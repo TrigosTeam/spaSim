@@ -8,7 +8,7 @@
 #'
 #' @return
 #' @export
-simulate_stripes <- function(background_sample = sample2,
+simulate_stripes <- function(background_sample,
                              n_stripe_type,
                              win = NULL,
                              properties_of_stripes = list(
@@ -49,7 +49,7 @@ simulate_stripes <- function(background_sample = sample2,
     infiltration_proportions = properties_of_stripes[[k]]$infiltration_proportions
 
     # generate intercepts
-    random_nums <- runif(n_stripes, min = -max(X,Y), max = max(X,Y))
+    random_nums <- stats::runif(n_stripes, min = -max(X,Y), max = max(X,Y))
 
     for (i in 1:dim(background_sample)[1]){
       x <- background_sample[i, "Cell.X.Position"]
@@ -59,10 +59,10 @@ simulate_stripes <- function(background_sample = sample2,
       p <- tryCatch(which(random_nums == max(random_nums[which(random_nums<y-x)])),
                     error=function(e) e, warning=function(w) w)
 
-      if (is(p,"warning") == FALSE) {
+      if (methods::is(p,"warning") == FALSE) {
         b <- random_nums[p]
         if ( y < x + b + stripe_width ){
-          random <- runif(1)
+          random <- stats::runif(1)
           n_infiltration_types <- length(infiltration_types)
           pheno <- stripe_cell_type
 
@@ -76,12 +76,9 @@ simulate_stripes <- function(background_sample = sample2,
             }
             n <- n+1
           }
-
           background_sample[i, "Phenotype"] <- pheno
         }
       }
-
-
     }
   }
 

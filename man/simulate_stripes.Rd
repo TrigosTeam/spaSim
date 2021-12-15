@@ -5,7 +5,7 @@
 \title{simulate_stripes}
 \usage{
 simulate_stripes(
-  background_sample = sample2,
+  background_sample,
   n_stripe_type,
   win = NULL,
   properties_of_stripes = list(S1 = list(number_of_stripes = 1, name_of_stripe_cell =

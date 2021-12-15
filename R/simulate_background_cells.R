@@ -1,14 +1,26 @@
+#' simulate_background_cells
+#'
+#' @param n_cells Number of cells in the background
+#' @param width Number The width of the image
+#' @param height Number The height of the image
+#' @param min_d Number The minimum distance between two cells
+#' @param oversample Number The multiplier for oversampling
+#'
+#' @importFrom ggplots ggplot aes geom_point
+#' @return
+#' @export
+#'
 simulate_background_cells <- function(n_cells, width, height, min_d, oversample = 1.2){
 
   # need to oversample first
   n_cells_inflated <- n_cells*oversample
 
   # ccalculate the window and intensity
-  win <- owin(xrange=c(0,width), yrange=c(0,height))
+  win <- spatstat::owin(xrange=c(0,width), yrange=c(0,height))
   beta <- n_cells_inflated/(width*height)
 
   # Hardcore process
-  sample <- rHardcore(beta = beta,R = min_d, W=win)
+  sample <- spatstat::rHardcore(beta = beta,R = min_d, W=win)
 
   # extract point data
   Cell.X.Position <- sample$x

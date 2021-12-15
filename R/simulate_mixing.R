@@ -1,4 +1,17 @@
-simulate_mixing <- function(background_sample = sample2,
+#' simulate_mixing
+#'
+#' @param background_sample Data.Frame The image that the stripes are simulated on
+#' @param names_of_mixing Vector of the mixed cell types
+#' @param shape String of the shape of the mixing area. Only "Rectangle" is available now
+#' @param size Vector c(width, height) The size of the mixing area
+#' @param mixing_degree Vector of the proportions of the mixed cell types
+#' @param centre_loc Data.frame The 2D location of the centre of the mixed area
+#' @param win owin object output from spatstat::owin function
+#'
+#' @return
+#' @export
+#'
+simulate_mixing <- function(background_sample,
                             names_of_mixing = c("Tumour", "Immune", "Others"),
                             shape = "Rectangle",
                             size = c(2500,2000),
@@ -13,7 +26,7 @@ simulate_mixing <- function(background_sample = sample2,
 
   # generate a location as the centre of the cluster
   if (is.null(centre_loc)){
-    seed_point <- runifpoint(1, win=win)}
+    seed_point <- spatstat::runifpoint(1, win=win)}
   else seed_point <- centre_loc
   a <- seed_point$x
   b <- seed_point$y
@@ -29,7 +42,7 @@ simulate_mixing <- function(background_sample = sample2,
     y <- background_sample[i, "Cell.Y.Position"]
 
     if (x > a - w && x < a + w && y > b - h && y < b + h){
-      random <- runif(1)
+      random <- stats::runif(1)
 
       # if the random number falls in the range of an infiltration proportion,
       # pheno will be the corresponding infiltraiton type
