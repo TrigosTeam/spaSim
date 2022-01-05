@@ -22,9 +22,9 @@ TIS(
 )
 }
 \arguments{
-\item{background_sample}{(OPTIONAL) Data.frame with locations of points
-representing background cells. If NULL, background cells will be simulated
-in this function.}
+\item{background_sample}{(OPTIONAL) Data.frame or SingleCellExperiment object
+with locations of points representing background cells. If NULL, background cells
+will be simulated in this function.}
 
 \item{n_cells}{(OPTIONAL) Number of background cells to simulate. If NULL,
 already have a background image.}
