@@ -4,7 +4,7 @@
 #' @param n_clusters Number of clusters
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #' default is "Others".
-#' @param win (OPTIONAL) owin object output from spatstat::owin function. By
+#' @param win (OPTIONAL) owin object output from spatstat.geom::owin function. By
 #' default is the window of the background image
 #' @param properties_of_clusters List of properties of the clusters
 #'
@@ -31,8 +31,11 @@ simulate_clusters <- function(background_sample,
                                   infiltration_types = c("Immune2", "Others"),
                                   infiltration_proportions = c(0.1, 0.05))
                               )
-)
-{
+){
+
+  # CHECK is the background sample a dataframe?
+  if (!is.data.frame(background_sample)) {
+    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
 
   # Get the window
   # if window is specified, use the specified window
@@ -40,7 +43,7 @@ simulate_clusters <- function(background_sample,
   if (is.null(win)) {
     X <- max(background_sample$Cell.X.Position)
     Y <- max(background_sample$Cell.Y.Position)
-    win <- spatstat::owin(c(0, X), c(0,Y))
+    win <- spatstat.geom::owin(c(0, X), c(0,Y))
   }
 
   # Default phenotype is specified by bg_type
@@ -71,7 +74,9 @@ simulate_clusters <- function(background_sample,
     r <- size
     R <- r^2
     shape <- shape
-    r_theta <- stats::runif(1, min = -2 , max = 1) # for the irregular shape
+    #r_theta <- stats::runif(1, min = -2 , max = 1) # for the irregular shape
+    # `r_theta` not random
+    r_theta <- 0.5
 
     Circle <- (shape == "Circle")
     Oval <- (shape == "Oval")
