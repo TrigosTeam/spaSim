@@ -25,7 +25,7 @@ simulate_clusters(
 \item{bg_type}{(OPTIONAL) String The name of the background cell type. By
 default is "Others".}
 
-\item{win}{(OPTIONAL) owin object output from spatstat::owin function. By
+\item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function. By
 default is the window of the background image}
 
 \item{properties_of_clusters}{List of properties of the clusters}
