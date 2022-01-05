@@ -54,6 +54,10 @@ TIS <- function(background_sample = NULL,
     Y <- height
   }
 
+  # CHECK is the background sample a dataframe?
+  if (!is.data.frame(background_sample)) {
+    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+
   image <- background_sample
   X <- max(background_sample$Cell.X.Position)
   Y <- max(background_sample$Cell.Y.Position)
@@ -69,7 +73,7 @@ TIS <- function(background_sample = NULL,
                              shape = "Rectangle",
                              size = bg_size,
                              centre_loc = data.frame("x" = X/2, "y" = Y/2),
-                             win = spatstat::owin(c(0,X),c(0,Y)))
+                             win = spatstat.geom::owin(c(0,X),c(0,Y)))
   }
   # simulate clusters
   if (!is.null(n_clusters)){
@@ -95,7 +99,7 @@ TIS <- function(background_sample = NULL,
                               properties_of_stripes = properties_of_stripes)}
 
   # format sce object
-  sce <- SPIAT::format_colData_to_sce(image)
+  sce <- format_sce(image)
   attr(sce, "name") <- image_name
   return(sce)
 }

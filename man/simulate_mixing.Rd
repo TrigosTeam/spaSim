@@ -11,7 +11,7 @@ simulate_mixing(
   size = c(2500, 2000),
   mixing_degree = c(0.2, 0.4, 0.4),
   centre_loc = data.frame(x = c(1250), y = c(1000)),
-  win = spatstat::owin(c(0, 2500), c(0, 2000))
+  win = spatstat.geom::owin(c(0, 2500), c(0, 2000))
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ simulate_mixing(
 
 \item{centre_loc}{Data.frame The 2D location of the centre of the mixed area}
 
-\item{win}{owin object output from spatstat::owin function}
+\item{win}{owin object output from spatstat.geom::owin function}
 }
 \value{
 A data.frame of the simulated image

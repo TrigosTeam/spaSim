@@ -16,11 +16,11 @@ simulate_background_cells <- function(n_cells, width, height, min_d, oversample 
   n_cells_inflated <- n_cells*oversample
 
   # ccalculate the window and intensity
-  win <- spatstat::owin(xrange=c(0,width), yrange=c(0,height))
+  win <- spatstat.geom::owin(xrange=c(0,width), yrange=c(0,height))
   beta <- n_cells_inflated/(width*height)
 
   # Hardcore process
-  sample <- spatstat::rHardcore(beta = beta,R = min_d, W=win)
+  sample <- spatstat.core::rHardcore(beta = beta,R = min_d, W=win)
 
   # extract point data
   Cell.X.Position <- sample$x

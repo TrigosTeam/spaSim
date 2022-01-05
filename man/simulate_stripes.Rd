@@ -20,7 +20,7 @@ simulate_stripes(
 
 \item{n_stripe_type}{Number of the types of the stripes}
 
-\item{win}{(OPTIONAL) owin object from spatstat owin method. By default it is
+\item{win}{(OPTIONAL) owin object from spatstat.geom owin method. By default it is
 the window of the background image.}
 
 \item{properties_of_stripes}{List of the properties of the stripes}

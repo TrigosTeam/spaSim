@@ -4,7 +4,7 @@
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #' default is "Others".
 #' @param n_immune_rings Number of immune rings
-#' @param win (OPTIONAL) owin object output from spatstat::owin function. By
+#' @param win (OPTIONAL) owin object output from spatstat.geom::owin function. By
 #' default is the window of the background image
 #' @param properties_of_immune_rings List of properties of the immune rings
 #'
@@ -44,21 +44,25 @@ simulate_immune_rings <- function(background_sample,
 ) {
 
   ## CHECK
+  # is the background sample a dataframe?
+  if (!is.data.frame(background_sample)) {
+    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+
   # check if the specified cluster properties match n_immune_rings
   if (as.numeric(length(properties_of_immune_rings)) != n_immune_rings){
     stop("`n_immune_rings` does not match the length of `properties_of_immune_rings`!")
   }
 
-  # Get the window
+  ## Get the window
   # if window is specified, use the specified window
   # otherwise, use the window of the background sample
   if (is.null(win)) {
     X <- max(background_sample$Cell.X.Position)
     Y <- max(background_sample$Cell.Y.Position)
-    win <- spatstat::owin(c(0, X), c(0,Y))
+    win <- spatstat.geom::owin(c(0, X), c(0,Y))
   }
 
-  # Default phenotype is specified by bg_type
+  ## Default phenotype is specified by bg_type
   # (when background sample does not have Phenotype)
   if (is.null(background_sample$Phenotype)){
     background_sample[, "Phenotype"] <- bg_type

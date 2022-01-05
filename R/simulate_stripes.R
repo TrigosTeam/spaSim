@@ -2,7 +2,7 @@
 #'
 #' @param background_sample Data.Frame The image that the stripes are simulated on
 #' @param n_stripe_type Number of the types of the stripes
-#' @param win (OPTIONAL) owin object from spatstat owin method. By default it is
+#' @param win (OPTIONAL) owin object from spatstat.geom owin method. By default it is
 #' the window of the background image.
 #' @param properties_of_stripes List of the properties of the stripes
 #'
@@ -28,11 +28,14 @@ simulate_stripes <- function(background_sample,
                                )
                              )
 ){
+  # CHECK is the background sample a dataframe?
+  if (!is.data.frame(background_sample)) {
+    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
   # get the window
   if (is.null(win)) {
     X <- max(background_sample$Cell.X.Position)
     Y <- max(background_sample$Cell.Y.Position)
-    win <- spatstat::owin(c(0, X), c(0,Y))
+    win <- spatstat.geom::owin(c(0, X), c(0,Y))
   }
 
 

@@ -30,7 +30,7 @@ default is "Others".}
 
 \item{n_immune_rings}{Number of immune rings}
 
-\item{win}{(OPTIONAL) owin object output from spatstat::owin function. By
+\item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function. By
 default is the window of the background image}
 
 \item{properties_of_immune_rings}{List of properties of the immune rings}

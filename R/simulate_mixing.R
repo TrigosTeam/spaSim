@@ -6,7 +6,7 @@
 #' @param size Vector c(width, height) The size of the mixing area
 #' @param mixing_degree Vector of the proportions of the mixed cell types
 #' @param centre_loc Data.frame The 2D location of the centre of the mixed area
-#' @param win owin object output from spatstat::owin function
+#' @param win owin object output from spatstat.geom::owin function
 #'
 #' @return A data.frame of the simulated image
 #' @export
@@ -17,7 +17,11 @@ simulate_mixing <- function(background_sample,
                             size = c(2500,2000),
                             mixing_degree = c(0.2, 0.4, 0.4),
                             centre_loc = data.frame("x" = c(1250), "y" = c(1000)),
-                            win = spatstat::owin(c(0,2500),c(0,2000))) {
+                            win = spatstat.geom::owin(c(0,2500),c(0,2000))) {
+
+  # CHECK is the background sample a dataframe?
+  if (!is.data.frame(background_sample)) {
+    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
 
   # default phenotype is "Others"
   if (is.null(background_sample$Phenotype)){
