@@ -15,8 +15,8 @@ simulate_multiple_images_with_clusters <- function(background_sample = bg1,
                                                    cluster_shape = 2,
                                                    infiltration = 0.1,
                                                    cluster_size = seq(200,1000,100),
-                                                   cluster_loc_x = 1000,
-                                                   cluster_loc_y = 1000,
+                                                   cluster_loc_x = 0,
+                                                   cluster_loc_y = 0,
                                                    plot.image = TRUE){
   # count the image number
   i <- 0
