@@ -1,8 +1,8 @@
 #' TIS
 #'
-#' @param background_sample (OPTIONAL) Data.frame with locations of points
-#' representing background cells. If NULL, background cells will be simulated
-#' in this function.
+#' @param background_sample (OPTIONAL) Data.frame or SingleCellExperiment object
+#' with locations of points representing background cells. If NULL, background cells
+#' will be simulated in this function.
 #' @param n_cells (OPTIONAL) Number of background cells to simulate. If NULL,
 #' already have a background image.
 #' @param width (OPTIONAL) Number The width of the image.
