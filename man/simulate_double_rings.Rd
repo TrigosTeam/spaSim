@@ -5,7 +5,7 @@
 \title{simulate_double_rings}
 \usage{
 simulate_double_rings(
-  background_sample,
+  background_sample = bg1,
   bg_type = "Others",
   n_double_rings = 2,
   win = NULL,
@@ -27,7 +27,8 @@ simulate_double_rings(
 )
 }
 \arguments{
-\item{background_sample}{Data.Frame The image that the stripes are simulated on}
+\item{background_sample}{(OPTIONAL) Data.Frame The image that the patterns
+are simulated on. By default use the internal \code{bg1} background image}
 
 \item{bg_type}{(OPTIONAL) String The name of the background cell type. By
 default is "Others".}

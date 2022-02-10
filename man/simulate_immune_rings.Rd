@@ -5,17 +5,17 @@
 \title{simulate_immune_rings}
 \usage{
 simulate_immune_rings(
-  background_sample,
+  background_sample = bg1,
   bg_type = "Others",
   n_immune_rings = 2,
   win = NULL,
   properties_of_immune_rings = list(I1 = list(name_of_cluster_cell = "Tumour", size =
-    700, shape = "Circle", centre_loc = data.frame(x = 1800, y = 1500),
-    infiltration_types = c("Immune1", "Immune2", "Others"), infiltration_proportions =
-    c(0.15, 0.05, 0.05), name_of_ring_cell = "Immune1", immune_ring_width = 150,
+    600, shape = "Circle", centre_loc = data.frame(x = 930, y = 1000), infiltration_types
+    = c("Immune1", "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
+    name_of_ring_cell = "Immune1", immune_ring_width = 150,
     immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions =
-    c(0.15)), I2 = list(name_of_cluster_cell = "Tumour", size = 700, shape = "Circle",
-    centre_loc = data.frame(x = 1800, y = 1500), infiltration_types = c("Immune1",     
+    c(0.15)), I2 = list(name_of_cluster_cell = "Tumour", size = 500, shape = "Oval",
+    centre_loc = data.frame(x = 1330, y = 1100), infiltration_types = c("Immune1",     
     "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
     name_of_ring_cell = "Immune1", immune_ring_width = 150,
     immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions =
@@ -23,7 +23,8 @@ simulate_immune_rings(
 )
 }
 \arguments{
-\item{background_sample}{Data.Frame The image that the stripes are simulated on}
+\item{background_sample}{(OPTIONAL) Data.Frame The image that the immune rings
+are simulated on. By default use the internal background image}
 
 \item{bg_type}{(OPTIONAL) String The name of the background cell type. By
 default is "Others".}

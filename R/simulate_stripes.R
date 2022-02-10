@@ -1,6 +1,7 @@
 #' simulate_stripes
 #'
-#' @param background_sample Data.Frame The image that the stripes are simulated on
+#' @param background_sample (OPTIONAL) Data.Frame The image that the stripes are
+#' simulated on. By default use the internal `bg1` background image
 #' @param n_stripe_type Number of the types of the stripes
 #' @param win (OPTIONAL) owin object from spatstat.geom owin method. By default it is
 #' the window of the background image.
@@ -8,8 +9,8 @@
 #'
 #' @return A data.frame of the simulated image
 #' @export
-simulate_stripes <- function(background_sample,
-                             n_stripe_type,
+simulate_stripes <- function(background_sample = bg1,
+                             n_stripe_type = 2,
                              win = NULL,
                              properties_of_stripes = list(
                                S1 = list(

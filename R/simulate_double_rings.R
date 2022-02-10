@@ -1,6 +1,7 @@
 #' simulate_double_rings
 #'
-#' @param background_sample Data.Frame The image that the stripes are simulated on
+#' @param background_sample (OPTIONAL) Data.Frame The image that the patterns
+#' are simulated on. By default use the internal `bg1` background image
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #' default is "Others".
 #' @param n_double_rings Number of double immune rings
@@ -10,7 +11,7 @@
 #'
 #' @return A data.frame of the simulated image
 #' @export
-simulate_double_rings <- function(background_sample,
+simulate_double_rings <- function(background_sample = bg1,
                                   bg_type = "Others",
                                   n_double_rings = 2,
                                   win = NULL,
@@ -154,12 +155,9 @@ simulate_double_rings <- function(background_sample,
       }
 
       else if(D < I_R){
-        print("1st ring----------")
-        print(background_sample[i, "lab"])
         # determine the primary label of the cell, if the primary label is lower
         # than 2, keep the primary label, skip out of the conditional
         background_sample[i, "lab"] <- min(1, background_sample[i, "lab"])
-        print(background_sample[i, "lab"])
         if (background_sample[i , "lab"] == 1){
           # generate random number to decide the phenotype
           r <- stats::runif(1)

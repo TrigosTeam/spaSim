@@ -5,8 +5,8 @@
 \title{simulate_stripes}
 \usage{
 simulate_stripes(
-  background_sample,
-  n_stripe_type,
+  background_sample = bg1,
+  n_stripe_type = 2,
   win = NULL,
   properties_of_stripes = list(S1 = list(number_of_stripes = 1, name_of_stripe_cell =
     "Others", width_of_stripe = 80, infiltration_types = c("Immune1"),
@@ -16,7 +16,8 @@ simulate_stripes(
 )
 }
 \arguments{
-\item{background_sample}{Data.Frame The image that the stripes are simulated on}
+\item{background_sample}{(OPTIONAL) Data.Frame The image that the stripes are
+simulated on. By default use the internal \code{bg1} background image}
 
 \item{n_stripe_type}{Number of the types of the stripes}
 

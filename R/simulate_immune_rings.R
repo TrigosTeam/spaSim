@@ -1,6 +1,7 @@
 #' simulate_immune_rings
 #'
-#' @param background_sample Data.Frame The image that the stripes are simulated on
+#' @param background_sample (OPTIONAL) Data.Frame The image that the immune rings
+#'  are simulated on. By default use the internal background image
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #' default is "Others".
 #' @param n_immune_rings Number of immune rings
@@ -10,16 +11,16 @@
 #'
 #' @return A data.frame of the simulated image
 #' @export
-simulate_immune_rings <- function(background_sample,
+simulate_immune_rings <- function(background_sample = bg1,
                                   bg_type = "Others",
                                   n_immune_rings = 2,
                                   win = NULL,
                                   properties_of_immune_rings = list(
                                     I1 = list(
                                       name_of_cluster_cell = "Tumour",
-                                      size = 700,
+                                      size = 600,
                                       shape = "Circle",
-                                      centre_loc = data.frame("x" = 1800, "y" = 1500),
+                                      centre_loc = data.frame("x" = 930, "y" = 1000),
                                       infiltration_types = c("Immune1", "Immune2", "Others"),
                                       infiltration_proportions = c(0.15, 0.05, 0.05),
                                       name_of_ring_cell = "Immune1",
@@ -29,9 +30,9 @@ simulate_immune_rings <- function(background_sample,
                                     ),
                                     I2 = list(
                                       name_of_cluster_cell = "Tumour",
-                                      size = 700,
-                                      shape = "Circle",
-                                      centre_loc = data.frame("x" = 1800, "y" = 1500),
+                                      size = 500,
+                                      shape = "Oval",
+                                      centre_loc = data.frame("x" = 1330, "y" = 1100),
                                       infiltration_types = c("Immune1", "Immune2", "Others"),
                                       infiltration_proportions = c(0.15, 0.05, 0.05),
                                       name_of_ring_cell = "Immune1",
