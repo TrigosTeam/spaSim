@@ -53,6 +53,10 @@ simulate_immune_rings <- function(background_sample,
     stop("`n_immune_rings` does not match the length of `properties_of_immune_rings`!")
   }
 
+  # add a new column to store the position label for each cell (0 for core cluster,
+  # 1 for first ring, 2 for background cells)
+  background_sample$lab <- 2
+
   ## Get the window
   # if window is specified, use the specified window
   # otherwise, use the window of the background sample
@@ -94,7 +98,6 @@ simulate_immune_rings <- function(background_sample,
     # cluster size is the radius of the cluster
     r <- size
     R <- r^2
-
     # cluster shape
     shape <- shape
     Circle <- (shape == "Circle")
@@ -117,6 +120,8 @@ simulate_immune_rings <- function(background_sample,
 
       # determine which region the point falls in
       if (D < R){
+        # determine the primary label of the cell
+        background_sample[i, "lab"] <- 0
         # generate random number to decide the phenotype
         random <- stats::runif(1)
         n_infiltration_types <- length(infiltration_types)
@@ -134,24 +139,27 @@ simulate_immune_rings <- function(background_sample,
       }
 
       else if(D < I_R){
-        # generate random number to decide the phenotype
-        random <- stats::runif(1)
-        n_ring_infiltration_types <- length(ring_infiltration_types)
-        pheno <- ring_cell_type
-        n <- 1
-        current_p <- 0
-        while (n <= n_ring_infiltration_types){
-          current_p <- current_p + ring_infiltration_proportions[n]
-          if (random <= current_p) {
-            pheno <- ring_infiltration_types[n]
-            break
+        # determine the primary label of the cell, if the primary label is lower
+        # than 2, keep the primary label, skip out of the conditional
+        background_sample[i, "lab"] <- min(1, background_sample[i, "lab"])
+        if (background_sample[i , "lab"] == 1){
+          # generate random number to decide the phenotype
+          random <- stats::runif(1)
+          n_ring_infiltration_types <- length(ring_infiltration_types)
+          pheno <- ring_cell_type
+          n <- 1
+          current_p <- 0
+          while (n <= n_ring_infiltration_types){
+            current_p <- current_p + ring_infiltration_proportions[n]
+            if (random <= current_p) {
+              pheno <- ring_infiltration_types[n]
+              break
+            }
+            n <- n+1
           }
-          n <- n+1
         }
       }
-
-      if (background_sample[i, "Phenotype"] != cluster_cell_type){
-        background_sample[i, "Phenotype"] <- pheno }
+      background_sample[i, "Phenotype"] <- pheno
     }
   }
 
