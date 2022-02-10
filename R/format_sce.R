@@ -8,7 +8,6 @@
 #' @param data Dataframe that will be the colData of the sce object
 #' @import SingleCellExperiment
 #' @return An SingleCellExperiment object
-#' @export
 
 format_sce <- function(data) {
 
@@ -37,7 +36,7 @@ format_sce <- function(data) {
 
   #Assign the columns
   for (name in colnames(data)){
-    colData(sce)[[name]] <- data[,name]
+    sce[[name]] <- data[,name]
   }
   return(sce)
 }
