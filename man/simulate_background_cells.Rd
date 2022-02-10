@@ -4,7 +4,14 @@
 \alias{simulate_background_cells}
 \title{simulate_background_cells}
 \usage{
-simulate_background_cells(n_cells, width, height, min_d, oversample = 1.2)
+simulate_background_cells(
+  n_cells,
+  width,
+  height,
+  min_d,
+  oversample = 1.2,
+  Phenotype = "Others"
+)
 }
 \arguments{
 \item{n_cells}{Numeric Number of cells in the background}

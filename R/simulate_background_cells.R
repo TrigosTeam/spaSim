@@ -17,7 +17,8 @@
 #' @return A data.frame of the simulated image
 #' @export
 #'
-simulate_background_cells <- function(n_cells, width, height, min_d, oversample = 1.2){
+simulate_background_cells <- function(n_cells, width, height, min_d, oversample = 1.2,
+                                      Phenotype = "Others"){
 
   # need to oversample first
   n_cells_inflated <- n_cells*oversample
@@ -40,6 +41,8 @@ simulate_background_cells <- function(n_cells, width, height, min_d, oversample 
   }
 
   rownames(sample) <- paste("Cell_",rownames(sample),sep = "")
+
+  sample$Phenotype <- Phenotype
 
   # plot
   g <- ggplot(sample, aes(Cell.X.Position, Cell.Y.Position)) +
