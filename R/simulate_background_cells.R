@@ -1,10 +1,17 @@
 #' simulate_background_cells
 #'
-#' @param n_cells Number of cells in the background
-#' @param width Number The width of the image
-#' @param height Number The height of the image
-#' @param min_d Number The minimum distance between two cells
-#' @param oversample Number The multiplier for oversampling
+#' @description Simulate cells without specifying their cell types. The 2D locations
+#' of the cells are simulated and plotted in a rectangular window. Users can specify
+#' the window size, cell number and the minimum distance between two cells.
+#'
+#' @param n_cells Numeric Number of cells in the background
+#' @param width Numeric The width of the image
+#' @param height Numeric The height of the image
+#' @param min_d Numeric The minimum distance between two cells
+#' @param oversample Numeric The multiplier for oversampling. Without oversampling,
+#' the simulation deletes cells that are within min_d from each other, resulting
+#' in a less number of cells than specified.
+#' @param Phenotype String The name of the background cell type. Default is "Others"
 #'
 #' @importFrom ggplot2 ggplot aes geom_point
 #' @return A data.frame of the simulated image
@@ -15,7 +22,7 @@ simulate_background_cells <- function(n_cells, width, height, min_d, oversample 
   # need to oversample first
   n_cells_inflated <- n_cells*oversample
 
-  # ccalculate the window and intensity
+  # calculate the window and intensity
   win <- spatstat.geom::owin(xrange=c(0,width), yrange=c(0,height))
   beta <- n_cells_inflated/(width*height)
 

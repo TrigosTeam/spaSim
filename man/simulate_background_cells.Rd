@@ -7,19 +7,25 @@
 simulate_background_cells(n_cells, width, height, min_d, oversample = 1.2)
 }
 \arguments{
-\item{n_cells}{Number of cells in the background}
+\item{n_cells}{Numeric Number of cells in the background}
 
-\item{width}{Number The width of the image}
+\item{width}{Numeric The width of the image}
 
-\item{height}{Number The height of the image}
+\item{height}{Numeric The height of the image}
 
-\item{min_d}{Number The minimum distance between two cells}
+\item{min_d}{Numeric The minimum distance between two cells}
 
-\item{oversample}{Number The multiplier for oversampling}
+\item{oversample}{Numeric The multiplier for oversampling. Without oversampling,
+the simulation deletes cells that are within min_d from each other, resulting
+in a less number of cells than specified.}
+
+\item{Phenotype}{String The name of the background cell type. Default is "Others"}
 }
 \value{
 A data.frame of the simulated image
 }
 \description{
-simulate_background_cells
+Simulate cells without specifying their cell types. The 2D locations
+of the cells are simulated and plotted in a rectangular window. Users can specify
+the window size, cell number and the minimum distance between two cells.
 }
