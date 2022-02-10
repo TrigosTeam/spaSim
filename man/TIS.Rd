@@ -16,6 +16,8 @@ TIS(
   properties_of_clusters = NULL,
   n_immune_rings = NULL,
   properties_of_immune_rings = NULL,
+  n_double_rings = NULL,
+  properties_of_double_rings = NULL,
   n_stripe_type = NULL,
   properties_of_stripes = NULL,
   image_name = NULL

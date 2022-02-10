@@ -43,6 +43,9 @@ TIS <- function(background_sample = NULL,
                 n_immune_rings = NULL,
                 properties_of_immune_rings = NULL,
 
+                n_double_rings = NULL,
+                properties_of_double_rings = NULL,
+
                 n_stripe_type = NULL,
                 properties_of_stripes = NULL,
 
@@ -69,11 +72,7 @@ TIS <- function(background_sample = NULL,
   if (!is.null(names_of_bg_cells)){
     image <- simulate_mixing(background_sample = image,
                              names_of_mixing = names_of_bg_cells,
-                             mixing_degree = proportions_of_bg_cells,
-                             shape = "Rectangle",
-                             size = bg_size,
-                             centre_loc = data.frame("x" = X/2, "y" = Y/2),
-                             win = spatstat.geom::owin(c(0,X),c(0,Y)))
+                             mixing_degree = proportions_of_bg_cells)
   }
   # simulate clusters
   if (!is.null(n_clusters)){
@@ -90,6 +89,14 @@ TIS <- function(background_sample = NULL,
                                    bg_type = "Others",
                                    win = NULL,
                                    properties_of_immune_rings = properties_of_immune_rings)
+  }
+  # simulate_double_rings
+  if (!is.null(n_double_rings)){
+    image <- simulate_double_rings(background_sample = image,
+                                   n_double_rings = n_double_rings,
+                                   bg_type = "Others",
+                                   win = NULL,
+                                   properties_of_double_rings = properties_of_double_rings)
   }
   # simulate_stripes
   if (!is.null(n_stripe_type)){
