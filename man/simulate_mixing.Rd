@@ -7,11 +7,7 @@
 simulate_mixing(
   background_sample,
   names_of_mixing = c("Tumour", "Immune", "Others"),
-  shape = "Rectangle",
-  size = c(2500, 2000),
-  mixing_degree = c(0.2, 0.4, 0.4),
-  centre_loc = data.frame(x = c(1250), y = c(1000)),
-  win = spatstat.geom::owin(c(0, 2500), c(0, 2000))
+  mixing_degree = c(0.2, 0.4, 0.4)
 )
 }
 \arguments{
@@ -19,15 +15,7 @@ simulate_mixing(
 
 \item{names_of_mixing}{Vector of the mixed cell types}
 
-\item{shape}{String of the shape of the mixing area. Only "Rectangle" is available now}
-
-\item{size}{Vector c(width, height) The size of the mixing area}
-
 \item{mixing_degree}{Vector of the proportions of the mixed cell types}
-
-\item{centre_loc}{Data.frame The 2D location of the centre of the mixed area}
-
-\item{win}{owin object output from spatstat.geom::owin function}
 }
 \value{
 A data.frame of the simulated image
