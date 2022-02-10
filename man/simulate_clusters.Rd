@@ -5,20 +5,21 @@
 \title{simulate_clusters}
 \usage{
 simulate_clusters(
-  background_sample,
+  background_sample = bg1,
   n_clusters = 2,
   bg_type = "Others",
   win = NULL,
-  properties_of_clusters = list(C1 = list(name_of_cluster_cell = "Tumour", size = 900,
+  properties_of_clusters = list(C1 = list(name_of_cluster_cell = "Tumour", size = 300,
     shape = "Oval", centre_loc = data.frame(x = 500, y = 500), infiltration_types =
     c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05)), C2 =
-    list(name_of_cluster_cell = "Immune1", size = 900, shape = "Irregular", centre_loc =
+    list(name_of_cluster_cell = "Immune1", size = 500, shape = "Irregular", centre_loc =
     data.frame(x = 1500, y = 500), infiltration_types = c("Immune2", "Others"),
     infiltration_proportions = c(0.1, 0.05)))
 )
 }
 \arguments{
-\item{background_sample}{Data.Frame The image that the stripes are simulated on}
+\item{background_sample}{(OPTIONAL) Data.Frame The image that the clusters
+are simulated on. Default is the internal background image}
 
 \item{n_clusters}{Number of clusters}
 

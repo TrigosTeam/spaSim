@@ -1,6 +1,7 @@
 #' simulate_clusters
 #'
-#' @param background_sample Data.Frame The image that the stripes are simulated on
+#' @param background_sample (OPTIONAL) Data.Frame The image that the clusters
+#' are simulated on. Default is the internal background image
 #' @param n_clusters Number of clusters
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #' default is "Others".
@@ -11,21 +12,21 @@
 #' @return A data.frame of the simulated image
 #' @export
 
-simulate_clusters <- function(background_sample,
+simulate_clusters <- function(background_sample = bg1,
                               n_clusters = 2,
                               bg_type = "Others",
                               win = NULL,
                               properties_of_clusters = list(
                                 C1 = list(
                                   name_of_cluster_cell = "Tumour",
-                                  size = 900,
+                                  size = 300,
                                   shape = "Oval",
                                   centre_loc = data.frame("x" = 500, "y" = 500),
                                   infiltration_types = c("Immune1", "Others"),
                                   infiltration_proportions = c(0.1, 0.05)),
                                 C2 = list(
                                   name_of_cluster_cell = "Immune1",
-                                  size = 900,
+                                  size = 500,
                                   shape = "Irregular",
                                   centre_loc = data.frame("x" = 1500, "y" = 500),
                                   infiltration_types = c("Immune2", "Others"),
