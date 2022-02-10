@@ -3,8 +3,6 @@ n_cells <- 5000
 width <- 2000
 height <- 2000
 min_d <- 10
-names_of_bg_cells <- c("Tumour", "Immune", "Others")
-proportions_of_bg_cells <- c(0.4, 0.4, 0.2)
 
 # set seed for this background image simulation for reproducibility
 set.seed(610)
