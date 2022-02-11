@@ -1,13 +1,33 @@
 #' multiple_images_with_immune_rings
 #'
-#' @param background_sample
-#' @param cluster_size
-#' @param ring_shape
-#' @param infiltration
-#' @param ring_width
-#' @param cluster_loc_x
-#' @param cluster_loc_y
-#' @param ring_infiltration
+#' @param background_sample Data.frame or SingleCellExperiment object with locations
+#' of points representing background cells. Further cell types will be simulated
+#' based on this background sample.
+#' @param cluster_size Numeric or Vector. The size of the cluster. If numeric,
+#' all simulated images have the same cluster size. If vector, images with
+#' a range of different cluster sizes will be simulated.
+#' @param ring_shape List. Properties of immune rings to simulate. Either choose
+#' one of the pre-designed shapes (`R_shape1`, `R_shape2` or `R_shape3`), or manually
+#' define the properties -- format:
+#' R_shape3 = list(I1 = list(name_of_cluster_cell = "Tumour",size = 100,
+#' shape = "Circle",centre_loc = data.frame("x" = 1000, "y" = 800),
+#' infiltration_types = c("Immune", "Others"), infiltration_proportions = c(0, 0.1),
+#' name_of_ring_cell = "Immune", immune_ring_width = 50, immune_ring_infiltration_types
+#' = c("Tumour", "Others"), immune_ring_infiltration_proportions = c(0.3, 0.15)),
+#' I2 = list(name_of_cluster_cell = "Tumour",size = 50,shape = "Oval",centre_loc =
+#' data.frame("x" = 1100, "y" = 1050), infiltration_types = c("Immune", "Others"),
+#' infiltration_proportions = c(0, 0.1), name_of_ring_cell = "Immune",
+#' immune_ring_width = 50, immune_ring_infiltration_types = c("Tumour","Others"),
+#' immune_ring_infiltration_proportions = c(0.3, 0.15)))
+#' @param infiltration Numeric or Vector. The degree of infiltration.
+#' @param ring_width Numeric or Vector. The width of the immune ring.
+#' @param cluster_loc_x Numeric or Vector. The X location of the cluster center.
+#' If numeric, all simulated images have the same center X location. If vector,
+#' images with a range of different center locations will be simulated.
+#' @param cluster_loc_y Numeric or Vector of the same length of `cluster_loc_x`.
+#' The Y location of the cluster center.
+#' @param ring_infiltration Numeric or Vector. The degree of tumour infiltration
+#' in the region of immune rings. (Only applied to cell type "Tumour")
 #' @param plot.image Boolean Whether plot the simulated images or not.Default is TRUE.
 #'
 #' @return
