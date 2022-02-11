@@ -79,7 +79,9 @@ multiple_images_with_clusters <- function(background_sample = bg1,
         image <- TIS(background_sample = background_sample,
                      n_clusters = n_clusters,
                      properties_of_clusters = properties_of_clusters)
-        plot_cells(image, c("Tumour","Immune"),c("red","darkgreen"), "Phenotype")
+        if (plot.image){
+          plot_cells(image, c("Tumour","Immune"),c("red","darkgreen"), "Phenotype")
+        }
         list.images[[i]] <- image
       }
     }

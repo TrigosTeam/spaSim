@@ -12,11 +12,12 @@ multiple_images_with_immune_rings(
   ring_width = seq(50, 100, 10),
   cluster_loc_x = 0,
   cluster_loc_y = 0,
-  ring_infiltration = seq(0, 0.2, 0.05)
+  ring_infiltration = seq(0, 0.2, 0.05),
+  plot.image = TRUE
 )
 }
 \arguments{
-\item{ring_infiltration}{}
+\item{plot.image}{Boolean Whether plot the simulated images or not.Default is TRUE.}
 }
 \value{
 

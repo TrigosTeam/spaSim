@@ -8,6 +8,7 @@
 #' @param cluster_loc_x
 #' @param cluster_loc_y
 #' @param ring_infiltration
+#' @param plot.image Boolean Whether plot the simulated images or not.Default is TRUE.
 #'
 #' @return
 #' @export
@@ -18,7 +19,8 @@ multiple_images_with_immune_rings <- function(background_sample = bg1,
                                              ring_width = seq(50,100,10),
                                              cluster_loc_x = 0,
                                              cluster_loc_y = 0,
-                                             ring_infiltration = seq(0, 0.2,0.05)){
+                                             ring_infiltration = seq(0, 0.2,0.05),
+                                             plot.image = TRUE){
   ## CHECK
   # is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
@@ -88,7 +90,9 @@ multiple_images_with_immune_rings <- function(background_sample = bg1,
             image <- TIS(background_sample = background_sample,
                          n_immune_rings = n_immune_rings,
                          properties_of_immune_rings = properties_of_immune_rings)
-            plot_cells(image, c("Tumour","Immune"),c("red","darkgreen"), "Phenotype")
+            if (plot.image){
+              plot_cells(image, c("Tumour","Immune"),c("red","darkgreen"), "Phenotype")
+            }
             list.images[[i]] <- image
           }
         }

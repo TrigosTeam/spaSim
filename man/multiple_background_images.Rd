@@ -8,7 +8,8 @@ multiple_background_images(
   background_sample,
   names_of_cell_types = c("Tumour", "Immune", "Others"),
   proportions_of_cell_types = list(rep(0.1, 9), seq(0, 0.4, 0.05), seq(0.9, 0.5,
-    -0.05))
+    -0.05)),
+  plot.image = T
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ based on this background sample.}
 proportions of the corresponding cell type. The length of the vector is how many
 images to generate. All vectors should be of the same length, also equal to
 the number of images}
+
+\item{plot.image}{Boolean Whether plot the simulated images or not.Default is TRUE.}
 }
 \value{
 
