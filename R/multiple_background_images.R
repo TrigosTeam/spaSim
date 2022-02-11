@@ -1,4 +1,4 @@
-#' simulate_multiple_background_images
+#' multiple_background_images
 #'
 #' @param background_sample Data.frame or SingleCellExperiment object with locations
 #' of points representing background cells. Further cell types will be simulated
@@ -13,14 +13,14 @@
 #' @export
 #'
 #' @examples
-simulate_multiple_background_images <- function(background_sample,
-                                                names_of_cell_types = c("Tumour",
-                                                                        "Immune",
-                                                                        "Others"),
-                                                proportions_of_cell_types = list(
-                                                  rep(0.1, 9),
-                                                  seq(0, 0.4, 0.05),
-                                                  seq(0.9,0.5,-0.05))){
+multiple_background_images <- function(background_sample,
+                                        names_of_cell_types = c("Tumour",
+                                                                "Immune",
+                                                                "Others"),
+                                        proportions_of_cell_types = list(
+                                          rep(0.1, 9),
+                                          seq(0, 0.4, 0.05),
+                                          seq(0.9,0.5,-0.05))){
   # CHECK is the background sample a data frame?
   if (!is.data.frame(background_sample)) {
     background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
@@ -67,7 +67,7 @@ simulate_multiple_background_images <- function(background_sample,
       background_sample[i, "Phenotype"] <- pheno
     }
     sce <- format_sce(background_sample)
-    plot_cell_categories(sce, categories_of_interest = c("Tumour", "Immune","Others"), colour_vector = c("red" ,"blue", "gray"), feature_colname = "Phenotype")
+    plot_cells(background_sample, categories_of_interest = c("Tumour", "Immune","Others"), colour_vector = c("red" ,"blue", "gray"), feature_colname = "Phenotype")
     list.images[[p_idx]] <- sce
   }
   return(list.images)

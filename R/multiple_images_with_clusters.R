@@ -1,4 +1,4 @@
-#' simulate_multiple_images_with_clusters
+#' multiple_images_with_clusters
 #'
 #' @param background_sample
 #' @param cluster_shape
@@ -11,14 +11,19 @@
 #' @return
 #' @export
 
-simulate_multiple_images_with_clusters <- function(background_sample = bg1,
-                                                   cluster_shape = 2,
-                                                   infiltration = 0.1,
-                                                   cluster_size = seq(200,1000,100),
-                                                   cluster_loc_x = 0,
-                                                   cluster_loc_y = 0,
-                                                   plot.image = TRUE){
-  # count the image number
+multiple_images_with_clusters <- function(background_sample = bg1,
+                                         cluster_shape = 2,
+                                         infiltration = 0.1,
+                                         cluster_size = seq(200,1000,100),
+                                         cluster_loc_x = 0,
+                                         cluster_loc_y = 0,
+                                         plot.image = TRUE){
+  ## CHECK
+  # is the background sample a dataframe?
+  if (!is.data.frame(background_sample)) {
+    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+
+   # count the image number
   i <- 0
   list.images <- list()
 
@@ -73,9 +78,8 @@ simulate_multiple_images_with_clusters <- function(background_sample = bg1,
         # simulate the image
         image <- TIS(background_sample = background_sample,
                      n_clusters = n_clusters,
-                     properties_of_clusters = properties_of_clusters,
-        )
-        plot_cell_categories(image, c("Tumour","Immune"),c("red","darkgreen"), "Phenotype")
+                     properties_of_clusters = properties_of_clusters)
+        plot_cells(image, c("Tumour","Immune"),c("red","darkgreen"), "Phenotype")
         list.images[[i]] <- image
       }
     }
