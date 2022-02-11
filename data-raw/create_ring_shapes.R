@@ -11,6 +11,7 @@ R_shape1 <- list(
     centre_loc = centre_loc_offset,
     infiltration_types = infiltration_types,
     infiltration_proportions = infiltration_proportions,
+    name_of_ring_cell = "Immune",
     immune_ring_width = 50,
     immune_ring_infiltration_types = c("Others"),
     immune_ring_infiltration_proportions = c(0.15)
@@ -22,6 +23,7 @@ R_shape1 <- list(
     centre_loc = centre_loc_offset + c(450, 250),
     infiltration_types = infiltration_types,
     infiltration_proportions = infiltration_proportions,
+    name_of_ring_cell = "Immune",
     immune_ring_width = 50,
     immune_ring_infiltration_types = c("Others"),
     immune_ring_infiltration_proportions = c(0.15)
@@ -33,6 +35,7 @@ R_shape1 <- list(
     centre_loc = centre_loc_offset + c(-250, -300),
     infiltration_types = infiltration_types,
     infiltration_proportions = infiltration_proportions,
+    name_of_ring_cell = "Immune",
     immune_ring_width = 50,
     immune_ring_infiltration_types = c("Others"),
     immune_ring_infiltration_proportions = c(0.15)
