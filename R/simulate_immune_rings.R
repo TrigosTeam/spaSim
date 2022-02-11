@@ -77,7 +77,6 @@ simulate_immune_rings <- function(background_sample = bg1,
 
   for (k in 1:n_immune_rings) { # for each cluster
     # get the arguments
-
     cluster_cell_type <- properties_of_immune_rings[[k]]$name_of_cluster_cell
     size <- properties_of_immune_rings[[k]]$size
     shape <- properties_of_immune_rings[[k]]$shape
@@ -89,6 +88,7 @@ simulate_immune_rings <- function(background_sample = bg1,
     ring_infiltration_types = properties_of_immune_rings[[k]]$immune_ring_infiltration_types
     ring_infiltration_proportions = properties_of_immune_rings[[k]]$immune_ring_infiltration_proportions
 
+    # if the location of the cluster is not specified,
     # generate a location as the centre of the cluster
     if (is.null(centre_loc)){
       seed_point <- spatstat::runifpoint(1, win=win)}
@@ -121,7 +121,7 @@ simulate_immune_rings <- function(background_sample = bg1,
 
       # determine which region the point falls in
       if (D < R){
-        # determine the primary label of the cell
+        # assign the primary label of the cell
         background_sample[i, "lab"] <- 0
         # generate random number to decide the phenotype
         random <- stats::runif(1)

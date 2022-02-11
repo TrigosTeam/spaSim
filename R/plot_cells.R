@@ -12,8 +12,9 @@
 #' @import tibble
 #' @importFrom SingleCellExperiment colData
 #' @return A plot is returned
+#' @export
 
-plot_cells <- function(data, categories_of_interest = NULL,
+plot_cells <- function(sce_object, categories_of_interest = NULL,
                                  colour_vector = NULL, feature_colname = "Cell.Type") {
 
   # if plotting the structure, users do not have to enter the params
@@ -34,10 +35,10 @@ plot_cells <- function(data, categories_of_interest = NULL,
   # setting these variables to NULL as otherwise get "no visible binding for global variable" in R check
   Cell.X.Position <- Cell.Y.Position <- Category <- NULL
 
-  if (class(data) == 'SingleCellExperiment'){
+  if (class(sce_object) == 'SingleCellExperiment'){
     formatted_data <- data.frame(colData(sce_object))
   }
-  else formatted_data <- data
+  else formatted_data <- sce_object
 
   #CHECK
   if (length(categories_of_interest) != length(colour_vector)) {
