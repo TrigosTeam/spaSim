@@ -1,5 +1,5 @@
 ## code to prepare `R_shape1`, `R_shape2` dataset goes here
-# C_shape1 - Tumour cluster ####
+# R_shape1 - Tumour cluster and immune ring ####
 centre_loc_offset <- data.frame("x" = 1000, "y" = 1000)
 infiltration_types <- c("Immune", "Others")
 infiltration_proportions <- c(0, 0.1)
