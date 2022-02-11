@@ -5,20 +5,20 @@
 \title{plot_cells}
 \usage{
 plot_cells(
-  data,
+  sce_object,
   categories_of_interest = NULL,
   colour_vector = NULL,
   feature_colname = "Cell.Type"
 )
 }
 \arguments{
-\item{data}{Singlecellexperiment object or data.frame that has cell locations and cell type info}
-
 \item{categories_of_interest}{Vector of cell categories to be coloured}
 
 \item{colour_vector}{Vector specifying the colours of each cell phenotype}
 
 \item{feature_colname}{String specifying the column the cell categories belong to}
+
+\item{data}{SingleCellExperiment object or data.frame that has cell locations and cell type info}
 }
 \value{
 A plot is returned

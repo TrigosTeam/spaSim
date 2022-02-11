@@ -3,7 +3,7 @@
 #' @description Produces a scatter plot of the cells in the tissue. Cells are coloured
 #' categorically by phenotype. Cells not part of the phenotypes of interest will be coloured "lightgrey"
 #'
-#' @param data Singlecellexperiment object or data.frame that has cell locations and cell type info
+#' @param data SingleCellExperiment object or data.frame that has cell locations and cell type info
 #' @param categories_of_interest Vector of cell categories to be coloured
 #' @param colour_vector Vector specifying the colours of each cell phenotype
 #' @param feature_colname String specifying the column the cell categories belong to
@@ -12,7 +12,6 @@
 #' @import tibble
 #' @importFrom SingleCellExperiment colData
 #' @return A plot is returned
-#' @export
 
 plot_cells <- function(sce_object, categories_of_interest = NULL,
                                  colour_vector = NULL, feature_colname = "Cell.Type") {
