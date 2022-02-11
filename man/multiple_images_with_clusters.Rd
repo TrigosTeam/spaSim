@@ -15,7 +15,36 @@ multiple_images_with_clusters(
 )
 }
 \arguments{
-\item{plot.image}{}
+\item{background_sample}{Data.frame or SingleCellExperiment object with locations
+of points representing background cells. Further cell types will be simulated
+based on this background sample.}
+
+\item{cluster_shape}{List Properties of clusters to simulate. Either choose
+one of the pre-designed shapes (\code{C_shape1}, \code{C_shape2} for tumour cluster or
+\code{C_shape3} for immune cluster), or manually define the properties
+-- format: list(C1 = list(name_of_cluster_cell = "Tumour",
+size = 100, shape = "Circle", centre_loc = data.frame("x" = 1000, "y" = 800),
+infiltration_types = c("Immune", "Others"),infiltration_proportions = c(0.1, 0.1)),
+C2 = list(name_of_cluster_cell = "Tumour",size = 50, shape = "Oval",
+centre_loc = data.frame("x" = 1100, "y" = 1050),
+infiltration_types = c("Immune", "Others"),infiltration_proportions = c(0.1, 0.1)))}
+
+\item{infiltration}{Numeric or Vector. The degree of infiltration. If numeric,
+all simulated images have the same infiltration degree. If vector, images with
+a range of different infiltrations will be simulated.}
+
+\item{cluster_size}{Numeric or Vector. The size of the cluster. If numeric,
+all simulated images have the same cluster size. If vector, images with
+a range of different cluster sizes will be simulated.}
+
+\item{cluster_loc_x}{Numeric or Vector. The X location of the cluster center.
+If numeric, all simulated images have the same center X location. If vector,
+images with a range of different center locations will be simulated.}
+
+\item{cluster_loc_y}{Numeric or Vector of the same length of \code{cluster_loc_x}.
+The Y location of the cluster center.}
+
+\item{plot.image}{Boolean Whether plot the simulated images or not.Default is TRUE.}
 }
 \value{
 
