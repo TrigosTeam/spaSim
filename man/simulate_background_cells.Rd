@@ -29,10 +29,16 @@ in a less number of cells than specified.}
 \item{Phenotype}{String The name of the background cell type. Default is "Others"}
 }
 \value{
-A data.frame of the simulated image
+A data.frame of the simulated background image
 }
 \description{
 Simulate cells without specifying their cell types. The 2D locations
 of the cells are simulated and plotted in a rectangular window. Users can specify
 the window size, cell number and the minimum distance between two cells.
+}
+\examples{
+set.seed(610) # set seed for this background image simulation for reproducibility
+background_image <- simulate_background_cells(n_cells = 5000, width = 2000,
+                                              height = 2000, min_d = 10,
+                                              oversample = 1.5, Phenotype = "Others")
 }

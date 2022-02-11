@@ -14,9 +14,15 @@
 #' @param Phenotype String The name of the background cell type. Default is "Others"
 #'
 #' @importFrom ggplot2 ggplot aes geom_point
-#' @return A data.frame of the simulated image
+#' @return A data.frame of the simulated background image
 #' @export
 #'
+#' @examples
+#' set.seed(610) # set seed for this background image simulation for reproducibility
+#' background_image <- simulate_background_cells(n_cells = 5000, width = 2000,
+#'                                               height = 2000, min_d = 10,
+#'                                               oversample = 1.5, Phenotype = "Others")
+
 simulate_background_cells <- function(n_cells, width, height, min_d, oversample = 1.2,
                                       Phenotype = "Others"){
 
