@@ -3,6 +3,7 @@
 export(TIS)
 export(multiple_background_images)
 export(multiple_images_with_clusters)
+export(multiple_images_with_immune_rings)
 export(simulate_background_cells)
 export(simulate_clusters)
 export(simulate_double_rings)
