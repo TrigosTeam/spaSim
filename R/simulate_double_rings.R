@@ -1,27 +1,28 @@
 #' simulate_double_rings
 #'
+#' @description
 #' @param background_sample (OPTIONAL) Data.Frame The image that the patterns
-#' are simulated on. By default use the internal `bg1` background image
+#' are simulated on. By default use the internal `bg1` background image.
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #' default is "Others".
-#' @param n_double_rings Number of double immune rings
+#' @param n_double_rings Number of double immune rings.
 #' @param win (OPTIONAL) owin object output from spatstat.geom::owin function. By
-#' default is the window of the background image
-#' @param properties_of_double_rings List of properties of the double immune rings
+#' default is the window of the background image.
+#' @param properties_of_double_rings List of properties of the double immune rings.
 #'
 #' @return A data.frame of the simulated image
 #' @export
 #' @examples
 #' set.seed(610)
 #' # manually define the properties of the immune ring
-#' properties_of_double_rings <- list(D1 = list(name_of_cluster_cell = "Tumour",size = size,
+#' properties_of_double_rings <- list(D1 = list(name_of_cluster_cell = "Tumour",size = 300,
 #' shape = "Circle",centre_loc = data.frame("x" = 1000, "y" = 1000),infiltration_types
 #' = c("Immune1", "Immune2", "Others"),infiltration_proportions = c(0.15, 0.05, 0.05),
 #' name_of_ring_cell = "Immune1",immune_ring_width = 150,immune_ring_infiltration_types
 #' = c("Others"),immune_ring_infiltration_proportions = c(0.15),name_of_double_ring_cell
 #' = "Immune2",double_ring_width = 100,double_ring_infiltration_types = c("Others"),
 #' double_ring_infiltration_proportions = c(0.15)),
-#' D2 = list(name_of_cluster_cell = "Tumour",size = size,shape = "Oval",centre_loc
+#' D2 = list(name_of_cluster_cell = "Tumour",size = 300,shape = "Oval",centre_loc
 #' = data.frame("x" = 1200, "y" = 1200),infiltration_types = c("Immune1", "Immune2", "Others"),
 #' infiltration_proportions = c(0.15, 0.05, 0.05),name_of_ring_cell = "Immune1",
 #' immune_ring_width = 150,immune_ring_infiltration_types = c("Others"),
@@ -31,20 +32,10 @@
 #'
 #' double_ring_image <- simulate_double_rings(background_sample = bg1,
 #' n_double_rings = 2, properties_of_double_rings = properties_of_double_rings)
-#' # not run
 #' # library(SPIAT)
 #' # plot_cell_categories(double_ring_image, c("Tumour","Immune1","Immune2"),
 #' # c("red","darkblue","darkgreen"),"Phenotype")
-#'
-#' set.seed(610)
-#' # can also use predefined immune rings properties
-#' properties_of_immune_rings2 <- D_shape1  # `D_shape1` is defined in the package
-#' double_ring_image2 <- simulate_immune_rings(background_sample = bg1,
-#' n_immune_rings = 2, properties_of_immune_rings= properties_of_immune_rings2)
-#' # not run
-#' # library(SPIAT)
-#' # plot_cell_categories(immune_ring_image2, c("Tumour","Immune1","Immune2"),
-#' # c("red","darkblue","darkgreen"),"Phenotype")
+
 simulate_double_rings <- function(background_sample = bg1,
                                   bg_type = "Others",
                                   n_double_rings = 2,
@@ -137,7 +128,7 @@ simulate_double_rings <- function(background_sample = bg1,
 
     # generate a location as the centre of the cluster
     if (is.null(centre_loc)){
-      seed_point <- spatstat::runifpoint(1, win=win)}
+      seed_point <- spatstat.core::runifpoint(1, win=win)}
     else seed_point <- centre_loc
     a <- seed_point$x
     b <- seed_point$y

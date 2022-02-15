@@ -1,29 +1,33 @@
-#' simulate_clusters
+#' Simulate clusters
+#' @description Based on an existing background image, simulate clusters of
+#'   cells where the same type of cells aggregate.
+#' @param background_sample (OPTIONAL) Data.Frame. The background image that the
+#'   clusters are generated on. Default is the internal background image `bg1`.
+#' @param n_clusters Numeric. Number of clusters.
+#' @param bg_type (OPTIONAL) String. The name of the background cell type if the
+#'   background sample does not have a "Phenotype" column. By default is
+#'   "Others".
+#' @param win (OPTIONAL) `owin` object output from spatstat.geom::owin function.
+#'   By default is the window of the background image.
+#' @param properties_of_clusters List of properties of the clusters. See
+#'   examples for the format of this arg.
 #'
-#' @param background_sample (OPTIONAL) Data.Frame The image that the clusters
-#' are simulated on. Default is the internal background image
-#' @param n_clusters Number of clusters
-#' @param bg_type (OPTIONAL) String The name of the background cell type. By
-#' default is "Others".
-#' @param win (OPTIONAL) owin object output from spatstat.geom::owin function. By
-#' default is the window of the background image
-#' @param properties_of_clusters List of properties of the clusters
+#' @family simulate pattern functions
+#' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
+#'   \code{\link{simulate_mixing}} for mixed background simulation,
+#'   \code{\link{simulate_immune_rings}}/\code{\link{simulate_double_rings}} for
+#'   immune ring simulation, and \code{\link{simulate_stripes}} for vessel
+#'   simulation.
 #'
 #' @return A data.frame of the simulated image
 #' @export
 #' @examples
 #' set.seed(610)
 #' cluster_image <- simulate_clusters(background_sample = bg1,
-#' n_clusters = 2, properties_of_clusters= list(C1 = list(
+#' n_clusters = 1, properties_of_clusters= list(C1 = list(
 #' name_of_cluster_cell = "Tumour", size = 300, shape = "Oval", centre_loc =
 #' data.frame("x" = 500, "y" = 500), infiltration_types = c("Immune1", "Others"),
 #' infiltration_proportions = c(0.1, 0.05))))
-#'
-#' set.seed(1)
-#' # can also use predefined cluster properties
-#' properties_of_clusters <- C_shape2  # `C_shape2` is defined in the package
-#' cluster_image2 <- simulate_clusters(background_sample = bg1,
-#' n_clusters = 2, properties_of_clusters= properties_of_clusters)
 
 simulate_clusters <- function(background_sample = bg1,
                               n_clusters = 2,
@@ -80,7 +84,7 @@ simulate_clusters <- function(background_sample = bg1,
 
     # generate a location as the centre of the cluster
     if (is.null(centre_loc)){
-      seed_point <- spatstat::runifpoint(1, win=win)}
+      seed_point <- spatstat.core::runifpoint(1, win=win)}
     else seed_point <- centre_loc
     a <- seed_point$x
     b <- seed_point$y

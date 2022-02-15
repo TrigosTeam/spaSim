@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_clusters.R
 \name{simulate_clusters}
 \alias{simulate_clusters}
-\title{simulate_clusters}
+\title{Simulate clusters}
 \usage{
 simulate_clusters(
   background_sample = bg1,
@@ -18,36 +18,45 @@ simulate_clusters(
 )
 }
 \arguments{
-\item{background_sample}{(OPTIONAL) Data.Frame The image that the clusters
-are simulated on. Default is the internal background image}
+\item{background_sample}{(OPTIONAL) Data.Frame. The background image that the
+clusters are generated on. Default is the internal background image \code{bg1}.}
 
-\item{n_clusters}{Number of clusters}
+\item{n_clusters}{Numeric. Number of clusters.}
 
-\item{bg_type}{(OPTIONAL) String The name of the background cell type. By
-default is "Others".}
+\item{bg_type}{(OPTIONAL) String. The name of the background cell type if the
+background sample does not have a "Phenotype" column. By default is
+"Others".}
 
-\item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function. By
-default is the window of the background image}
+\item{win}{(OPTIONAL) \code{owin} object output from spatstat.geom::owin function.
+By default is the window of the background image.}
 
-\item{properties_of_clusters}{List of properties of the clusters}
+\item{properties_of_clusters}{List of properties of the clusters. See
+examples for the format of this arg.}
 }
 \value{
 A data.frame of the simulated image
 }
 \description{
-simulate_clusters
+Based on an existing background image, simulate clusters of
+cells where the same type of cells aggregate.
 }
 \examples{
 set.seed(610)
 cluster_image <- simulate_clusters(background_sample = bg1,
-n_clusters = 2, properties_of_clusters= list(C1 = list(
+n_clusters = 1, properties_of_clusters= list(C1 = list(
 name_of_cluster_cell = "Tumour", size = 300, shape = "Oval", centre_loc =
 data.frame("x" = 500, "y" = 500), infiltration_types = c("Immune1", "Others"),
 infiltration_proportions = c(0.1, 0.05))))
-
-set.seed(1)
-# can also use predefined cluster properties
-properties_of_clusters <- C_shape2  # `C_shape2` is defined in the package
-cluster_image2 <- simulate_clusters(background_sample = bg1,
-n_clusters = 2, properties_of_clusters= properties_of_clusters)
 }
+\seealso{
+\code{\link{simulate_background_cells}} for all cell simulation,
+\code{\link{simulate_mixing}} for mixed background simulation,
+\code{\link{simulate_immune_rings}}/\code{\link{simulate_double_rings}} for
+immune ring simulation, and \code{\link{simulate_stripes}} for vessel
+simulation.
+
+Other simulate pattern functions: 
+\code{\link{simulate_background_cells}()},
+\code{\link{simulate_mixing}()}
+}
+\concept{simulate pattern functions}

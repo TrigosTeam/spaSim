@@ -1,12 +1,16 @@
 #' simulate_immune_rings
 #'
-#' @param background_sample (OPTIONAL) Data.Frame The image that the immune rings
-#'  are simulated on. By default use the internal background image
+#' @description Based on an existing background image, simulate rings of immune
+#'   cells that surround tumour clusters. The tumour clusters and immune rings
+#'   are simulated at the same time.
+#'
+#' @param background_sample (OPTIONAL) Data.Frame. The image that the immune
+#'   rings are simulated on. By default use the internal background image `bg1`.
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
-#' default is "Others".
-#' @param n_immune_rings Number of immune rings
-#' @param win (OPTIONAL) owin object output from spatstat.geom::owin function. By
-#' default is the window of the background image
+#'   default is "Others".
+#' @param n_immune_rings Number of immune rings.
+#' @param win (OPTIONAL) owin object output from spatstat.geom::owin function.
+#'   By default is the window of the background image
 #' @param properties_of_immune_rings List of properties of the immune rings
 #'
 #' @return A data.frame of the simulated image
@@ -20,24 +24,13 @@
 #' infiltration_types = c("Immune1", "Immune2", "Others"), infiltration_proportions
 #' = c(0.15, 0.05, 0.05), name_of_ring_cell = "Immune1", immune_ring_width = 150,
 #' immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions = c(0.15)))
-#' # simulate immune rings (`n_immune_rings` should match the length of
-#' `properties_of_immune_rings`)
+#' # simulate immune rings (`n_immune_rings` should match the length of `properties_of_immune_rings`)
 #' immune_ring_image <- simulate_immune_rings(background_sample = bg1,
 #' n_immune_rings = 1, properties_of_immune_rings = properties_of_immune_rings)
-#' # not run
 #' # library(SPIAT)
-#' # plot_cell_categories(immune_ring_image, c("Tumour","Immune1"),c("red","blue"),"Phenotype")
+#' # plot_cell_categories(immune_ring_image, c("Tumour","Immune1"),c("red","blue"),
+#' # "Phenotype")
 #'
-#' set.seed(1)
-#' # can also use predefined immune rings properties
-#' properties_of_immune_rings <- R_shape2  # `R_shape2` is defined in the package
-#' immune_ring_image2 <- simulate_immune_rings(background_sample = bg1,
-#' n_immune_rings = 2, properties_of_immune_rings= properties_of_immune_rings)
-#'
-#' # not run
-#' # library(SPIAT)
-#' # plot_cell_categories(immune_ring_image2, c("Tumour","Immune"),c("red","blue"),"Phenotype")
-
 simulate_immune_rings <- function(background_sample = bg1,
                                   bg_type = "Others",
                                   n_immune_rings = 2,
@@ -118,7 +111,7 @@ simulate_immune_rings <- function(background_sample = bg1,
     # if the location of the cluster is not specified,
     # generate a location as the centre of the cluster
     if (is.null(centre_loc)){
-      seed_point <- spatstat::runifpoint(1, win=win)}
+      seed_point <- spatstat.core::runifpoint(1, win=win)}
     else seed_point <- centre_loc
     a <- seed_point$x
     b <- seed_point$y
