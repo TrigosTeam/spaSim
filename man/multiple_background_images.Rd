@@ -2,7 +2,7 @@
 % Please edit documentation in R/multiple_background_images.R
 \name{multiple_background_images}
 \alias{multiple_background_images}
-\title{multiple_background_images}
+\title{Simulate multiple background images}
 \usage{
 multiple_background_images(
   background_sample,
@@ -13,24 +13,26 @@ multiple_background_images(
 )
 }
 \arguments{
-\item{background_sample}{Data.frame or SingleCellExperiment object with locations
-of points representing background cells. Further cell types will be simulated
-based on this background sample.}
+\item{background_sample}{Data.frame or SingleCellExperiment object with
+locations of points representing background cells. Further cell types will
+be simulated based on this background sample.}
 
-\item{names_of_cell_types}{Vector of strings Names of the cell types to generate}
+\item{names_of_cell_types}{String Vector. Names of the cell types to
+generate.}
 
-\item{proportions_of_cell_types}{List of vectors. Each vector is a sequence of
-proportions of the corresponding cell type. The length of the vector is how many
-images to generate. All vectors should be of the same length, also equal to
-the number of images}
+\item{proportions_of_cell_types}{List. Each element is a vector of
+proportions of the corresponding cell type. The length of the vector is how
+many images to generate. All vectors should be of the same length, also
+equal to the number of images}
 
-\item{plot.image}{Boolean Whether plot the simulated images or not.Default is TRUE.}
+\item{plot.image}{Boolean. Whether plot the simulated images or not.Default
+is TRUE.}
 }
 \value{
 A list of sce objects
 }
 \description{
-multiple_background_images
+Generate a set of background images all at once.
 }
 \examples{
 names_of_cell_types = c("Tumour","Immune","Others")
@@ -42,3 +44,13 @@ bg_image_list <- multiple_background_images(background_sample = bg1,
 names_of_cell_types = names_of_cell_types, proportions_of_cell_types =
 list(prop1, prop2, prop3), plot.image = FALSE)
 }
+\seealso{
+\code{\link{multiple_images_with_clusters}} for simulating multiple
+images with clusters, and \code{\link{multiple_images_with_immune_rings}} for
+simulating multiple images with immune rings.
+
+Other simulate multiple images functions: 
+\code{\link{multiple_images_with_clusters}()},
+\code{\link{multiple_images_with_immune_rings}()}
+}
+\concept{simulate multiple images functions}

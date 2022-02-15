@@ -1,14 +1,22 @@
-#' multiple_background_images
+#' Simulate multiple background images
 #'
-#' @param background_sample Data.frame or SingleCellExperiment object with locations
-#' of points representing background cells. Further cell types will be simulated
-#' based on this background sample.
-#' @param names_of_cell_types Vector of strings Names of the cell types to generate
-#' @param proportions_of_cell_types List of vectors. Each vector is a sequence of
-#' proportions of the corresponding cell type. The length of the vector is how many
-#' images to generate. All vectors should be of the same length, also equal to
-#' the number of images
-#' @param plot.image Boolean Whether plot the simulated images or not.Default is TRUE.
+#' @description Generate a set of background images all at once.
+#' @param background_sample Data.frame or SingleCellExperiment object with
+#'   locations of points representing background cells. Further cell types will
+#'   be simulated based on this background sample.
+#' @param names_of_cell_types String Vector. Names of the cell types to
+#'   generate.
+#' @param proportions_of_cell_types List. Each element is a vector of
+#'   proportions of the corresponding cell type. The length of the vector is how
+#'   many images to generate. All vectors should be of the same length, also
+#'   equal to the number of images
+#' @param plot.image Boolean. Whether plot the simulated images or not.Default
+#'   is TRUE.
+#'
+#' @family simulate multiple images functions
+#' @seealso \code{\link{multiple_images_with_clusters}} for simulating multiple
+#'   images with clusters, and \code{\link{multiple_images_with_immune_rings}} for
+#'   simulating multiple images with immune rings.
 #'
 #' @return A list of sce objects
 #' @export

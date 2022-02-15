@@ -1,5 +1,6 @@
-#' multiple_images_with_immune_rings
+#' Simulate multiple images with immune rings
 #'
+#' @description Generate a set of images with different immune ring properties.
 #' @param background_sample Data.frame or SingleCellExperiment object with locations
 #' of points representing background cells. Further cell types will be simulated
 #' based on this background sample.
@@ -19,8 +20,15 @@
 #' in the region of immune rings. (Only applied to cell type "Tumour")
 #' @param plot.image Boolean Whether plot the simulated images or not.Default is TRUE.
 #'
+#' @family simulate multiple images functions
+#' @seealso \code{\link{multiple_background_images}} for simulating multiple
+#'   mixed background images, and
+#'   \code{\link{multiple_images_with_clusters}} for simulating multiple
+#'   images with clusters.
+#'
 #' @return A list of sce objects
 #' @export
+#'
 #' @examples
 #' set.seed(610)
 #' ring_image_list <- multiple_images_with_immune_rings(background_sample = bg1,

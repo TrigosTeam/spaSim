@@ -2,7 +2,7 @@
 % Please edit documentation in R/multiple_images_with_immune_rings.R
 \name{multiple_images_with_immune_rings}
 \alias{multiple_images_with_immune_rings}
-\title{multiple_images_with_immune_rings}
+\title{Simulate multiple images with immune rings}
 \usage{
 multiple_images_with_immune_rings(
   background_sample = bg1,
@@ -48,7 +48,7 @@ in the region of immune rings. (Only applied to cell type "Tumour")}
 A list of sce objects
 }
 \description{
-multiple_images_with_immune_rings
+Generate a set of images with different immune ring properties.
 }
 \examples{
 set.seed(610)
@@ -57,3 +57,14 @@ ring_shape = 1, infiltration = 0, ring_width = seq(50,100,10),
 cluster_size = 300, cluster_loc_x = 0, cluster_loc_y = 0,
 ring_infiltration = seq(0, 0.2,0.05), plot.image = TRUE)
 }
+\seealso{
+\code{\link{multiple_background_images}} for simulating multiple
+mixed background images, and
+\code{\link{multiple_images_with_clusters}} for simulating multiple
+images with clusters.
+
+Other simulate multiple images functions: 
+\code{\link{multiple_background_images}()},
+\code{\link{multiple_images_with_clusters}()}
+}
+\concept{simulate multiple images functions}
