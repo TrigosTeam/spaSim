@@ -9,6 +9,7 @@ A data frame with 4915 rows and 2 variables:
 \describe{
 \item{Cell.X.Position}{X coordinate}
 \item{Cell.Y.Position}{Y coordinate}
+\item{Phenotype}{cell type}
 ...
 }
 }
