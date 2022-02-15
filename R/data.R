@@ -6,6 +6,7 @@
 #' \describe{
 #'   \item{Cell.X.Position}{X coordinate}
 #'   \item{Cell.Y.Position}{Y coordinate}
+#'   \item{Phenotype}{cell type}
 #'   ...
 #' }
 "bg1"
