@@ -79,5 +79,5 @@ n_immune_rings = 2, properties_of_immune_rings= properties_of_immune_rings2)
 # not run
 # library(SPIAT)
 # plot_cell_categories(immune_ring_image2, c("Tumour","Immune1","Immune2"),
-c("red","darkblue","darkgreen"),"Phenotype")
+# c("red","darkblue","darkgreen"),"Phenotype")
 }

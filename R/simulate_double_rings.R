@@ -44,7 +44,7 @@
 #' # not run
 #' # library(SPIAT)
 #' # plot_cell_categories(immune_ring_image2, c("Tumour","Immune1","Immune2"),
-#' c("red","darkblue","darkgreen"),"Phenotype")
+#' # c("red","darkblue","darkgreen"),"Phenotype")
 simulate_double_rings <- function(background_sample = bg1,
                                   bg_type = "Others",
                                   n_double_rings = 2,
