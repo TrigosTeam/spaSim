@@ -1,6 +1,7 @@
 #' Simulate multiple background images
 #'
 #' @description Generate a set of background images all at once.
+#'
 #' @param background_sample Data.frame or SingleCellExperiment object with
 #'   locations of points representing background cells. Further cell types will
 #'   be simulated based on this background sample.
