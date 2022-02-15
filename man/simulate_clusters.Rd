@@ -21,7 +21,8 @@ simulate_clusters(
 \item{background_sample}{(OPTIONAL) Data.Frame. The background image that the
 clusters are generated on. Default is the internal background image \code{bg1}.}
 
-\item{n_clusters}{Numeric. Number of clusters.}
+\item{n_clusters}{Numeric. Number of clusters. This must match the
+\code{length(properties_of_clusters)}.}
 
 \item{bg_type}{(OPTIONAL) String. The name of the background cell type if the
 background sample does not have a "Phenotype" column. By default is
@@ -57,6 +58,9 @@ simulation.
 
 Other simulate pattern functions: 
 \code{\link{simulate_background_cells}()},
-\code{\link{simulate_mixing}()}
+\code{\link{simulate_double_rings}()},
+\code{\link{simulate_immune_rings}()},
+\code{\link{simulate_mixing}()},
+\code{\link{simulate_stripes}()}
 }
 \concept{simulate pattern functions}

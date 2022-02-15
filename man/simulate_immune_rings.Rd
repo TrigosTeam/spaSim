@@ -29,7 +29,8 @@ rings are simulated on. By default use the internal background image \code{bg1}.
 \item{bg_type}{(OPTIONAL) String The name of the background cell type. By
 default is "Others".}
 
-\item{n_immune_rings}{Number of immune rings.}
+\item{n_immune_rings}{Number of immune rings. This must match the
+\code{length(properties_of_immune_rings)}.}
 
 \item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function.
 By default is the window of the background image}
@@ -60,3 +61,18 @@ n_immune_rings = 1, properties_of_immune_rings = properties_of_immune_rings)
 # "Phenotype")
 
 }
+\seealso{
+\code{\link{simulate_background_cells}} for all cell simulation,
+\code{\link{simulate_mixing}} for mixed background simulation,
+\code{\link{simulate_clusters}} for cluster simulation,
+\code{\link{simulate_double_rings}} for double immune ring simulation, and
+\code{\link{simulate_stripes}} for vessel simulation.
+
+Other simulate pattern functions: 
+\code{\link{simulate_background_cells}()},
+\code{\link{simulate_clusters}()},
+\code{\link{simulate_double_rings}()},
+\code{\link{simulate_mixing}()},
+\code{\link{simulate_stripes}()}
+}
+\concept{simulate pattern functions}

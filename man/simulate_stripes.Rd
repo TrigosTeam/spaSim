@@ -16,21 +16,23 @@ simulate_stripes(
 )
 }
 \arguments{
-\item{background_sample}{(OPTIONAL) Data.Frame The image that the stripes are
-simulated on. By default use the internal \code{bg1} background image}
+\item{background_sample}{(OPTIONAL) Data.Frame. The image that the stripes
+are simulated on. By default use the internal \code{bg1} background image.}
 
-\item{n_stripe_type}{Number of the types of the stripes}
+\item{n_stripe_type}{Number of stripe types.}
 
-\item{win}{(OPTIONAL) owin object from spatstat.geom owin method. By default it is
-the window of the background image.}
+\item{win}{(OPTIONAL) \code{owin} object from spatstat.geom owin method. By
+default it is the window of the background image.}
 
-\item{properties_of_stripes}{List of the properties of the stripes}
+\item{properties_of_stripes}{List of the properties of the stripes. See
+examples for the format of the properties.}
 }
 \value{
 A data.frame of the simulated image
 }
 \description{
-simulate_stripes
+Based on an existing background image, simulate stripes of cells
+representing vessels.
 }
 \examples{
 properties_of_stripes = list(
@@ -50,8 +52,22 @@ set.seed(610)
 stripe_image <- simulate_stripes(background_sample = bg1, n_stripe_type=2,
 win = NULL, properties_of_stripes = properties_of_stripes)
 
-# NOT RUN
 # library(SPIAT)
 # plot_cell_categories(stripe_image, categories_of_interest = c("Others","Immune"),
 # colour_vector = c("gray", "darkgreen"), feature_colname = "Phenotype")
 }
+\seealso{
+\code{\link{simulate_background_cells}} for all cell simulation,
+\code{\link{simulate_mixing}} for mixed background simulation,
+\code{\link{simulate_clusters}} for cluster simulation, and
+\code{\link{simulate_immune_rings}}/\code{\link{simulate_double_rings}} for
+immune ring simulation
+
+Other simulate pattern functions: 
+\code{\link{simulate_background_cells}()},
+\code{\link{simulate_clusters}()},
+\code{\link{simulate_double_rings}()},
+\code{\link{simulate_immune_rings}()},
+\code{\link{simulate_mixing}()}
+}
+\concept{simulate pattern functions}

@@ -3,7 +3,8 @@
 #'   cells where the same type of cells aggregate.
 #' @param background_sample (OPTIONAL) Data.Frame. The background image that the
 #'   clusters are generated on. Default is the internal background image `bg1`.
-#' @param n_clusters Numeric. Number of clusters.
+#' @param n_clusters Numeric. Number of clusters. This must match the
+#'   `length(properties_of_clusters)`.
 #' @param bg_type (OPTIONAL) String. The name of the background cell type if the
 #'   background sample does not have a "Phenotype" column. By default is
 #'   "Others".

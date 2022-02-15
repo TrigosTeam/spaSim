@@ -8,10 +8,18 @@
 #'   rings are simulated on. By default use the internal background image `bg1`.
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #'   default is "Others".
-#' @param n_immune_rings Number of immune rings.
+#' @param n_immune_rings Number of immune rings. This must match the
+#'   `length(properties_of_immune_rings)`.
 #' @param win (OPTIONAL) owin object output from spatstat.geom::owin function.
 #'   By default is the window of the background image
 #' @param properties_of_immune_rings List of properties of the immune rings
+#'
+#' @family simulate pattern functions
+#' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
+#'   \code{\link{simulate_mixing}} for mixed background simulation,
+#'   \code{\link{simulate_clusters}} for cluster simulation,
+#'   \code{\link{simulate_double_rings}} for double immune ring simulation, and
+#'   \code{\link{simulate_stripes}} for vessel simulation.
 #'
 #' @return A data.frame of the simulated image
 #' @export

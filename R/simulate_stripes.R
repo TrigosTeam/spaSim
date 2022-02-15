@@ -1,11 +1,22 @@
 #' simulate_stripes
 #'
-#' @param background_sample (OPTIONAL) Data.Frame The image that the stripes are
-#' simulated on. By default use the internal `bg1` background image
-#' @param n_stripe_type Number of the types of the stripes
-#' @param win (OPTIONAL) owin object from spatstat.geom owin method. By default it is
-#' the window of the background image.
-#' @param properties_of_stripes List of the properties of the stripes
+#' @description Based on an existing background image, simulate stripes of cells
+#'   representing vessels.
+#'
+#' @param background_sample (OPTIONAL) Data.Frame. The image that the stripes
+#'   are simulated on. By default use the internal `bg1` background image.
+#' @param n_stripe_type Number of stripe types.
+#' @param win (OPTIONAL) `owin` object from spatstat.geom owin method. By
+#'   default it is the window of the background image.
+#' @param properties_of_stripes List of the properties of the stripes. See
+#'   examples for the format of the properties.
+#'
+#' @family simulate pattern functions
+#' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
+#'   \code{\link{simulate_mixing}} for mixed background simulation,
+#'   \code{\link{simulate_clusters}} for cluster simulation, and
+#'   \code{\link{simulate_immune_rings}}/\code{\link{simulate_double_rings}} for
+#'   immune ring simulation
 #'
 #' @return A data.frame of the simulated image
 #' @export
@@ -27,7 +38,6 @@
 #' stripe_image <- simulate_stripes(background_sample = bg1, n_stripe_type=2,
 #' win = NULL, properties_of_stripes = properties_of_stripes)
 #'
-#' # NOT RUN
 #' # library(SPIAT)
 #' # plot_cell_categories(stripe_image, categories_of_interest = c("Others","Immune"),
 #' # colour_vector = c("gray", "darkgreen"), feature_colname = "Phenotype")

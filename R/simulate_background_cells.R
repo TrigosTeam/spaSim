@@ -1,17 +1,27 @@
-#' simulate_background_cells
+#' Simulate background cells
 #'
-#' @description Simulate cells without specifying their cell types. The 2D locations
-#' of the cells are simulated and plotted in a rectangular window. Users can specify
-#' the window size, cell number and the minimum distance between two cells.
+#' @description Simulate cell locations. The 2D locations of the cells are
+#'   simulated and plotted in a rectangular window. Users can specify the window
+#'   size, cell number and the minimum distance between two cells. All cells
+#'   have the same "Phenotype", specified by the "Phenotype" param. This
+#'   function uses `rHardcore` [`spatstat.core`].
 #'
-#' @param n_cells Numeric Number of cells in the background
-#' @param width Numeric The width of the image
-#' @param height Numeric The height of the image
-#' @param min_d Numeric The minimum distance between two cells
-#' @param oversample Numeric The multiplier for oversampling. Without oversampling,
-#' the simulation deletes cells that are within min_d from each other, resulting
-#' in a less number of cells than specified.
-#' @param Phenotype String The name of the background cell type. Default is "Others"
+#' @param n_cells Numeric. Number of cells in the background.
+#' @param width,height Numeric. The width and height of the image.
+#' @param min_d Numeric. The minimum distance between two cells.
+#' @param oversample (OPTIONAL) Numeric. The multiplier for oversampling.
+#'   Without oversampling, the simulation deletes cells that are within `min_d`
+#'   from each other, resulting in a less number of cells than specified.
+#'   Default is 1.2.
+#' @param Phenotype (OPTIONAL) String. The name of the background cell type.
+#'   Default is "Others".
+#'
+#' @family simulate pattern functions
+#' @seealso \code{\link{simulate_mixing}} for mixed background simulation,
+#'   \code{\link{simulate_clusters}} for cluster simulation,
+#'   \code{\link{simulate_immune_rings}}/\code{\link{simulate_double_rings}} for
+#'   immune ring simulation, and \code{\link{simulate_stripes}} for vessel
+#'   simulation.
 #'
 #' @importFrom ggplot2 ggplot aes geom_point
 #' @return A data.frame of the simulated background image

@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_background_cells.R
 \name{simulate_background_cells}
 \alias{simulate_background_cells}
-\title{simulate_background_cells}
+\title{Simulate background cells}
 \usage{
 simulate_background_cells(
   n_cells,
@@ -14,27 +14,29 @@ simulate_background_cells(
 )
 }
 \arguments{
-\item{n_cells}{Numeric Number of cells in the background}
+\item{n_cells}{Numeric. Number of cells in the background.}
 
-\item{width}{Numeric The width of the image}
+\item{width, height}{Numeric. The width and height of the image.}
 
-\item{height}{Numeric The height of the image}
+\item{min_d}{Numeric. The minimum distance between two cells.}
 
-\item{min_d}{Numeric The minimum distance between two cells}
+\item{oversample}{(OPTIONAL) Numeric. The multiplier for oversampling.
+Without oversampling, the simulation deletes cells that are within \code{min_d}
+from each other, resulting in a less number of cells than specified.
+Default is 1.2.}
 
-\item{oversample}{Numeric The multiplier for oversampling. Without oversampling,
-the simulation deletes cells that are within min_d from each other, resulting
-in a less number of cells than specified.}
-
-\item{Phenotype}{String The name of the background cell type. Default is "Others"}
+\item{Phenotype}{(OPTIONAL) String. The name of the background cell type.
+Default is "Others".}
 }
 \value{
 A data.frame of the simulated background image
 }
 \description{
-Simulate cells without specifying their cell types. The 2D locations
-of the cells are simulated and plotted in a rectangular window. Users can specify
-the window size, cell number and the minimum distance between two cells.
+Simulate cell locations. The 2D locations of the cells are
+simulated and plotted in a rectangular window. Users can specify the window
+size, cell number and the minimum distance between two cells. All cells
+have the same "Phenotype", specified by the "Phenotype" param. This
+function uses \code{rHardcore} \code{\link{spatstat.core}}.
 }
 \examples{
 set.seed(610) # set seed for this background image simulation for reproducibility
@@ -42,3 +44,18 @@ background_image <- simulate_background_cells(n_cells = 5000, width = 2000,
                                               height = 2000, min_d = 10,
                                               oversample = 1.5, Phenotype = "Others")
 }
+\seealso{
+\code{\link{simulate_mixing}} for mixed background simulation,
+\code{\link{simulate_clusters}} for cluster simulation,
+\code{\link{simulate_immune_rings}}/\code{\link{simulate_double_rings}} for
+immune ring simulation, and \code{\link{simulate_stripes}} for vessel
+simulation.
+
+Other simulate pattern functions: 
+\code{\link{simulate_clusters}()},
+\code{\link{simulate_double_rings}()},
+\code{\link{simulate_immune_rings}()},
+\code{\link{simulate_mixing}()},
+\code{\link{simulate_stripes}()}
+}
+\concept{simulate pattern functions}

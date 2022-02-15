@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_double_rings.R
 \name{simulate_double_rings}
 \alias{simulate_double_rings}
-\title{simulate_double_rings}
+\title{Simulate double immune rings}
 \usage{
 simulate_double_rings(
   background_sample = bg1,
@@ -33,18 +33,24 @@ are simulated on. By default use the internal \code{bg1} background image.}
 \item{bg_type}{(OPTIONAL) String The name of the background cell type. By
 default is "Others".}
 
-\item{n_double_rings}{Number of double immune rings.}
+\item{n_double_rings}{Number of double immune rings. This must match the
+\code{length(properties_of_double_rings)}.}
 
-\item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function. By
-default is the window of the background image.}
+\item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function.
+By default is the window of the background image.}
 
-\item{properties_of_double_rings}{List of properties of the double immune rings.}
+\item{properties_of_double_rings}{List of properties of the double immune
+rings.}
 }
 \value{
 A data.frame of the simulated image
 }
 \description{
-simulate_double_rings
+Based on an existing background image, simulate double rings of
+immune cells that surround tumour clusters. The inner ring is the internal
+margin of a tumour cluster. The outer ring is the external tumour margin.
+The tumour clusters and the double immune rings are simulated at the same
+time.
 }
 \examples{
 set.seed(610)
@@ -70,3 +76,18 @@ n_double_rings = 2, properties_of_double_rings = properties_of_double_rings)
 # plot_cell_categories(double_ring_image, c("Tumour","Immune1","Immune2"),
 # c("red","darkblue","darkgreen"),"Phenotype")
 }
+\seealso{
+\code{\link{simulate_background_cells}} for all cell simulation,
+\code{\link{simulate_mixing}} for mixed background simulation,
+\code{\link{simulate_clusters}} for cluster simulation,
+\code{\link{simulate_immune_rings}} for single immune ring simulation, and
+\code{\link{simulate_stripes}} for vessel simulation.
+
+Other simulate pattern functions: 
+\code{\link{simulate_background_cells}()},
+\code{\link{simulate_clusters}()},
+\code{\link{simulate_immune_rings}()},
+\code{\link{simulate_mixing}()},
+\code{\link{simulate_stripes}()}
+}
+\concept{simulate pattern functions}

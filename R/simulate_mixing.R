@@ -1,8 +1,19 @@
-#' simulate_mixing
+#' Simulate mixed background image
+#' @description Based on an existing background image, simulate mixed cell types
+#'   with specified cell types and proportions.
+#' @param background_sample (OPTIONAL) Data.Frame. The image that the stripes
+#'   are simulated on. By default use the `bg1` background image from the
+#'   package.
+#' @param names_of_mixing String Vector of the mixed cell types.
+#' @param mixing_degree Numeric Vector of the proportions of the mixed cell
+#'   types.
 #'
-#' @param background_sample Data.Frame The image that the stripes are simulated on
-#' @param names_of_mixing Vector of the mixed cell types
-#' @param mixing_degree Vector of the proportions of the mixed cell types
+#' @family simulate pattern functions
+#' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
+#'   \code{\link{simulate_clusters}} for cluster simulation,
+#'   \code{\link{simulate_immune_rings}}/\code{\link{simulate_double_rings}} for
+#'   immune ring simulation, and \code{\link{simulate_stripes}} for vessel
+#'   simulation.
 #'
 #' @return A data.frame of the simulated image
 #' @export
@@ -12,12 +23,11 @@
 #' mix_background <- simulate_mixing(background_sample = bg1,
 #' names_of_mixing = c("Tumour","Immune", "Others"), mixing_degree = c(0.2, 0.4,  0.4))
 #'
-#' # NOT RUN
 #' # library(SPIAT)
 #' # plot_cell_categories(mix_background, categories_of_interest = c("Tumour","Immune"),
 #' # colour_vector = c("red", "darkgreen"), feature_colname = "Phenotype")
 
-simulate_mixing <- function(background_sample,
+simulate_mixing <- function(background_sample = bg1,
                             names_of_mixing = c("Tumour", "Immune", "Others"),
                             mixing_degree = c(0.2, 0.4, 0.4)) {
 

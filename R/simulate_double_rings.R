@@ -1,14 +1,28 @@
-#' simulate_double_rings
+#' Simulate double immune rings
 #'
-#' @description
+#' @description Based on an existing background image, simulate double rings of
+#'   immune cells that surround tumour clusters. The inner ring is the internal
+#'   margin of a tumour cluster. The outer ring is the external tumour margin.
+#'   The tumour clusters and the double immune rings are simulated at the same
+#'   time.
+#'
 #' @param background_sample (OPTIONAL) Data.Frame The image that the patterns
-#' are simulated on. By default use the internal `bg1` background image.
+#'   are simulated on. By default use the internal `bg1` background image.
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
-#' default is "Others".
-#' @param n_double_rings Number of double immune rings.
-#' @param win (OPTIONAL) owin object output from spatstat.geom::owin function. By
-#' default is the window of the background image.
-#' @param properties_of_double_rings List of properties of the double immune rings.
+#'   default is "Others".
+#' @param n_double_rings Number of double immune rings. This must match the
+#'   `length(properties_of_double_rings)`.
+#' @param win (OPTIONAL) owin object output from spatstat.geom::owin function.
+#'   By default is the window of the background image.
+#' @param properties_of_double_rings List of properties of the double immune
+#'   rings.
+#'
+#' @family simulate pattern functions
+#' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
+#'   \code{\link{simulate_mixing}} for mixed background simulation,
+#'   \code{\link{simulate_clusters}} for cluster simulation,
+#'   \code{\link{simulate_immune_rings}} for single immune ring simulation, and
+#'   \code{\link{simulate_stripes}} for vessel simulation.
 #'
 #' @return A data.frame of the simulated image
 #' @export
