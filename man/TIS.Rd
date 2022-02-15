@@ -55,6 +55,12 @@ rings to simulate.}
 \item{properties_of_immune_rings}{(OPTIONAL) List of parameters to define the
 immune rings.}
 
+\item{n_double_rings}{(OPTIONAL) Number of double immune rings. If NULL, no double
+rings to simulate.}
+
+\item{properties_of_double_rings}{(OPTIONAL) List of parameters to define the
+double immune rings.}
+
 \item{n_stripe_type}{(OPTIONAL) Number of stripe (vessel) types. If NULL, no
 stripes to simulate.}
 
