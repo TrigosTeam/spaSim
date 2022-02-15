@@ -18,11 +18,12 @@ RoxygenNote: 7.1.2
 Imports: 
     ggplot2,
     methods,
-    spatstat,
     stats,
     dplyr,
     tibble,
-    SingleCellExperiment
+    SingleCellExperiment,
+    spatstat.core,
+    spatstat.geom
 Depends: 
     R (>= 2.10)
 LazyData: true
