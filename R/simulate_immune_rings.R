@@ -11,6 +11,33 @@
 #'
 #' @return A data.frame of the simulated image
 #' @export
+#'
+#' @examples
+#' set.seed(610)
+#' # manually define the properties of the immune ring
+#' properties_of_immune_rings <- list(I1 = list(name_of_cluster_cell = "Tumour",
+#' size = 600,shape = "Circle",centre_loc = data.frame("x" = 930, "y" = 1000),
+#' infiltration_types = c("Immune1", "Immune2", "Others"), infiltration_proportions
+#' = c(0.15, 0.05, 0.05), name_of_ring_cell = "Immune1", immune_ring_width = 150,
+#' immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions = c(0.15)))
+#' # simulate immune rings (`n_immune_rings` should match the length of
+#' `properties_of_immune_rings`)
+#' immune_ring_image <- simulate_immune_rings(background_sample = bg1,
+#' n_immune_rings = 1, properties_of_immune_rings = properties_of_immune_rings)
+#' # not run
+#' # library(SPIAT)
+#' # plot_cell_categories(immune_ring_image, c("Tumour","Immune1"),c("red","blue"),"Phenotype")
+#'
+#' set.seed(1)
+#' # can also use predefined immune rings properties
+#' properties_of_immune_rings <- R_shape2  # `R_shape2` is defined in the package
+#' immune_ring_image2 <- simulate_immune_rings(background_sample = bg1,
+#' n_immune_rings = 2, properties_of_immune_rings= properties_of_immune_rings)
+#'
+#' # not run
+#' # library(SPIAT)
+#' # plot_cell_categories(immune_ring_image2, c("Tumour","Immune"),c("red","blue"),"Phenotype")
+
 simulate_immune_rings <- function(background_sample = bg1,
                                   bg_type = "Others",
                                   n_immune_rings = 2,

@@ -37,3 +37,17 @@ A data.frame of the simulated image
 \description{
 simulate_clusters
 }
+\examples{
+set.seed(610)
+cluster_image <- simulate_clusters(background_sample = bg1,
+n_clusters = 2, properties_of_clusters= list(C1 = list(
+name_of_cluster_cell = "Tumour", size = 300, shape = "Oval", centre_loc =
+data.frame("x" = 500, "y" = 500), infiltration_types = c("Immune1", "Others"),
+infiltration_proportions = c(0.1, 0.05))))
+
+set.seed(1)
+# can also use predefined cluster properties
+properties_of_clusters <- C_shape2  # `C_shape2` is defined in the package
+cluster_image2 <- simulate_clusters(background_sample = bg1,
+n_clusters = 2, properties_of_clusters= properties_of_clusters)
+}

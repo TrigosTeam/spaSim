@@ -4,9 +4,9 @@
 #' of points representing background cells. Further cell types will be simulated
 #' based on this background sample.
 #' @param cluster_shape List Properties of clusters to simulate. Either choose
-#' one of the pre-designed shapes (`C_shape1`, `C_shape2` for tumour cluster or
-#' `C_shape3` for immune cluster), or manually define the properties
-#' -- format: list(C1 = list(name_of_cluster_cell = "Tumour",
+#' one of the pre-designed shapes (1 or 2 for tumour cluster or 3 for immune cluster),
+#' or manually define the properties -- format:
+#' list(C1 = list(name_of_cluster_cell = "Tumour",
 #' size = 100, shape = "Circle", centre_loc = data.frame("x" = 1000, "y" = 800),
 #' infiltration_types = c("Immune", "Others"),infiltration_proportions = c(0.1, 0.1)),
 #' C2 = list(name_of_cluster_cell = "Tumour",size = 50, shape = "Oval",
@@ -27,6 +27,11 @@
 #'
 #' @return
 #' @export
+#' @examples
+#' set.seed(610)
+#' cluster_image_list <- multiple_images_with_clusters(background_sample = bg1,
+#' cluster_shape=2, infiltration = c(0.1, 0.3), cluster_size = c(300,600), cluster_loc_x = 0,
+#' cluster_loc_y = 0, plot.image = TRUE)
 
 multiple_images_with_clusters <- function(background_sample = bg1,
                                          cluster_shape = 2,

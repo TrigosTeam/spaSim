@@ -23,3 +23,13 @@ A data.frame of the simulated image
 \description{
 simulate_mixing
 }
+\examples{
+set.seed(610)
+mix_background <- simulate_mixing(background_sample = bg1,
+names_of_mixing = c("Tumour","Immune", "Others"), mixing_degree = c(0.2, 0.4,  0.4))
+
+# NOT RUN
+# library(SPIAT)
+# plot_cell_categories(mix_background, categories_of_interest = c("Tumour","Immune"),
+# colour_vector = c("red", "darkgreen"), feature_colname = "Phenotype")
+}

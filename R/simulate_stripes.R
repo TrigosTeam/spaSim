@@ -9,6 +9,29 @@
 #'
 #' @return A data.frame of the simulated image
 #' @export
+#' @examples
+#' properties_of_stripes = list(
+#' S1 = list(
+#'   number_of_stripes = 1,
+#'   name_of_stripe_cell = "Others",
+#'   width_of_stripe = 80,
+#'   infiltration_types = c("Immune"),
+#'   infiltration_proportions = c(0.08)
+#' ), S2 = list(
+#'   number_of_stripes = 1,
+#'   name_of_stripe_cell = "Others",
+#'   width_of_stripe = 80,
+#'   infiltration_types = c("Immune"),
+#'   infiltration_proportions = c(0.08)))
+#' set.seed(610)
+#' stripe_image <- simulate_stripes(background_sample = bg1, n_stripe_type=2,
+#' win = NULL, properties_of_stripes = properties_of_stripes)
+#'
+#' # NOT RUN
+#' # library(SPIAT)
+#' # plot_cell_categories(stripe_image, categories_of_interest = c("Others","Immune"),
+#' # colour_vector = c("gray", "darkgreen"), feature_colname = "Phenotype")
+
 simulate_stripes <- function(background_sample = bg1,
                              n_stripe_type = 2,
                              win = NULL,
@@ -17,14 +40,14 @@ simulate_stripes <- function(background_sample = bg1,
                                  number_of_stripes = 1,
                                  name_of_stripe_cell = "Others",
                                  width_of_stripe = 80,
-                                 infiltration_types = c("Immune1"),
+                                 infiltration_types = c("Immune"),
                                  infiltration_proportions = c(0.08)
                                ),
                                S2 = list(
                                  number_of_stripes = 1,
                                  name_of_stripe_cell = "Others",
                                  width_of_stripe = 80,
-                                 infiltration_types = c("Immune1"),
+                                 infiltration_types = c("Immune"),
                                  infiltration_proportions = c(0.08)
                                )
                              )

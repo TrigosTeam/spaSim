@@ -15,6 +15,4 @@ An SingleCellExperiment object
 \description{
 Format a dataframe of data into a singlecellexperiment class
 where the count assay is empty
-every cell (columns), and cell phenotype, x and y coordinates are stored under data
-for the purpose of passing dataframe into a function requiring sce_object
 }

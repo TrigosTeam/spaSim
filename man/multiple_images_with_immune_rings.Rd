@@ -26,7 +26,7 @@ all simulated images have the same cluster size. If vector, images with
 a range of different cluster sizes will be simulated.}
 
 \item{ring_shape}{List. Properties of immune rings to simulate. Either choose
-one of the pre-designed shapes (\code{R_shape1}, \code{R_shape2} or \code{R_shape3}), or manually
+one of the pre-designed shapes (1, 2, or 3), or manually
 define the properties -- format:
 R_shape3 = list(I1 = list(name_of_cluster_cell = "Tumour",size = 100,
 shape = "Circle",centre_loc = data.frame("x" = 1000, "y" = 800),

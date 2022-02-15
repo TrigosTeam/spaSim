@@ -20,9 +20,9 @@ of points representing background cells. Further cell types will be simulated
 based on this background sample.}
 
 \item{cluster_shape}{List Properties of clusters to simulate. Either choose
-one of the pre-designed shapes (\code{C_shape1}, \code{C_shape2} for tumour cluster or
-\code{C_shape3} for immune cluster), or manually define the properties
--- format: list(C1 = list(name_of_cluster_cell = "Tumour",
+one of the pre-designed shapes (1 or 2 for tumour cluster or 3 for immune cluster),
+or manually define the properties -- format:
+list(C1 = list(name_of_cluster_cell = "Tumour",
 size = 100, shape = "Circle", centre_loc = data.frame("x" = 1000, "y" = 800),
 infiltration_types = c("Immune", "Others"),infiltration_proportions = c(0.1, 0.1)),
 C2 = list(name_of_cluster_cell = "Tumour",size = 50, shape = "Oval",
@@ -51,4 +51,10 @@ The Y location of the cluster center.}
 }
 \description{
 multiple_images_with_clusters
+}
+\examples{
+set.seed(610)
+cluster_image_list <- multiple_images_with_clusters(background_sample = bg1,
+cluster_shape=2, infiltration = c(0.1, 0.3), cluster_size = c(300,600), cluster_loc_x = 0,
+cluster_loc_y = 0, plot.image = TRUE)
 }

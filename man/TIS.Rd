@@ -66,5 +66,26 @@ stripes to simulate.}
 An sce object of the simulated image
 }
 \description{
-TIS
+Tissue Image Simulator (TIS) integrates the basic simulation functions
+in spaSim, including simulating (mixed) background image, clusters, immune rings,
+double immune rings and stripes. The patterns are simulated on separate layers
+sequentially (e.g. immune rings are simulated after/on top of background cells).
+
+Pattern properties (e.g. \code{properties_of_clusters}) contain the properties of
+a pattern in the format of list where each element is one pattern.
+These properties can be manually defined. Or users can use predefined properties
+from the package (\code{C_shape1}, \code{C_shape2}, \code{C_Shape3} for clusters; \code{R_shape1},
+\code{R_shape2}, \code{R_shape3} for immune rings; \code{D_shape1} for double rings).
+Details about the format of the properties see \link{simulate_clusters}
+}
+\examples{
+set.seed(610)
+double_ring_image <- TIS(background_sample=bg1, n_double_rings = 2,
+properties_of_double_rings = D_shape1)
+
+# NOT RUN
+# library(SPIAT)
+# plot_cell_categories(double_ring_image, categories_of_interest =
+# c("Tumour","Immune1", "Immune2"), colour_vector = c("red", "darkgreen",
+# "darkblue"), feature_colname = "Phenotype")
 }

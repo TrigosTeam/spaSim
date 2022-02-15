@@ -27,8 +27,17 @@ the number of images}
 \item{plot.image}{Boolean Whether plot the simulated images or not.Default is TRUE.}
 }
 \value{
-
+a list of sce objects
 }
 \description{
 multiple_background_images
+}
+\examples{
+names_of_cell_types = c("Tumour","Immune","Others")
+prop1 <- rep(0.1,9)
+prop2 <- seq(0, 0.4, 0.05)
+prop3 <- seq(0.9,0.5,-0.05)
+set.seed(610)
+bg_image_list <- multiple_background_images(background_sample = bg1, names_of_cell_types=
+names_of_cells_types, proportions_of_cell_types = list(prop1, prop2, prop3), plot.image=F)
 }
