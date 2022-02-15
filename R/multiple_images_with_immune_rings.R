@@ -30,9 +30,9 @@
 #' in the region of immune rings. (Only applied to cell type "Tumour")
 #' @param plot.image Boolean Whether plot the simulated images or not.Default is TRUE.
 #'
-#' @return
+#' @return A list of sce objects
 #' @export
-#' #' @examples
+#' @examples
 #' set.seed(610)
 #' ring_image_list <- multiple_images_with_immune_rings(background_sample = bg1,
 #' ring_shape = 1, infiltration = 0, ring_width = seq(50,100,10),

@@ -56,8 +56,15 @@ in the region of immune rings. (Only applied to cell type "Tumour")}
 \item{plot.image}{Boolean Whether plot the simulated images or not.Default is TRUE.}
 }
 \value{
-
+A list of sce objects
 }
 \description{
 multiple_images_with_immune_rings
+}
+\examples{
+set.seed(610)
+ring_image_list <- multiple_images_with_immune_rings(background_sample = bg1,
+ring_shape = 1, infiltration = 0, ring_width = seq(50,100,10),
+cluster_size = 300, cluster_loc_x = 0, cluster_loc_y = 0,
+ring_infiltration = seq(0, 0.2,0.05), plot.image = TRUE)
 }
