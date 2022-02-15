@@ -68,8 +68,8 @@ double_ring_image <- simulate_double_rings(background_sample = bg1,
 n_double_rings = 2, properties_of_double_rings = properties_of_double_rings)
 # not run
 # library(SPIAT)
-# plot_cell_categories(immune_ring_image, c("Tumour","Immune1","Immune2"),
-c("red","darkblue","darkgreen"),"Phenotype")
+# plot_cell_categories(double_ring_image, c("Tumour","Immune1","Immune2"),
+# c("red","darkblue","darkgreen"),"Phenotype")
 
 set.seed(610)
 # can also use predefined immune rings properties
