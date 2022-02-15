@@ -6,19 +6,8 @@
 #' @param cluster_size Numeric or Vector. The size of the cluster. If numeric,
 #' all simulated images have the same cluster size. If vector, images with
 #' a range of different cluster sizes will be simulated.
-#' @param ring_shape List. Properties of immune rings to simulate. Either choose
-#' one of the pre-designed shapes (1, 2, or 3), or manually
-#' define the properties -- format:
-#' R_shape3 = list(I1 = list(name_of_cluster_cell = "Tumour",size = 100,
-#' shape = "Circle",centre_loc = data.frame("x" = 1000, "y" = 800),
-#' infiltration_types = c("Immune", "Others"), infiltration_proportions = c(0, 0.1),
-#' name_of_ring_cell = "Immune", immune_ring_width = 50, immune_ring_infiltration_types
-#' = c("Tumour", "Others"), immune_ring_infiltration_proportions = c(0.3, 0.15)),
-#' I2 = list(name_of_cluster_cell = "Tumour",size = 50,shape = "Oval",centre_loc =
-#' data.frame("x" = 1100, "y" = 1050), infiltration_types = c("Immune", "Others"),
-#' infiltration_proportions = c(0, 0.1), name_of_ring_cell = "Immune",
-#' immune_ring_width = 50, immune_ring_infiltration_types = c("Tumour","Others"),
-#' immune_ring_infiltration_proportions = c(0.3, 0.15)))
+#' @param ring_shape List. Properties of immune rings to simulate. Choose
+#' one of the pre-designed shapes (1, 2, or 3).
 #' @param infiltration Numeric or Vector. The degree of infiltration.
 #' @param ring_width Numeric or Vector. The width of the immune ring.
 #' @param cluster_loc_x Numeric or Vector. The X location of the cluster center.
