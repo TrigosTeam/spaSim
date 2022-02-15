@@ -12,13 +12,13 @@ plot_cells(
 )
 }
 \arguments{
+\item{sce_object}{SingleCellExperiment object or data.frame that has cell locations and cell type info}
+
 \item{categories_of_interest}{Vector of cell categories to be coloured}
 
 \item{colour_vector}{Vector specifying the colours of each cell phenotype}
 
 \item{feature_colname}{String specifying the column the cell categories belong to}
-
-\item{data}{SingleCellExperiment object or data.frame that has cell locations and cell type info}
 }
 \value{
 A plot is returned
