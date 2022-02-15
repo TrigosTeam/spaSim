@@ -3,7 +3,8 @@
 #' @description Format a dataframe of data into a singlecellexperiment class
 #' where the count assay is empty
 #'
-#' @param data Dataframe that will be the colData of the sce object
+#' @param data Dataframe that will be the colData of the sce object.
+#'
 #' @import SingleCellExperiment
 #' @return An SingleCellExperiment object
 

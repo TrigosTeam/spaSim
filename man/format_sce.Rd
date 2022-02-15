@@ -7,7 +7,7 @@
 format_sce(data)
 }
 \arguments{
-\item{data}{Dataframe that will be the colData of the sce object}
+\item{data}{Dataframe that will be the colData of the sce object.}
 }
 \value{
 An SingleCellExperiment object
