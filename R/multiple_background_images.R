@@ -10,7 +10,7 @@
 #' the number of images
 #' @param plot.image Boolean Whether plot the simulated images or not.Default is TRUE.
 #'
-#' @return a list of sce objects
+#' @return A list of sce objects
 #' @export
 #' @examples
 #' names_of_cell_types = c("Tumour","Immune","Others")

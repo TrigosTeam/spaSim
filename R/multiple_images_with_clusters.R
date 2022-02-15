@@ -25,7 +25,7 @@
 #' The Y location of the cluster center.
 #' @param plot.image Boolean Whether plot the simulated images or not.Default is TRUE.
 #'
-#' @return
+#' @return A list of sce objects
 #' @export
 #' @examples
 #' set.seed(610)

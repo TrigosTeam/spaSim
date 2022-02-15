@@ -27,7 +27,7 @@ the number of images}
 \item{plot.image}{Boolean Whether plot the simulated images or not.Default is TRUE.}
 }
 \value{
-a list of sce objects
+A list of sce objects
 }
 \description{
 multiple_background_images

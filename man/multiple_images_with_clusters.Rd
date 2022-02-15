@@ -47,7 +47,7 @@ The Y location of the cluster center.}
 \item{plot.image}{Boolean Whether plot the simulated images or not.Default is TRUE.}
 }
 \value{
-
+A list of sce objects
 }
 \description{
 multiple_images_with_clusters
