@@ -1,6 +1,7 @@
 Package: spaSim
 Title: Spatial point data simulator for tissue images
-Version: 0.0.0.9000
+Version: 0.99.0
+Date: 2022-02-16
 Authors@R: 
     c(person("Yuzhou", "Feng", email = "yuzhou.feng@petermac.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2955-4053")),
@@ -11,7 +12,10 @@ Description: A suite of functions for simulating spatial patterns of cells in
     format. Each point represents a cell, with its 2D locations and cell type. 
     Potential cell patterns include background cells, tumour/immune cell clusters, 
     immune rings, and blood/lymphatic vessels.
-License: MIT + file LICENSE
+License: GPL (>= 3) + file LICENSE
+URL: https://github.com/fuerzhou/spaSim
+BugReports: https://support.bioconductor.org/t/spaSim
+biocViews: StatisticalMethod
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
@@ -20,13 +24,18 @@ Imports:
     methods,
     stats,
     dplyr,
-    tibble,
-    SingleCellExperiment,
     spatstat.core,
-    spatstat.geom
+    spatstat.geom,
+    SummarizedExperiment
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1.0)
 LazyData: true
 Suggests: 
-    testthat (>= 3.0.0)
+    RefManageR,
+    BiocStyle,
+    knitr,
+    testthat (>= 3.0.0),
+    sessioninfo,
+    rmarkdown
 Config/testthat/edition: 3
+VignetteBuilder: knitr
