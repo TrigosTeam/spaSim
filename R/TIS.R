@@ -1,4 +1,4 @@
-#' TIS
+#' Tissue Image Simulator (TIS)
 #'
 #' @description Tissue Image Simulator (TIS) integrates the basic simulation functions
 #' in spaSim, including simulating (mixed) background image, clusters, immune rings,
@@ -86,7 +86,7 @@ TIS <- function(background_sample = NULL,
 
   # CHECK is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
 
   image <- background_sample
   X <- max(background_sample$Cell.X.Position)

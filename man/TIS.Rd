@@ -2,7 +2,7 @@
 % Please edit documentation in R/TIS.R
 \name{TIS}
 \alias{TIS}
-\title{TIS}
+\title{Tissue Image Simulator (TIS)}
 \usage{
 TIS(
   background_sample = NULL,

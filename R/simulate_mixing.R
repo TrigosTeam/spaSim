@@ -33,7 +33,7 @@ simulate_mixing <- function(background_sample = bg1,
 
   # CHECK is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
 
   # default phenotype is "Others"
   if (is.null(background_sample$Phenotype)){

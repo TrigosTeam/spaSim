@@ -22,7 +22,7 @@ test_that("simulate_multiple_background_images works",{
   # test if return a list of 3 objects
   expect_length(imageL, 3)
   # test if each object is an sce
-  expect_equal(class(imageL[[1]])[[1]], "SingleCellExperiment")
+  expect_equal(class(imageL[[1]])[[1]], "SummarizedExperiment")
   # test if there are "Tumour" and "Immune", "Others" cells under the "Phenotype" column
   expect_setequal(colnames(colData(sce)),
                   c("Cell.X.Position", "Cell.Y.Position", "Phenotype", "pseudo"))
@@ -39,7 +39,7 @@ test_that("TIS works for generating background image", {
               names_of_bg_cells = c("Tumour","Immune", "Others"),
               proportions_of_bg_cells = c(0.1, 0.3, 0.6))
   # test the class of the result
-  expect_equal(class(image)[[1]], "SingleCellExperiment")
+  expect_equal(class(image)[[1]], "SummarizedExperiment")
   # test if there are more than 4000 cells in the simulated image
   data <- data.frame(colData(image))
   expect_gt(dim(data)[1], 4000)

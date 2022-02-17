@@ -42,7 +42,7 @@ multiple_background_images <- function(background_sample,
                                         plot.image = T){
   # CHECK is the background sample a data frame?
   if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
 
   # default phenotype is "Others"
   if (is.null(background_sample$Phenotype)){

@@ -4,19 +4,13 @@
 #' @param background_sample Data.frame or SingleCellExperiment object with
 #'   locations of points representing background cells. Further cell types will
 #'   be simulated based on this background sample.
-#' @param cluster_shape List Properties of clusters to simulate. Either choose
+#' @param cluster_shape List. Properties of clusters to simulate. Either choose
 #'   one of the pre-designed shapes (1 or 2 for tumour cluster or 3 for immune
-#'   cluster), or manually define the properties -- format: list(C1 =
-#'   list(name_of_cluster_cell = "Tumour", size = 100, shape = "Circle",
-#'   centre_loc = data.frame("x" = 1000, "y" = 800), infiltration_types =
-#'   c("Immune", "Others"),infiltration_proportions = c(0.1, 0.1)), C2 =
-#'   list(name_of_cluster_cell = "Tumour",size = 50, shape = "Oval", centre_loc
-#'   = data.frame("x" = 1100, "y" = 1050), infiltration_types = c("Immune",
-#'   "Others"),infiltration_proportions = c(0.1, 0.1)))
-#' @param infiltration Numeric or Vector. The degree of infiltration. If
+#'   cluster).
+#' @param infiltration Numeric Vector. The degree of infiltration. If
 #'   numeric, all simulated images have the same infiltration degree. If vector,
 #'   images with a range of different infiltrations will be simulated.
-#' @param cluster_size Numeric or Vector. The size of the cluster. If numeric,
+#' @param cluster_size Numeric Vector. The size of the cluster. If numeric,
 #'   all simulated images have the same cluster size. If vector, images with a
 #'   range of different cluster sizes will be simulated.
 #' @param cluster_loc_x Numeric or Vector. The X location of the cluster center.
@@ -52,7 +46,7 @@ multiple_images_with_clusters <- function(background_sample = bg1,
   ## CHECK
   # is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
 
    # count the image number
   i <- 0

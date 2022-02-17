@@ -33,7 +33,7 @@ test_that("multiple_images_with_immune_rings works", {
   # test if return a list of 2 objects
   expect_length(imageL, 4)
   # test if each object is an sce
-  expect_equal(class(sce)[[1]], "SingleCellExperiment")
+  expect_equal(class(sce)[[1]], "SummarizedExperiment")
   # test if there are "Tumour" and "Immune", "Others" cells under the "Phenotype" column
   expect_setequal(colnames(colData(sce)),
                   c("Cell.X.Position", "Cell.Y.Position", "Phenotype","lab", "pseudo"))
@@ -47,7 +47,7 @@ test_that("TIS works for simulating immune rings", {
                properties_of_immune_rings = R_shape2)
 
   # test the class of the result
-  expect_equal(class(image)[[1]], "SingleCellExperiment")
+  expect_equal(class(image)[[1]], "SummarizedExperiment")
 
   # test if there are "Tumour" and "Immune", "Others" cells under the "Phenotype" column
   data <- data.frame(colData(image))
@@ -63,7 +63,7 @@ test_that("TIS works for simulating double rings", {
                properties_of_double_rings = D_shape1)
 
   # test the class of the result
-  expect_equal(class(image)[[1]], "SingleCellExperiment")
+  expect_equal(class(image)[[1]], "SummarizedExperiment")
 
   # test if there are "Tumour" and "Immune", "Others" cells under the "Phenotype" column
   data <- data.frame(colData(image))

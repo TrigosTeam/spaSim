@@ -54,7 +54,7 @@ simulate_clusters <- function(background_sample = bg1,
 
   # CHECK is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
 
   # Get the window
   # if window is specified, use the specified window

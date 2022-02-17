@@ -12,7 +12,7 @@ plot_cells(
 )
 }
 \arguments{
-\item{sce_object}{SingleCellExperiment object or data.frame that has cell locations and cell type info}
+\item{sce_object}{SingleCellExperiment object orw data.frame that has cell locations and cell type info}
 
 \item{categories_of_interest}{Vector of cell categories to be coloured}
 

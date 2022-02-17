@@ -48,7 +48,7 @@ multiple_images_with_immune_rings <- function(background_sample = bg1,
   ## CHECK
   # is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
 
   # count the image number
   i <- 0

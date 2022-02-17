@@ -94,7 +94,7 @@ simulate_double_rings <- function(background_sample = bg1,
   ## CHECK
   # is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SingleCellExperiment::colData(background_sample))}
+    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
 
   # check if the specified cluster properties match n_double_rings
   if (as.numeric(length(properties_of_double_rings)) != n_double_rings){

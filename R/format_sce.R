@@ -5,7 +5,7 @@
 #'
 #' @param data Dataframe that will be the colData of the sce object.
 #'
-#' @import SingleCellExperiment
+#' @import SummarizedExperiment
 #' @return An SingleCellExperiment object
 
 format_sce <- function(data) {
@@ -28,7 +28,7 @@ format_sce <- function(data) {
   rownames(assay_data_matrix) <- NULL
   assay_data_matrix_t <- t(assay_data_matrix)
 
-  sce <- SingleCellExperiment(assays = list(counts = assay_data_matrix_t))
+  sce <- SummarizedExperiment(assays = list(counts = assay_data_matrix_t))
 
   rownames(sce) <- assay_rownames
   colnames(sce) <- assay_colnames
