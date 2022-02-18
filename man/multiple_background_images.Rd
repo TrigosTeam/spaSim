@@ -9,7 +9,7 @@ multiple_background_images(
   names_of_cell_types = c("Tumour", "Immune", "Others"),
   proportions_of_cell_types = list(rep(0.1, 9), seq(0, 0.4, 0.05), seq(0.9, 0.5,
     -0.05)),
-  plot.image = T
+  plot.image = TRUE
 )
 }
 \arguments{
@@ -46,8 +46,8 @@ list(prop1, prop2, prop3), plot.image = FALSE)
 }
 \seealso{
 \code{\link{multiple_images_with_clusters}} for simulating multiple
-images with clusters, and \code{\link{multiple_images_with_immune_rings}} for
-simulating multiple images with immune rings.
+images with clusters, and \code{\link{multiple_images_with_immune_rings}}
+for simulating multiple images with immune rings.
 
 Other simulate multiple images functions: 
 \code{\link{multiple_images_with_clusters}()},
