@@ -36,6 +36,7 @@ Suggests:
     knitr,
     testthat (>= 3.0.0),
     sessioninfo,
-    rmarkdown
+    rmarkdown,
+    markdown
 Config/testthat/edition: 3
 VignetteBuilder: knitr
