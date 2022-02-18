@@ -87,14 +87,6 @@ citation("spaSim")
 
 # Quick start to using to `spaSim`
 
-```{r "start", message=FALSE}
-library("spaSim")
-
-set.seed(610)
-mix_background <- TIS(n_cells = 5000, width = 2000, height = 2000, min_d = 10,
-                      names_of_bg_cells = c("Tumour","Immune","Others"), 
-                      proportions_of_bg_cells = c(0.1, 0.2, 0.7))
-```
 
 Edit this as you see fit =)
 
