@@ -12,7 +12,7 @@ Description: A suite of functions for simulating spatial patterns of cells in
     format. Each point represents a cell, with its 2D locations and cell type. 
     Potential cell patterns include background cells, tumour/immune cell clusters, 
     immune rings, and blood/lymphatic vessels.
-License: GPL (>= 3) + file LICENSE
+License: Artistic-2.0
 URL: https://github.com/fuerzhou/spaSim
 BugReports: https://support.bioconductor.org/t/spaSim
 biocViews: StatisticalMethod
