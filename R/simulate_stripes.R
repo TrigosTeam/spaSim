@@ -78,7 +78,7 @@ simulate_stripes <- function(background_sample = bg1,
     background_sample[, "Phenotype"] <- "Others"
   }
 
-  for (k in 1:n_stripe_type){
+  for (k in seq_len(n_stripe_type)){
     n_stripes = properties_of_stripes[[k]]$number_of_stripes
     stripe_cell_type = properties_of_stripes[[k]]$name_of_stripe_cell
     stripe_width = properties_of_stripes[[k]]$width_of_stripe
@@ -88,7 +88,7 @@ simulate_stripes <- function(background_sample = bg1,
     # generate intercepts
     random_nums <- stats::runif(n_stripes, min = -max(X,Y), max = max(X,Y))
 
-    for (i in 1:dim(background_sample)[1]){
+    for (i in seq_len(dim(background_sample)[1])){
       x <- background_sample[i, "Cell.X.Position"]
       y <- background_sample[i, "Cell.Y.Position"]
       pheno <- background_sample[i, "Phenotype"]

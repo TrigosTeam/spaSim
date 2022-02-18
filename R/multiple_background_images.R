@@ -16,8 +16,8 @@
 #'
 #' @family simulate multiple images functions
 #' @seealso \code{\link{multiple_images_with_clusters}} for simulating multiple
-#'   images with clusters, and \code{\link{multiple_images_with_immune_rings}} for
-#'   simulating multiple images with immune rings.
+#'   images with clusters, and \code{\link{multiple_images_with_immune_rings}}
+#'   for simulating multiple images with immune rings.
 #'
 #' @return A list of sce objects
 #' @export
@@ -39,7 +39,7 @@ multiple_background_images <- function(background_sample,
                                           rep(0.1, 9),
                                           seq(0, 0.4, 0.05),
                                           seq(0.9,0.5,-0.05)),
-                                        plot.image = T){
+                                        plot.image = TRUE){
   # CHECK is the background sample a data frame?
   if (!is.data.frame(background_sample)) {
     background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
@@ -68,7 +68,7 @@ multiple_background_images <- function(background_sample,
 
     # assign cell type to each cell in the current image
     print(p_idx)
-    for (i in 1:dim(background_sample)[1]){
+    for (i in seq_len(dim(background_sample)[1])){
       r <- stats::runif(1)
       # if the random number falls in the range of a proportion,
       # pheno will be the corresponding infiltraiton type

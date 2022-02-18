@@ -90,7 +90,7 @@ multiple_images_with_clusters <- function(background_sample = bg1,
 
         # change the properties of the cluster based on the current loop
         properties_of_clusters <- properties_of_clusters_temp
-        for (k in 1:length(properties_of_clusters)){
+        for (k in seq_len(length(properties_of_clusters))){
           # change the sizes of the default shape
           properties_of_clusters[[k]]$size <- properties_of_clusters[[k]]$size + size
           # change the default infiltration proportions

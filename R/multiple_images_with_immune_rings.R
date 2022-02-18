@@ -92,7 +92,7 @@ multiple_images_with_immune_rings <- function(background_sample = bg1,
 
             # change the properties of the cluster based on the current loop
             properties_of_immune_rings <- properties_of_immune_rings_temp
-            for (k in 1:length(properties_of_immune_rings)){
+            for (k in seq_len(length(properties_of_immune_rings))){
               # change the sizes of the default shape
               properties_of_immune_rings[[k]]$size <-
                 properties_of_immune_rings[[k]]$size + size

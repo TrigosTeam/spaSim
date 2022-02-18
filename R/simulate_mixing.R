@@ -41,7 +41,7 @@ simulate_mixing <- function(background_sample = bg1,
   }
 
   n_types <- length(names_of_mixing)
-  for (i in 1:dim(background_sample)[1]){
+  for (i in seq_len(dim(background_sample)[1])){
     x <- background_sample[i, "Cell.X.Position"]
     y <- background_sample[i, "Cell.Y.Position"]
 

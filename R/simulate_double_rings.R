@@ -122,7 +122,7 @@ simulate_double_rings <- function(background_sample = bg1,
 
   n_cells <- dim(background_sample)[1]
 
-  for (k in 1:n_double_rings) { # for each cluster
+  for (k in seq_len(n_double_rings)) { # for each cluster
 
     # get the arguments
     cluster_cell_type <- properties_of_double_rings[[k]]$name_of_cluster_cell
@@ -162,7 +162,7 @@ simulate_double_rings <- function(background_sample = bg1,
 
     # determine if each cell is in the cluster or in the immune ring or in the
     # double ring or none
-    for (i in 1:n_cells){
+    for (i in seq_len(n_cells)){
       x <- background_sample[i, "Cell.X.Position"]
       y <- background_sample[i, "Cell.Y.Position"]
       pheno <- background_sample[i, "Phenotype"]
