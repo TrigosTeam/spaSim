@@ -36,7 +36,7 @@ Simulate cell locations. The 2D locations of the cells are
 simulated and plotted in a rectangular window. Users can specify the window
 size, cell number and the minimum distance between two cells. All cells
 have the same "Phenotype", specified by the "Phenotype" param. This
-function uses \code{rHardcore} \code{\link{spatstat.core}}.
+function uses \code{rHardcore} \code{\link{spatstat.random}}.
 }
 \examples{
 set.seed(610) # set seed for this background image simulation for reproducibility

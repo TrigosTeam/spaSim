@@ -4,7 +4,7 @@
 #'   simulated and plotted in a rectangular window. Users can specify the window
 #'   size, cell number and the minimum distance between two cells. All cells
 #'   have the same "Phenotype", specified by the "Phenotype" param. This
-#'   function uses `rHardcore` [`spatstat.core`].
+#'   function uses `rHardcore` [`spatstat.random`].
 #'
 #' @param n_cells Numeric. Number of cells in the background.
 #' @param width,height Numeric. The width and height of the image.
@@ -44,7 +44,7 @@ simulate_background_cells <- function(n_cells, width, height, min_d, oversample 
   beta <- n_cells_inflated/(width*height)
 
   # Hardcore process
-  sample <- spatstat.core::rHardcore(beta = beta,R = min_d, W=win)
+  sample <- spatstat.random::rHardcore(beta = beta,R = min_d, W=win)
 
   # extract point data
   Cell.X.Position <- sample$x

@@ -24,9 +24,9 @@ Imports:
     methods,
     stats,
     dplyr,
-    spatstat.core,
     spatstat.geom,
-    SummarizedExperiment
+    SummarizedExperiment,
+    spatstat.random
 Depends: 
     R (>= 4.1.0)
 LazyData: true

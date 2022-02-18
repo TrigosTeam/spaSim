@@ -142,7 +142,7 @@ simulate_double_rings <- function(background_sample = bg1,
 
     # generate a location as the centre of the cluster
     if (is.null(centre_loc)){
-      seed_point <- spatstat.core::runifpoint(1, win=win)}
+      seed_point <- spatstat.random::runifpoint(1, win=win)}
     else seed_point <- centre_loc
     a <- seed_point$x
     b <- seed_point$y
