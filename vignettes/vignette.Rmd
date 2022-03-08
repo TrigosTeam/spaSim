@@ -87,10 +87,180 @@ citation("spaSim")
 
 # Quick start to using to `spaSim`
 
+## Simulate multiple images with a pattern.
 
-Edit this as you see fit =)
+1. Simulate multiple background images with different proportions of cell types.
+The example is 9 images with 10% Tumour cells and more and more Immune cells.
+```{r}
+multiple_background_images(
+  background_sample = bg1,
+  names_of_cell_types = c("Tumour", "Immune", "Others"),
+  proportions_of_cell_types = list(rep(0.1, 9), seq(0, 0.4, 0.05), 
+                                   seq(0.9, 0.5, -0.05)),
+  plot.image = TRUE)
 
-Here is an example of you can cite your package inside the vignette:
+```
+2. Simulate multiple images with clusters of different properties.
+The example is 4 images with larger and larger tumour cluster sizes.
+```{r}
+multiple_images_with_clusters(
+  background_sample = bg1,
+  cluster_shape = 2,
+  infiltration = 0.1,
+  cluster_size = seq(200, 500, 100),
+  cluster_loc_x = 0,
+  cluster_loc_y = 0,
+  plot.image = TRUE
+)
+```
+
+3. Simulate multiple images with immune rings of different properties.
+The example is 3 images with wider and wider immune rings.
+
+```{r}
+multiple_images_with_immune_rings(
+  background_sample = bg1,
+  cluster_size = 200,
+  ring_shape = 1,
+  infiltration = 0,
+  ring_width = seq(50, 120, 30),
+  cluster_loc_x = 0,
+  cluster_loc_y = 0,
+  ring_infiltration = 0.1,
+  plot.image = TRUE
+)
+```
+
+## Simulate individual image.
+spaSim has a family of functions to simulate patterns.
+
+1. Simulate background cells.
+```{r}
+bg <- simulate_background_cells(n_cells = 5000,
+                                width = 2000,
+                                height = 2000,
+                                min_d = 10,
+                                oversample = 1.5,
+                                Phenotype="Others")
+```
+
+2. Simulate mixed background
+```{r}
+mix_bg <- simulate_mixing(background_sample = bg1,
+                          names_of_mixing = c("Tumour", "Immune", "Others"),
+                          mixing_degree = c(0.2, 0.4, 0.4))
+
+```
+
+3. Simulate clusters.
+
+```{r}
+clusters <- simulate_clusters(background_sample = bg1,
+                  n_clusters = 2,
+                  bg_type = "Others",
+                  win = NULL,
+                  properties_of_clusters = list(
+                    C1 = list(name_of_cluster_cell = "Tumour", size = 300,
+                              shape = "Oval", centre_loc = data.frame(x = 500, y = 500), 
+                               infiltration_types = c("Immune1", "Others"), 
+                               infiltration_proportions = c(0.1, 0.05)), 
+                    C2 = list(name_of_cluster_cell = "Immune1", size = 500, 
+                              shape = "Irregular", centre_loc = data.frame(x = 1500, y = 500), 
+                              infiltration_types = c("Immune2", "Others"),
+                              infiltration_proportions = c(0.1, 0.05))))
+```
+4. Simulate immune rings.
+```{r}
+rings <- simulate_immune_rings(
+  background_sample = bg1,
+  bg_type = "Others",
+  n_immune_rings = 2,
+  win = NULL,
+  properties_of_immune_rings = list(
+    I1 = list(name_of_cluster_cell = "Tumour", size = 500, 
+              shape = "Circle", centre_loc = data.frame(x = 930, y = 1000), 
+              infiltration_types = c("Immune1", "Immune2", "Others"), 
+              infiltration_proportions = c(0.15, 0.05, 0.05),
+              name_of_ring_cell = "Immune1", immune_ring_width = 150,
+              immune_ring_infiltration_types = c("Others"), 
+              immune_ring_infiltration_proportions = c(0.15)), 
+    I2 = list(name_of_cluster_cell = "Tumour", size = 400, shape = "Oval",
+              centre_loc = data.frame(x = 1330, y = 1100), 
+              infiltration_types = c("Immune1",  "Immune2", "Others"), 
+              infiltration_proportions = c(0.15, 0.05, 0.05),
+              name_of_ring_cell = "Immune1", immune_ring_width = 150,
+              immune_ring_infiltration_types = c("Others"), 
+              immune_ring_infiltration_proportions = c(0.15))))
+```
+5. Simulate double rings.
+```{r}
+double_rings <- simulate_double_rings(
+  background_sample = bg1,
+  bg_type = "Others",
+  n_double_rings = 2,
+  win = NULL,
+  properties_of_double_rings = list(
+    I1 = list(name_of_cluster_cell = "Tumour", size = 300, shape = "Circle", 
+              centre_loc = data.frame(x = 1000, y = 1000), 
+              infiltration_types = c("Immune1", "Immune2", "Others"), 
+              infiltration_proportions = c(0.15, 0.05, 0.05), 
+              name_of_ring_cell = "Immune1", immune_ring_width = 150,
+              immune_ring_infiltration_types = c("Others"), 
+              immune_ring_infiltration_proportions = c(0.15), 
+              name_of_double_ring_cell = "Immune2", double_ring_width = 100,
+              double_ring_infiltration_types = c("Others"), 
+              double_ring_infiltration_proportions = c(0.15)),      
+    I2 = list(name_of_cluster_cell = "Tumour", size = 300, shape = "Oval",
+              centre_loc = data.frame(x = 1200, y = 1200), 
+              infiltration_types = c("Immune1", "Immune2", "Others"), 
+              infiltration_proportions = c(0.15, 0.05, 0.05),
+              name_of_ring_cell = "Immune1", immune_ring_width = 150,
+              immune_ring_infiltration_types = c("Others"), 
+              immune_ring_infiltration_proportions = c(0.15), 
+              name_of_double_ring_cell = "Immune2", double_ring_width = 100,
+              double_ring_infiltration_types = c("Others"), 
+              double_ring_infiltration_proportions = c(0.15))))
+```
+
+6. Simulate vessles.
+```{r}
+vessles <- simulate_stripes(
+  background_sample = bg1,
+  n_stripe_type = 2,
+  win = NULL,
+  properties_of_stripes = list(
+    S1 = list(number_of_stripes = 1, name_of_stripe_cell = "Others", 
+              width_of_stripe = 80, infiltration_types = c("Immune"),
+              infiltration_proportions = c(0.08)), 
+    S2 = list(number_of_stripes = 5, name_of_stripe_cell = "Others", 
+              width_of_stripe = 80, infiltration_types = c("Immune"), 
+              infiltration_proportions = c(0.08))))
+```
+## Function TIS()
+Function `TIS` simulate all possible patterns in one function. The patterns are simulated in the order of: background cells, mixed background cells, clusters (tumour/immune), immune rings, double immune rings, and vessels. 
+
+Not all patterns are required for using this function. If a pattern is not needed, simply use `NULL` for the pattern args.
+
+The example is simulating a background sample with a tumour clsuter on it.
+
+```{r}
+TIS(background_sample = NULL,
+    n_cells = 5000,
+    width = 2000,
+    height = 2000,
+    min_d = 10,
+    n_clusters = 1,
+    properties_of_clusters = list(
+      C1 = list( name_of_cluster_cell = "Tumour", size = 300, shape = "Oval", 
+                 centre_loc = data.frame("x" = 500, "y" = 500),
+                 infiltration_types = c("Immune1", "Others"), 
+                 infiltration_proportions = c(0.1, 0.05))),
+    plot.image = TRUE)
+```
+
+
+# Citation
+Here is an example of you can cite the package.
 
 * `r Biocpkg("spaSim")` `r Citep(bib[["spaSim"]])`
 
