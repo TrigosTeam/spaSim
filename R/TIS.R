@@ -40,6 +40,7 @@
 #' stripes to simulate.
 #' @param properties_of_stripes (OPTIONAL) List of parameters to define the stripes.
 #' @param image_name (OPTIONAL) String to name the output tissue image.
+#' @param plot.image Boolean. Whether the simulated image is plotted.
 #'
 #' @return An sce object of the simulated image
 #' @export
@@ -76,7 +77,8 @@ TIS <- function(background_sample = NULL,
                 n_stripe_type = NULL,
                 properties_of_stripes = NULL,
 
-                image_name = NULL)
+                image_name = NULL,
+                plot.image = FALSE)
 {
   if (is.null(background_sample)){
     background_sample <- simulate_background_cells(n_cells, width, height, min_d)
@@ -99,7 +101,8 @@ TIS <- function(background_sample = NULL,
   if (!is.null(names_of_bg_cells)){
     image <- simulate_mixing(background_sample = image,
                              names_of_mixing = names_of_bg_cells,
-                             mixing_degree = proportions_of_bg_cells)
+                             mixing_degree = proportions_of_bg_cells,
+                             plot.image = FALSE)
   }
   # simulate clusters
   if (!is.null(n_clusters)){
@@ -107,7 +110,8 @@ TIS <- function(background_sample = NULL,
                                n_clusters = n_clusters,
                                bg_type = "Others",
                                win = NULL,
-                               properties_of_clusters = properties_of_clusters)
+                               properties_of_clusters = properties_of_clusters,
+                               plot.image = FALSE)
   }
   # simulate_immune_rings
   if (!is.null(n_immune_rings)){
@@ -115,7 +119,8 @@ TIS <- function(background_sample = NULL,
                                    n_immune_rings = n_immune_rings,
                                    bg_type = "Others",
                                    win = NULL,
-                                   properties_of_immune_rings = properties_of_immune_rings)
+                                   properties_of_immune_rings = properties_of_immune_rings,
+                                   plot.image = FALSE)
   }
   # simulate_double_rings
   if (!is.null(n_double_rings)){
@@ -123,17 +128,27 @@ TIS <- function(background_sample = NULL,
                                    n_double_rings = n_double_rings,
                                    bg_type = "Others",
                                    win = NULL,
-                                   properties_of_double_rings = properties_of_double_rings)
+                                   properties_of_double_rings = properties_of_double_rings,
+                                   plot.image = FALSE)
   }
   # simulate_stripes
   if (!is.null(n_stripe_type)){
     image <- simulate_stripes(background_sample = image,
                               n_stripe_type = n_stripe_type,
                               win = NULL,
-                              properties_of_stripes = properties_of_stripes)}
+                              properties_of_stripes = properties_of_stripes,
+                              plot.image = FALSE)}
+
+  if (plot.image){
+    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                "lightgreen", "yellow", "black", "pink")
+    phenos <- unique(image$Phenotype)
+    plot_cells(image, phenos, colors[1:length(phenos)], "Phenotype")
+  }
 
   # format sce object
   sce <- format_sce(image)
   attr(sce, "name") <- image_name
+
   return(sce)
 }

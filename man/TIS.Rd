@@ -20,7 +20,8 @@ TIS(
   properties_of_double_rings = NULL,
   n_stripe_type = NULL,
   properties_of_stripes = NULL,
-  image_name = NULL
+  image_name = NULL,
+  plot.image = FALSE
 )
 }
 \arguments{
@@ -67,6 +68,8 @@ stripes to simulate.}
 \item{properties_of_stripes}{(OPTIONAL) List of parameters to define the stripes.}
 
 \item{image_name}{(OPTIONAL) String to name the output tissue image.}
+
+\item{plot.image}{Boolean. Whether the simulated image is plotted.}
 }
 \value{
 An sce object of the simulated image
