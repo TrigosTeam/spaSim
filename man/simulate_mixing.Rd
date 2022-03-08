@@ -7,7 +7,8 @@
 simulate_mixing(
   background_sample = bg1,
   names_of_mixing = c("Tumour", "Immune", "Others"),
-  mixing_degree = c(0.2, 0.4, 0.4)
+  mixing_degree = c(0.2, 0.4, 0.4),
+  plot.image = TRUE
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ package.}
 
 \item{mixing_degree}{Numeric Vector of the proportions of the mixed cell
 types.}
+
+\item{plot.image}{Boolean. Whether the simulated image is plotted.}
 }
 \value{
 A data.frame of the simulated image

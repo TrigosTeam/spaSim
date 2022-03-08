@@ -7,6 +7,7 @@
 #' @param names_of_mixing String Vector of the mixed cell types.
 #' @param mixing_degree Numeric Vector of the proportions of the mixed cell
 #'   types.
+#' @param plot.image Boolean. Whether the simulated image is plotted.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -29,7 +30,8 @@
 
 simulate_mixing <- function(background_sample = bg1,
                             names_of_mixing = c("Tumour", "Immune", "Others"),
-                            mixing_degree = c(0.2, 0.4, 0.4)) {
+                            mixing_degree = c(0.2, 0.4, 0.4),
+                            plot.image = TRUE) {
 
   # CHECK is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
@@ -60,6 +62,12 @@ simulate_mixing <- function(background_sample = bg1,
       n <- n+1
     }
     background_sample[i, "Phenotype"] <- pheno
+  }
+  if (plot.image){
+    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                "lightgreen", "yellow", "black", "pink")
+    phenos <- unique(background_sample$Phenotype)
+    plot_cells(background_sample, phenos, colors[1:length(phenos)], "Phenotype")
   }
 
   return(background_sample)

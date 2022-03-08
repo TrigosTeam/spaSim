@@ -10,6 +10,7 @@
 #'   default it is the window of the background image.
 #' @param properties_of_stripes List of the properties of the stripes. See
 #'   examples for the format of the properties.
+#' @param plot.image Boolean. Whether the simulated image is plotted.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -60,7 +61,8 @@ simulate_stripes <- function(background_sample = bg1,
                                  infiltration_types = c("Immune"),
                                  infiltration_proportions = c(0.08)
                                )
-                             )
+                             ),
+                             plot.image = TRUE
 ){
   # CHECK is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
@@ -117,6 +119,12 @@ simulate_stripes <- function(background_sample = bg1,
         }
       }
     }
+  }
+  if (plot.image){
+    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                "lightgreen", "yellow", "black", "pink")
+    phenos <- unique(background_sample$Phenotype)
+    plot_cells(background_sample, phenos, colors[1:length(phenos)], "Phenotype")
   }
 
   return(background_sample)

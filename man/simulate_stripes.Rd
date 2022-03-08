@@ -12,7 +12,8 @@ simulate_stripes(
     "Others", width_of_stripe = 80, infiltration_types = c("Immune"),
     infiltration_proportions = c(0.08)), S2 = list(number_of_stripes = 1,
     name_of_stripe_cell = "Others", width_of_stripe = 80, infiltration_types =
-    c("Immune"), infiltration_proportions = c(0.08)))
+    c("Immune"), infiltration_proportions = c(0.08))),
+  plot.image = TRUE
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ default it is the window of the background image.}
 
 \item{properties_of_stripes}{List of the properties of the stripes. See
 examples for the format of the properties.}
+
+\item{plot.image}{Boolean. Whether the simulated image is plotted.}
 }
 \value{
 A data.frame of the simulated image

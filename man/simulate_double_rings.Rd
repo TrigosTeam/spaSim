@@ -23,7 +23,8 @@ simulate_double_rings(
     immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions =
     c(0.15), name_of_double_ring_cell = "Immune2", double_ring_width = 100,
     double_ring_infiltration_types = c("Others"), double_ring_infiltration_proportions =
-    c(0.15)))
+    c(0.15))),
+  plot.image = TRUE
 )
 }
 \arguments{
@@ -41,6 +42,8 @@ By default is the window of the background image.}
 
 \item{properties_of_double_rings}{List of properties of the double immune
 rings.}
+
+\item{plot.image}{Boolean. Whether the simulated image is plotted.}
 }
 \value{
 A data.frame of the simulated image

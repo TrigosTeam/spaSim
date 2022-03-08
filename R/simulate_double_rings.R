@@ -16,6 +16,7 @@
 #'   By default is the window of the background image.
 #' @param properties_of_double_rings List of properties of the double immune
 #'   rings.
+#' @param plot.image Boolean. Whether the simulated image is plotted.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -87,9 +88,8 @@ simulate_double_rings <- function(background_sample = bg1,
                                       double_ring_infiltration_types = c("Others"),
                                       double_ring_infiltration_proportions = c(0.15)
                                     )
-                                  )
-
-) {
+                                  ),
+                                  plot.image = TRUE) {
 
   ## CHECK
   # is the background sample a dataframe?
@@ -239,6 +239,13 @@ simulate_double_rings <- function(background_sample = bg1,
       background_sample[i, "Phenotype"] <- pheno
     }
   }
+  if (plot.image){
+    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                "lightgreen", "yellow", "black", "pink")
+    phenos <- unique(background_sample$Phenotype)
+    plot_cells(background_sample, phenos, colors[1:length(phenos)], "Phenotype")
+  }
+
 
   return(background_sample)
 }

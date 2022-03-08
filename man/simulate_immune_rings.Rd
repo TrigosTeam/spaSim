@@ -19,7 +19,8 @@ simulate_immune_rings(
     "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
     name_of_ring_cell = "Immune1", immune_ring_width = 150,
     immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions =
-    c(0.15)))
+    c(0.15))),
+  plot.image = TRUE
 )
 }
 \arguments{
@@ -36,6 +37,8 @@ default is "Others".}
 By default is the window of the background image}
 
 \item{properties_of_immune_rings}{List of properties of the immune rings}
+
+\item{plot.image}{Boolean. Whether the simulated image is plotted.}
 }
 \value{
 A data.frame of the simulated image

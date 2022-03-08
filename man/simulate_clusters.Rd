@@ -14,7 +14,8 @@ simulate_clusters(
     c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05)), C2 =
     list(name_of_cluster_cell = "Immune1", size = 500, shape = "Irregular", centre_loc =
     data.frame(x = 1500, y = 500), infiltration_types = c("Immune2", "Others"),
-    infiltration_proportions = c(0.1, 0.05)))
+    infiltration_proportions = c(0.1, 0.05))),
+  plot.image = TRUE
 )
 }
 \arguments{
@@ -33,6 +34,8 @@ By default is the window of the background image.}
 
 \item{properties_of_clusters}{List of properties of the clusters. See
 examples for the format of this arg.}
+
+\item{plot.image}{Boolean. Whether the simulated image is plotted.}
 }
 \value{
 A data.frame of the simulated image

@@ -12,6 +12,7 @@
 #'   By default is the window of the background image.
 #' @param properties_of_clusters List of properties of the clusters. See
 #'   examples for the format of this arg.
+#' @param plot.image Boolean. Whether the simulated image is plotted.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -49,7 +50,8 @@ simulate_clusters <- function(background_sample = bg1,
                                   centre_loc = data.frame("x" = 1500, "y" = 500),
                                   infiltration_types = c("Immune2", "Others"),
                                   infiltration_proportions = c(0.1, 0.05))
-                              )
+                              ),
+                              plot.image = TRUE
 ){
 
   # CHECK is the background sample a dataframe?
@@ -160,6 +162,13 @@ simulate_clusters <- function(background_sample = bg1,
       }
       background_sample[i, "Phenotype"] <- pheno
     }
+  }
+
+  if (plot.image){
+    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                "lightgreen", "yellow", "black", "pink")
+    phenos <- unique(background_sample$Phenotype)
+    plot_cells(background_sample, phenos, colors[1:length(phenos)], "Phenotype")
   }
 
   return(background_sample)
