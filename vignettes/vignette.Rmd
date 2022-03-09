@@ -37,16 +37,16 @@ startTime <- Sys.time()
 library("RefManageR")
 
 ## Write bibliography information
-bib <- c(
-    R = citation(),
-    BiocStyle = citation("BiocStyle")[1],
-    knitr = citation("knitr")[1],
-    RefManageR = citation("RefManageR")[1],
-    rmarkdown = citation("rmarkdown")[1],
-    sessioninfo = citation("sessioninfo")[1],
-    testthat = citation("testthat")[1],
-    spaSim = citation("spaSim")[1]
-)
+# bib <- c(
+#     R = citation(),
+#     BiocStyle = citation("BiocStyle")[1],
+#     knitr = citation("knitr")[1],
+#     RefManageR = citation("RefManageR")[1],
+#     rmarkdown = citation("rmarkdown")[1],
+#     sessioninfo = citation("sessioninfo")[1],
+#     testthat = citation("testthat")[1],
+#     spaSim = citation("spaSim")[1]
+# )
 ```
 
 # Basics
@@ -55,7 +55,7 @@ bib <- c(
 
 `R` is an open-source statistical environment which can be easily modified to enhance its functionality via packages. `r Biocpkg("spaSim")` is a `R` package available via the [Bioconductor](http://bioconductor.org) repository for packages. `R` can be installed on any operating system from [CRAN](https://cran.r-project.org/) after which you can install `r Biocpkg("spaSim")` by using the following commands in your `R` session:
 
-```{r "install", eval = FALSE}
+```{r "install"}
 # if (!requireNamespace("BiocManager", quietly = TRUE)) {
 #       install.packages("BiocManager")
 #   }
@@ -66,8 +66,7 @@ bib <- c(
 # BiocManager::valid()
 
 # change to biocmanager later
-# install.packages("devtools")
-devtools::install_github("fuerzhou/spaSim")
+devtools::install_github("trigos-team/spaSim")
 
 library(spaSim) 
 ```
