@@ -30,14 +30,8 @@ library(spaSim)
 set.seed(610)
 mix_background <- TIS(n_cells = 5000, width = 2000, height = 2000, min_d = 10,
                       names_of_bg_cells = c("Tumour","Immune","Others"), 
-                      proportions_of_bg_cells = c(0.1, 0.2, 0.7))
+                      proportions_of_bg_cells = c(0.1, 0.2, 0.7),
+                      plot.image = TRUE)
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
-
-``` r
-plot_cell_categories(mix_background, categories_of_interest =c("Tumour","Immune"), 
-                     colour_vector = c("red", "darkgreen"), feature_colname = "Phenotype")
-```
-
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" width="100%" /><img src="man/figures/README-example-2.png" width="100%" />
