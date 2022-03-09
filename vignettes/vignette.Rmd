@@ -37,16 +37,16 @@ startTime <- Sys.time()
 library("RefManageR")
 
 ## Write bibliography information
-# bib <- c(
-#     R = citation(),
-#     BiocStyle = citation("BiocStyle")[1],
-#     knitr = citation("knitr")[1],
-#     RefManageR = citation("RefManageR")[1],
-#     rmarkdown = citation("rmarkdown")[1],
-#     sessioninfo = citation("sessioninfo")[1],
-#     testthat = citation("testthat")[1],
-#     spaSim = citation("spaSim")[1]
-# )
+bib <- c(
+    R = citation(),
+    BiocStyle = citation("BiocStyle")[1],
+    knitr = citation("knitr")[1],
+    RefManageR = citation("RefManageR")[1],
+    rmarkdown = citation("rmarkdown")[1],
+    sessioninfo = citation("sessioninfo")[1],
+    testthat = citation("testthat")[1],
+    spaSim = citation("spaSim")[1]
+)
 ```
 
 # Basics
