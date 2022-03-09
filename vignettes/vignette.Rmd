@@ -65,6 +65,10 @@ bib <- c(
 # ## Check that you have a valid Bioconductor installation
 # BiocManager::valid()
 
+# change to biocmanager later
+# install.packages("devtools")
+devtools::install_github("fuerzhou/spaSim")
+
 library(spaSim) 
 ```
 
