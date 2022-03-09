@@ -97,6 +97,7 @@ citation("spaSim")
 1. Simulate multiple background images with different proportions of cell types.
 The example is 9 images with 10% Tumour cells and more and more Immune cells.
 ```{r}
+bg_list <- 
 multiple_background_images(
   background_sample = bg1,
   names_of_cell_types = c("Tumour", "Immune", "Others"),
@@ -108,6 +109,7 @@ multiple_background_images(
 2. Simulate multiple images with clusters of different properties.
 The example is 4 images with larger and larger tumour cluster sizes.
 ```{r}
+cluster_list <- 
 multiple_images_with_clusters(
   background_sample = bg1,
   cluster_shape = 2,
@@ -123,6 +125,7 @@ multiple_images_with_clusters(
 The example is 3 images with wider and wider immune rings.
 
 ```{r}
+immune_ring_list <- 
 multiple_images_with_immune_rings(
   background_sample = bg1,
   cluster_size = 200,
