@@ -66,6 +66,7 @@ bib <- c(
 # BiocManager::valid()
 
 # change to biocmanager later
+install.packages("devtools",repos = "https://cran.ms.unimelb.edu.au/")
 devtools::install()
 
 library(spaSim) 
