@@ -5,3 +5,4 @@
 ^data-raw$
 ^\.github$
 ^README\.md$
+*.html
