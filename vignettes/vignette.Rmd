@@ -65,7 +65,7 @@ bib <- c(
 # ## Check that you have a valid Bioconductor installation
 # BiocManager::valid()
 
-library(spaSim)
+library(spaSim) 
 ```
 
 ## Required knowledge
