@@ -95,14 +95,14 @@ citation("spaSim")
 ## Simulate multiple images with a pattern.
 
 1. Simulate multiple background images with different proportions of cell types.
-The example is 9 images with 10% Tumour cells and more and more Immune cells.
+The example is 4 images with 10% Tumour cells and more and more Immune cells.
 ```{r}
 bg_list <- 
 multiple_background_images(
   background_sample = bg1,
   names_of_cell_types = c("Tumour", "Immune", "Others"),
-  proportions_of_cell_types = list(rep(0.1, 9), seq(0, 0.4, 0.05), 
-                                   seq(0.9, 0.5, -0.05)),
+  proportions_of_cell_types = list(rep(0.1, 4), seq(0, 0.3, 0.1), 
+                                   seq(0.9, 0.6, -0.1)),
   plot.image = TRUE)
 
 ```
