@@ -18,7 +18,7 @@ You can install the development version of spaSim like so:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("fuerzhou/spaSim")
+devtools::install_github("trigos-team/spaSim")
 ```
 
 ## Example
