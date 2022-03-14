@@ -4,5 +4,4 @@
 .httr-oauth
 .DS_Store
 .Rprofile
-spaSim.Rproj
 inst/doc
