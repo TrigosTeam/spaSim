@@ -115,7 +115,10 @@ multiple_images_with_immune_rings <- function(background_sample = bg1,
                          n_immune_rings = n_immune_rings,
                          properties_of_immune_rings = properties_of_immune_rings)
             if (plot.image){
-              plot_cells(image, c("Tumour","Immune"),c("red","darkgreen"), "Phenotype")
+              colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                          "lightgreen", "yellow", "black", "pink")
+              phenos <- unique(image$Phenotype)
+              plot_cells(image, phenos, colors[1:length(phenos)], "Phenotype")
             }
             list.images[[i]] <- image
           }
