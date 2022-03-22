@@ -9,10 +9,10 @@
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #'   default is "Others".
 #' @param n_immune_rings Number of immune rings. This must match the
-#'   `length(properties_of_immune_rings)`.
+#'   `length(properties_of_immune_rings)`. --could shorten to n_ir
 #' @param win (OPTIONAL) owin object output from spatstat.geom::owin function.
 #'   By default is the window of the background image
-#' @param properties_of_immune_rings List of properties of the immune rings
+#' @param properties_of_immune_rings List of properties of the immune rings --could shorten to 'immune_ring_properties' or 'ir_properties'
 #' @param plot.image Boolean. Whether the simulated image is plotted.
 #'
 #' @family simulate pattern functions

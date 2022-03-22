@@ -2,7 +2,7 @@
 #' @description Based on an existing background image, simulate clusters of
 #'   cells where the same type of cells aggregate.
 #' @param background_sample (OPTIONAL) Data.Frame. The background image that the
-#'   clusters are generated on. Default is the internal background image `bg1`.
+#'   clusters are generated on. Default is the internal background image `bg1`. -- could shorten to 'background' or 'bg' 
 #' @param n_clusters Numeric. Number of clusters. This must match the
 #'   `length(properties_of_clusters)`.
 #' @param bg_type (OPTIONAL) String. The name of the background cell type if the
@@ -11,7 +11,7 @@
 #' @param win (OPTIONAL) `owin` object output from spatstat.geom::owin function.
 #'   By default is the window of the background image.
 #' @param properties_of_clusters List of properties of the clusters. See
-#'   examples for the format of this arg.
+#'   examples for the format of this arg. -- could shorten to 'cluster-properties'
 #' @param plot.image Boolean. Whether the simulated image is plotted.
 #'
 #' @family simulate pattern functions

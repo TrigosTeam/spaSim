@@ -12,7 +12,7 @@
 #' @param oversample (OPTIONAL) Numeric. The multiplier for oversampling.
 #'   Without oversampling, the simulation deletes cells that are within `min_d`
 #'   from each other, resulting in a less number of cells than specified.
-#'   Default is 1.2.
+#'   Default is 1.2. -- should it be obersampling_rate? oversample sounds like T/F argument
 #' @param Phenotype (OPTIONAL) String. The name of the background cell type.
 #'   Default is "Others".
 #'

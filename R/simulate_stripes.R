@@ -1,7 +1,7 @@
 #' simulate_stripes
 #'
 #' @description Based on an existing background image, simulate stripes of cells
-#'   representing vessels.
+#'   representing vessels. --need to clarify whether the positions of these are stochastic
 #'
 #' @param background_sample (OPTIONAL) Data.Frame. The image that the stripes
 #'   are simulated on. By default use the internal `bg1` background image.
@@ -9,7 +9,7 @@
 #' @param win (OPTIONAL) `owin` object from spatstat.geom owin method. By
 #'   default it is the window of the background image.
 #' @param properties_of_stripes List of the properties of the stripes. See
-#'   examples for the format of the properties.
+#'   examples for the format of the properties. -- could shorten to 'stripe_properties'
 #' @param plot.image Boolean. Whether the simulated image is plotted.
 #'
 #' @family simulate pattern functions
