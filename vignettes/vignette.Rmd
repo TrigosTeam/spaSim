@@ -93,10 +93,14 @@ citation("spaSim")
 # Quick start to using `spaSim`
 
 ## Simulate individual image.
-spaSim has a family of functions to simulate patterns.
+spaSim has a family of functions to simulate patterns. Suggested text: explain the layered construction of patterns starting from 'background cells' which serve as the canvas for higher order structures. 
+
+Also worth highlighting which parts are deterministic (cluster/shape locations, shape, and size) and which are stochastic (cell assignments within clusters/shapes, vessel locations?), either in this section or the subsections below.
+
+Also worth showing that you can input a background already containing cell assignments into these functions in a later section showing more advanced usage. 
 
 ### Simulate background cells.
-Randomly generate spatial locations of 'background cells' prior to creating cell identities. The 'background cells' are the input... -todo finish
+Suggested text: Randomly generate spatial locations of 'background cells' prior to creating cell identities. The 'background cells' serve as the input to the other simulation functions which may assign new identities to these cells in a structured or unstructured way.
 ```{r}
 bg <- simulate_background_cells(n_cells = 5000,
                                 width = 2000,
@@ -108,7 +112,7 @@ head(bg)
 ```
 
 ### Simulate mixed background
-Randomly assign 'background cells' to the the specified cell identities in the specified proportions in an unstructured manner.
+Suggested text: Randomly assign 'background cells' to the the specified cell identities in the specified proportions in an unstructured manner.
 ```{r}
 #should force the same colours to the same index in names_of_mixing for all plots generated from these functions
 #change names_of_mixing -> ident?
@@ -121,7 +125,7 @@ mix_bg <- simulate_mixing(background_sample = bg,
 ```
 
 ### Simulate clusters
-First, specify the properties of clusters such their primary cell type, size, shape and location, and properties of any infiltrating cell types. Then randomly assign 'background cells' which lie within these clusters to the specified cell identities in the specified proportions.
+Suggested text: First, specify the properties of clusters such their primary cell type, size, shape and location, and properties of any infiltrating cell types. Then randomly assign 'background cells' which lie within these clusters to the specified cell identities in the specified proportions.
 ```{r}
 cluster_properties <- list(
                     C1 = list(name_of_cluster_cell = "Tumour", size = 300,
@@ -142,7 +146,7 @@ clusters <- simulate_clusters(background_sample = bg,
 ```
 
 ### Simulate immune rings
-First, specify the properties of immune rings such their primary (inner mass) and secondary (outer ring) cell types, size, shape, width and location. Properties of cells infiltrating into the inner mass or outer ring can also be set. Then randomly assign 'background cells' which lie within these clusters to the specified cell identities in the specified proportions.
+Suggested text: First, specify the properties of immune rings such their primary (inner mass) and secondary (outer ring) cell types, size, shape, width and location. Properties of cells infiltrating into the inner mass or outer ring can also be set. Then randomly assign 'background cells' which lie within these clusters to the specified cell identities in the specified proportions.
 ```{r}
 immune_ring_properties <- list(
     I1 = list(name_of_cluster_cell = "Tumour", size = 500, 
@@ -168,7 +172,7 @@ rings <- simulate_immune_rings(
   properties_of_immune_rings = immune_ring_properties,
   plot.image = TRUE)
 
-# Jojo - it may be worth highlighting that in these examples you are layering two shapes on top of each other and that an algorithm is used to make the inner mass and outer rings of the different shapes cohesive. Possibly, it is better for each functionality (clusters, immune rings, double rings, etc.) to be shown in its simplest possible form (like the code below), then show the layering in a later part of the vignette. Also worth showing that you can input a background already containing cell assignments into these functions, explain the layered construction of patterns, and to highlight which parts are deterministic (cluster/shape locations, shape, and size) and which are stochastic (cell assignments within clusters/shapes)
+# Jojo - it may be worth highlighting that in these examples you are layering two shapes on top of each other and that an algorithm is used to make the inner mass and outer rings of the different shapes cohesive. Possibly, it is better for each functionality (clusters, immune rings, double rings, etc.) to be shown in its simplest possible form (like the code below), then show the layering in a later part of the vignette for more advanced usage.
 
 immune_ring_properties <- list(
     I1 = list(name_of_cluster_cell = "Tumour", size = 500, 
@@ -189,7 +193,7 @@ rings <- simulate_immune_rings(
 ```
 
 ### Simulate double rings.
-First, specify the properties of double rings such their primary (inner mass), secondary (inner ring), and tertiary (outer ring) cell types, size, shape, width and location. Properties of cells infiltrating into the inner mass or either ring can also be set. Then randomly assign 'background cells' which lie within these clusters to the specified cell identities in the specified proportions.
+Suggested test: First, specify the properties of double rings such their primary (inner mass), secondary (inner ring), and tertiary (outer ring) cell types, size, shape, width and location. Properties of cells infiltrating into the inner mass or either ring can also be set. Then randomly assign 'background cells' which lie within these clusters to the specified cell identities in the specified proportions.
 ```{r}
 double_ring_properties <- list(
     I1 = list(name_of_cluster_cell = "Tumour", size = 300, shape = "Circle", 
@@ -223,7 +227,7 @@ double_rings <- simulate_double_rings(
 ```
 
 ### Simulate vessels.
-First, specify the properties of vessel structures such as their 
+Suggested text: First, specify the properties of vessel structures such as the number present, their width, and the properties of their infiltrating cells. Then randomly assign 'background cells' which lie within these vessel structures to the specified cell identities in the specified proportions.
 ```{r}
 vessles <- simulate_stripes(
   background_sample = bg1,
@@ -239,22 +243,31 @@ vessles <- simulate_stripes(
 ```
 
 ## Simulate multiple images with a pattern.
+Suggested text: explanation of quick interface to generate images with different parameters/randomised elements.
 
-1. Simulate multiple background images with different proportions of cell types.
+Might be worth using only some of these examples and putting them under a section for advanced usage about generating images in parallel, along with layering multiple shapes, using inputs which already contain assignments.
+
+### Simulate multiple background images with different proportions of cell types.
 The example is 4 images with 10% Tumour cells and more and more Immune cells.
 ```{r}
+#Even though it is in the function documentation, I suggest taking the vectors out of the function and declaring them at the start, maybe with comments about what they are when necessary, i.e.:
+##cell types present in each image
+#cell_types <- c("Tumour", "Immune", "Others")
+##each vector i in list corresponds to cell type i. Each element j in vector i corresponds to the proportion of cell type i in image j.
+#prop_list <- list(rep(0.1, 4), seq(0, 0.3, 0.1),  seq(0.9, 0.6, -0.1)
 bg_list <- 
 multiple_background_images(
-  background_sample = bg1,
+  background_sample = bg,
   names_of_cell_types = c("Tumour", "Immune", "Others"),
   proportions_of_cell_types = list(rep(0.1, 4), seq(0, 0.3, 0.1), 
                                    seq(0.9, 0.6, -0.1)),
   plot.image = TRUE)
 
 ```
-2. Simulate multiple images with clusters of different properties.
+### Simulate multiple images with clusters of different properties.
 The example is 4 images with larger and larger tumour cluster sizes.
 ```{r}
+#be aware this uses layering of multiple shapes. Best to show after you have introduced this concept.
 cluster_list <- 
 multiple_images_with_clusters(
   background_sample = bg1,
@@ -267,13 +280,14 @@ multiple_images_with_clusters(
 )
 ```
 
-3. Simulate multiple images with immune rings of different properties.
+### Simulate multiple images with immune rings of different properties.
 The example is 3 images with wider and wider immune rings.
 
 ```{r}
+#be aware this uses layering of multiple shapes. Best to show after you have introduced this concept.
 immune_ring_list <- 
 multiple_images_with_immune_rings(
-  background_sample = bg1,
+  background_sample = bg,
   cluster_size = 200,
   ring_shape = 1,
   infiltration = 0,
@@ -290,7 +304,7 @@ Function `TIS` simulate all possible patterns in one function. The patterns are 
 
 Not all patterns are required for using this function. If a pattern is not needed, simply use `NULL` for the pattern args.
 
-The example is simulating a background sample with a tumour clsuter on it.
+The example is simulating a background sample with a tumour cluster on it.
 
 ```{r}
 TIS(background_sample = NULL,
