@@ -1,26 +1,26 @@
 #' Simulate multiple images with clusters
 #'
 #' @description Generate a set of images with different cluster properties.
-#' @param background_sample Data.frame or SingleCellExperiment object with
+#' @param background_sample data.frame or SingleCellExperiment class object with
 #'   locations of points representing background cells. Further cell types will
-#'   be simulated based on this background sample.
+#'   be simulated based on this background sample. - should note requirements for columns (i.e. which names are required or which index is x/y)
 #' @param cluster_shape List. Properties of clusters to simulate. Either choose
 #'   one of the pre-designed shapes (1 or 2 for tumour cluster or 3 for immune
-#'   cluster).
+#'   cluster). -- not sure what these numbers and descriptions mean
 #' @param infiltration Numeric Vector. The degree of infiltration. If
 #'   numeric, all simulated images have the same infiltration degree. If vector,
-#'   images with a range of different infiltrations will be simulated.
+#'   images with a range of different infiltrations will be simulated. --could change to 'prop_infiltration' to make clearer
 #' @param cluster_size Numeric Vector. The size of the cluster. If numeric,
 #'   all simulated images have the same cluster size. If vector, images with a
-#'   range of different cluster sizes will be simulated.
+#'   range of different cluster sizes will be simulated. -- could clarify units of 'size'
 #' @param cluster_loc_x Numeric or Vector. The X location of the cluster center.
 #'   If numeric, all simulated images have the same center X location. If
 #'   vector, images with a range of different center locations will be
-#'   simulated.
+#'   simulated. -- could clarify units of 'x'
 #' @param cluster_loc_y Numeric or Vector of the same length of `cluster_loc_x`.
-#'   The Y location of the cluster center.
+#'   The Y location of the cluster center. -- could clarify units of 'size'
 #' @param plot.image Boolean Whether plot the simulated images or not.Default is
-#'   TRUE.
+#'   TRUE. --should it be 'plot_image' for consistency?
 #'
 #' @family simulate multiple images functions
 #' @seealso \code{\link{multiple_background_images}} for simulating multiple

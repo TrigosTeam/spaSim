@@ -1,9 +1,9 @@
 #' format_sce
 #'
-#' @description Format a dataframe of data into a singlecellexperiment class
-#' where the count assay is empty
+#' @description Format a data frame object into a SingleCellExperiment class object
+#' where the count assay is empty -- note: your code uses SummarizedExperiment, not sce
 #'
-#' @param data Dataframe that will be the colData of the sce object.
+#' @param data A data frame where each row contains information about a cell. The columns of the data frame will become the colData of the SingleCellExperiment object.
 #'
 #' @import SummarizedExperiment
 #' @return An SingleCellExperiment object

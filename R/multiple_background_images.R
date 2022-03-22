@@ -2,17 +2,17 @@
 #'
 #' @description Generate a set of background images all at once.
 #'
-#' @param background_sample Data.frame or SingleCellExperiment object with
+#' @param background_sample data.frame or SingleCellExperiment class object with
 #'   locations of points representing background cells. Further cell types will
-#'   be simulated based on this background sample.
+#'   be simulated based on this background sample. - should note requirements for columns (i.e. which names are required or which index is x/y)
 #' @param names_of_cell_types String Vector. Names of the cell types to
-#'   generate.
+#'   generate. -- could shorten to 'idents'
 #' @param proportions_of_cell_types List. Each element is a vector of
 #'   proportions of the corresponding cell type. The length of the vector is how
 #'   many images to generate. All vectors should be of the same length, also
-#'   equal to the number of images
-#' @param plot.image Boolean. Whether plot the simulated images or not.Default
-#'   is TRUE.
+#'   equal to the number of images. -- could shorten to 'props'
+#' @param plot.image Boolean. Whether plot the simulated images or not. Default
+#'   is TRUE. --should it be 'plot_image' for consistency?
 #'
 #' @family simulate multiple images functions
 #' @seealso \code{\link{multiple_images_with_clusters}} for simulating multiple

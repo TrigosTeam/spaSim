@@ -4,9 +4,9 @@
 #' @param background_sample (OPTIONAL) Data.Frame. The image that the stripes
 #'   are simulated on. By default use the `bg1` background image from the
 #'   package.
-#' @param names_of_mixing String Vector of the mixed cell types.
+#' @param names_of_mixing String Vector of the mixed cell types. --could shorten to mixing_names
 #' @param mixing_degree Numeric Vector of the proportions of the mixed cell
-#'   types.
+#'   types. --could change to mixing_props if they are simply proportions
 #' @param plot.image Boolean. Whether the simulated image is plotted.
 #'
 #' @family simulate pattern functions

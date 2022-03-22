@@ -3,12 +3,12 @@
 #' @description Generate a set of images with different immune ring properties.
 #' @param background_sample Data.frame or SingleCellExperiment object with locations
 #' of points representing background cells. Further cell types will be simulated
-#' based on this background sample.
+#' based on this background sample. - should note requirements for columns (i.e. which names are required or which index is x/y)
 #' @param cluster_size Numeric or Vector. The size of the cluster. If numeric,
 #' all simulated images have the same cluster size. If vector, images with
 #' a range of different cluster sizes will be simulated.
 #' @param ring_shape List. Properties of immune rings to simulate. Choose
-#' one of the pre-designed shapes (1, 2, or 3).
+#' one of the pre-designed shapes (1, 2, or 3). -- not sure what these numbers and descriptions mean
 #' @param infiltration Numeric or Vector. The degree of infiltration.
 #' @param ring_width Numeric or Vector. The width of the immune ring.
 #' @param cluster_loc_x Numeric or Vector. The X location of the cluster center.

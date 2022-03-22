@@ -115,9 +115,6 @@ head(bg)
 Suggested text: Randomly assign 'background cells' to the the specified cell identities in the specified proportions in an unstructured manner.
 ```{r}
 #should force the same colours to the same index in names_of_mixing for all plots generated from these functions
-#change names_of_mixing -> ident?
-#change mixing_degree -> prop/prop_ident?
-#do you need consistency between arguments for bioconductor? i.e. plot_image vs plotImage vs plot.image?
 mix_bg <- simulate_mixing(background_sample = bg,
                           names_of_mixing = c("Tumour", "Immune", "Others"),
                           mixing_degree = c(0.2, 0.4, 0.4), 
