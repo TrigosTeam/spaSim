@@ -1,11 +1,13 @@
 #' format_sce
 #'
-#' @description Format a dataframe of data into a singlecellexperiment class
-#' where the count assay is empty
+#' @description Format a data frame object into a SingleCellExperiment class
+#'   object where the count assay is empty.
 #'
-#' @param data Dataframe that will be the colData of the sce object.
+#' @param data A data frame where each row contains information about a cell.
+#'   The columns of the data frame will become the colData of the
+#'   SingleCellExperiment object.
 #'
-#' @import SummarizedExperiment
+#' @import SingleCellExperiment
 #' @return An SingleCellExperiment object
 
 format_sce <- function(data) {
@@ -16,9 +18,9 @@ format_sce <- function(data) {
     stop("No data in the dataframe")
   }
 
-
   data[,"pseudo"] <- 0
   assay_data <- data[,"pseudo"]
+  data[,"pseudo"] <- NULL
   assay_rownames <- "pseudo"
   assay_colnames <- rownames(data)
 
@@ -28,7 +30,7 @@ format_sce <- function(data) {
   rownames(assay_data_matrix) <- NULL
   assay_data_matrix_t <- t(assay_data_matrix)
 
-  sce <- SummarizedExperiment(assays = list(counts = assay_data_matrix_t))
+  sce <- SingleCellExperiment(assays = list(counts = assay_data_matrix_t))
 
   rownames(sce) <- assay_rownames
   colnames(sce) <- assay_colnames
