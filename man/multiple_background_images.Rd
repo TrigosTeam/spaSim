@@ -9,7 +9,8 @@ multiple_background_images(
   names_of_cell_types = c("Tumour", "Immune", "Others"),
   proportions_of_cell_types = list(rep(0.1, 9), seq(0, 0.4, 0.05), seq(0.9, 0.5,
     -0.05)),
-  plot.image = TRUE
+  plot.image = TRUE,
+  plot.colours = NULL
 )
 }
 \arguments{
@@ -27,6 +28,9 @@ equal to the number of images}
 
 \item{plot.image}{Boolean. Whether plot the simulated images or not.Default
 is TRUE.}
+
+\item{plot.colours}{String Vector. If plot.image is TRUE, this param is the
+corresponding colours for the \code{names_of_cell_types} arg.}
 }
 \value{
 A list of sce objects

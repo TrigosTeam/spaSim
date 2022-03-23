@@ -1,46 +1,53 @@
 #' Tissue Image Simulator (TIS)
 #'
-#' @description Tissue Image Simulator (TIS) integrates the basic simulation functions
-#' in spaSim, including simulating (mixed) background image, clusters, immune rings,
-#' double immune rings and stripes. The patterns are simulated on separate layers
-#' sequentially (e.g. immune rings are simulated after/on top of background cells).
+#' @description Tissue Image Simulator (TIS) integrates the basic simulation
+#'   functions in spaSim, including simulating (mixed) background image,
+#'   clusters, immune rings, double immune rings and stripes. The patterns are
+#'   simulated on separate layers sequentially (e.g. immune rings are simulated
+#'   after/on top of background cells).
 #'
-#' Pattern properties (e.g. `properties_of_clusters`) contain the properties of
-#' a pattern in the format of list where each element is one pattern.
-#' These properties can be manually defined. Or users can use predefined properties
-#' from the package (`C_shape1`, `C_shape2`, `C_Shape3` for clusters; `R_shape1`,
-#' `R_shape2`, `R_shape3` for immune rings; `D_shape1` for double rings).
-#' Details about the format of the properties see \link{simulate_clusters}
+#'   Pattern properties (e.g. `properties_of_clusters`) contain the properties
+#'   of a pattern in the format of list where each element is one pattern. These
+#'   properties can be manually defined. Or users can use predefined properties
+#'   from the package (`C_shape1`, `C_shape2`, `C_Shape3` for clusters;
+#'   `R_shape1`, `R_shape2`, `R_shape3` for immune rings; `D_shape1` for double
+#'   rings). Details about the format of the properties see
+#'   \link{simulate_clusters}
 #'
 #' @param background_sample (OPTIONAL) Data.frame or SingleCellExperiment object
-#' with locations of points representing background cells. If NULL, background cells
-#' will be simulated in this function.
+#'   with locations of points representing background cells. If NULL, background
+#'   cells will be simulated in this function.
 #' @param n_cells (OPTIONAL) Number of background cells to simulate. If NULL,
-#' already have a background image.
+#'   already have a background image.
 #' @param width (OPTIONAL) Number The width of the image.
 #' @param height (OPTIONAL) Number The height of the image.
 #' @param min_d (OPTIONAL) Number The minimum distance between two cells.
 #' @param names_of_bg_cells (OPTIONAL) Vector The cell types of the background
-#' cells. If NULL, the background cells are of one type.
+#'   cells. If NULL, the background cells are of one type.
 #' @param proportions_of_bg_cells (OPTIONAL) Vector The corresponding proportion
-#' of each cell type in the background cells.
+#'   of each cell type in the background cells.
 #' @param n_clusters (OPTIONAL) Number of cell clusters. If NULL, no clusters to
-#' simulate.
+#'   simulate.
 #' @param properties_of_clusters (OPTIONAL) List of parameters to define the
-#' clusters.
+#'   clusters.
 #' @param n_immune_rings (OPTIONAL) Number of immune rings. If NULL, no immune
-#' rings to simulate.
+#'   rings to simulate.
 #' @param properties_of_immune_rings (OPTIONAL) List of parameters to define the
-#' immune rings.
-#' @param n_double_rings (OPTIONAL) Number of double immune rings. If NULL, no double
-#' rings to simulate.
+#'   immune rings.
+#' @param n_double_rings (OPTIONAL) Number of double immune rings. If NULL, no
+#'   double rings to simulate.
 #' @param properties_of_double_rings (OPTIONAL) List of parameters to define the
-#' double immune rings.
+#'   double immune rings.
 #' @param n_stripe_type (OPTIONAL) Number of stripe (vessel) types. If NULL, no
-#' stripes to simulate.
-#' @param properties_of_stripes (OPTIONAL) List of parameters to define the stripes.
+#'   stripes to simulate.
+#' @param properties_of_stripes (OPTIONAL) List of parameters to define the
+#'   stripes.
 #' @param image_name (OPTIONAL) String to name the output tissue image.
 #' @param plot.image Boolean. Whether the simulated image is plotted.
+#' @param plot.categories String Vector specifying the order of the cell
+#'   cateories to be plotted.
+#' @param plot.colours String Vector specifying the order of the colours that
+#'   correspond to the `plot.categories` arg.
 #'
 #' @return An sce object of the simulated image
 #' @export
@@ -78,7 +85,9 @@ TIS <- function(background_sample = NULL,
                 properties_of_stripes = NULL,
 
                 image_name = NULL,
-                plot.image = FALSE)
+                plot.image = FALSE,
+                plot.categories = NULL,
+                plot.colours = NULL)
 {
   if (is.null(background_sample)){
     background_sample <- simulate_background_cells(n_cells, width, height, min_d)
@@ -138,12 +147,13 @@ TIS <- function(background_sample = NULL,
                               win = NULL,
                               properties_of_stripes = properties_of_stripes,
                               plot.image = FALSE)}
-
+  
+  if(is.null(plot.categories)) plot.categories <- unique(image$Phenotype)
   if (plot.image){
-    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                "lightgreen", "yellow", "black", "pink")
-    phenos <- unique(image$Phenotype)
-    plot_cells(image, phenos, colors[1:length(phenos)], "Phenotype")
+    if (is.null(plot.colours)){
+      plot.colours <- unique(image$Phenotype)
+    }
+    plot_cells(image, plot.categories, plot.colours[1:length(plot.categories)], "Phenotype")
   }
 
   # format sce object

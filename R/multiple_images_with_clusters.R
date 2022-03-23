@@ -21,7 +21,10 @@
 #'   The Y location of the cluster center.
 #' @param plot.image Boolean Whether plot the simulated images or not.Default is
 #'   TRUE.
-#'
+#' @param plot.categories String Vector specifying the order of the cell
+#'   cateories to be plotted.
+#' @param plot.colours String Vector specifying the order of the colours that
+#'   correspond to the `plot.categories` arg.
 #' @family simulate multiple images functions
 #' @seealso \code{\link{multiple_background_images}} for simulating multiple
 #'   mixed background images, and
@@ -42,7 +45,9 @@ multiple_images_with_clusters <- function(background_sample = bg1,
                                          cluster_size = seq(200,1000,100),
                                          cluster_loc_x = 0,
                                          cluster_loc_y = 0,
-                                         plot.image = TRUE){
+                                         plot.image = TRUE,
+                                         plot.categories = NULL,
+                                         plot.colours = NULL){
   ## CHECK
   # is the background sample a dataframe?
   if (!is.data.frame(background_sample)) {
@@ -103,9 +108,18 @@ multiple_images_with_clusters <- function(background_sample = bg1,
         # simulate the image
         image <- TIS(background_sample = background_sample,
                      n_clusters = n_clusters,
-                     properties_of_clusters = properties_of_clusters)
+                     properties_of_clusters = properties_of_clusters,
+                     plot.image = FALSE,
+                     plot.categories = plot.categories)
+        
+        if(is.null(plot.categories)) plot.categories <- unique(image$Phenotype)
+        
         if (plot.image){
-          plot_cells(image, c("Tumour","Immune"),c("red","darkgreen"), "Phenotype")
+          if (is.null(plot.colours)){
+            plot.colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                              "lightgreen", "yellow", "black", "pink")
+          }
+          plot_cells(sce, plot.categories, plot.colours[1:length(plot.categories)], "Phenotype")
         }
         list.images[[i]] <- image
       }

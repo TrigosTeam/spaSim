@@ -11,7 +11,9 @@ multiple_images_with_clusters(
   cluster_size = seq(200, 1000, 100),
   cluster_loc_x = 0,
   cluster_loc_y = 0,
-  plot.image = TRUE
+  plot.image = TRUE,
+  plot.categories = NULL,
+  plot.colours = NULL
 )
 }
 \arguments{
@@ -41,6 +43,12 @@ The Y location of the cluster center.}
 
 \item{plot.image}{Boolean Whether plot the simulated images or not.Default is
 TRUE.}
+
+\item{plot.categories}{String Vector specifying the order of the cell
+cateories to be plotted.}
+
+\item{plot.colours}{String Vector specifying the order of the colours that
+correspond to the \code{plot.categories} arg.}
 }
 \value{
 A list of sce objects
