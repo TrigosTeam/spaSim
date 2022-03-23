@@ -43,6 +43,12 @@ The Y location of the cluster center.}
 in the region of immune rings. (Only applied to cell type "Tumour")}
 
 \item{plot.image}{Boolean Whether plot the simulated images or not.Default is TRUE.}
+
+\item{plot.categories}{String Vector specifying the order of the cell
+cateories to be plotted.}
+
+\item{plot.colours}{String Vector specifying the order of the colours that
+correspond to the \code{plot.categories} arg.}
 }
 \value{
 A list of sce objects

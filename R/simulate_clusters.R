@@ -129,7 +129,10 @@ simulate_clusters <- function(background_sample = bg1,
           current_p <- 0
           while (n <= n_infiltration_types){
             current_p <- current_p + infiltration_proportions[n]
-            if (random <= current_p) pheno <- infiltration_types[n]; break
+            if (random <= current_p) {
+              pheno <- infiltration_types[n] 
+              break
+            }
             n <- n+1
           }
 
@@ -156,7 +159,10 @@ simulate_clusters <- function(background_sample = bg1,
           current_p <- 0
           while (n <= n_infiltration_types){
             current_p <- current_p + infiltration_proportions[n]
-            if (random <= current_p) pheno <- infiltration_types[n]; break
+            if (random <= current_p) {
+              pheno <- infiltration_types[n]
+              break
+            }
             n <- n+1 }
         }
       }

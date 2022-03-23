@@ -21,13 +21,15 @@ TIS(
   n_stripe_type = NULL,
   properties_of_stripes = NULL,
   image_name = NULL,
-  plot.image = FALSE
+  plot.image = FALSE,
+  plot.categories = NULL,
+  plot.colours = NULL
 )
 }
 \arguments{
 \item{background_sample}{(OPTIONAL) Data.frame or SingleCellExperiment object
-with locations of points representing background cells. If NULL, background cells
-will be simulated in this function.}
+with locations of points representing background cells. If NULL, background
+cells will be simulated in this function.}
 
 \item{n_cells}{(OPTIONAL) Number of background cells to simulate. If NULL,
 already have a background image.}
@@ -56,8 +58,8 @@ rings to simulate.}
 \item{properties_of_immune_rings}{(OPTIONAL) List of parameters to define the
 immune rings.}
 
-\item{n_double_rings}{(OPTIONAL) Number of double immune rings. If NULL, no double
-rings to simulate.}
+\item{n_double_rings}{(OPTIONAL) Number of double immune rings. If NULL, no
+double rings to simulate.}
 
 \item{properties_of_double_rings}{(OPTIONAL) List of parameters to define the
 double immune rings.}
@@ -65,27 +67,36 @@ double immune rings.}
 \item{n_stripe_type}{(OPTIONAL) Number of stripe (vessel) types. If NULL, no
 stripes to simulate.}
 
-\item{properties_of_stripes}{(OPTIONAL) List of parameters to define the stripes.}
+\item{properties_of_stripes}{(OPTIONAL) List of parameters to define the
+stripes.}
 
 \item{image_name}{(OPTIONAL) String to name the output tissue image.}
 
 \item{plot.image}{Boolean. Whether the simulated image is plotted.}
+
+\item{plot.categories}{String Vector specifying the order of the cell
+cateories to be plotted.}
+
+\item{plot.colours}{String Vector specifying the order of the colours that
+correspond to the \code{plot.categories} arg.}
 }
 \value{
 An sce object of the simulated image
 }
 \description{
-Tissue Image Simulator (TIS) integrates the basic simulation functions
-in spaSim, including simulating (mixed) background image, clusters, immune rings,
-double immune rings and stripes. The patterns are simulated on separate layers
-sequentially (e.g. immune rings are simulated after/on top of background cells).
+Tissue Image Simulator (TIS) integrates the basic simulation
+functions in spaSim, including simulating (mixed) background image,
+clusters, immune rings, double immune rings and stripes. The patterns are
+simulated on separate layers sequentially (e.g. immune rings are simulated
+after/on top of background cells).
 
-Pattern properties (e.g. \code{properties_of_clusters}) contain the properties of
-a pattern in the format of list where each element is one pattern.
-These properties can be manually defined. Or users can use predefined properties
-from the package (\code{C_shape1}, \code{C_shape2}, \code{C_Shape3} for clusters; \code{R_shape1},
-\code{R_shape2}, \code{R_shape3} for immune rings; \code{D_shape1} for double rings).
-Details about the format of the properties see \link{simulate_clusters}
+Pattern properties (e.g. \code{properties_of_clusters}) contain the properties
+of a pattern in the format of list where each element is one pattern. These
+properties can be manually defined. Or users can use predefined properties
+from the package (\code{C_shape1}, \code{C_shape2}, \code{C_Shape3} for clusters;
+\code{R_shape1}, \code{R_shape2}, \code{R_shape3} for immune rings; \code{D_shape1} for double
+rings). Details about the format of the properties see
+\link{simulate_clusters}
 }
 \examples{
 set.seed(610)

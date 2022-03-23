@@ -19,7 +19,10 @@
 #' @param ring_infiltration Numeric or Vector. The degree of tumour infiltration
 #' in the region of immune rings. (Only applied to cell type "Tumour")
 #' @param plot.image Boolean Whether plot the simulated images or not.Default is TRUE.
-#'
+#' @param plot.categories String Vector specifying the order of the cell
+#'   cateories to be plotted.
+#' @param plot.colours String Vector specifying the order of the colours that
+#'   correspond to the `plot.categories` arg.
 #' @family simulate multiple images functions
 #' @seealso \code{\link{multiple_background_images}} for simulating multiple
 #'   mixed background images, and
@@ -113,12 +116,17 @@ multiple_images_with_immune_rings <- function(background_sample = bg1,
             # simulate the image
             image <- TIS(background_sample = background_sample,
                          n_immune_rings = n_immune_rings,
-                         properties_of_immune_rings = properties_of_immune_rings)
+                         properties_of_immune_rings = properties_of_immune_rings,
+                         plot.categories = plot.categories)
+            if(is.null(plot.categories)) plot.categories <- unique(image$Phenotype)
+            
             if (plot.image){
-              colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                          "lightgreen", "yellow", "black", "pink")
-              phenos <- unique(image$Phenotype)
-              plot_cells(image, phenos, colors[1:length(phenos)], "Phenotype")
+              if (is.null(plot.colours)){
+                plot.colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                                  "lightgreen", "yellow", "black", "pink")
+              }
+              phenos <- plot.categories
+              plot_cells(sce, phenos, plot.colours[1:length(phenos)], "Phenotype")
             }
             list.images[[i]] <- image
           }
