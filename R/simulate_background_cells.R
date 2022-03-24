@@ -6,10 +6,10 @@
 #'   have the same "Phenotype", specified by the "Phenotype" param. This
 #'   function uses `rHardcore` [`spatstat.random`].
 #'
-#' @param n_cells Numeric. Number of cells in the background.
+#' @param n_cells Numeric. Number of cells to simulate in the background.
 #' @param width,height Numeric. The width and height of the image.
 #' @param min_d Numeric. The minimum distance between two cells.
-#' @param oversample (OPTIONAL) Numeric. The multiplier for oversampling.
+#' @param oversampling_rate (OPTIONAL) Numeric. The multiplier for oversampling.
 #'   Without oversampling, the simulation deletes cells that are within `min_d`
 #'   from each other, resulting in a less number of cells than specified.
 #'   Default is 1.2.
@@ -23,7 +23,6 @@
 #'   immune ring simulation, and \code{\link{simulate_stripes}} for vessel
 #'   simulation.
 #'
-#' @importFrom ggplot2 ggplot aes geom_point
 #' @return A data.frame of the simulated background image
 #' @export
 #'
@@ -31,13 +30,14 @@
 #' set.seed(610) # set seed for this background image simulation for reproducibility
 #' background_image <- simulate_background_cells(n_cells = 5000, width = 2000,
 #'                                               height = 2000, min_d = 10,
-#'                                               oversample = 1.5, Phenotype = "Others")
+#'                                               oversampling_rate = 1.5, Phenotype = "Others")
 
-simulate_background_cells <- function(n_cells, width, height, min_d, oversample = 1.2,
+simulate_background_cells <- function(n_cells, width, height, min_d, 
+                                      oversampling_rate = 1.2,
                                       Phenotype = "Others"){
 
   # need to oversample first
-  n_cells_inflated <- n_cells*oversample
+  n_cells_inflated <- n_cells*oversampling_rate
 
   # calculate the window and intensity
   win <- spatstat.geom::owin(xrange=c(0,width), yrange=c(0,height))
@@ -61,9 +61,7 @@ simulate_background_cells <- function(n_cells, width, height, min_d, oversample 
   sample$Phenotype <- Phenotype
 
   # plot
-  g <- ggplot(sample, aes(Cell.X.Position, Cell.Y.Position)) +
-    geom_point()
-  plot(g)
+  plot_cells(sample, Phenotype, "lightgray", "Phenotype")
 
   return(sample)
 }

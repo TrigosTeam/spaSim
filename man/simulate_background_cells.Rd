@@ -9,18 +9,18 @@ simulate_background_cells(
   width,
   height,
   min_d,
-  oversample = 1.2,
+  oversampling_rate = 1.2,
   Phenotype = "Others"
 )
 }
 \arguments{
-\item{n_cells}{Numeric. Number of cells in the background.}
+\item{n_cells}{Numeric. Number of cells to simulate in the background.}
 
 \item{width, height}{Numeric. The width and height of the image.}
 
 \item{min_d}{Numeric. The minimum distance between two cells.}
 
-\item{oversample}{(OPTIONAL) Numeric. The multiplier for oversampling.
+\item{oversampling_rate}{(OPTIONAL) Numeric. The multiplier for oversampling.
 Without oversampling, the simulation deletes cells that are within \code{min_d}
 from each other, resulting in a less number of cells than specified.
 Default is 1.2.}
@@ -42,7 +42,7 @@ function uses \code{rHardcore} \code{\link{spatstat.random}}.
 set.seed(610) # set seed for this background image simulation for reproducibility
 background_image <- simulate_background_cells(n_cells = 5000, width = 2000,
                                               height = 2000, min_d = 10,
-                                              oversample = 1.5, Phenotype = "Others")
+                                              oversampling_rate = 1.5, Phenotype = "Others")
 }
 \seealso{
 \code{\link{simulate_mixing}} for mixed background simulation,

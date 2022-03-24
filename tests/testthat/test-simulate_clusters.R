@@ -8,19 +8,19 @@ test_that("simulate_clusters works", {
 })
 
 test_that("multiple_images_with_clusters works", {
-  imageL <- multiple_images_with_clusters(background_sample = bg1,
+  imageL <- multiple_images_with_clusters(bg_sample = bg1,
                                           cluster_shape = 2,
                                           infiltration = 0.1,
                                           cluster_size = seq(400,500,100),
                                           cluster_loc_x = 0,
                                           cluster_loc_y = 0,
-                                          plot.image = TRUE)
+                                          plot_image = FALSE)
   sce <- imageL[[1]]
 
   # test if return a list of 2 objects
   expect_length(imageL, 2)
   # test if each object is an sce
-  expect_equal(class(sce)[[1]], "SummarizedExperiment")
+  expect_equal(class(sce)[[1]], "SingleCellExperiment")
   # test if there are "Tumour" and "Immune", "Others" cells under the "Phenotype" column
   expect_setequal(colnames(colData(sce)),
                   c("Cell.X.Position", "Cell.Y.Position", "Phenotype", "pseudo"))
@@ -29,13 +29,13 @@ test_that("multiple_images_with_clusters works", {
 })
 
 test_that("TIS works for simulating clusters", {
-  image <- TIS(background_sample = bg1,
+  image <- TIS(bg_sample = bg1,
                n_clusters = 3,
                properties_of_clusters = C_shape1,
                image_name = "cluster_image")
 
   # test the class of the result
-  expect_equal(class(image)[[1]], "SummarizedExperiment")
+  expect_equal(class(image)[[1]], "SingleCellExperiment")
 
   # test if there are "Tumour" and "Immune", "Others" cells under the "Phenotype" column
   data <- data.frame(colData(image))

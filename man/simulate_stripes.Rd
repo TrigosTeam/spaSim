@@ -5,40 +5,54 @@
 \title{simulate_stripes}
 \usage{
 simulate_stripes(
-  background_sample = bg1,
+  bg_sample = bg1,
   n_stripe_type = 2,
   win = NULL,
-  properties_of_stripes = list(S1 = list(number_of_stripes = 1, name_of_stripe_cell =
+  stripe_properties = list(S1 = list(number_of_stripes = 1, name_of_stripe_cell =
     "Others", width_of_stripe = 80, infiltration_types = c("Immune"),
     infiltration_proportions = c(0.08)), S2 = list(number_of_stripes = 1,
     name_of_stripe_cell = "Others", width_of_stripe = 80, infiltration_types =
     c("Immune"), infiltration_proportions = c(0.08))),
-  plot.image = TRUE
+  plot_image = TRUE,
+  plot_categories = NULL,
+  plot_colours = NULL
 )
 }
 \arguments{
-\item{background_sample}{(OPTIONAL) Data.Frame. The image that the stripes
-are simulated on. By default use the internal \code{bg1} background image.}
-
-\item{n_stripe_type}{Number of stripe types.}
+\item{bg_sample}{(OPTIONAL) A data.frame or SingleCellExperiment class object
+with locations of points representing background cells. Further cell types
+will be simulated based on this background sample. The data.frame or the
+metadata of the SCE object should have colnames including
+"Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+\code{\link{bg1}} background image.}
 
 \item{win}{(OPTIONAL) \code{owin} object from spatstat.geom owin method. By
 default it is the window of the background image.}
 
-\item{properties_of_stripes}{List of the properties of the stripes. See
-examples for the format of the properties.}
+\item{stripe_properties}{List of the properties of the stripes. See examples
+for the format of the properties. Please refer to the examples for the
+structure of \code{stripe_properties}.}
 
-\item{plot.image}{Boolean. Whether the simulated image is plotted.}
+\item{plot_image}{Boolean. Whether the simulated image is plotted.}
+
+\item{plot_categories}{String Vector specifying the order of the cell
+categories to be plotted.}
+
+\item{plot_colours}{String Vector specifying the order of the colours that
+correspond to the \code{plot_categories} arg.}
 }
 \value{
 A data.frame of the simulated image
 }
 \description{
 Based on an existing background image, simulate stripes of cells
-representing vessels.
+representing vessels. The cell types and widths of the stripes can be
+specified. The locations of the stripes are randomly simulated. Please
+refer to the examples to check what properties of the stripes can be
+specified.
 }
 \examples{
-properties_of_stripes = list(
+stripe_properties = list(
 S1 = list(
   number_of_stripes = 1,
   name_of_stripe_cell = "Others",
@@ -52,8 +66,8 @@ S1 = list(
   infiltration_types = c("Immune"),
   infiltration_proportions = c(0.08)))
 set.seed(610)
-stripe_image <- simulate_stripes(background_sample = bg1, n_stripe_type=2,
-win = NULL, properties_of_stripes = properties_of_stripes)
+stripe_image <- simulate_stripes(bg_sample = bg1, n_stripe_type=2,
+win = NULL, stripe_properties = stripe_properties)
 
 # library(SPIAT)
 # plot_cell_categories(stripe_image, categories_of_interest = c("Others","Immune"),

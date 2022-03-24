@@ -1,18 +1,26 @@
 #' Simulate clusters
 #' @description Based on an existing background image, simulate clusters of
 #'   cells where the same type of cells aggregate.
-#' @param background_sample (OPTIONAL) Data.Frame. The background image that the
-#'   clusters are generated on. Default is the internal background image `bg1`.
+#' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
+#'   with locations of points representing background cells. Further cell types
+#'   will be simulated based on this background sample. The data.frame or the
+#'   metadata of the SCE object should have colnames including
+#'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+#'   \code{\link{bg1}} background image.
 #' @param n_clusters Numeric. Number of clusters. This must match the
-#'   `length(properties_of_clusters)`.
+#'   `length(cluster_properties)`.
 #' @param bg_type (OPTIONAL) String. The name of the background cell type if the
 #'   background sample does not have a "Phenotype" column. By default is
 #'   "Others".
 #' @param win (OPTIONAL) `owin` object output from spatstat.geom::owin function.
 #'   By default is the window of the background image.
-#' @param properties_of_clusters List of properties of the clusters. See
+#' @param cluster_properties List of properties of the clusters. See
 #'   examples for the format of this arg.
-#' @param plot.image Boolean. Whether the simulated image is plotted.
+#' @param plot_image Boolean. Whether the simulated image is plotted.
+#' @param plot_categories String Vector specifying the order of the cell
+#'   categories to be plotted.
+#' @param plot_colours String Vector specifying the order of the colours that
+#'   correspond to the `plot_categories` arg.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -25,17 +33,17 @@
 #' @export
 #' @examples
 #' set.seed(610)
-#' cluster_image <- simulate_clusters(background_sample = bg1,
-#' n_clusters = 1, properties_of_clusters= list(C1 = list(
+#' cluster_image <- simulate_clusters(bg_sample = bg1,
+#' n_clusters = 1, cluster_properties= list(C1 = list(
 #' name_of_cluster_cell = "Tumour", size = 300, shape = "Oval", centre_loc =
 #' data.frame("x" = 500, "y" = 500), infiltration_types = c("Immune1", "Others"),
 #' infiltration_proportions = c(0.1, 0.05))))
 
-simulate_clusters <- function(background_sample = bg1,
+simulate_clusters <- function(bg_sample = bg1,
                               n_clusters = 2,
                               bg_type = "Others",
                               win = NULL,
-                              properties_of_clusters = list(
+                              cluster_properties = list(
                                 C1 = list(
                                   name_of_cluster_cell = "Tumour",
                                   size = 300,
@@ -51,39 +59,41 @@ simulate_clusters <- function(background_sample = bg1,
                                   infiltration_types = c("Immune2", "Others"),
                                   infiltration_proportions = c(0.1, 0.05))
                               ),
-                              plot.image = TRUE
+                              plot_image = TRUE,
+                              plot_categories = NULL,
+                              plot_colours = NULL
 ){
 
   # CHECK is the background sample a dataframe?
-  if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
+  if (!is.data.frame(bg_sample)) {
+    bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
   # Get the window
   # if window is specified, use the specified window
   # otherwise, use the window of the background sample
   if (is.null(win)) {
-    X <- max(background_sample$Cell.X.Position)
-    Y <- max(background_sample$Cell.Y.Position)
+    X <- max(bg_sample$Cell.X.Position)
+    Y <- max(bg_sample$Cell.Y.Position)
     win <- spatstat.geom::owin(c(0, X), c(0,Y))
   }
 
   # Default phenotype is specified by bg_type
   # (when background sample does not have Phenotype)
-  if (is.null(background_sample$Phenotype)){
-    background_sample[, "Phenotype"] <- bg_type
+  if (is.null(bg_sample$Phenotype)){
+    bg_sample[, "Phenotype"] <- bg_type
   }
 
-  n_cells <- dim(background_sample)[1]
+  n_cells <- dim(bg_sample)[1]
 
   for (k in seq_len(n_clusters)) { # for each cluster
     # get the arguments
 
-    cell_type <- properties_of_clusters[[k]]$name_of_cluster_cell
-    size <- properties_of_clusters[[k]]$size
-    shape <- properties_of_clusters[[k]]$shape
-    centre_loc <- properties_of_clusters[[k]]$centre_loc
-    infiltration_types <- properties_of_clusters[[k]]$infiltration_types
-    infiltration_proportions <- properties_of_clusters[[k]]$infiltration_proportions
+    cell_type <- cluster_properties[[k]]$name_of_cluster_cell
+    size <- cluster_properties[[k]]$size
+    shape <- cluster_properties[[k]]$shape
+    centre_loc <- cluster_properties[[k]]$centre_loc
+    infiltration_types <- cluster_properties[[k]]$infiltration_types
+    infiltration_proportions <- cluster_properties[[k]]$infiltration_proportions
 
     # generate a location as the centre of the cluster
     if (is.null(centre_loc)){
@@ -104,9 +114,9 @@ simulate_clusters <- function(background_sample = bg1,
     Strip <- (shape == "Strip")
 
     for (i in seq_len(n_cells)){
-      x <- background_sample[i, "Cell.X.Position"]
-      y <- background_sample[i, "Cell.Y.Position"]
-      pheno <- background_sample[i, "Phenotype"]
+      x <- bg_sample[i, "Cell.X.Position"]
+      y <- bg_sample[i, "Cell.Y.Position"]
+      pheno <- bg_sample[i, "Phenotype"]
 
       A <- (x - a)^2
       B <- (y - b)^2
@@ -166,16 +176,19 @@ simulate_clusters <- function(background_sample = bg1,
             n <- n+1 }
         }
       }
-      background_sample[i, "Phenotype"] <- pheno
+      bg_sample[i, "Phenotype"] <- pheno
     }
   }
 
-  if (plot.image){
-    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                "lightgreen", "yellow", "black", "pink")
-    phenos <- unique(background_sample$Phenotype)
-    plot_cells(background_sample, phenos, colors[1:length(phenos)], "Phenotype")
+  if (plot_image){
+    if(is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
+    if (is.null(plot_colours)){
+      plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                        "lightgreen", "yellow", "black", "pink")
+    }
+    phenos <- plot_categories
+    plot_cells(bg_sample, phenos, plot_colours[1:length(phenos)], "Phenotype")
   }
 
-  return(background_sample)
+  return(bg_sample)
 }

@@ -6,17 +6,25 @@
 #'   The tumour clusters and the double immune rings are simulated at the same
 #'   time.
 #'
-#' @param background_sample (OPTIONAL) Data.Frame The image that the patterns
-#'   are simulated on. By default use the internal `bg1` background image.
+#' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
+#'   with locations of points representing background cells. Further cell types
+#'   will be simulated based on this background sample. The data.frame or the
+#'   metadata of the SCE object should have colnames including
+#'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+#'   \code{\link{bg1}} background image.
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #'   default is "Others".
-#' @param n_double_rings Number of double immune rings. This must match the
-#'   `length(properties_of_double_rings)`.
+#' @param n_dr Number of double immune rings. This must match the
+#'   `length(dr_properties)`.
 #' @param win (OPTIONAL) owin object output from spatstat.geom::owin function.
 #'   By default is the window of the background image.
-#' @param properties_of_double_rings List of properties of the double immune
-#'   rings.
-#' @param plot.image Boolean. Whether the simulated image is plotted.
+#' @param dr_properties List of properties of the double immune
+#'   rings. Please refer to the examples for the structure of `dr_properties`.
+#' @param plot_image Boolean. Whether the simulated image is plotted.
+#' @param plot_categories String Vector specifying the order of the cell
+#'   categories to be plotted.
+#' @param plot_colours String Vector specifying the order of the colours that
+#'   correspond to the `plot_categories` arg.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -30,7 +38,7 @@
 #' @examples
 #' set.seed(610)
 #' # manually define the properties of the immune ring
-#' properties_of_double_rings <- list(D1 = list(name_of_cluster_cell = "Tumour",size = 300,
+#' dr_properties <- list(D1 = list(name_of_cluster_cell = "Tumour",size = 300,
 #' shape = "Circle",centre_loc = data.frame("x" = 1000, "y" = 1000),infiltration_types
 #' = c("Immune1", "Immune2", "Others"),infiltration_proportions = c(0.15, 0.05, 0.05),
 #' name_of_ring_cell = "Immune1",immune_ring_width = 150,immune_ring_infiltration_types
@@ -45,17 +53,17 @@
 #' double_ring_width = 100,double_ring_infiltration_types = c("Others"),
 #' double_ring_infiltration_proportions = c(0.15)))
 #'
-#' double_ring_image <- simulate_double_rings(background_sample = bg1,
-#' n_double_rings = 2, properties_of_double_rings = properties_of_double_rings)
+#' double_ring_image <- simulate_double_rings(bg_sample = bg1,
+#' n_dr = 2, dr_properties = dr_properties)
 #' # library(SPIAT)
 #' # plot_cell_categories(double_ring_image, c("Tumour","Immune1","Immune2"),
 #' # c("red","darkblue","darkgreen"),"Phenotype")
 
-simulate_double_rings <- function(background_sample = bg1,
+simulate_double_rings <- function(bg_sample = bg1,
                                   bg_type = "Others",
-                                  n_double_rings = 2,
+                                  n_dr = 2,
                                   win = NULL,
-                                  properties_of_double_rings = list(
+                                  dr_properties = list(
                                     I1 = list(
                                       name_of_cluster_cell = "Tumour",
                                       size = 300,
@@ -89,56 +97,58 @@ simulate_double_rings <- function(background_sample = bg1,
                                       double_ring_infiltration_proportions = c(0.15)
                                     )
                                   ),
-                                  plot.image = TRUE) {
+                                  plot_image = TRUE,
+                                  plot_categories = NULL,
+                                  plot_colours = NULL) {
 
   ## CHECK
   # is the background sample a dataframe?
-  if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
+  if (!is.data.frame(bg_sample)) {
+    bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
-  # check if the specified cluster properties match n_double_rings
-  if (as.numeric(length(properties_of_double_rings)) != n_double_rings){
-    stop("`n_double_rings` does not match the length of `properties_of_double_rings`!")
+  # check if the specified cluster properties match n_dr
+  if (as.numeric(length(dr_properties)) != n_dr){
+    stop("`n_dr` does not match the length of `dr_properties`!")
   }
 
   # add a new column to store the position label for each cell (0 for core cluster,
   # 1 for first ring, 2 for second ring, 3 for background cells)
-  background_sample$lab <- 3
+  bg_sample$lab <- 3
 
   ## Get the window
   # if window is specified, use the specified window
   # otherwise, use the window of the background sample
   if (is.null(win)) {
-    X <- max(background_sample$Cell.X.Position)
-    Y <- max(background_sample$Cell.Y.Position)
+    X <- max(bg_sample$Cell.X.Position)
+    Y <- max(bg_sample$Cell.Y.Position)
     win <- spatstat.geom::owin(c(0, X), c(0,Y))
   }
 
   ## Default phenotype is specified by bg_type
   # (when background sample does not have Phenotype)
-  if (is.null(background_sample$Phenotype)){
-    background_sample[, "Phenotype"] <- bg_type
+  if (is.null(bg_sample$Phenotype)){
+    bg_sample[, "Phenotype"] <- bg_type
   }
 
-  n_cells <- dim(background_sample)[1]
+  n_cells <- dim(bg_sample)[1]
 
-  for (k in seq_len(n_double_rings)) { # for each cluster
+  for (k in seq_len(n_dr)) { # for each cluster
 
     # get the arguments
-    cluster_cell_type <- properties_of_double_rings[[k]]$name_of_cluster_cell
-    size <- properties_of_double_rings[[k]]$size
-    shape <- properties_of_double_rings[[k]]$shape
-    centre_loc <- properties_of_double_rings[[k]]$centre_loc
-    infiltration_types <- properties_of_double_rings[[k]]$infiltration_types
-    infiltration_proportions <- properties_of_double_rings[[k]]$infiltration_proportions
-    ring_cell_type = properties_of_double_rings[[k]]$name_of_ring_cell
-    ring_width <- properties_of_double_rings[[k]]$immune_ring_width
-    ring_infiltration_types = properties_of_double_rings[[k]]$immune_ring_infiltration_types
-    ring_infiltration_proportions = properties_of_double_rings[[k]]$immune_ring_infiltration_proportions
-    double_ring_cell_type <- properties_of_double_rings[[k]]$name_of_double_ring_cell
-    double_ring_width <- properties_of_double_rings[[k]]$double_ring_width
-    double_ring_infiltration_types <- properties_of_double_rings[[k]]$double_ring_infiltration_types
-    double_ring_infiltration_proportions <- properties_of_double_rings[[k]]$double_ring_infiltration_proportions
+    cluster_cell_type <- dr_properties[[k]]$name_of_cluster_cell
+    size <- dr_properties[[k]]$size
+    shape <- dr_properties[[k]]$shape
+    centre_loc <- dr_properties[[k]]$centre_loc
+    infiltration_types <- dr_properties[[k]]$infiltration_types
+    infiltration_proportions <- dr_properties[[k]]$infiltration_proportions
+    ring_cell_type = dr_properties[[k]]$name_of_ring_cell
+    ring_width <- dr_properties[[k]]$immune_ring_width
+    ring_infiltration_types = dr_properties[[k]]$immune_ring_infiltration_types
+    ring_infiltration_proportions = dr_properties[[k]]$immune_ring_infiltration_proportions
+    double_ring_cell_type <- dr_properties[[k]]$name_of_double_ring_cell
+    double_ring_width <- dr_properties[[k]]$double_ring_width
+    double_ring_infiltration_types <- dr_properties[[k]]$double_ring_infiltration_types
+    double_ring_infiltration_proportions <- dr_properties[[k]]$double_ring_infiltration_proportions
 
     # generate a location as the centre of the cluster
     if (is.null(centre_loc)){
@@ -163,9 +173,9 @@ simulate_double_rings <- function(background_sample = bg1,
     # determine if each cell is in the cluster or in the immune ring or in the
     # double ring or none
     for (i in seq_len(n_cells)){
-      x <- background_sample[i, "Cell.X.Position"]
-      y <- background_sample[i, "Cell.Y.Position"]
-      pheno <- background_sample[i, "Phenotype"]
+      x <- bg_sample[i, "Cell.X.Position"]
+      y <- bg_sample[i, "Cell.Y.Position"]
+      pheno <- bg_sample[i, "Phenotype"]
 
       # squared distance to the cluster centre
       A <- (x - a)^2
@@ -176,7 +186,7 @@ simulate_double_rings <- function(background_sample = bg1,
       # determine which region the point falls in
       if (D < R){
         # determine the primary label of the cell
-        background_sample[i, "lab"] <- 0
+        bg_sample[i, "lab"] <- 0
         # generate random number to decide the phenotype
         r <- stats::runif(1)
         n_infiltration_types <- length(infiltration_types)
@@ -196,8 +206,8 @@ simulate_double_rings <- function(background_sample = bg1,
       else if(D < I_R){
         # determine the primary label of the cell, if the primary label is lower
         # than 2, keep the primary label, skip out of the conditional
-        background_sample[i, "lab"] <- min(1, background_sample[i, "lab"])
-        if (background_sample[i , "lab"] == 1){
+        bg_sample[i, "lab"] <- min(1, bg_sample[i, "lab"])
+        if (bg_sample[i , "lab"] == 1){
           # generate random number to decide the phenotype
           r <- stats::runif(1)
           n_ring_infiltration_types <- length(ring_infiltration_types)
@@ -218,8 +228,8 @@ simulate_double_rings <- function(background_sample = bg1,
       else if (D < I_D){
         # determine the primary label of the cell, if the primary label is lower
         # than 2, keep the primary label, skip out of the conditional
-        background_sample[i, "lab"] <- min(2, background_sample[i, "lab"])
-        if (background_sample[i , "lab"] == 2){
+        bg_sample[i, "lab"] <- min(2, bg_sample[i, "lab"])
+        if (bg_sample[i , "lab"] == 2){
           # generate random number to decide the phenotype
           r <- stats::runif(1)
           n_double_ring_infiltration_types <- length(double_ring_infiltration_types)
@@ -236,17 +246,21 @@ simulate_double_rings <- function(background_sample = bg1,
           }
         }
       }
-      background_sample[i, "Phenotype"] <- pheno
+      bg_sample[i, "Phenotype"] <- pheno
     }
   }
-  if (plot.image){
-    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                "lightgreen", "yellow", "black", "pink")
-    phenos <- unique(background_sample$Phenotype)
-    plot_cells(background_sample, phenos, colors[1:length(phenos)], "Phenotype")
+  
+  # plot the image 
+  if (plot_image){
+    if(is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
+    if (is.null(plot_colours)){
+      plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                        "lightgreen", "yellow", "black", "pink")
+    }
+    phenos <- plot_categories
+    plot_cells(bg_sample, phenos, plot_colours[1:length(phenos)], "Phenotype")
   }
 
-
-  return(background_sample)
+  return(bg_sample)
 }
 

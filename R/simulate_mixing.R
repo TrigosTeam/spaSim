@@ -1,13 +1,18 @@
 #' Simulate mixed background image
 #' @description Based on an existing background image, simulate mixed cell types
 #'   with specified cell types and proportions.
-#' @param background_sample (OPTIONAL) Data.Frame. The image that the stripes
-#'   are simulated on. By default use the `bg1` background image from the
-#'   package.
-#' @param names_of_mixing String Vector of the mixed cell types.
-#' @param mixing_degree Numeric Vector of the proportions of the mixed cell
-#'   types.
-#' @param plot.image Boolean. Whether the simulated image is plotted.
+#' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
+#'   with locations of points representing background cells. Further cell types
+#'   will be simulated based on this background sample. The data.frame or the
+#'   metadata of the SCE object should have colnames including
+#'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+#'   \code{\link{bg1}} background image.
+#' @param idents String Vector of the mixed cell types.
+#' @param props Numeric Vector of the proportions of the mixed cell
+#'   types. 
+#' @param plot_image Boolean. Whether the simulated image is plotted.
+#' @param plot_colours String Vector specifying the order of the colours that
+#'   correspond to the `idents` arg.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -21,31 +26,32 @@
 #'
 #' @examples
 #' set.seed(610)
-#' mix_background <- simulate_mixing(background_sample = bg1,
-#' names_of_mixing = c("Tumour","Immune", "Others"), mixing_degree = c(0.2, 0.4,  0.4))
+#' mix_background <- simulate_mixing(bg_sample = bg1,
+#' idents = c("Tumour","Immune", "Others"), props = c(0.2, 0.4,  0.4))
 #'
 #' # library(SPIAT)
 #' # plot_cell_categories(mix_background, categories_of_interest = c("Tumour","Immune"),
 #' # colour_vector = c("red", "darkgreen"), feature_colname = "Phenotype")
 
-simulate_mixing <- function(background_sample = bg1,
-                            names_of_mixing = c("Tumour", "Immune", "Others"),
-                            mixing_degree = c(0.2, 0.4, 0.4),
-                            plot.image = TRUE) {
+simulate_mixing <- function(bg_sample = bg1,
+                            idents = c("Tumour", "Immune", "Others"),
+                            props = c(0.2, 0.4, 0.4),
+                            plot_image = TRUE,
+                            plot_colours = NULL) {
 
   # CHECK is the background sample a dataframe?
-  if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
+  if (!is.data.frame(bg_sample)) {
+    bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
   # default phenotype is "Others"
-  if (is.null(background_sample$Phenotype)){
-    background_sample[, "Phenotype"] <- "Others"
+  if (is.null(bg_sample$Phenotype)){
+    bg_sample[, "Phenotype"] <- "Others"
   }
 
-  n_types <- length(names_of_mixing)
-  for (i in seq_len(dim(background_sample)[1])){
-    x <- background_sample[i, "Cell.X.Position"]
-    y <- background_sample[i, "Cell.Y.Position"]
+  n_types <- length(idents)
+  for (i in seq_len(dim(bg_sample)[1])){
+    x <- bg_sample[i, "Cell.X.Position"]
+    y <- bg_sample[i, "Cell.Y.Position"]
 
     random <- stats::runif(1)
 
@@ -54,21 +60,22 @@ simulate_mixing <- function(background_sample = bg1,
     n <- 1 # start from the first proportion
     current_p <- 0
     while (n <= n_types){
-      current_p <- current_p + mixing_degree[n]
+      current_p <- current_p + props[n]
       if (random <= current_p) {
-        pheno <- names_of_mixing[n]
+        pheno <- idents[n]
         break
       }
       n <- n+1
     }
-    background_sample[i, "Phenotype"] <- pheno
+    bg_sample[i, "Phenotype"] <- pheno
   }
-  if (plot.image){
-    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                "lightgreen", "yellow", "black", "pink")
-    phenos <- unique(background_sample$Phenotype)
-    plot_cells(background_sample, phenos, colors[1:length(phenos)], "Phenotype")
+  if (plot_image){
+    if (is.null(plot_colours)){
+      plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                        "lightgreen", "yellow", "black", "pink")
+    }
+    plot_cells(bg_sample, idents, plot_colours[1:length(idents)], "Phenotype")
   }
 
-  return(background_sample)
+  return(bg_sample)
 }
