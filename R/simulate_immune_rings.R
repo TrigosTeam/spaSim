@@ -44,9 +44,6 @@
 #' # simulate immune rings (`n_ir` should match the length of `ir_properties`)
 #' immune_ring_image <- simulate_immune_rings(bg_sample = bg1,
 #' n_ir = 1, ir_properties = ir_properties)
-#' # library(SPIAT)
-#' # plot_cell_categories(immune_ring_image, c("Tumour","Immune1"),c("red","blue"),
-#' # "Phenotype")
 #' 
 simulate_immune_rings <- function(bg_sample = bg1,
                                   bg_type = "Others",

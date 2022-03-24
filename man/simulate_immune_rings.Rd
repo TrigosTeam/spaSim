@@ -71,9 +71,6 @@ immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportio
 # simulate immune rings (`n_ir` should match the length of `ir_properties`)
 immune_ring_image <- simulate_immune_rings(bg_sample = bg1,
 n_ir = 1, ir_properties = ir_properties)
-# library(SPIAT)
-# plot_cell_categories(immune_ring_image, c("Tumour","Immune1"),c("red","blue"),
-# "Phenotype")
 
 }
 \seealso{

@@ -61,12 +61,8 @@
 #' double_ring_image <- TIS(bg_sample=bg1, n_clusters = 1,
 #' properties_of_clusters = list(C1 = list( name_of_cluster_cell = "Tumour",
 #' size = 300, shape = "Oval", centre_loc = data.frame("x" = 500, "y" = 500),
-#' infiltration_types = c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05))))
-#'
-#' # library(SPIAT)
-#' # plot_cell_categories(double_ring_image, categories_of_interest =
-#' # c("Tumour","Immune1", "Immune2"), colour_vector = c("red", "darkgreen",
-#' # "darkblue"), feature_colname = "Phenotype")
+#' infiltration_types = c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05))),
+#' plot_image = TRUE)
 
 TIS <- function(bg_sample = NULL,
                 n_cells = NULL,
