@@ -5,23 +5,30 @@
 \title{Simulate mixed background image}
 \usage{
 simulate_mixing(
-  background_sample = bg1,
-  names_of_mixing = c("Tumour", "Immune", "Others"),
-  mixing_degree = c(0.2, 0.4, 0.4),
-  plot.image = TRUE
+  bg_sample = bg1,
+  idents = c("Tumour", "Immune", "Others"),
+  props = c(0.2, 0.4, 0.4),
+  plot_image = TRUE,
+  plot_colours = NULL
 )
 }
 \arguments{
-\item{background_sample}{(OPTIONAL) Data.Frame. The image that the stripes
-are simulated on. By default use the \code{bg1} background image from the
-package.}
+\item{bg_sample}{(OPTIONAL) A data.frame or SingleCellExperiment class object
+with locations of points representing background cells. Further cell types
+will be simulated based on this background sample. The data.frame or the
+metadata of the SCE object should have colnames including
+"Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+\code{\link{bg1}} background image.}
 
-\item{names_of_mixing}{String Vector of the mixed cell types.}
+\item{idents}{String Vector of the mixed cell types.}
 
-\item{mixing_degree}{Numeric Vector of the proportions of the mixed cell
+\item{props}{Numeric Vector of the proportions of the mixed cell
 types.}
 
-\item{plot.image}{Boolean. Whether the simulated image is plotted.}
+\item{plot_image}{Boolean. Whether the simulated image is plotted.}
+
+\item{plot_colours}{String Vector specifying the order of the colours that
+correspond to the \code{idents} arg.}
 }
 \value{
 A data.frame of the simulated image
@@ -32,8 +39,8 @@ with specified cell types and proportions.
 }
 \examples{
 set.seed(610)
-mix_background <- simulate_mixing(background_sample = bg1,
-names_of_mixing = c("Tumour","Immune", "Others"), mixing_degree = c(0.2, 0.4,  0.4))
+mix_background <- simulate_mixing(bg_sample = bg1,
+idents = c("Tumour","Immune", "Others"), props = c(0.2, 0.4,  0.4))
 
 # library(SPIAT)
 # plot_cell_categories(mix_background, categories_of_interest = c("Tumour","Immune"),

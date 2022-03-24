@@ -5,7 +5,7 @@
 \alias{bg1}
 \title{Dataframe of background cells 2000*2000.}
 \format{
-A data frame with 4915 rows and 2 variables:
+A data frame with 4915 rows (cells) and 3 columns:
 \describe{
 \item{Cell.X.Position}{X coordinate}
 \item{Cell.Y.Position}{Y coordinate}

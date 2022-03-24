@@ -5,25 +5,31 @@
 \title{Simulate clusters}
 \usage{
 simulate_clusters(
-  background_sample = bg1,
+  bg_sample = bg1,
   n_clusters = 2,
   bg_type = "Others",
   win = NULL,
-  properties_of_clusters = list(C1 = list(name_of_cluster_cell = "Tumour", size = 300,
+  cluster_properties = list(C1 = list(name_of_cluster_cell = "Tumour", size = 300,
     shape = "Oval", centre_loc = data.frame(x = 500, y = 500), infiltration_types =
     c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05)), C2 =
     list(name_of_cluster_cell = "Immune1", size = 500, shape = "Irregular", centre_loc =
     data.frame(x = 1500, y = 500), infiltration_types = c("Immune2", "Others"),
     infiltration_proportions = c(0.1, 0.05))),
-  plot.image = TRUE
+  plot_image = TRUE,
+  plot_categories = NULL,
+  plot_colours = NULL
 )
 }
 \arguments{
-\item{background_sample}{(OPTIONAL) Data.Frame. The background image that the
-clusters are generated on. Default is the internal background image \code{bg1}.}
+\item{bg_sample}{(OPTIONAL) A data.frame or SingleCellExperiment class object
+with locations of points representing background cells. Further cell types
+will be simulated based on this background sample. The data.frame or the
+metadata of the SCE object should have colnames including
+"Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+\code{\link{bg1}} background image.}
 
 \item{n_clusters}{Numeric. Number of clusters. This must match the
-\code{length(properties_of_clusters)}.}
+\code{length(cluster_properties)}.}
 
 \item{bg_type}{(OPTIONAL) String. The name of the background cell type if the
 background sample does not have a "Phenotype" column. By default is
@@ -32,10 +38,16 @@ background sample does not have a "Phenotype" column. By default is
 \item{win}{(OPTIONAL) \code{owin} object output from spatstat.geom::owin function.
 By default is the window of the background image.}
 
-\item{properties_of_clusters}{List of properties of the clusters. See
+\item{cluster_properties}{List of properties of the clusters. See
 examples for the format of this arg.}
 
-\item{plot.image}{Boolean. Whether the simulated image is plotted.}
+\item{plot_image}{Boolean. Whether the simulated image is plotted.}
+
+\item{plot_categories}{String Vector specifying the order of the cell
+categories to be plotted.}
+
+\item{plot_colours}{String Vector specifying the order of the colours that
+correspond to the \code{plot_categories} arg.}
 }
 \value{
 A data.frame of the simulated image
@@ -46,8 +58,8 @@ cells where the same type of cells aggregate.
 }
 \examples{
 set.seed(610)
-cluster_image <- simulate_clusters(background_sample = bg1,
-n_clusters = 1, properties_of_clusters= list(C1 = list(
+cluster_image <- simulate_clusters(bg_sample = bg1,
+n_clusters = 1, cluster_properties= list(C1 = list(
 name_of_cluster_cell = "Tumour", size = 300, shape = "Oval", centre_loc =
 data.frame("x" = 500, "y" = 500), infiltration_types = c("Immune1", "Others"),
 infiltration_proportions = c(0.1, 0.05))))

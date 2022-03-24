@@ -2,51 +2,52 @@
 % Please edit documentation in R/multiple_background_images.R
 \name{multiple_background_images}
 \alias{multiple_background_images}
-\title{Simulate multiple background images}
+\title{Simulate multiple background images (mixed cell types)}
 \usage{
 multiple_background_images(
-  background_sample,
-  names_of_cell_types = c("Tumour", "Immune", "Others"),
-  proportions_of_cell_types = list(rep(0.1, 9), seq(0, 0.4, 0.05), seq(0.9, 0.5,
-    -0.05)),
-  plot.image = TRUE,
-  plot.colours = NULL
+  bg_sample,
+  idents = c("Tumour", "Immune", "Others"),
+  props = list(rep(0.1, 9), seq(0, 0.4, 0.05), seq(0.9, 0.5, -0.05)),
+  plot_image = TRUE,
+  plot_colours = NULL
 )
 }
 \arguments{
-\item{background_sample}{Data.frame or SingleCellExperiment object with
-locations of points representing background cells. Further cell types will
-be simulated based on this background sample.}
+\item{bg_sample}{A data.frame or SingleCellExperiment class object
+with locations of points representing background cells. Further cell types
+will be simulated based on this background sample. The data.frame or the
+metadata of the SCE object should have colnames including
+"Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+\code{\link{bg1}} background image.}
 
-\item{names_of_cell_types}{String Vector. Names of the cell types to
-generate.}
+\item{idents}{String Vector. Names of the cell types to generate.}
 
-\item{proportions_of_cell_types}{List. Each element is a vector of
+\item{props}{List. Each element is a vector of
 proportions of the corresponding cell type. The length of the vector is how
 many images to generate. All vectors should be of the same length, also
-equal to the number of images}
+equal to the number of images.}
 
-\item{plot.image}{Boolean. Whether plot the simulated images or not.Default
+\item{plot_image}{Boolean. Whether plot the simulated images or not. Default
 is TRUE.}
 
-\item{plot.colours}{String Vector. If plot.image is TRUE, this param is the
-corresponding colours for the \code{names_of_cell_types} arg.}
+\item{plot_colours}{String Vector. If plot_image is TRUE, this param is the
+corresponding colours for the \code{idents} arg.}
 }
 \value{
-A list of sce objects
+A list of SCE objects
 }
 \description{
-Generate a set of background images all at once.
+Generate a set of background images with different proportions
+of mixed cell types all at once.
 }
 \examples{
-names_of_cell_types = c("Tumour","Immune","Others")
+idents = c("Tumour","Immune","Others")
 prop1 <- rep(0.1,9)
 prop2 <- seq(0, 0.4, 0.05)
 prop3 <- seq(0.9,0.5,-0.05)
 set.seed(610)
-bg_image_list <- multiple_background_images(background_sample = bg1,
-names_of_cell_types = names_of_cell_types, proportions_of_cell_types =
-list(prop1, prop2, prop3), plot.image = FALSE)
+bg_image_list <- multiple_background_images(bg_sample = bg1,
+idents = idents, props = list(prop1, prop2, prop3), plot_image = FALSE)
 }
 \seealso{
 \code{\link{multiple_images_with_clusters}} for simulating multiple

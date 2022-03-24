@@ -56,7 +56,7 @@ C_shape2 <- list(
 
 # C_shape3 - Immune cluster ####
 centre_loc_offset <- data.frame("x" = 1000, "y" = 1000)
-infiltration_types <- c("Immune", "Others")
+infiltration_types <- c("Immune1", "Others")
 infiltration_proportions <- c(0.1, 0.1)
 C_shape3 <- list(
   C1 = list(

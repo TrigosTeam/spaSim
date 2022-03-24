@@ -5,11 +5,12 @@
 \title{Tissue Image Simulator (TIS)}
 \usage{
 TIS(
-  background_sample = NULL,
+  bg_sample = NULL,
   n_cells = NULL,
   width = NULL,
   height = NULL,
   min_d = NULL,
+  oversampling_rate = 1.2,
   names_of_bg_cells = NULL,
   proportions_of_bg_cells = NULL,
   n_clusters = NULL,
@@ -21,24 +22,32 @@ TIS(
   n_stripe_type = NULL,
   properties_of_stripes = NULL,
   image_name = NULL,
-  plot.image = FALSE,
-  plot.categories = NULL,
-  plot.colours = NULL
+  plot_image = FALSE,
+  plot_categories = NULL,
+  plot_colours = NULL
 )
 }
 \arguments{
-\item{background_sample}{(OPTIONAL) Data.frame or SingleCellExperiment object
-with locations of points representing background cells. If NULL, background
-cells will be simulated in this function.}
+\item{bg_sample}{(OPTIONAL) A data.frame or SingleCellExperiment class object
+with locations of points representing background cells. Further cell types
+will be simulated based on this background sample. The data.frame or the
+metadata of the SCE object should have colnames including
+"Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+\code{\link{bg1}} background image.}
 
-\item{n_cells}{(OPTIONAL) Number of background cells to simulate. If NULL,
-already have a background image.}
+\item{n_cells}{(OPTIONAL) Number of background cells to simulate. Only when
+\code{bg_sample} is NULL.}
 
 \item{width}{(OPTIONAL) Number The width of the image.}
 
 \item{height}{(OPTIONAL) Number The height of the image.}
 
 \item{min_d}{(OPTIONAL) Number The minimum distance between two cells.}
+
+\item{oversampling_rate}{(OPTIONAL) Numeric. The multiplier for oversampling.
+Without oversampling, the simulation deletes cells that are within \code{min_d}
+from each other, resulting in a less number of cells than specified.
+Default is 1.2.}
 
 \item{names_of_bg_cells}{(OPTIONAL) Vector The cell types of the background
 cells. If NULL, the background cells are of one type.}
@@ -72,13 +81,13 @@ stripes.}
 
 \item{image_name}{(OPTIONAL) String to name the output tissue image.}
 
-\item{plot.image}{Boolean. Whether the simulated image is plotted.}
+\item{plot_image}{Boolean. Whether the simulated image is plotted.}
 
-\item{plot.categories}{String Vector specifying the order of the cell
-cateories to be plotted.}
+\item{plot_categories}{String Vector specifying the order of the cell
+categories to be plotted.}
 
-\item{plot.colours}{String Vector specifying the order of the colours that
-correspond to the \code{plot.categories} arg.}
+\item{plot_colours}{String Vector specifying the order of the colours that
+correspond to the \code{plot_categories} arg.}
 }
 \value{
 An sce object of the simulated image
@@ -92,15 +101,13 @@ after/on top of background cells).
 
 Pattern properties (e.g. \code{properties_of_clusters}) contain the properties
 of a pattern in the format of list where each element is one pattern. These
-properties can be manually defined. Or users can use predefined properties
-from the package (\code{C_shape1}, \code{C_shape2}, \code{C_Shape3} for clusters;
-\code{R_shape1}, \code{R_shape2}, \code{R_shape3} for immune rings; \code{D_shape1} for double
-rings). Details about the format of the properties see
-\link{simulate_clusters}
+properties need to be manually defined. Details about the format of the properties
+see the examples in \link{simulate_clusters} \link{simulate_immune_rings}
+\link{simulate_double_rings} \link{simulate_stripes}
 }
 \examples{
 set.seed(610)
-double_ring_image <- TIS(background_sample=bg1, n_clusters = 1,
+double_ring_image <- TIS(bg_sample=bg1, n_clusters = 1,
 properties_of_clusters = list(C1 = list( name_of_cluster_cell = "Tumour",
 size = 300, shape = "Oval", centre_loc = data.frame("x" = 500, "y" = 500),
 infiltration_types = c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05))))

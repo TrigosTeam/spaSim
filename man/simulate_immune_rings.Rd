@@ -5,13 +5,13 @@
 \title{simulate_immune_rings}
 \usage{
 simulate_immune_rings(
-  background_sample = bg1,
+  bg_sample = bg1,
   bg_type = "Others",
-  n_immune_rings = 2,
+  n_ir = 2,
   win = NULL,
-  properties_of_immune_rings = list(I1 = list(name_of_cluster_cell = "Tumour", size =
-    600, shape = "Circle", centre_loc = data.frame(x = 930, y = 1000), infiltration_types
-    = c("Immune1", "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
+  ir_properties = list(I1 = list(name_of_cluster_cell = "Tumour", size = 600, shape =
+    "Circle", centre_loc = data.frame(x = 930, y = 1000), infiltration_types =
+    c("Immune1", "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
     name_of_ring_cell = "Immune1", immune_ring_width = 150,
     immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions =
     c(0.15)), I2 = list(name_of_cluster_cell = "Tumour", size = 500, shape = "Oval",
@@ -20,25 +20,37 @@ simulate_immune_rings(
     name_of_ring_cell = "Immune1", immune_ring_width = 150,
     immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions =
     c(0.15))),
-  plot.image = TRUE
+  plot_image = TRUE,
+  plot_categories = NULL,
+  plot_colours = NULL
 )
 }
 \arguments{
-\item{background_sample}{(OPTIONAL) Data.Frame. The image that the immune
-rings are simulated on. By default use the internal background image \code{bg1}.}
+\item{bg_sample}{(OPTIONAL) A data.frame or SingleCellExperiment class object
+with locations of points representing background cells. Further cell types
+will be simulated based on this background sample. The data.frame or the
+metadata of the SCE object should have colnames including
+"Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+\code{\link{bg1}} background image.}
 
 \item{bg_type}{(OPTIONAL) String The name of the background cell type. By
 default is "Others".}
 
-\item{n_immune_rings}{Number of immune rings. This must match the
-\code{length(properties_of_immune_rings)}.}
+\item{n_ir}{Number of immune rings. This must match the arg
+\code{length(ir_properties)}.}
 
 \item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function.
-By default is the window of the background image}
+By default is the window of the background image.}
 
-\item{properties_of_immune_rings}{List of properties of the immune rings}
+\item{ir_properties}{List of properties of the immune rings. Please refer to the examples for the structure of \code{ir_properties}.}
 
-\item{plot.image}{Boolean. Whether the simulated image is plotted.}
+\item{plot_image}{Boolean. Whether the simulated image is plotted.}
+
+\item{plot_categories}{String Vector specifying the order of the cell
+categories to be plotted.}
+
+\item{plot_colours}{String Vector specifying the order of the colours that
+correspond to the \code{plot_categories} arg.}
 }
 \value{
 A data.frame of the simulated image
@@ -51,14 +63,14 @@ are simulated at the same time.
 \examples{
 set.seed(610)
 # manually define the properties of the immune ring
-properties_of_immune_rings <- list(I1 = list(name_of_cluster_cell = "Tumour",
+ir_properties <- list(I1 = list(name_of_cluster_cell = "Tumour",
 size = 600,shape = "Circle",centre_loc = data.frame("x" = 930, "y" = 1000),
 infiltration_types = c("Immune1", "Immune2", "Others"), infiltration_proportions
 = c(0.15, 0.05, 0.05), name_of_ring_cell = "Immune1", immune_ring_width = 150,
 immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions = c(0.15)))
-# simulate immune rings (`n_immune_rings` should match the length of `properties_of_immune_rings`)
-immune_ring_image <- simulate_immune_rings(background_sample = bg1,
-n_immune_rings = 1, properties_of_immune_rings = properties_of_immune_rings)
+# simulate immune rings (`n_ir` should match the length of `ir_properties`)
+immune_ring_image <- simulate_immune_rings(bg_sample = bg1,
+n_ir = 1, ir_properties = ir_properties)
 # library(SPIAT)
 # plot_cell_categories(immune_ring_image, c("Tumour","Immune1"),c("red","blue"),
 # "Phenotype")

@@ -1,19 +1,25 @@
 #' plot_cells
 #'
-#' @description Produces a scatter plot of the cells in the tissue. Cells are coloured
-#' categorically by phenotype. Cells not part of the phenotypes of interest will be coloured "lightgrey"
+#' @description Produces a scatter plot of the cells in the tissue. Cells are
+#'   coloured categorically by Phenotype column. Cells not part of the
+#'   phenotypes of interest will be coloured "lightgrey".
 #'
-#' @param sce_object SingleCellExperiment object orw data.frame that has cell locations and cell type info
-#' @param categories_of_interest Vector of cell categories to be coloured
-#' @param colour_vector Vector specifying the colours of each cell phenotype
-#' @param feature_colname String specifying the column the cell categories belong to
+#' @param sce_object SingleCellExperiment object or a data.frame that has cell
+#'   locations and phenotype info.
+#' @param categories_of_interest String Vector of cell categories to be
+#'   coloured.
+#' @param colour_vector String Vector specifying the colours of each cell
+#'   phenotype.
+#' @param feature_colname String specifying the column the cell categories
+#'   belong to.
+#'   
 #' @import dplyr
 #' @import ggplot2
 #' @importFrom SummarizedExperiment colData
 #' @return A plot is returned
 
 plot_cells <- function(sce_object, categories_of_interest = NULL,
-                       colour_vector = NULL, feature_colname = "Cell.Type") {
+                       colour_vector = NULL, feature_colname = "Phenotype") {
 
   # if plotting the structure, users do not have to enter the params
   # we have stored the categories and colours for them
@@ -33,7 +39,7 @@ plot_cells <- function(sce_object, categories_of_interest = NULL,
   # setting these variables to NULL as otherwise get "no visible binding for global variable" in R check
   Cell.X.Position <- Cell.Y.Position <- Category <- NULL
 
-  if (methods::is(sce_object,'SummarizedExperiment')) {
+  if (methods::is(sce_object,'SingleCellExperiment')) {
     formatted_data <- data.frame(colData(sce_object))
   }
   else formatted_data <- sce_object
@@ -76,9 +82,11 @@ plot_cells <- function(sce_object, categories_of_interest = NULL,
     all_colours <- colour_vector
   }
 
-  p <- ggplot(formatted_data, aes_string(x = "Cell.X.Position", y = "Cell.Y.Position", colour = feature_colname)) +
+  p <- ggplot(formatted_data, aes_string(x = "Cell.X.Position", 
+                                         y = "Cell.Y.Position", colour = feature_colname)) +
     geom_point(aes_string(colour = feature_colname), size = 1)
-  p <- ggplot(formatted_data, aes_string(x = "Cell.X.Position", y = "Cell.Y.Position", colour = feature_colname))
+  p <- ggplot(formatted_data, aes_string(x = "Cell.X.Position", y = "Cell.Y.Position", 
+                                         colour = feature_colname))
   if (any(formatted_data[[feature_colname]] == "OTHER")) {
     p <- p + geom_point(data=subset(formatted_data, get(feature_colname) =='OTHER'),
                         aes_string(colour = feature_colname), size = 1) +

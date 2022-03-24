@@ -8,22 +8,27 @@ plot_cells(
   sce_object,
   categories_of_interest = NULL,
   colour_vector = NULL,
-  feature_colname = "Cell.Type"
+  feature_colname = "Phenotype"
 )
 }
 \arguments{
-\item{sce_object}{SingleCellExperiment object orw data.frame that has cell locations and cell type info}
+\item{sce_object}{SingleCellExperiment object or a data.frame that has cell
+locations and phenotype info.}
 
-\item{categories_of_interest}{Vector of cell categories to be coloured}
+\item{categories_of_interest}{String Vector of cell categories to be
+coloured.}
 
-\item{colour_vector}{Vector specifying the colours of each cell phenotype}
+\item{colour_vector}{String Vector specifying the colours of each cell
+phenotype.}
 
-\item{feature_colname}{String specifying the column the cell categories belong to}
+\item{feature_colname}{String specifying the column the cell categories
+belong to.}
 }
 \value{
 A plot is returned
 }
 \description{
-Produces a scatter plot of the cells in the tissue. Cells are coloured
-categorically by phenotype. Cells not part of the phenotypes of interest will be coloured "lightgrey"
+Produces a scatter plot of the cells in the tissue. Cells are
+coloured categorically by Phenotype column. Cells not part of the
+phenotypes of interest will be coloured "lightgrey".
 }

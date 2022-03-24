@@ -4,16 +4,24 @@
 #'   cells that surround tumour clusters. The tumour clusters and immune rings
 #'   are simulated at the same time.
 #'
-#' @param background_sample (OPTIONAL) Data.Frame. The image that the immune
-#'   rings are simulated on. By default use the internal background image `bg1`.
+#' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
+#'   with locations of points representing background cells. Further cell types
+#'   will be simulated based on this background sample. The data.frame or the
+#'   metadata of the SCE object should have colnames including
+#'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+#'   \code{\link{bg1}} background image.
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
 #'   default is "Others".
-#' @param n_immune_rings Number of immune rings. This must match the
-#'   `length(properties_of_immune_rings)`.
+#' @param n_ir Number of immune rings. This must match the arg
+#'   `length(ir_properties)`.
 #' @param win (OPTIONAL) owin object output from spatstat.geom::owin function.
-#'   By default is the window of the background image
-#' @param properties_of_immune_rings List of properties of the immune rings
-#' @param plot.image Boolean. Whether the simulated image is plotted.
+#'   By default is the window of the background image.
+#' @param ir_properties List of properties of the immune rings. Please refer to the examples for the structure of `ir_properties`.
+#' @param plot_image Boolean. Whether the simulated image is plotted.
+#' @param plot_categories String Vector specifying the order of the cell
+#'   categories to be plotted.
+#' @param plot_colours String Vector specifying the order of the colours that
+#'   correspond to the `plot_categories` arg.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -28,23 +36,23 @@
 #' @examples
 #' set.seed(610)
 #' # manually define the properties of the immune ring
-#' properties_of_immune_rings <- list(I1 = list(name_of_cluster_cell = "Tumour",
+#' ir_properties <- list(I1 = list(name_of_cluster_cell = "Tumour",
 #' size = 600,shape = "Circle",centre_loc = data.frame("x" = 930, "y" = 1000),
 #' infiltration_types = c("Immune1", "Immune2", "Others"), infiltration_proportions
 #' = c(0.15, 0.05, 0.05), name_of_ring_cell = "Immune1", immune_ring_width = 150,
 #' immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions = c(0.15)))
-#' # simulate immune rings (`n_immune_rings` should match the length of `properties_of_immune_rings`)
-#' immune_ring_image <- simulate_immune_rings(background_sample = bg1,
-#' n_immune_rings = 1, properties_of_immune_rings = properties_of_immune_rings)
+#' # simulate immune rings (`n_ir` should match the length of `ir_properties`)
+#' immune_ring_image <- simulate_immune_rings(bg_sample = bg1,
+#' n_ir = 1, ir_properties = ir_properties)
 #' # library(SPIAT)
 #' # plot_cell_categories(immune_ring_image, c("Tumour","Immune1"),c("red","blue"),
 #' # "Phenotype")
-#'
-simulate_immune_rings <- function(background_sample = bg1,
+#' 
+simulate_immune_rings <- function(bg_sample = bg1,
                                   bg_type = "Others",
-                                  n_immune_rings = 2,
+                                  n_ir = 2,
                                   win = NULL,
-                                  properties_of_immune_rings = list(
+                                  ir_properties = list(
                                     I1 = list(
                                       name_of_cluster_cell = "Tumour",
                                       size = 600,
@@ -70,52 +78,54 @@ simulate_immune_rings <- function(background_sample = bg1,
                                       immune_ring_infiltration_proportions = c(0.15)
                                     )
                                   ),
-                                  plot.image = TRUE
+                                  plot_image = TRUE,
+                                  plot_categories = NULL,
+                                  plot_colours = NULL
 ) {
 
   ## CHECK
   # is the background sample a dataframe?
-  if (!is.data.frame(background_sample)) {
-    background_sample <- data.frame(SummarizedExperiment::colData(background_sample))}
+  if (!is.data.frame(bg_sample)) {
+    bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
-  # check if the specified cluster properties match n_immune_rings
-  if (as.numeric(length(properties_of_immune_rings)) != n_immune_rings){
-    stop("`n_immune_rings` does not match the length of `properties_of_immune_rings`!")
+  # check if the specified cluster properties match n_ir
+  if (as.numeric(length(ir_properties)) != n_ir){
+    stop("`n_ir` does not match the length of `ir_properties`!")
   }
 
   # add a new column to store the position label for each cell (0 for core cluster,
   # 1 for first ring, 2 for background cells)
-  background_sample$lab <- 2
+  bg_sample$lab <- 2
 
   ## Get the window
   # if window is specified, use the specified window
   # otherwise, use the window of the background sample
   if (is.null(win)) {
-    X <- max(background_sample$Cell.X.Position)
-    Y <- max(background_sample$Cell.Y.Position)
+    X <- max(bg_sample$Cell.X.Position)
+    Y <- max(bg_sample$Cell.Y.Position)
     win <- spatstat.geom::owin(c(0, X), c(0,Y))
   }
 
   ## Default phenotype is specified by bg_type
   # (when background sample does not have Phenotype)
-  if (is.null(background_sample$Phenotype)){
-    background_sample[, "Phenotype"] <- bg_type
+  if (is.null(bg_sample$Phenotype)){
+    bg_sample[, "Phenotype"] <- bg_type
   }
 
-  n_cells <- dim(background_sample)[1]
+  n_cells <- dim(bg_sample)[1]
 
-  for (k in seq_len(n_immune_rings)) { # for each cluster
+  for (k in seq_len(n_ir)) { # for each cluster
     # get the arguments
-    cluster_cell_type <- properties_of_immune_rings[[k]]$name_of_cluster_cell
-    size <- properties_of_immune_rings[[k]]$size
-    shape <- properties_of_immune_rings[[k]]$shape
-    centre_loc <- properties_of_immune_rings[[k]]$centre_loc
-    infiltration_types <- properties_of_immune_rings[[k]]$infiltration_types
-    infiltration_proportions <- properties_of_immune_rings[[k]]$infiltration_proportions
-    ring_cell_type = properties_of_immune_rings[[k]]$name_of_ring_cell
-    ring_width = properties_of_immune_rings[[k]]$immune_ring_width
-    ring_infiltration_types = properties_of_immune_rings[[k]]$immune_ring_infiltration_types
-    ring_infiltration_proportions = properties_of_immune_rings[[k]]$immune_ring_infiltration_proportions
+    cluster_cell_type <- ir_properties[[k]]$name_of_cluster_cell
+    size <- ir_properties[[k]]$size
+    shape <- ir_properties[[k]]$shape
+    centre_loc <- ir_properties[[k]]$centre_loc
+    infiltration_types <- ir_properties[[k]]$infiltration_types
+    infiltration_proportions <- ir_properties[[k]]$infiltration_proportions
+    ring_cell_type = ir_properties[[k]]$name_of_ring_cell
+    ring_width = ir_properties[[k]]$immune_ring_width
+    ring_infiltration_types = ir_properties[[k]]$immune_ring_infiltration_types
+    ring_infiltration_proportions = ir_properties[[k]]$immune_ring_infiltration_proportions
 
     # if the location of the cluster is not specified,
     # generate a location as the centre of the cluster
@@ -138,9 +148,9 @@ simulate_immune_rings <- function(background_sample = bg1,
 
     # determine if each cell is in the cluster or in the immune ring or neither
     for (i in seq_len(n_cells)){
-      x <- background_sample[i, "Cell.X.Position"]
-      y <- background_sample[i, "Cell.Y.Position"]
-      pheno <- background_sample[i, "Phenotype"]
+      x <- bg_sample[i, "Cell.X.Position"]
+      y <- bg_sample[i, "Cell.Y.Position"]
+      pheno <- bg_sample[i, "Phenotype"]
 
       # squared distance to the cluster centre
       A <- (x - a)^2
@@ -151,7 +161,7 @@ simulate_immune_rings <- function(background_sample = bg1,
       # determine which region the point falls in
       if (D < R){
         # assign the primary label of the cell
-        background_sample[i, "lab"] <- 0
+        bg_sample[i, "lab"] <- 0
         # generate random number to decide the phenotype
         random <- stats::runif(1)
         n_infiltration_types <- length(infiltration_types)
@@ -171,8 +181,8 @@ simulate_immune_rings <- function(background_sample = bg1,
       else if(D < I_R){
         # determine the primary label of the cell, if the primary label is lower
         # than 2, keep the primary label, skip out of the conditional
-        background_sample[i, "lab"] <- min(1, background_sample[i, "lab"])
-        if (background_sample[i , "lab"] == 1){
+        bg_sample[i, "lab"] <- min(1, bg_sample[i, "lab"])
+        if (bg_sample[i , "lab"] == 1){
           # generate random number to decide the phenotype
           random <- stats::runif(1)
           n_ring_infiltration_types <- length(ring_infiltration_types)
@@ -189,15 +199,18 @@ simulate_immune_rings <- function(background_sample = bg1,
           }
         }
       }
-      background_sample[i, "Phenotype"] <- pheno
+      bg_sample[i, "Phenotype"] <- pheno
     }
   }
-  if (plot.image){
-    colors <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                "lightgreen", "yellow", "black", "pink")
-    phenos <- unique(background_sample$Phenotype)
-    plot_cells(background_sample, phenos, colors[1:length(phenos)], "Phenotype")
+  if (plot_image){
+    if(is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
+    if (is.null(plot_colours)){
+      plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                        "lightgreen", "yellow", "black", "pink")
+    }
+    phenos <- plot_categories
+    plot_cells(bg_sample, phenos, plot_colours[1:length(phenos)], "Phenotype")
   }
-  return(background_sample)
+  return(bg_sample)
 }
 

@@ -5,62 +5,74 @@
 \title{Simulate multiple images with clusters}
 \usage{
 multiple_images_with_clusters(
-  background_sample = bg1,
+  bg_sample = bg1,
   cluster_shape = 2,
-  infiltration = 0.1,
+  prop_infiltration = 0.1,
   cluster_size = seq(200, 1000, 100),
   cluster_loc_x = 0,
   cluster_loc_y = 0,
-  plot.image = TRUE,
-  plot.categories = NULL,
-  plot.colours = NULL
+  plot_image = TRUE,
+  plot_categories = NULL,
+  plot_colours = NULL
 )
 }
 \arguments{
-\item{background_sample}{Data.frame or SingleCellExperiment object with
-locations of points representing background cells. Further cell types will
-be simulated based on this background sample.}
+\item{bg_sample}{A data.frame or SingleCellExperiment class object
+with locations of points representing background cells. Further cell types
+will be simulated based on this background sample. The data.frame or the
+metadata of the SCE object should have colnames including
+"Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
+\code{\link{bg1}} background image.}
 
-\item{cluster_shape}{List. Properties of clusters to simulate. Either choose
-one of the pre-designed shapes (1 or 2 for tumour cluster or 3 for immune
-cluster).}
+\item{cluster_shape}{Number. Choose from one of the following pre-designed
+shapes (1 or 2 for tumour cluster or 3 for immune cluster). The
+pre-designed shape contains information of the cell names of the cluster,
+the infiltration cell types, the proportions of infiltration, the cluster
+size, and the cluster centre locations. In order to simulate a set of
+images, use the arguments below to specify the ranges of the properties.
+The predefined cell types can not be changed, while users can change them
+manually after the simulation.}
 
-\item{infiltration}{Numeric Vector. The degree of infiltration. If
+\item{prop_infiltration}{Numeric Vector. The degree of infiltration. If
 numeric, all simulated images have the same infiltration degree. If vector,
-images with a range of different infiltrations will be simulated.}
+images with a range of different infiltration proportions will be
+simulated.}
 
-\item{cluster_size}{Numeric Vector. The size of the cluster. If numeric,
-all simulated images have the same cluster size. If vector, images with a
-range of different cluster sizes will be simulated.}
+\item{cluster_size}{Numeric Vector. The size of the cluster. If numeric, all
+simulated images have the same cluster size. If vector, images with a range
+of different cluster sizes will be simulated. The size should not exceed
+the limit of the image sides.}
 
-\item{cluster_loc_x}{Numeric or Vector. The X location of the cluster center.
-If numeric, all simulated images have the same center X location. If
-vector, images with a range of different center locations will be
+\item{cluster_loc_x}{Numeric or Vector. The X location of the cluster center
+offset. If numeric, all simulated images have the same center X location.
+If vector, images with a range of different center locations will be
 simulated.}
 
 \item{cluster_loc_y}{Numeric or Vector of the same length of \code{cluster_loc_x}.
-The Y location of the cluster center.}
+The Y location of the cluster center offset.}
 
-\item{plot.image}{Boolean Whether plot the simulated images or not.Default is
+\item{plot_image}{Boolean Whether plot the simulated images or not.Default is
 TRUE.}
 
-\item{plot.categories}{String Vector specifying the order of the cell
-cateories to be plotted.}
+\item{plot_categories}{String Vector specifying the order of the cell
+categories to be plotted.}
 
-\item{plot.colours}{String Vector specifying the order of the colours that
-correspond to the \code{plot.categories} arg.}
+\item{plot_colours}{String Vector specifying the order of the colours that
+correspond to the \code{plot_categories} arg.}
 }
 \value{
-A list of sce objects
+A list of SCE objects
 }
 \description{
 Generate a set of images with different cluster properties.
+Trying out the default parameters is recommended for understanding this
+function.
 }
 \examples{
 set.seed(610)
-cluster_image_list <- multiple_images_with_clusters(background_sample = bg1,
-cluster_shape=2, infiltration = c(0.1, 0.3), cluster_size = c(300,600), cluster_loc_x = 0,
-cluster_loc_y = 0, plot.image = TRUE)
+cluster_image_list <- multiple_images_with_clusters(bg_sample = bg1,
+cluster_shape=2, infiltration = c(0.1, 0.3), cluster_size = c(300,600), 
+cluster_loc_x = 0, cluster_loc_y = 0, plot_image = TRUE)
 }
 \seealso{
 \code{\link{multiple_background_images}} for simulating multiple
