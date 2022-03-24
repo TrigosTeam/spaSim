@@ -26,7 +26,8 @@ Imports:
     dplyr,
     spatstat.geom,
     SummarizedExperiment,
-    spatstat.random
+    spatstat.random,
+    SingleCellExperiment
 Depends: 
     R (>= 4.1.0)
 LazyData: true
