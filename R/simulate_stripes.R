@@ -12,6 +12,8 @@
 #'   metadata of the SCE object should have colnames including
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
+#' @param n_stripe_type Number of stripe types. Should be the same as
+#'   `length(stripe_properties`.
 #' @param win (OPTIONAL) `owin` object from spatstat.geom owin method. By
 #'   default it is the window of the background image.
 #' @param stripe_properties List of the properties of the stripes. See examples
@@ -48,11 +50,7 @@
 #'   infiltration_proportions = c(0.08)))
 #' set.seed(610)
 #' stripe_image <- simulate_stripes(bg_sample = bg1, n_stripe_type=2,
-#' win = NULL, stripe_properties = stripe_properties)
-#'
-#' # library(SPIAT)
-#' # plot_cell_categories(stripe_image, categories_of_interest = c("Others","Immune"),
-#' # colour_vector = c("gray", "darkgreen"), feature_colname = "Phenotype")
+#' win = NULL, stripe_properties = stripe_properties, plot_image = TRUE)
 
 simulate_stripes <- function(bg_sample = bg1,
                              n_stripe_type = 2,

@@ -8,11 +8,11 @@ multiple_images_with_immune_rings(
   bg_sample = bg1,
   cluster_size = 200,
   ring_shape = 1,
-  infiltration = 0,
+  prop_infiltration = 0,
   ring_width = seq(50, 100, 10),
   cluster_loc_x = 0,
   cluster_loc_y = 0,
-  ring_infiltration = seq(0, 0.2, 0.05),
+  prop_ring_infiltration = seq(0, 0.2, 0.05),
   plot_image = TRUE,
   plot_categories = NULL,
   plot_colours = NULL
@@ -40,6 +40,11 @@ order to simulate a set of images, use the arguments below to specify the
 ranges of the properties. The predefined cell types can not be changed,
 while users can change them manually after the simulation.}
 
+\item{prop_infiltration}{Numeric Vector. The degree of infiltration. If
+numeric, all simulated images have the same infiltration degree. If vector,
+images with a range of different infiltration proportions will be
+simulated.}
+
 \item{ring_width}{Numeric Vector. The width of the immune ring. If numeric,
 all simulated images have the same ring width. If vector, images with a
 range of different ring widths will be simulated.}
@@ -52,6 +57,9 @@ simulated.}
 \item{cluster_loc_y}{Numeric or Vector of the same length of \code{cluster_loc_x}.
 The Y location of the cluster center offset.}
 
+\item{prop_ring_infiltration}{Numeric or Vector. The degree of tumour
+infiltration in the region of immune rings.}
+
 \item{plot_image}{Boolean Whether plot the simulated images or not.Default is
 TRUE.}
 
@@ -60,14 +68,6 @@ cateories to be plotted.}
 
 \item{plot_colours}{String Vector specifying the order of the colours that
 correspond to the \code{plot_categories} arg.}
-
-\item{prop_infiltration}{Numeric Vector. The degree of infiltration. If
-numeric, all simulated images have the same infiltration degree. If vector,
-images with a range of different infiltration proportions will be
-simulated.}
-
-\item{prop_ring_infiltration}{Numeric or Vector. The degree of tumour
-infiltration in the region of immune rings.}
 }
 \value{
 A list of sce objects
@@ -78,9 +78,9 @@ Generate a set of images with different immune ring properties.
 \examples{
 set.seed(610)
 ring_image_list <- multiple_images_with_immune_rings(bg_sample = bg1,
-ring_shape = 1, infiltration = 0, ring_width = seq(50,100,10),
+ring_shape = 1, prop_infiltration = 0, ring_width = seq(50,100,10),
 cluster_size = 300, cluster_loc_x = 0, cluster_loc_y = 0,
-ring_infiltration = seq(0, 0.2,0.05), plot_image = TRUE)
+prop_ring_infiltration = seq(0, 0.2,0.05), plot_image = TRUE)
 }
 \seealso{
 \code{\link{multiple_background_images}} for simulating multiple

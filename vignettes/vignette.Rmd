@@ -361,11 +361,11 @@ immune_ring_list <-
 multiple_images_with_immune_rings(bg_sample = bg,
                                   cluster_size = 200,
                                   ring_shape = 1,
-                                  infiltration = 0,
+                                  prop_infiltration = 0,
                                   ring_width = range_ring_width,
                                   cluster_loc_x = 0,
                                   cluster_loc_y = 0,
-                                  ring_infiltration = 0.1,
+                                  prop_ring_infiltration = 0.1,
                                   plot_image = TRUE
 )
 ```
