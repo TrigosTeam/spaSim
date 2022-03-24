@@ -42,9 +42,6 @@ set.seed(610)
 mix_background <- simulate_mixing(bg_sample = bg1,
 idents = c("Tumour","Immune", "Others"), props = c(0.2, 0.4,  0.4))
 
-# library(SPIAT)
-# plot_cell_categories(mix_background, categories_of_interest = c("Tumour","Immune"),
-# colour_vector = c("red", "darkgreen"), feature_colname = "Phenotype")
 }
 \seealso{
 \code{\link{simulate_background_cells}} for all cell simulation,

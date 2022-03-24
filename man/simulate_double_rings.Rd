@@ -87,9 +87,6 @@ double_ring_infiltration_proportions = c(0.15)))
 
 double_ring_image <- simulate_double_rings(bg_sample = bg1,
 n_dr = 2, dr_properties = dr_properties)
-# library(SPIAT)
-# plot_cell_categories(double_ring_image, c("Tumour","Immune1","Immune2"),
-# c("red","darkblue","darkgreen"),"Phenotype")
 }
 \seealso{
 \code{\link{simulate_background_cells}} for all cell simulation,
