@@ -68,13 +68,6 @@ bib <- c(
 library(spaSim) 
 ```
 
-## Required knowledge
-
-`r Biocpkg("spaSim")` is based on many other packages and in particular in those that have implemented the infrastructure needed for dealing with cell data. That is, packages like `r Biocpkg("SingleCellExperiment")`.
-
-If you are asking yourself the question "Where do I start using Bioconductor?" you might be interested in [this blog post](http://lcolladotor.github.io/2014/10/16/startbioc/#.VkOKbq6rRuU).
-
-
 ## Citing `spaSim`
 
 We hope that `r Biocpkg("spaSim")` will be useful for your research. Please use the following information to cite the package and the overall approach. Thank you!
