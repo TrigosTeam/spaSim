@@ -10,7 +10,7 @@ test_that("simulate_clusters works", {
 test_that("multiple_images_with_clusters works", {
   imageL <- multiple_images_with_clusters(bg_sample = bg1,
                                           cluster_shape = 2,
-                                          infiltration = 0.1,
+                                          prop_infiltration = 0.1,
                                           cluster_size = seq(400,500,100),
                                           cluster_loc_x = 0,
                                           cluster_loc_y = 0,
@@ -23,7 +23,7 @@ test_that("multiple_images_with_clusters works", {
   expect_equal(class(sce)[[1]], "SingleCellExperiment")
   # test if there are "Tumour" and "Immune", "Others" cells under the "Phenotype" column
   expect_setequal(colnames(colData(sce)),
-                  c("Cell.X.Position", "Cell.Y.Position", "Phenotype", "pseudo"))
+                  c("Cell.X.Position", "Cell.Y.Position", "Phenotype"))
   expect_setequal(unique(sce$Phenotype), c("Tumour", "Immune", "Others"))
 
 })
@@ -40,7 +40,7 @@ test_that("TIS works for simulating clusters", {
   # test if there are "Tumour" and "Immune", "Others" cells under the "Phenotype" column
   data <- data.frame(colData(image))
   expect_setequal(colnames(data),
-                  c("Cell.X.Position", "Cell.Y.Position", "Phenotype", "pseudo"))
+                  c("Cell.X.Position", "Cell.Y.Position", "Phenotype"))
   expect_setequal(unique(image$Phenotype), c("Tumour", "Immune", "Others"))
 
   # test if the "name" attribute of the image is "cluster_image"

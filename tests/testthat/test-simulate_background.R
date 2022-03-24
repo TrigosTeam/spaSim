@@ -25,7 +25,7 @@ test_that("simulate_multiple_background_images works",{
   expect_equal(class(imageL[[1]])[[1]], "SingleCellExperiment")
   # test if there are "Tumour" and "Immune", "Others" cells under the "Phenotype" column
   expect_setequal(colnames(colData(sce)),
-                  c("Cell.X.Position", "Cell.Y.Position", "Phenotype", "pseudo"))
+                  c("Cell.X.Position", "Cell.Y.Position", "Phenotype"))
   expect_setequal(unique(sce$Phenotype), c("Tumour", "Immune", "Others"))
 })
 

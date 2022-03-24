@@ -52,18 +52,18 @@
 #' @examples
 #' set.seed(610)
 #' ring_image_list <- multiple_images_with_immune_rings(bg_sample = bg1,
-#' ring_shape = 1, infiltration = 0, ring_width = seq(50,100,10),
+#' ring_shape = 1, prop_infiltration = 0, ring_width = seq(50,100,10),
 #' cluster_size = 300, cluster_loc_x = 0, cluster_loc_y = 0,
-#' ring_infiltration = seq(0, 0.2,0.05), plot_image = TRUE)
+#' prop_ring_infiltration = seq(0, 0.2,0.05), plot_image = TRUE)
 
 multiple_images_with_immune_rings <- function(bg_sample = bg1,
                                              cluster_size = 200,
                                              ring_shape = 1,
-                                             infiltration = 0,
+                                             prop_infiltration = 0,
                                              ring_width = seq(50,100,10),
                                              cluster_loc_x = 0,
                                              cluster_loc_y = 0,
-                                             ring_infiltration = seq(0, 0.2,0.05),
+                                             prop_ring_infiltration = seq(0, 0.2,0.05),
                                              plot_image = TRUE,
                                              plot_categories = NULL,
                                              plot_colours = NULL){
@@ -103,14 +103,14 @@ multiple_images_with_immune_rings <- function(bg_sample = bg1,
     # if the cluster size is too small, adjust the locations of some of the sub shapes
     if (size < size_threshold) {
     }
-    for (infil in infiltration){
+    for (infil in prop_infiltration){
       for (width in ring_width){
         y_idx <- 0
         for (loc_x in cluster_loc_x) {
           # find the corresponding y loc
           y_idx <- y_idx + 1
           loc_y <- cluster_loc_y[y_idx]
-          for (ring_infil in ring_infiltration){
+          for (ring_infil in prop_ring_infiltration){
             i <- i + 1 # image count
 
             # change the properties of the cluster based on the current loop

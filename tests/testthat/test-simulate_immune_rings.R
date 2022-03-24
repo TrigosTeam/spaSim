@@ -26,7 +26,7 @@ test_that("multiple_images_with_immune_rings works", {
                                               ring_width = seq(50,100,50),
                                               cluster_loc_x = 0,
                                               cluster_loc_y = 0,
-                                              ring_infiltration = seq(0, 0.2,0.2),
+                                              prop_ring_infiltration = seq(0, 0.2,0.2),
                                               plot_image = FALSE)
   sce <- imageL[[1]]
 
