@@ -96,7 +96,7 @@ multiple_background_images <- function(bg_sample,
     
     sce <- format_sce(bg_sample)
     if (plot_image){
-      plot_cells(bg_sample, idents, plot_colours[1:length(idents)], "Phenotype")
+      plot_cells(bg_sample, idents, plot_colours[seq_len(idents)], "Phenotype")
     }
     list.images[[p_idx]] <- sce
   }

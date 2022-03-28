@@ -131,7 +131,7 @@ multiple_images_with_clusters <- function(bg_sample = bg1,
           if (is.null(plot_colours)){
             plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
                               "lightgreen", "yellow", "black", "pink")}
-          plot_cells(image, plot_categories, plot_colours[1:length(plot_categories)], "Phenotype")}
+          plot_cells(image, plot_categories, plot_colours[seq_len(plot_categories)], "Phenotype")}
         list.images[[i]] <- image
       }
     }
