@@ -71,7 +71,7 @@ simulate_mixing <- function(bg_sample = bg1,
       plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
                         "lightgreen", "yellow", "black", "pink")
     }
-    plot_cells(bg_sample, idents, plot_colours[1:length(idents)], "Phenotype")
+    plot_cells(bg_sample, idents, plot_colours[seq_len(idents)], "Phenotype")
   }
 
   return(bg_sample)

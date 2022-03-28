@@ -255,7 +255,7 @@ simulate_double_rings <- function(bg_sample = bg1,
                         "lightgreen", "yellow", "black", "pink")
     }
     phenos <- plot_categories
-    plot_cells(bg_sample, phenos, plot_colours[1:length(phenos)], "Phenotype")
+    plot_cells(bg_sample, phenos, plot_colours[seq_len(phenos)], "Phenotype")
   }
 
   return(bg_sample)
