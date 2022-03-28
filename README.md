@@ -43,4 +43,4 @@ mix_background <- TIS(n_cells = 5000, width = 2000, height = 2000, min_d = 10,
 ## Vignette
 
 The vignette with an overview of the package can be accessed from the
-top Menu under Articles.
+top Menu under Articles [here](https://trigosteam.github.io/spaSim/).
