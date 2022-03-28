@@ -94,13 +94,14 @@ First we randomly generate the spatial locations of generic 'background cells' (
 Background images are simulated with a Hardcore Process, which is a Poisson process where events (i.e. cells) are maintained at a specific minimum distance from each other. As `rHardcore` from `spatstat.random` package deletes cells based on this requirement, our function uses a `oversampling_rate` to create more cells than the target number of cells (`n_cells`) to ensure the resulting image has the number of cells specified. If the resulting image ends up with slightly less cells than specified, increase arg `oversampling_rate` to account for this. 
 
 ```{r}
+set.seed(610)
 bg <- simulate_background_cells(n_cells = 5000,
                                 width = 2000,
                                 height = 2000,
                                 min_d = 10,
                                 oversampling_rate = 1.6,
                                 Phenotype="Others")
- head(bg)
+head(bg)
 # use dim(bg)[1] to check if the same number of cells are simulated. 
 # if not, increase `oversampling_rate`
 dim(bg)[1]
@@ -113,10 +114,11 @@ Users can use the background image they defined earlier (e.g. `bg`), or the imag
                                                                                                                            
 The `props` argument defines the proportions of each cell type in `idents`. Although the proportions are specified, the exact cells that are assigned by each identity are stochastic. Therefore, users are encouraged to use the set.seed() function to ensure reproducibility. 
 ```{r}
-mix_bg <- simulate_mixing(bg_sample = bg,                                                                                                                           idents = c("Tumour", "Immune", "Others"),
-                         props = c(0.2, 0.3, 0.5), 
-                         plot_image = TRUE,
-                         plot_colours = c("red","darkgreen","lightgray"))
+mix_bg <- simulate_mixing(bg_sample = bg,
+                          idents = c("Tumour", "Immune", "Others"),
+                          props = c(0.2, 0.3, 0.5), 
+                          plot_image = TRUE,
+                          plot_colours = c("red","darkgreen","lightgray"))
 ```
                                                                                                                            
 ### Simulate clusters
@@ -167,7 +169,9 @@ rings <- simulate_immune_rings(
   n_ir = 1,
   win = NULL,
   ir_properties = immune_ring_properties,
-  plot_image = TRUE)
+  plot_image = TRUE,
+  plot_categories = c("Tumour", "Immune1", "Others"),
+  plot_colours = c("red", "darkgreen", "lightgray"))
 ```
                                                                                                                            
 spaSim also allows simulation of two shapes overlapping each other. An algorithm is then used to make the inner mass and outer rings of the different shapes cohesive. An example is shown below. Overlapping of shapes is also possible for clusters and double rings.
@@ -194,7 +198,9 @@ rings <- simulate_immune_rings(bg_sample = bg,
                               n_ir = 2,
                               win = NULL,
                               ir_properties = immune_ring_properties,
-                              plot_image = TRUE)
+                              plot_image = TRUE,
+                              plot_categories = c("Tumour", "Immune1", "Others"),
+                              plot_colours = c("red", "darkgreen", "lightgray"))
 ```
 
 ### Simulate double rings
@@ -271,18 +277,18 @@ properties_of_clusters = list(
  C1 = list( name_of_cluster_cell = "Tumour", size = 300, shape = "Oval", 
             centre_loc = data.frame("x" = 500, "y" = 500),
             infiltration_types = c("Immune1", "Others"), 
-            infiltration_proportions = c(0.1, 0.05)))
+            infiltration_proportions = c(0.3, 0.05)))
 ## immune ring properties
 immune_ring_properties <- list( 
-  I1 = list(name_of_cluster_cell = "Tumour", size = 500, 
-            shape = "Circle", centre_loc = data.frame(x = 930, y = 1000), 
+  I1 = list(name_of_cluster_cell = "Tumour", size = 300, 
+            shape = "Circle", centre_loc = data.frame(x = 1030, y = 1100), 
             infiltration_types = c("Immune1", "Immune2", "Others"), 
             infiltration_proportions = c(0.15, 0.05, 0.05),
             name_of_ring_cell = "Immune1", immune_ring_width = 150,
             immune_ring_infiltration_types = c("Others"), 
             immune_ring_infiltration_proportions = c(0.15)), 
-  I2 = list(name_of_cluster_cell = "Tumour", size = 400, shape = "Oval",
-           centre_loc = data.frame(x = 1330, y = 1100), 
+  I2 = list(name_of_cluster_cell = "Tumour", size = 200, shape = "Oval",
+           centre_loc = data.frame(x = 1430, y = 1400), 
            infiltration_types = c("Immune1",  "Immune2", "Others"), 
            infiltration_proportions = c(0.15, 0.05, 0.05),
            name_of_ring_cell = "Immune1", immune_ring_width = 150,
@@ -304,8 +310,8 @@ TIS(bg_sample = NULL,
    n_immune_rings = 2,
    properties_of_immune_rings = immune_ring_properties,
    plot_image = TRUE,
-   plot_categories = c("Tumour", "Immune1"),
-   plot_colours = c("red", "darkgreen"))
+   plot_categories = c("Tumour", "Immune1", "Immune2"),
+   plot_colours = c("red", "darkgreen", "darkblue"))
 ```
 
 ## Simulating a range of multiple images
@@ -331,7 +337,7 @@ prop_list <- list(Tumour_prop, Immune_prop, Others_prop)
 # simulate 
 bg_list <- 
  multiple_background_images(bg_sample = bg, idents = idents, props = prop_list,
-                            plot_image = TRUE)
+                            plot_image = TRUE, plot_colours = c("red", "darkgreen", "lightgray"))
 ```
                                                                                                                            
 ### Simulate multiple images with clusters of different properties.
@@ -352,7 +358,9 @@ cluster_list <-
                                cluster_size = range_of_size,
                                cluster_loc_x = 0,
                                cluster_loc_y = 0,
-                               plot_image = TRUE)
+                               plot_image = TRUE,
+                               plot_categories = c("Tumour", "Immune"),
+                               plot_colours = c("red", "darkgreen"))
 ```
 
 We will also include one example for shape "2" and one example for shape "3".
@@ -401,7 +409,9 @@ immune_ring_list <-
                                    cluster_loc_x = 0,
                                    cluster_loc_y = 0,
                                    prop_ring_infiltration = 0.1,
-                                   plot_image = TRUE
+                                   plot_image = TRUE,
+                                   plot_categories = c("Tumour", "Immune"),
+                                   plot_colours = c("red", "darkgreen")
  )
 ```
 
