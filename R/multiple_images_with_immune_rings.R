@@ -145,7 +145,7 @@ multiple_images_with_immune_rings <- function(bg_sample = bg1,
                 plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
                                   "lightgreen", "yellow", "black", "pink")}
               phenos <- plot_categories
-              plot_cells(image, phenos, plot_colours[seq_len(phenos)], "Phenotype")
+              plot_cells(image, phenos, plot_colours[seq_len(length(phenos))], "Phenotype")
             }
             list.images[[i]] <- image
           }

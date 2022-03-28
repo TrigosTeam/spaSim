@@ -187,7 +187,7 @@ simulate_clusters <- function(bg_sample = bg1,
                         "lightgreen", "yellow", "black", "pink")
     }
     phenos <- plot_categories
-    plot_cells(bg_sample, phenos, plot_colours[seq_len(phenos)], "Phenotype")
+    plot_cells(bg_sample, phenos, plot_colours[seq_len(length(phenos))], "Phenotype")
   }
 
   return(bg_sample)
