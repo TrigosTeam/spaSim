@@ -3,8 +3,8 @@ pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   vignette: vignette.html
-last_built: 2022-03-28T04:17Z
+last_built: 2022-03-29T21:35Z
 urls:
-  reference: https://ryoacademy.com/haha/reference
-  article: https://ryoacademy.com/haha/articles
+  reference: https://trigosteam.github.io/spaSim/reference
+  article: https://trigosteam.github.io/spaSim/articles
 

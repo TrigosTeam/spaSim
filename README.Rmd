@@ -25,7 +25,7 @@ As quantitative tools for spatial tissue image analysis have been developed and 
 Here shows some comparisons between real images and simulated images from spaSim. The red points are tumour cells; blue and green points are immune cells, and gray points are unspecified cell types.
 
 ```{r echo=FALSE, fig.align="center"}
-knitr::include_graphics("spaSim-examples.png")
+knitr::include_graphics("man/figures/spaSim-examples.png")
 ```
 
 ## Installation
