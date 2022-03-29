@@ -6,14 +6,24 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of spaSim is to facilitate tissue image simulations! It
-simulates cells with 2D locations and cell types in a tissue. The
-available patterns include background cells, cell clusters, immune cell
-rings and vessels. It also enables simulations that generate a set of
-images in one run!
+The goal of spaSim (**spa**tial **Sim**ulator) is to facilitate tissue
+image simulations! It simulates cells with 2D locations (point data) and
+cell types in a tissue. The available patterns include background cells,
+cell clusters, immune cell rings and vessels. It also enables
+simulations that generate a set of images in one run!
 
-Simulations from spaSim can be applied to test and benchmark metrics
-developed for spatial image analysis.
+As quantitative tools for spatial tissue image analysis have been
+developed and need benchmarking, simulations from spaSim can be applied
+to test and benchmark these tools and metrics. The output of spaSim are
+images in SingleCellExperiment object format and can be used with SPIAT
+(SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues) also
+developed by out team.
+
+Here shows some comparisons between real images and simulated images
+from spaSim. The red points are tumour cells; blue and green points are
+immune cells, and gray points are unspecified cell types.
+
+<img src="spaSim-examples.png" width="100%" style="display: block; margin: auto;" />
 
 ## Installation
 
@@ -27,7 +37,8 @@ You can install the development version of spaSim like so:
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows how to simulate background cells
+with multiple cell types of different proportions.
 
 ``` r
 library(spaSim)
