@@ -4,7 +4,7 @@
 #'   functions in spaSim, including simulating (mixed) background image,
 #'   clusters, immune rings, double immune rings and stripes. The patterns are
 #'   simulated on separate layers sequentially (e.g. immune rings are simulated
-#'   after/on top of background cells).
+#'   after/on top of background cells). And each layer is also plot sequentially.
 #'
 #'   Pattern properties (e.g. `properties_of_clusters`) contain the properties
 #'   of a pattern in the format of list where each element is one pattern. These
@@ -97,6 +97,11 @@ TIS <- function(bg_sample = NULL,
     X <- width
     Y <- height
   }
+  if (is.null(plot_colours)){
+    plot_colours <- plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                                      "lightgreen", "yellow", "black", "pink")
+  }
+  if(is.null(plot_categories)) plot_categories <- unique(image$Phenotype)
 
   # CHECK is the background sample a dataframe?
   if (!is.data.frame(bg_sample)) {
@@ -114,7 +119,8 @@ TIS <- function(bg_sample = NULL,
     image <- simulate_mixing(bg_sample = image,
                              idents = names_of_bg_cells,
                              props = proportions_of_bg_cells,
-                             plot_image = FALSE)
+                             plot_image = plot_image,
+                             plot_colours = plot_colours)
   }
   # simulate clusters
   if (!is.null(n_clusters)){
@@ -123,7 +129,9 @@ TIS <- function(bg_sample = NULL,
                                bg_type = "Others",
                                win = NULL,
                                cluster_properties = properties_of_clusters,
-                               plot_image = FALSE)
+                               plot_image = plot_image,
+                               plot_categories = plot_categories,
+                               plot_colours = plot_colours)
   }
   # simulate_immune_rings
   if (!is.null(n_immune_rings)){
@@ -132,7 +140,9 @@ TIS <- function(bg_sample = NULL,
                                    bg_type = "Others",
                                    win = NULL,
                                    ir_properties= properties_of_immune_rings,
-                                   plot_image = FALSE)
+                                   plot_image = plot_image,
+                                   plot_categories = plot_categories,
+                                   plot_colours = plot_colours)
   }
   # simulate_double_rings
   if (!is.null(n_double_rings)){
@@ -141,7 +151,9 @@ TIS <- function(bg_sample = NULL,
                                    bg_type = "Others",
                                    win = NULL,
                                    dr_properties = properties_of_double_rings,
-                                   plot_image = FALSE)
+                                   plot_image = plot_image,
+                                   plot_categories = plot_categories,
+                                   plot_colours = plot_colours)
   }
   # simulate_stripes
   if (!is.null(n_stripe_type)){
@@ -149,17 +161,9 @@ TIS <- function(bg_sample = NULL,
                               n_stripe_type = n_stripe_type,
                               win = NULL,
                               stripe_properties = properties_of_stripes,
-                              plot_image = FALSE)}
-  
-  
-  if (plot_image){
-    if(is.null(plot_categories)) plot_categories <- unique(image$Phenotype)
-    if (is.null(plot_colours)){
-      plot_colours <- plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                                        "lightgreen", "yellow", "black", "pink")
-    }
-    plot_cells(image, plot_categories, plot_colours[seq_len(length(plot_categories))], "Phenotype")
-  }
+                              plot_image = plot_image,
+                              plot_categories = plot_categories,
+                              plot_colours = plot_colours)}
 
   # format sce object
   sce <- format_sce(image)

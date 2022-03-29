@@ -97,7 +97,7 @@ Tissue Image Simulator (TIS) integrates the basic simulation
 functions in spaSim, including simulating (mixed) background image,
 clusters, immune rings, double immune rings and stripes. The patterns are
 simulated on separate layers sequentially (e.g. immune rings are simulated
-after/on top of background cells).
+after/on top of background cells). And each layer is also plot sequentially.
 
 Pattern properties (e.g. \code{properties_of_clusters}) contain the properties
 of a pattern in the format of list where each element is one pattern. These
