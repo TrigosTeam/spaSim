@@ -49,7 +49,9 @@ bib <- c(
 
 # Basics
 
-spaSim is a simulator of tumor immune microenvironment spatial data. It includes a family of functions to simulate a diverse set of cell localization patterns in tissues. Patterns include background cells (one cell type or multiple cell types of different proportions), tumour/immune clusters, immune rings, double immune rings and stripes (blood/lymphatic vessels). 
+spaSim (**spa**tial **Sim**ulator) is a simulator of tumor immune microenvironment spatial data. It includes a family of functions to simulate a diverse set of cell localization patterns in tissues. Patterns include background cells (one cell type or multiple cell types of different proportions), tumour/immune clusters, immune rings, double immune rings and stripes (blood/lymphatic vessels). 
+
+As quantitative tools for spatial tissue image analysis have been developed and need benchmarking, simulations from spaSim can be applied to test and benchmark these tools and metrics. The output of spaSim are images in SingleCellExperiment object format and can be used with SPIAT (SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues) also developed by out team.
 
 ## Install `spaSim`
 
@@ -123,10 +125,10 @@ mix_bg <- simulate_mixing(bg_sample = bg,
                                                                                                                            
 ### Simulate clusters
 This function aims to simulate cells that aggregate as clusters like tumour clusters or immune clusters. Tumour clusters can be circles or ovals (or merging several ovals/circles together), and immune clusters are irregular (or merging several irregular shapes together).
-                                                                                                                           
+
 First, we specify the properties of clusters such their primary cell type, size, shape and location. If infiltrating cell types are required, we can also include their properties. 
 
-The assignment of identities to the cells that lie in the tumour cluster is random, using the random number sampling technique.
+If there are multiple cell types lying in the cluster (e.g. tumour cells and infiltrating cells), the assignment of identities to these cells is random, using the random number sampling technique.
 
 ```{r}
 cluster_properties <- list(
@@ -146,13 +148,14 @@ clusters <- simulate_clusters(bg_sample = mix_bg,
                               plot_categories = c("Tumour" , "Immune", "Immune1", "Others"),
                               plot_colours = c("red", "darkgreen", "darkblue", "lightgray"))
 ```
-                                                                                                                           
+The simulated image shows a tumour cluster and an immune cluster on a mixed background image. The primary cell type of the tumour cluster is "Tumour", and some "Immune1" and "Others" cells also lie in the tumour cluster. The primary cell type of the immune cluster is "Immune1", and some "Immune2" and "Others" cells also lie in the immune cluster. 
+
 ### Simulate immune rings
 This function aims to simulate tumour clusters and an immune ring surrounding each of the clusters, which represent immune cells excluded to the tumor margin.
                                                                                                         
 First, we specify the properties of immune rings such their primary (inner cluster) and secondary (outer ring) cell types, size, shape, width and location. Properties of cells infiltrating into the inner mass or outer ring can also be set. 
 
-Similar to simulating the clusters, the assignment of identities to the cells that lie in the tumour cluster and the immune ring is random, using the random number sampling technique.
+If there are multiple cell types lying in the cluster and the immune ring, the assignment of identities to these cells is random, using the random number sampling technique.
 
 ```{r}
 immune_ring_properties <- list(
@@ -161,8 +164,8 @@ immune_ring_properties <- list(
             infiltration_types = c("Immune1", "Immune2", "Others"), 
             infiltration_proportions = c(0.15, 0.05, 0.05),
             name_of_ring_cell = "Immune1", immune_ring_width = 150,
-            immune_ring_infiltration_types = c("Others"), 
-            immune_ring_infiltration_proportions = c(0.15)))
+            immune_ring_infiltration_types = c("Immune2", "Others"), 
+            immune_ring_infiltration_proportions = c(0.1, 0.15)))
 rings <- simulate_immune_rings(
   bg_sample = bg,
   bg_type = "Others",
@@ -170,10 +173,10 @@ rings <- simulate_immune_rings(
   win = NULL,
   ir_properties = immune_ring_properties,
   plot_image = TRUE,
-  plot_categories = c("Tumour", "Immune1", "Others"),
-  plot_colours = c("red", "darkgreen", "lightgray"))
+  plot_categories = c("Tumour", "Immune1", "Immune2", "Others"),
+  plot_colours = c("red", "darkgreen", "darkblue", "lightgray"))
 ```
-                                                                                                                           
+
 spaSim also allows simulation of two shapes overlapping each other. An algorithm is then used to make the inner mass and outer rings of the different shapes cohesive. An example is shown below. Overlapping of shapes is also possible for clusters and double rings.
 
 ```{r}
@@ -183,15 +186,15 @@ immune_ring_properties <- list(
             infiltration_types = c("Immune1", "Immune2", "Others"), 
             infiltration_proportions = c(0.15, 0.05, 0.05),
             name_of_ring_cell = "Immune1", immune_ring_width = 150,
-            immune_ring_infiltration_types = c("Others"), 
-            immune_ring_infiltration_proportions = c(0.15)), 
+            immune_ring_infiltration_types = c("Immune2", "Others"), 
+            immune_ring_infiltration_proportions = c(0.1, 0.15)), 
   I2 = list(name_of_cluster_cell = "Tumour", size = 400, shape = "Oval",
            centre_loc = data.frame(x = 1330, y = 1100), 
            infiltration_types = c("Immune1",  "Immune2", "Others"), 
            infiltration_proportions = c(0.15, 0.05, 0.05),
            name_of_ring_cell = "Immune1", immune_ring_width = 150,
-           immune_ring_infiltration_types = c("Others"), 
-           immune_ring_infiltration_proportions = c(0.15)))
+           immune_ring_infiltration_types = c("Immune2","Others"), 
+           immune_ring_infiltration_proportions = c(0.1, 0.15)))
 
 rings <- simulate_immune_rings(bg_sample = bg,
                               bg_type = "Others",
@@ -199,14 +202,14 @@ rings <- simulate_immune_rings(bg_sample = bg,
                               win = NULL,
                               ir_properties = immune_ring_properties,
                               plot_image = TRUE,
-                              plot_categories = c("Tumour", "Immune1", "Others"),
-                              plot_colours = c("red", "darkgreen", "lightgray"))
+                              plot_categories = c("Tumour", "Immune1", "Immune2", "Others"),
+                              plot_colours = c("red", "darkgreen", "darkblue", "lightgray"))
 ```
 
 ### Simulate double rings
 This function aims to simulate tumour clusters with an inner ring (internal tumour margin) and an outer ring (external tumour margin).
 
-First, we specify the properties of double rings such their primary (inner mass), secondary (inner ring), and tertiary (outer ring) cell types, size, shape, width and location. Properties of cells infiltrating into the inner mass or either ring can also be set. Similar to simulating the clusters, the assignment of identities to the cells that lie in the tumour cluster and the double rings is random, using the random number sampling technique.
+First, we specify the properties of double rings such their primary (inner mass), secondary (inner ring), and tertiary (outer ring) cell types, size, shape, width and location. Properties of cells infiltrating into the inner mass or either ring can also be set. If there are multiple cell types lying in the tumour cluster and the double rings, the assignment of identities to the cells is random, using the random number sampling technique.
 
 Similar to the above case, we are placing two double immune rings that overlap with each other to form a more complex shape.
 
@@ -238,11 +241,11 @@ double_rings <- simulate_double_rings(bg_sample = bg1,
                                      win = NULL,
                                      dr_properties = double_ring_properties,
                                      plot_image = TRUE,
-                                     plot_categories = c("Tumour", "Immune1", "Immune2"),
-                                     plot_colours = c("red", "darkgreen", "darkblue"))
+                                     plot_categories = c("Tumour", "Immune1", "Immune2", "Others"),
+                                     plot_colours = c("red", "darkgreen", "darkblue", "lightgray"))
 ```
 
-The simulated image shows two layers of immune rings. The inner ring (internal tumour margin) is coloured green and has some tumour cells in the ring. The outer ring (external tumour margin) is coloured blue and has some other OTHER cell types.
+The simulated image shows two layers of immune rings. The primary cell type in the inner ring (internal tumour margin) is coloured green, and some "Tumour" cells also lie in the inner ring. The outer ring (external tumour margin) is coloured blue, and some other "Others" cells also lie in the outer ring.
 
 ### Simulate vessels
 This function aims to simulate stripes of cells representing blood/lymphatic vessels.
@@ -266,7 +269,13 @@ vessles <- simulate_stripes(bg_sample = bg1,
 ```
 
 ### Displaying the sequential construction of a simulated image
+
 The `TIS` function simulates all possible patterns in one function. The patterns are simulated in the order of: background cells, mixed background cells, clusters (tumour/immune), immune rings, double immune rings, and vessels. 
+
+```{r echo=FALSE, fig.align="center"}
+knitr::include_graphics("../sequential.png")
+```
+
 Not all patterns are required for using this function. If a pattern is not needed, simply use `NULL` for the pattern args.
 The example simulates a background sample with a tumour cluster and an immune ring on it.
 
@@ -310,16 +319,18 @@ TIS(bg_sample = NULL,
    n_immune_rings = 2,
    properties_of_immune_rings = immune_ring_properties,
    plot_image = TRUE,
-   plot_categories = c("Tumour", "Immune1", "Immune2"),
-   plot_colours = c("red", "darkgreen", "darkblue"))
+   plot_categories = c("Tumour", "Immune1", "Immune2", "Others"),
+   plot_colours = c("red", "darkgreen", "darkblue", "lightgray"))
 ```
 
 ## Simulating a range of multiple images
 Sometimes simulations of a set of images that span a range of different properties of patterns are needed. Rather than simulating images individually, simulating these images in one go is desirable. The following functions create a quick interface to generate a range of images with different parameters/randomised elements.
-                                                                                                         
+
 ### Simulate multiple background images (multiple cell types) with different proportions of cell types.
+
 This function aims to simulate a set of images that contain different proportions of specified cell types.
-                                                                                                        In this example we simulate 4 images with 10% Tumour cells and an increasing number of Immune cells. First specify the cell types and the proportions of each cell type in each image.
+
+In this example we simulate 4 images with 10% Tumour cells and an increasing number of Immune cells. First specify the cell types and the proportions of each cell type in each image.
                                                                                                         
 ```{r}
 #cell types present in each image
@@ -342,11 +353,11 @@ bg_list <-
                                                                                                                            
 ### Simulate multiple images with clusters of different properties.
 This function aims to simulate a set of images that contain different tumour/immune clusters.
-                                                                                                         Note that in this function users cannot manually define the base shape and the primary cell type of the clusters. There are three options for the base shape available in the `cluster_shape` argument. "1" for a simple cluster where all cells are "Tumour", "2" for a tumour cluster where the primary cell type is "Tumour" and there is infiltration of types "Immune" and "Others", and "3" for an immune cluster where the primary cell type is "Immune" and the infiltration cell types are "Immune1" and "Others").
-                                                                                                         
+
+Note that in this function users cannot manually define the base shape and the primary cell type of the clusters. There are three options for the base shape available in the `cluster_shape` argument. "1" for a simple cluster where all cells are "Tumour", "2" for a tumour cluster where the primary cell type is "Tumour" and there is infiltration of types "Immune" and "Others", and "3" for an immune cluster where the primary cell type is "Immune" and the infiltration cell types are "Immune1" and "Others").
+     
 Here we simulate 4 images with larger and larger tumour cluster sizes using the cluster shape "1". We also define the range of any desired parameter.
 
-Can you also include examples for shapes "1" and "3" so users know how they look?
 ```{r}
 # if a property is fixed, use a number for that parameter.
 # if a property spans a range, use a numeric vector for that parameter, e.g.
@@ -359,8 +370,8 @@ cluster_list <-
                                cluster_loc_x = 0,
                                cluster_loc_y = 0,
                                plot_image = TRUE,
-                               plot_categories = c("Tumour", "Immune"),
-                               plot_colours = c("red", "darkgreen"))
+                               plot_categories = c("Tumour", "Immune", "Others"),
+                               plot_colours = c("red", "darkgreen", "lightgray"))
 ```
 
 We will also include one example for shape "2" and one example for shape "3".
@@ -373,8 +384,8 @@ multiple_images_with_clusters(bg_sample = bg1,
                                cluster_loc_x = 0,
                                cluster_loc_y = 0,
                                plot_image = TRUE, 
-                              plot_categories = c("Tumour" , "Immune"),
-                              plot_colours = c("red","darkgreen"))
+                              plot_categories = c("Tumour" , "Immune", "Others"),
+                              plot_colours = c("red","darkgreen", "lightgray"))
 ```
 
 ```{r}
@@ -386,13 +397,14 @@ multiple_images_with_clusters(bg_sample = bg1,
                                cluster_loc_x = 0,
                                cluster_loc_y = 0,
                                plot_image = TRUE, 
-                               plot_categories = "Immune",
-                               plot_colours = "darkgreen")
+                               plot_categories = c("Immune", "Others"),
+                               plot_colours = c("darkgreen", "lightgray"))
 ```
 
 ### Simulate multiple images with immune rings of different properties
 This function aims to simulate a set of images that contain different tumour clusters with immune rings.
-                                                                                                         Note that similar to `multiple_images_with_clusters`, in this function users cannot manually define the base shape and the primary cell type of the clusters or the immune rings. There are three options for the base shape available in the `ring`_shape` argument ("1", "2" and "3" where where the primary cluster cell type is "Tumour", cluster infiltration cell types are "Immune" and "Others", primary ring cell type is "Immune" and ring infiltration type is "Others") (better define which correspond to "1", "2" and "3" as it is not clear). The cluster size, infiltration proportions, cluster location, ring width, and ring infiltration proportions can be defined. (Do you mean that you can have a range of these as well?)
+
+Note that similar to `multiple_images_with_clusters`, in this function users cannot manually define the base shape and the primary cell type of the clusters or the immune rings. There are three options for the base shape available in the `ring`_shape` argument ("1", "2" and "3" where where the primary cluster cell type is "Tumour", cluster infiltration cell types are "Immune" and "Others", primary ring cell type is "Immune" and ring infiltration type is "Others") (better define which correspond to "1", "2" and "3" as it is not clear). The cluster size, infiltration proportions, cluster location, ring width, and ring infiltration proportions can be defined. (Do you mean that you can have a range of these as well?)
 
 Here we show 3 images with increasingly wider immune rings. First define any parameter that has a range.
 
@@ -410,9 +422,8 @@ immune_ring_list <-
                                    cluster_loc_y = 0,
                                    prop_ring_infiltration = 0.1,
                                    plot_image = TRUE,
-                                   plot_categories = c("Tumour", "Immune"),
-                                   plot_colours = c("red", "darkgreen")
- )
+                                   plot_categories = c("Tumour", "Immune", "Others"),
+                                   plot_colours = c("red", "darkgreen", "lightgray"))
 ```
 
 # Citation
