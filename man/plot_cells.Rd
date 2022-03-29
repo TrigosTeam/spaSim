@@ -29,6 +29,6 @@ A plot is returned
 }
 \description{
 Produces a scatter plot of the cells in the tissue. Cells are
-coloured categorically by Phenotype column. Cells not part of the
-phenotypes of interest will be coloured "lightgrey".
+coloured categorically by Phenotype column. Cell categories not specified
+will be coloured "lightgrey" and labled "Unspecified".
 }
