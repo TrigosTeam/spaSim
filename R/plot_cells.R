@@ -1,8 +1,8 @@
 #' plot_cells
 #'
 #' @description Produces a scatter plot of the cells in the tissue. Cells are
-#'   coloured categorically by Phenotype column. Cells not part of the
-#'   phenotypes of interest will be coloured "lightgrey".
+#'   coloured categorically by Phenotype column. Cell categories not specified
+#'   will be coloured "lightgrey" and labled "Unspecified".
 #'
 #' @param sce_object SingleCellExperiment object or a data.frame that has cell
 #'   locations and phenotype info.
@@ -12,7 +12,7 @@
 #'   phenotype.
 #' @param feature_colname String specifying the column the cell categories
 #'   belong to.
-#'   
+#'
 #' @import dplyr
 #' @import ggplot2
 #' @importFrom SummarizedExperiment colData
@@ -62,9 +62,9 @@ plot_cells <- function(sce_object, categories_of_interest = NULL,
     }
   }
 
-  #set all categories of those that aren't in categories_of_interest to be "OTHER"
+  #set all categories of those that aren't in categories_of_interest to be "Unspecified"
   if (any(!formatted_data[[feature_colname]] %in% categories_of_interest)) {
-    formatted_data[!formatted_data$Phenotype %in% categories_of_interest,][[feature_colname]] <- "OTHER"
+    formatted_data[!formatted_data$Phenotype %in% categories_of_interest,][[feature_colname]] <- "Unspecified"
   }
 
   #Assign the colour to corresponding phenotypes in df
@@ -73,9 +73,9 @@ plot_cells <- function(sce_object, categories_of_interest = NULL,
     idx <- which(categories_of_interest == category)
     formatted_data[formatted_data[[feature_colname]] == category, ]$color <- colour_vector[idx]
   }
-  if (any(formatted_data[[feature_colname]] == "OTHER")) {
-    formatted_data[formatted_data[[feature_colname]] == "OTHER", ]$color <- "lightgrey"
-    all_categories <- c(categories_of_interest, "OTHER")
+  if (any(formatted_data[[feature_colname]] == "Unspecified")) {
+    formatted_data[formatted_data[[feature_colname]] == "Unspecified", ]$color <- "lightgrey"
+    all_categories <- c(categories_of_interest, "Unspecified")
     all_colours <- c(colour_vector, "lightgrey")
   } else {
     all_categories <- categories_of_interest
@@ -87,10 +87,10 @@ plot_cells <- function(sce_object, categories_of_interest = NULL,
     geom_point(aes_string(colour = feature_colname), size = 1)
   p <- ggplot(formatted_data, aes_string(x = "Cell.X.Position", y = "Cell.Y.Position", 
                                          colour = feature_colname))
-  if (any(formatted_data[[feature_colname]] == "OTHER")) {
-    p <- p + geom_point(data=subset(formatted_data, get(feature_colname) =='OTHER'),
+  if (any(formatted_data[[feature_colname]] == "Unspecified")) {
+    p <- p + geom_point(data=subset(formatted_data, get(feature_colname) =='Unspecified'),
                         aes_string(colour = feature_colname), size = 1) +
-      geom_point(data=subset(formatted_data, get(feature_colname) !='OTHER'),
+      geom_point(data=subset(formatted_data, get(feature_colname) !='Unspecified'),
                  aes_string(colour = feature_colname), size = 1)
   }else{
     p <- p + geom_point(aes_string(colour = feature_colname), size = 1)}
