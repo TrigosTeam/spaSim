@@ -23,7 +23,7 @@ Here shows some comparisons between real images and simulated images
 from spaSim. The red points are tumour cells; blue and green points are
 immune cells, and gray points are unspecified cell types.
 
-<img src="spaSim-examples.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/spaSim-examples.png" width="100%" style="display: block; margin: auto;" />
 
 ## Installation
 

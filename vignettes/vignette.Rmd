@@ -273,7 +273,7 @@ vessles <- simulate_stripes(bg_sample = bg1,
 The `TIS` function simulates all possible patterns in one function. The patterns are simulated in the order of: background cells, mixed background cells, clusters (tumour/immune), immune rings, double immune rings, and vessels. 
 
 ```{r echo=FALSE, fig.align="center"}
-knitr::include_graphics("../sequential.png")
+knitr::include_graphics("../man/figures/sequential.png")
 ```
 
 Not all patterns are required for using this function. If a pattern is not needed, simply use `NULL` for the pattern args.

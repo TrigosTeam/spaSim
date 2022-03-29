@@ -3,7 +3,7 @@
 functions in spaSim, including simulating (mixed) background image,
 clusters, immune rings, double immune rings and stripes. The patterns are
 simulated on separate layers sequentially (e.g. immune rings are simulated
-after/on top of background cells).
+after/on top of background cells). And each layer is also plot sequentially.
 Pattern properties (e.g. properties_of_clusters) contain the properties
 of a pattern in the format of list where each element is one pattern. These
 properties need to be manually defined. Details about the format of the properties
@@ -12,7 +12,7 @@ simulate_double_rings simulate_stripes"><title>Tissue Image Simulator (TIS) — 
 functions in spaSim, including simulating (mixed) background image,
 clusters, immune rings, double immune rings and stripes. The patterns are
 simulated on separate layers sequentially (e.g. immune rings are simulated
-after/on top of background cells).
+after/on top of background cells). And each layer is also plot sequentially.
 Pattern properties (e.g. properties_of_clusters) contain the properties
 of a pattern in the format of list where each element is one pattern. These
 properties need to be manually defined. Details about the format of the properties
@@ -51,13 +51,7 @@ simulate_double_rings simulate_stripes"><!-- mathjax --><script src="https://cdn
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"><li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/fuerzhou/spaSim/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul></div>
+      <ul class="navbar-nav"></ul></div>
 
     
   </div>
@@ -65,7 +59,7 @@ simulate_double_rings simulate_stripes"><!-- mathjax --><script src="https://cdn
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Tissue Image Simulator (TIS)</h1>
-      <small class="dont-index">Source: <a href="https://github.com/fuerzhou/spaSim/blob/HEAD/R/TIS.R" class="external-link"><code>R/TIS.R</code></a></small>
+      
       <div class="d-none name"><code>TIS.Rd</code></div>
     </div>
 
@@ -74,7 +68,7 @@ simulate_double_rings simulate_stripes"><!-- mathjax --><script src="https://cdn
 functions in spaSim, including simulating (mixed) background image,
 clusters, immune rings, double immune rings and stripes. The patterns are
 simulated on separate layers sequentially (e.g. immune rings are simulated
-after/on top of background cells).</p>
+after/on top of background cells). And each layer is also plot sequentially.</p>
 <p>Pattern properties (e.g. <code>properties_of_clusters</code>) contain the properties
 of a pattern in the format of list where each element is one pattern. These
 properties need to be manually defined. Details about the format of the properties
@@ -185,7 +179,7 @@ correspond to the <code>plot_categories</code> arg.</p></dd>
 <span class="r-in">size <span class="op">=</span> <span class="fl">300</span>, shape <span class="op">=</span> <span class="st">"Oval"</span>, centre_loc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"x"</span> <span class="op">=</span> <span class="fl">500</span>, <span class="st">"y"</span> <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>,</span>
 <span class="r-in">infiltration_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Immune1"</span>, <span class="st">"Others"</span><span class="op">)</span>, infiltration_proportions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span class="r-in">plot_image <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="TIS-1.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object of type 'closure' is not subsettable</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

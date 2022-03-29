@@ -60,14 +60,7 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/fuerzhou/spaSim/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
+      <ul class="navbar-nav"></ul>
 </div>
 
     
@@ -79,8 +72,10 @@
 </h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>The goal of spaSim is to facilitate tissue image simulations! It simulates cells with 2D locations and cell types in a tissue. The available patterns include background cells, cell clusters, immune cell rings and vessels. It also enables simulations that generate a set of images in one run!</p>
-<p>Simulations from spaSim can be applied to test and benchmark metrics developed for spatial image analysis.</p>
+<p>The goal of spaSim (<strong>spa</strong>tial <strong>Sim</strong>ulator) is to facilitate tissue image simulations! It simulates cells with 2D locations (point data) and cell types in a tissue. The available patterns include background cells, cell clusters, immune cell rings and vessels. It also enables simulations that generate a set of images in one run!</p>
+<p>As quantitative tools for spatial tissue image analysis have been developed and need benchmarking, simulations from spaSim can be applied to test and benchmark these tools and metrics. The output of spaSim are images in SingleCellExperiment object format and can be used with SPIAT (SPIAT (<strong>Sp</strong>atial <strong>I</strong>mage <strong>A</strong>nalysis of <strong>T</strong>issues) also developed by out team.</p>
+<p>Here shows some comparisons between real images and simulated images from spaSim. The red points are tumour cells; blue and green points are immune cells, and gray points are unspecified cell types.</p>
+<p><img src="reference/figures/spaSim-examples.png" width="100%" style="display: block; margin: auto;"></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -93,9 +88,9 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>This is a basic example which shows how to simulate background cells with multiple cell types of different proportions.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fuerzhou/spaSim" class="external-link">spaSim</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://trigosteam.github.io/spaSim/">spaSim</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">610</span><span class="op">)</span>
 <span class="va">mix_background</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TIS.html">TIS</a></span><span class="op">(</span>n_cells <span class="op">=</span> <span class="fl">5000</span>, width <span class="op">=</span> <span class="fl">2000</span>, height <span class="op">=</span> <span class="fl">2000</span>, min_d <span class="op">=</span> <span class="fl">10</span>,
                       names_of_bg_cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tumour"</span>,<span class="st">"Immune"</span>,<span class="st">"Others"</span><span class="op">)</span>, 
@@ -106,13 +101,12 @@
 <div class="section level2">
 <h2 id="vignette">Vignette<a class="anchor" aria-label="anchor" href="#vignette"></a>
 </h2>
-<p>The vignette with an overview of the package can be accessed from the top Menu under Articles.</p>
+<p>The vignette with an overview of the package can be accessed from the top Menu under Articles <a href="https://trigosteam.github.io/spaSim/">here</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/fuerzhou/spaSim/" class="external-link">Browse source code</a></li>
 <li><a href="https://support.bioconductor.org/t/spaSim" class="external-link">Report a bug</a></li>
 </ul>
 </div>
