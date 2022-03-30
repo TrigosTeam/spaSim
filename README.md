@@ -56,3 +56,5 @@ mix_background <- TIS(n_cells = 5000, width = 2000, height = 2000, min_d = 10,
 
 <img src="man/figures/README-example-1.png" width="100%" /><img src="man/figures/README-example-2.png" width="100%" />
 
+## Creators
+spaSim was created, designed and implemented by Yuzhou Feng. Anna Trigos provided supervision and guidance.
