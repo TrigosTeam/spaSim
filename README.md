@@ -16,11 +16,11 @@ As quantitative tools for spatial tissue image analysis have been
 developed and need benchmarking, simulations from spaSim can be applied
 to test and benchmark these tools and metrics. The output of spaSim are
 images in SingleCellExperiment object format and can be used with SPIAT
-(SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues) also
+(**Sp**atial **I**mage **A**nalysis of **T**issues), also
 developed by out team.
 
-Here shows some comparisons between real images and simulated images
-from spaSim. The red points are tumour cells; blue and green points are
+Here are some comparisons between real images and simulated images
+from spaSim. The red points are tumour cells, blue and green points are
 immune cells, and gray points are unspecified cell types.
 
 <img src="man/figures/spaSim-examples.png" width="100%" style="display: block; margin: auto;" />
@@ -34,6 +34,11 @@ You can install the development version of spaSim like so:
 # install.packages("devtools")
 # devtools::install_github("TrigosTeam/spaSim")
 ```
+
+## Vignette
+
+The vignette with an overview of the package can be accessed from the
+top Menu under Articles or clicking [here](https://trigosteam.github.io/spaSim/).
 
 ## Example
 
@@ -51,7 +56,3 @@ mix_background <- TIS(n_cells = 5000, width = 2000, height = 2000, min_d = 10,
 
 <img src="man/figures/README-example-1.png" width="100%" /><img src="man/figures/README-example-2.png" width="100%" />
 
-## Vignette
-
-The vignette with an overview of the package can be accessed from the
-top Menu under Articles [here](https://trigosteam.github.io/spaSim/).
