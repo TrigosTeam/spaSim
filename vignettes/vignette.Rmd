@@ -495,16 +495,17 @@ As `SPIAT` uses SingleCellExperiment object as the basic data structure for imag
 Here is an example of using `SPIAT` function on `spaSim` image. We use `simulated_image` generated from one of the previous sections. 
 
 ```{r}
-if (requireNamespace("SPIAT", quietly = TRUE)) {
-  # visualise
-  SPIAT::plot_cell_categories(sce_object = simulated_image, 
-                              categories_of_interest = c("Tumour", "Immune1", "Immune2", "Others"),
-                              colour_vector = c("red", "darkgreen", "darkblue", "lightgray"),
-                              feature_colname = "Phenotype")
-  # calculate average minimum distance of the cells
-  SPIAT::average_minimum_distance(sce_object = simulated_image)
-  # You can also try other functions :)
-}
+# The following code will not run as SPIAT is still not released yet. You can try out the dev version on Github~
+# if (requireNamespace("SPIAT", quietly = TRUE)) {
+#   # visualise
+#   SPIAT::plot_cell_categories(sce_object = simulated_image, 
+#                               categories_of_interest = c("Tumour", "Immune1", "Immune2", "Others"),
+#                               colour_vector = c("red", "darkgreen", "darkblue", "lightgray"),
+#                               feature_colname = "Phenotype")
+#   # calculate average minimum distance of the cells
+#   SPIAT::average_minimum_distance(sce_object = simulated_image)
+#   # You can also try other functions :)
+# }
 ```
 
 
