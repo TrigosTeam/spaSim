@@ -101,7 +101,7 @@ TIS <- function(bg_sample = NULL,
     plot_colours <- plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
                                       "lightgreen", "yellow", "black", "pink")
   }
-  if(is.null(plot_categories)) plot_categories <- unique(image$Phenotype)
+  if(is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
 
   # CHECK is the background sample a dataframe?
   if (!is.data.frame(bg_sample)) {
