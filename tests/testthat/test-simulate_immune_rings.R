@@ -42,9 +42,35 @@ test_that("multiple_images_with_immune_rings works", {
 })
 
 test_that("TIS works for simulating immune rings", {
+  ir_properties <-list(
+      I1 = list(
+        name_of_cluster_cell = "Tumour",
+        size = 600,
+        shape = "Circle",
+        centre_loc = data.frame("x" = 930, "y" = 1000),
+        infiltration_types = c("Immune1", "Immune2", "Others"),
+        infiltration_proportions = c(0.15, 0.05, 0.05),
+        name_of_ring_cell = "Immune1",
+        immune_ring_width = 150,
+        immune_ring_infiltration_types = c("Others"),
+        immune_ring_infiltration_proportions = c(0.15)
+      ),
+      I2 = list(
+        name_of_cluster_cell = "Tumour",
+        size = 500,
+        shape = "Oval",
+        centre_loc = data.frame("x" = 1330, "y" = 1100),
+        infiltration_types = c("Immune1", "Immune2", "Others"),
+        infiltration_proportions = c(0.15, 0.05, 0.05),
+        name_of_ring_cell = "Immune1",
+        immune_ring_width = 150,
+        immune_ring_infiltration_types = c("Others"),
+        immune_ring_infiltration_proportions = c(0.15)
+      )
+    )
   image <- TIS(bg_sample = bg1,
                n_immune_rings = 2,
-               properties_of_immune_rings = R_shape2)
+               properties_of_immune_rings = ir_properties)
 
   # test the class of the result
   expect_equal(class(image)[[1]], "SingleCellExperiment")
@@ -53,7 +79,7 @@ test_that("TIS works for simulating immune rings", {
   data <- data.frame(colData(image))
   expect_setequal(colnames(data),
                   c("Cell.X.Position", "Cell.Y.Position", "Phenotype","lab"))
-  expect_setequal(unique(image$Phenotype), c("Tumour", "Immune", "Others"))
+  expect_setequal(unique(image$Phenotype), c("Tumour", "Immune1","Immune2", "Others"))
 })
 
 

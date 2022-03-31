@@ -393,7 +393,7 @@ cluster_list <-
                                 plot_image = TRUE, 
                                 plot_categories = c("Tumour" , "Immune", "Others"),
                                 plot_colours = c("red","darkgreen", "lightgray"))
-  ```
+```
 
 ```{r}
 # shape "3" - Immune cluster
