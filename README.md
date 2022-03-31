@@ -27,12 +27,23 @@ immune cells, and gray points are unspecified cell types.
 
 ## Installation
 
+To install this package, start R and enter:
+```r 
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+# The following initializes usage of Bioc devel
+BiocManager::install(version='devel')
+
+BiocManager::install("spaSim")
+```
+
+
 You can install the development version of spaSim like so:
 
-``` r
-# enable this later
-# install.packages("devtools")
-# devtools::install_github("TrigosTeam/spaSim")
+```r
+install.packages("devtools")
+devtools::install_github("TrigosTeam/spaSim", ref = "dev")
 ```
 
 ## Vignette
