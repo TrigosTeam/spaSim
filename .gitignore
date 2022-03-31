@@ -5,3 +5,5 @@
 .DS_Store
 .Rprofile
 inst/doc
+.git
+docs
