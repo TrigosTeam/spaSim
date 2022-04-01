@@ -1,5 +1,10 @@
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # spaSim
+
+<!-- badges: start -->
+<!-- badges: end -->
 
 The goal of spaSim (**spa**tial **Sim**ulator) is to facilitate tissue
 image simulations! It simulates cells with 2D locations (point data) and
@@ -11,8 +16,8 @@ As quantitative tools for spatial tissue image analysis have been
 developed and need benchmarking, simulations from spaSim can be applied
 to test and benchmark these tools and metrics. The output of spaSim are
 images in SingleCellExperiment object format and can be used with SPIAT
-(SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues) also
-developed by out team.
+(**Sp**atial **I**mage **A**nalysis of **T**issues), also developed by
+out team.
 
 ## Installation
 
@@ -35,10 +40,13 @@ install.packages("devtools")
 devtools::install_github("TrigosTeam/spaSim")
 ```
 
-## Example
+## Vignette
 
-This is a basic example which shows how to simulate background cells
-with multiple cell types of different proportions.
+The vignette with an overview of the package can be accessed from the
+top Menu under Articles or clicking
+[here](https://trigosteam.github.io/spaSim/). \#\# Example This is a
+basic example which shows how to simulate background cells with multiple
+cell types of different proportions.
 
 ``` r
 library(spaSim)
@@ -51,7 +59,7 @@ mix_background <- TIS(n_cells = 5000, width = 2000, height = 2000, min_d = 10,
 
 ![](man/figures/README-example-1.png)<!-- -->![](man/figures/README-example-2.png)<!-- -->
 
-## Vignette
+## Creators
 
-The vignette with an overview of the package can be accessed from the
-top Menu under Articles [here](https://trigosteam.github.io/spaSim/).
+spaSim was created, designed and implemented by Yuzhou Feng. Anna Trigos
+provided supervision and guidance.

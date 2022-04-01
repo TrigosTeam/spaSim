@@ -2,6 +2,8 @@
 output: github_document
 ---
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE,
@@ -14,10 +16,13 @@ knitr::opts_chunk$set(
 ```
 
 # spaSim
+
+<!-- badges: start -->
+<!-- badges: end -->
  
 The goal of spaSim (**spa**tial **Sim**ulator) is to facilitate tissue image simulations! It simulates cells with 2D locations (point data) and cell types in a tissue. The available patterns include  background cells, cell clusters, immune cell rings and vessels. It also enables simulations that generate a set of images in one run!
 
-As quantitative tools for spatial tissue image analysis have been developed and need benchmarking, simulations from spaSim can be applied to test and benchmark these tools and metrics. The output of spaSim are images in SingleCellExperiment object format and can be used with SPIAT (SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues) also developed by out team.
+As quantitative tools for spatial tissue image analysis have been developed and need benchmarking, simulations from spaSim can be applied to test and benchmark these tools and metrics. The output of spaSim are images in SingleCellExperiment object format and can be used with SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues), also developed by out team.
 
  
 ## Installation
@@ -41,7 +46,10 @@ install.packages("devtools")
 devtools::install_github("TrigosTeam/spaSim")
 ```
 
+## Vignette
 
+The vignette with an overview of the package can be accessed from the
+top Menu under Articles or clicking [here](https://trigosteam.github.io/spaSim/).
 ## Example
 This is a basic example which shows how to simulate background cells with multiple cell types of different proportions.
 
@@ -55,6 +63,5 @@ mix_background <- TIS(n_cells = 5000, width = 2000, height = 2000, min_d = 10,
 
 ```
 
-## Vignette 
-
-The vignette with an overview of the package can be accessed from the top Menu under Articles [here](https://trigosteam.github.io/spaSim/).
+## Creators
+spaSim was created, designed and implemented by Yuzhou Feng. Anna Trigos provided supervision and guidance.
