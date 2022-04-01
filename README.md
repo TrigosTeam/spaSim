@@ -15,9 +15,9 @@ simulations that generate a set of images in one run!
 As quantitative tools for spatial tissue image analysis have been
 developed and need benchmarking, simulations from spaSim can be applied
 to test and benchmark these tools and metrics. The output of spaSim are
-images in SingleCellExperiment object format and can be used with SPIAT
-(**Sp**atial **I**mage **A**nalysis of **T**issues), also developed by
-out team.
+images in SingleCellExperiment object format and can be used with SPIAT.
+SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues) is also
+developed by our team.
 
 ## Installation
 
@@ -44,9 +44,12 @@ devtools::install_github("TrigosTeam/spaSim")
 
 The vignette with an overview of the package can be accessed from the
 top Menu under Articles or clicking
-[here](https://trigosteam.github.io/spaSim/). \#\# Example This is a
-basic example which shows how to simulate background cells with multiple
-cell types of different proportions.
+[here](https://trigosteam.github.io/spaSim/).
+
+## Example
+
+This is a basic example which shows how to simulate background cells
+with multiple cell types of different proportions.
 
 ``` r
 library(spaSim)
