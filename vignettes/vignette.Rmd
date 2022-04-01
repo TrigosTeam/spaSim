@@ -12,7 +12,7 @@ output:
   toc_float: true
   toc_depth: 2
   code_folding: "none"
-dpi: 72
+dpi: 50
 date: "`r doc_date()`"
 package: "`r pkg_ver('spaSim')`"
 vignette: >
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   crop = NULL, ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html,
-  fig.width = 3, fig.height = 1.6, dpi = 72
+  fig.width = 4, fig.height = 2.5, dpi = 50
 )
 ```
 
