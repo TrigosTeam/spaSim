@@ -50,7 +50,7 @@ devtools::install_github("TrigosTeam/spaSim")
 ## Vignette
 
 The vignette with an overview of the package can be accessed from the
-top Menu under Articles or clicking [here](https://trigosteam.github.io/spaSim/).
+top Menu under Articles or clicking [here](https://trigosteam.github.io/spaSim/articles/vignette.html).
 
 ## Example
 This is a basic example which shows how to simulate background cells with multiple cell types of different proportions.

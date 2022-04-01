@@ -44,7 +44,7 @@ devtools::install_github("TrigosTeam/spaSim")
 
 The vignette with an overview of the package can be accessed from the
 top Menu under Articles or clicking
-[here](https://trigosteam.github.io/spaSim/).
+[here](https://trigosteam.github.io/spaSim/articles/vignette.html).
 
 ## Example
 
