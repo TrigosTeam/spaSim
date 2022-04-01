@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   crop = NULL, ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html,
-  fig.width = 2, fig.height = 1, dpi = 72
+  fig.width = 3, fig.height = 1.6, dpi = 72
 )
 ```
 
