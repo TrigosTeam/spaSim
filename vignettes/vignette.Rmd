@@ -71,7 +71,7 @@ BiocManager::install("spaSim")
 
 # install from GitHub
 install.packages("devtools")
-devtools::install_github("TrigosTeam/spaSim", ref = "dev")
+devtools::install_github("TrigosTeam/spaSim")
 ```
 
 ## Citing `spaSim`
