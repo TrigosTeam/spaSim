@@ -42,7 +42,8 @@ default is "Others".}
 \item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function.
 By default is the window of the background image.}
 
-\item{ir_properties}{List of properties of the immune rings. Please refer to the examples for the structure of \code{ir_properties}.}
+\item{ir_properties}{List of properties of the immune rings. Please refer to
+the examples for the structure of \code{ir_properties}.}
 
 \item{plot_image}{Boolean. Whether the simulated image is plotted.}
 
@@ -58,7 +59,9 @@ A data.frame of the simulated image
 \description{
 Based on an existing background image, simulate rings of immune
 cells that surround tumour clusters. The tumour clusters and immune rings
-are simulated at the same time.
+are simulated at the same time. The default values for the arguments give
+an example of immune ring simulation which enable an automatic simulation
+of immune rings without the specification of any argument.
 }
 \examples{
 set.seed(610)

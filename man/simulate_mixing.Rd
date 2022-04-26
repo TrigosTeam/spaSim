@@ -22,8 +22,7 @@ metadata of the SCE object should have colnames including
 
 \item{idents}{String Vector of the mixed cell types.}
 
-\item{props}{Numeric Vector of the proportions of the mixed cell
-types.}
+\item{props}{Numeric Vector of the proportions of the mixed cell types.}
 
 \item{plot_image}{Boolean. Whether the simulated image is plotted.}
 
@@ -35,7 +34,10 @@ A data.frame of the simulated image
 }
 \description{
 Based on an existing background image, simulate mixed cell types
-with specified cell types and proportions.
+with specified cell types and proportions. The default values for the
+arguments give an example of mixed cell type simulation which enable an
+automatic simulation of mixed cell types without the specification of any
+argument.
 }
 \examples{
 set.seed(610)

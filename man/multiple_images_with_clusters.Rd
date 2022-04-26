@@ -17,9 +17,9 @@ multiple_images_with_clusters(
 )
 }
 \arguments{
-\item{bg_sample}{A data.frame or SingleCellExperiment class object
-with locations of points representing background cells. Further cell types
-will be simulated based on this background sample. The data.frame or the
+\item{bg_sample}{A data.frame or SingleCellExperiment class object with
+locations of points representing background cells. Further cell types will
+be simulated based on this background sample. The data.frame or the
 metadata of the SCE object should have colnames including
 "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 \code{\link{bg1}} background image.}
@@ -66,7 +66,9 @@ A list of SCE objects
 \description{
 Generate a set of images with different cluster properties.
 Trying out the default parameters is recommended for understanding this
-function.
+function. The default values for the arguments give an example of multiple
+image simulation which enable an automatic multiple image simulation
+without the specification of any argument.
 }
 \examples{
 set.seed(610)

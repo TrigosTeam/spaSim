@@ -38,8 +38,8 @@ background sample does not have a "Phenotype" column. By default is
 \item{win}{(OPTIONAL) \code{owin} object output from spatstat.geom::owin function.
 By default is the window of the background image.}
 
-\item{cluster_properties}{List of properties of the clusters. See
-examples for the format of this arg.}
+\item{cluster_properties}{List of properties of the clusters. See examples
+for the format of this arg.}
 
 \item{plot_image}{Boolean. Whether the simulated image is plotted.}
 
@@ -54,7 +54,9 @@ A data.frame of the simulated image
 }
 \description{
 Based on an existing background image, simulate clusters of
-cells where the same type of cells aggregate.
+cells where the same type of cells aggregate. The default values for the
+arguments give an example of cluster simulation which enable an automatic
+simulation of clusters without the specification of any argument.
 }
 \examples{
 set.seed(610)

@@ -36,7 +36,8 @@ default it is the window of the background image.}
 for the format of the properties. Please refer to the examples for the
 structure of \code{stripe_properties}.}
 
-\item{plot_image}{Boolean. Whether the simulated image is plotted.}
+\item{plot_image}{Boolean. Whether the simulated image is plotted. Default is
+TRUE.}
 
 \item{plot_categories}{String Vector specifying the order of the cell
 categories to be plotted.}
@@ -52,7 +53,9 @@ Based on an existing background image, simulate stripes of cells
 representing vessels. The cell types and widths of the stripes can be
 specified. The locations of the stripes are randomly simulated. Please
 refer to the examples to check what properties of the stripes can be
-specified.
+specified. The default values for the arguments give an example of vessel
+simulation which enable an automatic simulation of vessels without the
+specification of any argument.
 }
 \examples{
 stripe_properties = list(

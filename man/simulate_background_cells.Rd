@@ -22,11 +22,13 @@ simulate_background_cells(
 
 \item{oversampling_rate}{(OPTIONAL) Numeric. The multiplier for oversampling.
 Without oversampling, the simulation deletes cells that are within \code{min_d}
-from each other, resulting in a less number of cells than specified.
-Default is 1.2.}
+from each other, resulting in a less total number of cells than \code{n_cells}.
+Default is 1.2 (this should be set based on \code{n_cells} and \code{min_d}; should
+always be larger than 1).}
 
 \item{Phenotype}{(OPTIONAL) String. The name of the background cell type.
-Default is "Others".}
+Default is "Others" since there shouldn't be any identity of the background
+cells.}
 }
 \value{
 A data.frame of the simulated background image

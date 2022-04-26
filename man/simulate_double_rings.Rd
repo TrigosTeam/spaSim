@@ -46,8 +46,8 @@ default is "Others".}
 \item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function.
 By default is the window of the background image.}
 
-\item{dr_properties}{List of properties of the double immune
-rings. Please refer to the examples for the structure of \code{dr_properties}.}
+\item{dr_properties}{List of properties of the double immune rings. Please
+refer to the examples for the structure of \code{dr_properties}.}
 
 \item{plot_image}{Boolean. Whether the simulated image is plotted.}
 
@@ -65,7 +65,9 @@ Based on an existing background image, simulate double rings of
 immune cells that surround tumour clusters. The inner ring is the internal
 margin of a tumour cluster. The outer ring is the external tumour margin.
 The tumour clusters and the double immune rings are simulated at the same
-time.
+time. The default values for the arguments give an example of double ring
+simulation which enable an automatic simulation of double rings without the
+specification of any argument.
 }
 \examples{
 set.seed(610)

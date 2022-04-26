@@ -5,7 +5,7 @@
 \title{Simulate multiple background images (mixed cell types)}
 \usage{
 multiple_background_images(
-  bg_sample,
+  bg_sample = bg1,
   idents = c("Tumour", "Immune", "Others"),
   props = list(rep(0.1, 9), seq(0, 0.4, 0.05), seq(0.9, 0.5, -0.05)),
   plot_image = TRUE,
@@ -13,19 +13,19 @@ multiple_background_images(
 )
 }
 \arguments{
-\item{bg_sample}{A data.frame or SingleCellExperiment class object
-with locations of points representing background cells. Further cell types
-will be simulated based on this background sample. The data.frame or the
+\item{bg_sample}{A data.frame or SingleCellExperiment class object with
+locations of points representing background cells. Further cell types will
+be simulated based on this background sample. The data.frame or the
 metadata of the SCE object should have colnames including
 "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 \code{\link{bg1}} background image.}
 
 \item{idents}{String Vector. Names of the cell types to generate.}
 
-\item{props}{List. Each element is a vector of
-proportions of the corresponding cell type. The length of the vector is how
-many images to generate. All vectors should be of the same length, also
-equal to the number of images.}
+\item{props}{List. Each element is a vector of proportions of the
+corresponding cell type. The length of the vector is how many images to
+generate. All vectors should be of the same length, also equal to the
+number of images.}
 
 \item{plot_image}{Boolean. Whether plot the simulated images or not. Default
 is TRUE.}
@@ -38,7 +38,9 @@ A list of SCE objects
 }
 \description{
 Generate a set of background images with different proportions
-of mixed cell types all at once.
+of mixed cell types all at once. The default values for the arguments give
+an example of multiple image simulation which enable an automatic multiple
+image simulation without the specification of any argument.
 }
 \examples{
 idents = c("Tumour","Immune","Others")

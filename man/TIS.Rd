@@ -46,8 +46,9 @@ metadata of the SCE object should have colnames including
 
 \item{oversampling_rate}{(OPTIONAL) Numeric. The multiplier for oversampling.
 Without oversampling, the simulation deletes cells that are within \code{min_d}
-from each other, resulting in a less number of cells than specified.
-Default is 1.2.}
+from each other, resulting in a less total number of cells than \code{n_cells}.
+Default is 1.2 (this should be set based on \code{n_cells} and \code{min_d}; should
+always be larger than 1).}
 
 \item{names_of_bg_cells}{(OPTIONAL) Vector The cell types of the background
 cells. If NULL, the background cells are of one type.}
@@ -97,13 +98,15 @@ Tissue Image Simulator (TIS) integrates the basic simulation
 functions in spaSim, including simulating (mixed) background image,
 clusters, immune rings, double immune rings and stripes. The patterns are
 simulated on separate layers sequentially (e.g. immune rings are simulated
-after/on top of background cells). And each layer is also plot sequentially.
+after/on top of background cells). And each layer is also plot
+sequentially.
 
 Pattern properties (e.g. \code{properties_of_clusters}) contain the properties
 of a pattern in the format of list where each element is one pattern. These
-properties need to be manually defined. Details about the format of the properties
-see the examples in \link{simulate_clusters} \link{simulate_immune_rings}
-\link{simulate_double_rings} \link{simulate_stripes}
+properties need to be manually defined. Details about the format of the
+properties see the examples in \link{simulate_clusters}
+\link{simulate_immune_rings} \link{simulate_double_rings}
+\link{simulate_stripes}
 }
 \examples{
 set.seed(610)
