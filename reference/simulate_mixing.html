@@ -89,7 +89,8 @@ metadata of the SCE object should have colnames including
 <dd><p>Boolean. Whether the simulated image is plotted.</p></dd>
 <dt>plot_colours</dt>
 <dd><p>String Vector specifying the order of the colours that
-correspond to the <code>idents</code> arg.</p></dd>
+correspond to the <code>idents</code> arg. Default is NULL - the predefined
+colour vector would be used for plotting..</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -113,10 +114,10 @@ simulation.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">610</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mix_background</span> <span class="op">&lt;-</span> <span class="fu">simulate_mixing</span><span class="op">(</span>bg_sample <span class="op">=</span> <span class="va">bg1</span>,</span>
-<span class="r-in">idents <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tumour"</span>,<span class="st">"Immune"</span>, <span class="st">"Others"</span><span class="op">)</span>, props <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.4</span>,  <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">mix_background</span> <span class="op">&lt;-</span> <span class="fu">simulate_mixing</span><span class="op">(</span>bg_sample<span class="op">=</span><span class="va">bg1</span>,</span>
+<span class="r-in">idents<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tumour"</span>,<span class="st">"Immune"</span>, <span class="st">"Others"</span><span class="op">)</span>, props<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.4</span>,  <span class="fl">0.4</span><span class="op">)</span>,</span>
+<span class="r-in">plot_image<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="simulate_mixing-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -123,10 +123,12 @@ infiltration in the region of immune rings.</p></dd>
 TRUE.</p></dd>
 <dt>plot_categories</dt>
 <dd><p>String Vector specifying the order of the cell
-cateories to be plotted.</p></dd>
+cateories to be plotted. Default is NULL - the cell categories under the
+"Phenotype" column would be used for plotting.</p></dd>
 <dt>plot_colours</dt>
 <dd><p>String Vector specifying the order of the colours that
-correspond to the <code>plot_categories</code> arg.</p></dd>
+correspond to the <code>plot_categories</code> arg. Default is NULL - the predefined
+colour vector would be used for plotting.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -147,7 +149,7 @@ for simulating multiple images with clusters.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">610</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">ring_image_list</span> <span class="op">&lt;-</span> <span class="fu">multiple_images_with_immune_rings</span><span class="op">(</span>bg_sample <span class="op">=</span> <span class="va">bg1</span>,</span>
 <span class="r-in">ring_shape <span class="op">=</span> <span class="fl">1</span>, prop_infiltration <span class="op">=</span> <span class="fl">0</span>, ring_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">100</span>,<span class="fl">10</span><span class="op">)</span>,</span>
-<span class="r-in">cluster_size <span class="op">=</span> <span class="fl">300</span>, cluster_loc_x <span class="op">=</span> <span class="fl">0</span>, cluster_loc_y <span class="op">=</span> <span class="fl">0</span>,</span>
+<span class="r-in">cluster_size <span class="op">=</span> <span class="fl">200</span>, cluster_loc_x <span class="op">=</span> <span class="fl">0</span>, cluster_loc_y <span class="op">=</span> <span class="fl">0</span>,</span>
 <span class="r-in">prop_ring_infiltration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.2</span>,<span class="fl">0.05</span><span class="op">)</span>, plot_image <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="multiple_images_with_immune_rings-1.png" alt="" width="700" height="433"></span>
 <span class="r-plt img"><img src="multiple_images_with_immune_rings-2.png" alt="" width="700" height="433"></span>

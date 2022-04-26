@@ -103,10 +103,12 @@ for the format of this arg.</p></dd>
 <dd><p>Boolean. Whether the simulated image is plotted.</p></dd>
 <dt>plot_categories</dt>
 <dd><p>String Vector specifying the order of the cell
-categories to be plotted.</p></dd>
+categories to be plotted. Default is NULL - the cell categories under the
+"Phenotype" column would be used for plotting.</p></dd>
 <dt>plot_colours</dt>
 <dd><p>String Vector specifying the order of the colours that
-correspond to the <code>plot_categories</code> arg.</p></dd>
+correspond to the <code>plot_categories</code> arg. Default is NULL - the predefined
+colour vector would be used for plotting.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -131,10 +133,12 @@ simulation.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">610</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">cluster_image</span> <span class="op">&lt;-</span> <span class="fu">simulate_clusters</span><span class="op">(</span>bg_sample <span class="op">=</span> <span class="va">bg1</span>,</span>
-<span class="r-in">n_clusters <span class="op">=</span> <span class="fl">1</span>, cluster_properties<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>C1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">name_of_cluster_cell <span class="op">=</span> <span class="st">"Tumour"</span>, size <span class="op">=</span> <span class="fl">300</span>, shape <span class="op">=</span> <span class="st">"Oval"</span>, centre_loc <span class="op">=</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"x"</span> <span class="op">=</span> <span class="fl">500</span>, <span class="st">"y"</span> <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>, infiltration_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Immune1"</span>, <span class="st">"Others"</span><span class="op">)</span>,</span>
-<span class="r-in">infiltration_proportions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in">n_clusters<span class="op">=</span><span class="fl">2</span>, cluster_properties<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>C1<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name_of_cluster_cell<span class="op">=</span><span class="st">"Tumour"</span>,</span>
+<span class="r-in">size<span class="op">=</span><span class="fl">300</span>, shape<span class="op">=</span><span class="st">"Oval"</span>, centre_loc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">=</span><span class="fl">500</span>, <span class="st">"y"</span><span class="op">=</span><span class="fl">500</span><span class="op">)</span>,</span>
+<span class="r-in">infiltration_types<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Immune1"</span>, <span class="st">"Others"</span><span class="op">)</span>, infiltration_proportions<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span>
+<span class="r-in">C2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name_of_cluster_cell<span class="op">=</span><span class="st">"Immune1"</span>, size<span class="op">=</span><span class="fl">500</span>, shape<span class="op">=</span><span class="st">"Irregular"</span>,</span>
+<span class="r-in">centre_loc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"x"</span><span class="op">=</span><span class="fl">1500</span>,<span class="st">"y"</span><span class="op">=</span><span class="fl">500</span><span class="op">)</span>, infiltration_types<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Immune2"</span>, <span class="st">"Others"</span><span class="op">)</span>,</span>
+<span class="r-in">infiltration_proportions<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="simulate_clusters-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
