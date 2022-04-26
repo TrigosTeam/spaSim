@@ -65,7 +65,7 @@ simulate_double_rings <- function(bg_sample = bg1,
                                   n_dr = 2,
                                   win = NULL,
                                   dr_properties = list(
-                                      I1 = list(
+                                      D1 = list(
                                           name_of_cluster_cell = "Tumour",
                                           size = 300,
                                           shape = "Circle",
@@ -81,7 +81,7 @@ simulate_double_rings <- function(bg_sample = bg1,
                                           double_ring_infiltration_types = c("Others"),
                                           double_ring_infiltration_proportions = c(0.15)
                                       ),
-                                      I2 = list(
+                                      D2 = list(
                                           name_of_cluster_cell = "Tumour",
                                           size = 300,
                                           shape = "Oval",

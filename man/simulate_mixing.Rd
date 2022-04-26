@@ -27,7 +27,8 @@ metadata of the SCE object should have colnames including
 \item{plot_image}{Boolean. Whether the simulated image is plotted.}
 
 \item{plot_colours}{String Vector specifying the order of the colours that
-correspond to the \code{idents} arg.}
+correspond to the \code{idents} arg. Default is NULL - the predefined
+colour vector would be used for plotting..}
 }
 \value{
 A data.frame of the simulated image
@@ -41,9 +42,9 @@ argument.
 }
 \examples{
 set.seed(610)
-mix_background <- simulate_mixing(bg_sample = bg1,
-idents = c("Tumour","Immune", "Others"), props = c(0.2, 0.4,  0.4))
-
+mix_background <- simulate_mixing(bg_sample=bg1,
+idents=c("Tumour","Immune", "Others"), props=c(0.2, 0.4,  0.4),
+plot_image=TRUE)
 }
 \seealso{
 \code{\link{simulate_background_cells}} for all cell simulation,

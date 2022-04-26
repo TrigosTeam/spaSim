@@ -41,14 +41,19 @@
 #' @examples
 #' set.seed(610)
 #' # manually define the properties of the immune ring
-#' ir_properties <- list(I1 = list(name_of_cluster_cell = "Tumour",
-#' size = 600,shape = "Circle",centre_loc = data.frame("x" = 930, "y" = 1000),
-#' infiltration_types = c("Immune1", "Immune2", "Others"), infiltration_proportions
-#' = c(0.15, 0.05, 0.05), name_of_ring_cell = "Immune1", immune_ring_width = 150,
-#' immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions = c(0.15)))
+#' ir_properties <- list(I1=list(name_of_cluster_cell="Tumour", size=600,
+#' shape="Circle",centre_loc=data.frame("x"=930, "y"=1000),
+#' infiltration_types=c("Immune1", "Immune2", "Others"), infiltration_proportions
+#'=c(0.15, 0.05, 0.05), name_of_ring_cell="Immune1", immune_ring_width=150,
+#' immune_ring_infiltration_types=c("Others"), immune_ring_infiltration_proportions=c(0.15)),
+#' I2=list(name_of_cluster_cell="Tumour", size=500, shape="Oval",
+#' centre_loc=data.frame("x"=1330, "y"=1100), infiltration_types=c("Immune1", "Immune2", "Others"),
+#' infiltration_proportions=c(0.15, 0.05, 0.05), name_of_ring_cell="Immune1",
+#' immune_ring_width=150, immune_ring_infiltration_types=c("Others"),
+#' immune_ring_infiltration_proportions=c(0.15)))
 #' # simulate immune rings (`n_ir` should match the length of `ir_properties`)
-#' immune_ring_image <- simulate_immune_rings(bg_sample = bg1,
-#' n_ir = 1, ir_properties = ir_properties)
+#' immune_ring_image <- simulate_immune_rings(bg_sample=bg1,
+#' n_ir=2, ir_properties=ir_properties)
 #'
 simulate_immune_rings <- function(bg_sample = bg1,
                                   bg_type = "Others",

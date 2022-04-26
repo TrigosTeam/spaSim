@@ -31,7 +31,8 @@ number of images.}
 is TRUE.}
 
 \item{plot_colours}{String Vector. If plot_image is TRUE, this param is the
-corresponding colours for the \code{idents} arg.}
+corresponding colours for the \code{idents} arg. Default is NULL, the predefined
+colour vector would be used for plotting.}
 }
 \value{
 A list of SCE objects

@@ -52,10 +52,9 @@
 #' @export
 #' @examples
 #' set.seed(610)
-#' cluster_image_list <- multiple_images_with_clusters(bg_sample = bg1,
-#' cluster_shape=2, prop_infiltration = c(0.1, 0.3), cluster_size = c(300,600),
+#' cluster_image_list <- multiple_images_with_clusters(bg_sample=bg1,
+#' cluster_shape=2, prop_infiltration=0.1, cluster_size = seq(200,1000,100),
 #' cluster_loc_x = 0, cluster_loc_y = 0, plot_image = TRUE)
-
 multiple_images_with_clusters <- function(bg_sample = bg1,
                                           cluster_shape = 2,
                                           prop_infiltration = 0.1,

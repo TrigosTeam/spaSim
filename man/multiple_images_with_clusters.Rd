@@ -55,10 +55,12 @@ The Y location of the cluster center offset.}
 TRUE.}
 
 \item{plot_categories}{String Vector specifying the order of the cell
-categories to be plotted.}
+categories to be plotted. Default is NULL - the cell categories under the
+"Phenotype" column would be used for plotting.}
 
 \item{plot_colours}{String Vector specifying the order of the colours that
-correspond to the \code{plot_categories} arg.}
+correspond to the \code{plot_categories} arg. Default is NULL - the predefined
+colour vector would be used for plotting.}
 }
 \value{
 A list of SCE objects
@@ -72,8 +74,8 @@ without the specification of any argument.
 }
 \examples{
 set.seed(610)
-cluster_image_list <- multiple_images_with_clusters(bg_sample = bg1,
-cluster_shape=2, prop_infiltration = c(0.1, 0.3), cluster_size = c(300,600),
+cluster_image_list <- multiple_images_with_clusters(bg_sample=bg1,
+cluster_shape=2, prop_infiltration=0.1, cluster_size = seq(200,1000,100),
 cluster_loc_x = 0, cluster_loc_y = 0, plot_image = TRUE)
 }
 \seealso{

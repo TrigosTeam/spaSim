@@ -39,11 +39,12 @@
 #' @examples
 #' set.seed(610)
 #' cluster_image <- simulate_clusters(bg_sample = bg1,
-#' n_clusters = 1, cluster_properties= list(C1 = list(
-#' name_of_cluster_cell = "Tumour", size = 300, shape = "Oval", centre_loc =
-#' data.frame("x" = 500, "y" = 500), infiltration_types = c("Immune1", "Others"),
-#' infiltration_proportions = c(0.1, 0.05))))
-
+#' n_clusters=2, cluster_properties=list(C1=list(name_of_cluster_cell="Tumour",
+#' size=300, shape="Oval", centre_loc=data.frame("x"=500, "y"=500),
+#' infiltration_types=c("Immune1", "Others"), infiltration_proportions=c(0.1, 0.05)),
+#' C2=list(name_of_cluster_cell="Immune1", size=500, shape="Irregular",
+#' centre_loc=data.frame("x"=1500,"y"=500), infiltration_types=c("Immune2", "Others"),
+#' infiltration_proportions=c(0.1, 0.05))))
 simulate_clusters <- function(bg_sample = bg1,
                               n_clusters = 2,
                               bg_type = "Others",
@@ -68,7 +69,6 @@ simulate_clusters <- function(bg_sample = bg1,
                               plot_categories = NULL,
                               plot_colours = NULL
 ){
-
     ## CHECK
     if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
         stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")

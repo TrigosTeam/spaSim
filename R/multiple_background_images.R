@@ -42,7 +42,7 @@ multiple_background_images <- function(bg_sample = bg1,
                                        idents = c("Tumour", "Immune","Others"),
                                        props = list(rep(0.1, 9),
                                                     seq(0, 0.4, 0.05),
-                                                    seq(0.9,0.5,-0.05)),
+                                                    seq(0.9, 0.5, -0.05)),
                                        plot_image = TRUE,
                                        plot_colours = NULL){
     ## CHECK

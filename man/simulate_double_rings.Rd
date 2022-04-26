@@ -9,14 +9,14 @@ simulate_double_rings(
   bg_type = "Others",
   n_dr = 2,
   win = NULL,
-  dr_properties = list(I1 = list(name_of_cluster_cell = "Tumour", size = 300, shape =
+  dr_properties = list(D1 = list(name_of_cluster_cell = "Tumour", size = 300, shape =
     "Circle", centre_loc = data.frame(x = 1000, y = 1000), infiltration_types =
     c("Immune1", "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
     name_of_ring_cell = "Immune1", immune_ring_width = 150,
     immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions =
     c(0.15), name_of_double_ring_cell = "Immune2", double_ring_width = 100,
     double_ring_infiltration_types = c("Others"), double_ring_infiltration_proportions =
-    c(0.15)),      I2 = list(name_of_cluster_cell = "Tumour", size = 300, shape = "Oval",
+    c(0.15)),      D2 = list(name_of_cluster_cell = "Tumour", size = 300, shape = "Oval",
     centre_loc = data.frame(x = 1200, y = 1200), infiltration_types = c("Immune1",
     "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
     name_of_ring_cell = "Immune1", immune_ring_width = 150,
@@ -52,10 +52,12 @@ refer to the examples for the structure of \code{dr_properties}.}
 \item{plot_image}{Boolean. Whether the simulated image is plotted.}
 
 \item{plot_categories}{String Vector specifying the order of the cell
-categories to be plotted.}
+categories to be plotted. Default is NULL - the cell categories under the
+"Phenotype" column would be used for plotting.}
 
 \item{plot_colours}{String Vector specifying the order of the colours that
-correspond to the \code{plot_categories} arg.}
+correspond to the \code{plot_categories} arg. Default is NULL - the predefined
+colour vector would be used for plotting.}
 }
 \value{
 A data.frame of the simulated image

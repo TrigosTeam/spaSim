@@ -29,10 +29,9 @@
 #'
 #' @examples
 #' set.seed(610)
-#' mix_background <- simulate_mixing(bg_sample = bg1,
-#' idents = c("Tumour","Immune", "Others"), props = c(0.2, 0.4,  0.4))
-#'
-
+#' mix_background <- simulate_mixing(bg_sample=bg1,
+#' idents=c("Tumour","Immune", "Others"), props=c(0.2, 0.4,  0.4),
+#' plot_image=TRUE)
 simulate_mixing <- function(bg_sample = bg1,
                             idents = c("Tumour", "Immune", "Others"),
                             props = c(0.2, 0.4, 0.4),

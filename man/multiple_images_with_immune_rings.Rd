@@ -64,10 +64,12 @@ infiltration in the region of immune rings.}
 TRUE.}
 
 \item{plot_categories}{String Vector specifying the order of the cell
-cateories to be plotted.}
+cateories to be plotted. Default is NULL - the cell categories under the
+"Phenotype" column would be used for plotting.}
 
 \item{plot_colours}{String Vector specifying the order of the colours that
-correspond to the \code{plot_categories} arg.}
+correspond to the \code{plot_categories} arg. Default is NULL - the predefined
+colour vector would be used for plotting.}
 }
 \value{
 A list of sce objects
@@ -82,7 +84,7 @@ specification of any argument.
 set.seed(610)
 ring_image_list <- multiple_images_with_immune_rings(bg_sample = bg1,
 ring_shape = 1, prop_infiltration = 0, ring_width = seq(50,100,10),
-cluster_size = 300, cluster_loc_x = 0, cluster_loc_y = 0,
+cluster_size = 200, cluster_loc_x = 0, cluster_loc_y = 0,
 prop_ring_infiltration = seq(0, 0.2,0.05), plot_image = TRUE)
 }
 \seealso{
