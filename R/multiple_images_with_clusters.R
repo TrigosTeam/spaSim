@@ -49,7 +49,7 @@
 #' @examples
 #' set.seed(610)
 #' cluster_image_list <- multiple_images_with_clusters(bg_sample = bg1,
-#' cluster_shape=2, prop_infiltration = c(0.1, 0.3), cluster_size = c(300,600), 
+#' cluster_shape=2, prop_infiltration = c(0.1, 0.3), cluster_size = c(300,600),
 #' cluster_loc_x = 0, cluster_loc_y = 0, plot_image = TRUE)
 
 multiple_images_with_clusters <- function(bg_sample = bg1,
@@ -61,80 +61,80 @@ multiple_images_with_clusters <- function(bg_sample = bg1,
                                           plot_image = TRUE,
                                           plot_categories = NULL,
                                           plot_colours = NULL){
-  
-  ## CHECK
-  # is the background sample a dataframe?
-  if (!is.data.frame(bg_sample)) {
-    bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
-   # count the image number
-  i <- 0
-  list.images <- list()
+    ## CHECK
+    # is the background sample a dataframe?
+    if (!is.data.frame(bg_sample)) {
+        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
-  # choose a cluster shape (predefined in the package)
-  if (cluster_shape == 1){
-    n_clusters <- 3
-    infiltration_types <- c("Immune", "Others")
-    properties_of_clusters_temp <- C_shape1
-    # if the cluster size is too small, adjust the locations of some of the sub shapes
-    size_threshold <- 240
-  }
-  else if(cluster_shape == 2){
-    n_clusters <- 2
-    infiltration_types <- c("Immune", "Others")
-    properties_of_clusters_temp <- C_shape2
-    # if the cluster size is too small, adjust the locations of some of the sub shapes
-    size_threshold <- 100
-  }
-  else if (cluster_shape == 3){
-    n_clusters <- 1
-    infiltration_types <- c("Immune", "Others")
-    properties_of_clusters_temp <- C_shape3
-    size_threshold <- 0
-  }
+    # count the image number
+    i <- 0
+    list.images <- list()
 
-  # loop through the cluster size and infiltration proportion ranges
-  for (size in cluster_size){
-    # if the cluster size is too small, adjust the locations of some of the sub shapes
-    if (size < size_threshold) {
+    # choose a cluster shape (predefined in the package)
+    if (cluster_shape == 1){
+        n_clusters <- 3
+        infiltration_types <- c("Immune", "Others")
+        properties_of_clusters_temp <- C_shape1
+        # if the cluster size is too small, adjust the locations of some of the sub shapes
+        size_threshold <- 240
     }
-    for (infil in prop_infiltration){
-      y_idx <- 0
-      for (loc_x in cluster_loc_x) {
-        i <- i + 1 # image count
+    else if(cluster_shape == 2){
+        n_clusters <- 2
+        infiltration_types <- c("Immune", "Others")
+        properties_of_clusters_temp <- C_shape2
+        # if the cluster size is too small, adjust the locations of some of the sub shapes
+        size_threshold <- 100
+    }
+    else if (cluster_shape == 3){
+        n_clusters <- 1
+        infiltration_types <- c("Immune", "Others")
+        properties_of_clusters_temp <- C_shape3
+        size_threshold <- 0
+    }
 
-        # find the corresponding y loc
-        y_idx <- y_idx + 1
-        loc_y <- cluster_loc_y[y_idx]
-
-        # change the properties of the cluster based on the current loop
-        properties_of_clusters <- properties_of_clusters_temp
-        for (k in seq_len(length(properties_of_clusters))){
-          # change the sizes of the default shape
-          properties_of_clusters[[k]]$size <- properties_of_clusters[[k]]$size + size
-          # change the default infiltration proportions
-          properties_of_clusters[[k]]$infiltration_proportions[1] <- infil
-          # change the default centre locations
-          properties_of_clusters[[k]]$centre_loc[1] <- properties_of_clusters[[k]]$centre_loc[1] + loc_x
-          properties_of_clusters[[k]]$centre_loc[2] <- properties_of_clusters[[k]]$centre_loc[2] + loc_y
+    # loop through the cluster size and infiltration proportion ranges
+    for (size in cluster_size){
+        # if the cluster size is too small, adjust the locations of some of the sub shapes
+        if (size < size_threshold) {
         }
+        for (infil in prop_infiltration){
+            y_idx <- 0
+            for (loc_x in cluster_loc_x) {
+                i <- i + 1 # image count
 
-        # simulate the image
-        image <- TIS(bg_sample = bg_sample,
-                     n_clusters = n_clusters,
-                     properties_of_clusters = properties_of_clusters,
-                     plot_image = FALSE,
-                     plot_categories = plot_categories)
-        
-        if (plot_image){
-          if(is.null(plot_categories)) plot_categories <- unique(image$Phenotype)
-          if (is.null(plot_colours)){
-            plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                              "lightgreen", "yellow", "black", "pink")}
-          plot_cells(image, plot_categories, plot_colours[seq_len(length(plot_categories))], "Phenotype")}
-        list.images[[i]] <- image
-      }
+                # find the corresponding y loc
+                y_idx <- y_idx + 1
+                loc_y <- cluster_loc_y[y_idx]
+
+                # change the properties of the cluster based on the current loop
+                properties_of_clusters <- properties_of_clusters_temp
+                for (k in seq_len(length(properties_of_clusters))){
+                    # change the sizes of the default shape
+                    properties_of_clusters[[k]]$size <- properties_of_clusters[[k]]$size + size
+                    # change the default infiltration proportions
+                    properties_of_clusters[[k]]$infiltration_proportions[1] <- infil
+                    # change the default centre locations
+                    properties_of_clusters[[k]]$centre_loc[1] <- properties_of_clusters[[k]]$centre_loc[1] + loc_x
+                    properties_of_clusters[[k]]$centre_loc[2] <- properties_of_clusters[[k]]$centre_loc[2] + loc_y
+                }
+
+                # simulate the image
+                image <- TIS(bg_sample = bg_sample,
+                             n_clusters = n_clusters,
+                             properties_of_clusters = properties_of_clusters,
+                             plot_image = FALSE,
+                             plot_categories = plot_categories)
+
+                if (plot_image){
+                    if(is.null(plot_categories)) plot_categories <- unique(image$Phenotype)
+                    if (is.null(plot_colours)){
+                        plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                                          "lightgreen", "yellow", "black", "pink")}
+                    plot_cells(image, plot_categories, plot_colours[seq_len(length(plot_categories))], "Phenotype")}
+                list.images[[i]] <- image
+            }
+        }
     }
-  }
-  return(list.images)
+    return(list.images)
 }

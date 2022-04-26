@@ -58,11 +58,11 @@
 #' @export
 #' @examples
 #' set.seed(610)
-#' double_ring_image <- TIS(bg_sample=bg1, n_clusters = 1,
-#' properties_of_clusters = list(C1 = list( name_of_cluster_cell = "Tumour",
-#' size = 300, shape = "Oval", centre_loc = data.frame("x" = 500, "y" = 500),
-#' infiltration_types = c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05))),
-#' plot_image = TRUE)
+#' double_ring_image <- TIS(bg_sample=bg1, n_clusters=1,
+#' properties_of_clusters=list(C1=list( name_of_cluster_cell="Tumour",
+#' size=300, shape="Oval", centre_loc=data.frame("x"=500, "y"=500),
+#' infiltration_types=c("Immune1", "Others"), infiltration_proportions=c(0.1, 0.05))),
+#' plot_image=TRUE)
 
 TIS <- function(bg_sample = NULL,
                 n_cells = NULL,
@@ -70,104 +70,109 @@ TIS <- function(bg_sample = NULL,
                 height = NULL,
                 min_d = NULL,
                 oversampling_rate = 1.2,
-
                 names_of_bg_cells = NULL,
                 proportions_of_bg_cells = NULL,
-
                 n_clusters = NULL,
                 properties_of_clusters = NULL,
-
                 n_immune_rings = NULL,
                 properties_of_immune_rings = NULL,
-
                 n_double_rings = NULL,
                 properties_of_double_rings = NULL,
-
                 n_stripe_type = NULL,
                 properties_of_stripes = NULL,
-
                 image_name = NULL,
                 plot_image = FALSE,
                 plot_categories = NULL,
-                plot_colours = NULL)
-{
-  if (is.null(bg_sample)){
-    bg_sample <- simulate_background_cells(n_cells, width, height, min_d, 
-                                           oversampling_rate = oversampling_rate)
-    X <- width
-    Y <- height
-  }
-  if (is.null(plot_colours)){
-    plot_colours <- plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                                      "lightgreen", "yellow", "black", "pink")
-  }
-  if(is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
+                plot_colours = NULL) {
+    if (is.null(bg_sample)) {
+        bg_sample <- simulate_background_cells(n_cells, width, height, min_d,
+                                               oversampling_rate = oversampling_rate)
+        X <- width
+        Y <- height
+    }
+    if (is.null(plot_colours)) {
+        plot_colours <- plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue", "lightgreen", "yellow", "black", "pink")
+    }
+    if (is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
 
-  # CHECK is the background sample a dataframe?
-  if (!is.data.frame(bg_sample)) {
-    bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
+    # CHECK is the background sample a dataframe?
+    if (!is.data.frame(bg_sample)) {
+        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))
+    }
 
-  image <- bg_sample
-  X <- max(bg_sample$Cell.X.Position)
-  Y <- max(bg_sample$Cell.Y.Position)
+    image <- bg_sample
+    X <- max(bg_sample$Cell.X.Position)
+    Y <- max(bg_sample$Cell.Y.Position)
 
-  # get background information
-  bg_size = c(X, Y)
+    # get background information
+    bg_size <- c(X, Y)
 
-  # simulate bg with mixing types of cells
-  if (!is.null(names_of_bg_cells)){
-    image <- simulate_mixing(bg_sample = image,
-                             idents = names_of_bg_cells,
-                             props = proportions_of_bg_cells,
-                             plot_image = plot_image,
-                             plot_colours = plot_colours)
-  }
-  # simulate clusters
-  if (!is.null(n_clusters)){
-    image <- simulate_clusters(bg_sample = image,
-                               n_clusters = n_clusters,
-                               bg_type = "Others",
-                               win = NULL,
-                               cluster_properties = properties_of_clusters,
-                               plot_image = plot_image,
-                               plot_categories = plot_categories,
-                               plot_colours = plot_colours)
-  }
-  # simulate_immune_rings
-  if (!is.null(n_immune_rings)){
-    image <- simulate_immune_rings(bg_sample = image,
-                                   n_ir = n_immune_rings,
-                                   bg_type = "Others",
-                                   win = NULL,
-                                   ir_properties= properties_of_immune_rings,
-                                   plot_image = plot_image,
-                                   plot_categories = plot_categories,
-                                   plot_colours = plot_colours)
-  }
-  # simulate_double_rings
-  if (!is.null(n_double_rings)){
-    image <- simulate_double_rings(bg_sample = image,
-                                   n_dr = n_double_rings,
-                                   bg_type = "Others",
-                                   win = NULL,
-                                   dr_properties = properties_of_double_rings,
-                                   plot_image = plot_image,
-                                   plot_categories = plot_categories,
-                                   plot_colours = plot_colours)
-  }
-  # simulate_stripes
-  if (!is.null(n_stripe_type)){
-    image <- simulate_stripes(bg_sample = image,
-                              n_stripe_type = n_stripe_type,
-                              win = NULL,
-                              stripe_properties = properties_of_stripes,
-                              plot_image = plot_image,
-                              plot_categories = plot_categories,
-                              plot_colours = plot_colours)}
+    # simulate bg with mixing types of cells
+    if (!is.null(names_of_bg_cells)) {
+        image <- simulate_mixing(
+            bg_sample = image,
+            idents = names_of_bg_cells,
+            props = proportions_of_bg_cells,
+            plot_image = plot_image,
+            plot_colours = plot_colours
+        )
+    }
+    # simulate clusters
+    if (!is.null(n_clusters)) {
+        image <- simulate_clusters(
+            bg_sample = image,
+            n_clusters = n_clusters,
+            bg_type = "Others",
+            win = NULL,
+            cluster_properties = properties_of_clusters,
+            plot_image = plot_image,
+            plot_categories = plot_categories,
+            plot_colours = plot_colours
+        )
+    }
+    # simulate_immune_rings
+    if (!is.null(n_immune_rings)) {
+        image <- simulate_immune_rings(
+            bg_sample = image,
+            n_ir = n_immune_rings,
+            bg_type = "Others",
+            win = NULL,
+            ir_properties = properties_of_immune_rings,
+            plot_image = plot_image,
+            plot_categories = plot_categories,
+            plot_colours = plot_colours
+        )
+    }
+    # simulate_double_rings
+    if (!is.null(n_double_rings)) {
+        image <- simulate_double_rings(
+            bg_sample = image,
+            n_dr = n_double_rings,
+            bg_type = "Others",
+            win = NULL,
+            dr_properties = properties_of_double_rings,
+            plot_image = plot_image,
+            plot_categories = plot_categories,
+            plot_colours = plot_colours
+        )
+    }
+    # simulate_stripes
+    if (!is.null(n_stripe_type)) {
+        image <- simulate_stripes(
+            bg_sample = image,
+            n_stripe_type = n_stripe_type,
+            win = NULL,
+            stripe_properties = properties_of_stripes,
+            plot_image = plot_image,
+            plot_categories = plot_categories,
+            plot_colours = plot_colours
+        )
+    }
 
-  # format sce object
-  sce <- format_sce(image)
-  attr(sce, "name") <- image_name
+    # format sce object
+    sce <- format_sce(image)
+    attr(sce, "name") <- image_name
 
-  return(sce)
+    return(sce)
 }
+

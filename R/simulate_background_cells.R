@@ -32,36 +32,36 @@
 #'                                               height = 2000, min_d = 10,
 #'                                               oversampling_rate = 1.5, Phenotype = "Others")
 
-simulate_background_cells <- function(n_cells, width, height, min_d, 
+simulate_background_cells <- function(n_cells, width, height, min_d,
                                       oversampling_rate = 1.2,
                                       Phenotype = "Others"){
 
-  # need to oversample first
-  n_cells_inflated <- n_cells*oversampling_rate
+    # need to oversample first
+    n_cells_inflated <- n_cells*oversampling_rate
 
-  # calculate the window and intensity
-  win <- spatstat.geom::owin(xrange=c(0,width), yrange=c(0,height))
-  beta <- n_cells_inflated/(width*height)
+    # calculate the window and intensity
+    win <- spatstat.geom::owin(xrange=c(0,width), yrange=c(0,height))
+    beta <- n_cells_inflated/(width*height)
 
-  # Hardcore process
-  sample <- spatstat.random::rHardcore(beta = beta,R = min_d, W=win)
+    # Hardcore process
+    sample <- spatstat.random::rHardcore(beta = beta,R = min_d, W=win)
 
-  # extract point data
-  Cell.X.Position <- sample$x
-  Cell.Y.Position <- sample$y
-  sample <- data.frame(Cell.X.Position = sample$x, Cell.Y.Position = sample$y)
+    # extract point data
+    Cell.X.Position <- sample$x
+    Cell.Y.Position <- sample$y
+    sample <- data.frame(Cell.X.Position = sample$x, Cell.Y.Position = sample$y)
 
-  # if the sampled data is more than the expected number
-  if (dim(sample)[1] > n_cells){
-    sample <- sample[sample(nrow(sample), n_cells),]
-  }
+    # if the sampled data is more than the expected number
+    if (dim(sample)[1] > n_cells){
+        sample <- sample[sample(nrow(sample), n_cells),]
+    }
 
-  rownames(sample) <- paste("Cell_",rownames(sample),sep = "")
+    rownames(sample) <- paste("Cell_",rownames(sample),sep = "")
 
-  sample$Phenotype <- Phenotype
+    sample$Phenotype <- Phenotype
 
-  # plot
-  plot_cells(sample, Phenotype, "lightgray", "Phenotype")
+    # plot
+    plot_cells(sample, Phenotype, "lightgray", "Phenotype")
 
-  return(sample)
+    return(sample)
 }

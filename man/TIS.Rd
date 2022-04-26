@@ -107,9 +107,9 @@ see the examples in \link{simulate_clusters} \link{simulate_immune_rings}
 }
 \examples{
 set.seed(610)
-double_ring_image <- TIS(bg_sample=bg1, n_clusters = 1,
-properties_of_clusters = list(C1 = list( name_of_cluster_cell = "Tumour",
-size = 300, shape = "Oval", centre_loc = data.frame("x" = 500, "y" = 500),
-infiltration_types = c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05))),
-plot_image = TRUE)
+double_ring_image <- TIS(bg_sample=bg1, n_clusters=1,
+properties_of_clusters=list(C1=list( name_of_cluster_cell="Tumour",
+size=300, shape="Oval", centre_loc=data.frame("x"=500, "y"=500),
+infiltration_types=c("Immune1", "Others"), infiltration_proportions=c(0.1, 0.05))),
+plot_image=TRUE)
 }

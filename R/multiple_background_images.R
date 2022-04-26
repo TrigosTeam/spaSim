@@ -42,63 +42,63 @@ multiple_background_images <- function(bg_sample,
                                                     seq(0.9,0.5,-0.05)),
                                        plot_image = TRUE,
                                        plot_colours = NULL){
-  # CHECK is the background sample a data frame?
-  if (!is.data.frame(bg_sample)) {
-    bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
+    # CHECK is the background sample a data frame?
+    if (!is.data.frame(bg_sample)) {
+        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
-  # default phenotype is "Others"
-  if (is.null(bg_sample$Phenotype)){
-    bg_sample[, "Phenotype"] <- "Others"
-  }
-  
-  # define the plotting properties
-  if (plot_image){
-    if (is.null(plot_colours)){
-      plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                        "lightgreen", "yellow", "black", "pink")}}
-
-  n_types <- length(idents)
-
-  # count the image number
-  p_idx <- 0
-  list.images <- list()
-
-  # loop through the proportions of cell types
-  for (prop in props[[1]]){
-    p_idx <- p_idx + 1 # this is the p_idx(th) image (also the p_idx proportion)
-
-    # get the vector of proportions for the current image
-    props_temp <- c(prop)
-    for (k in 2:length(idents)){
-      props_temp <- c(props_temp,
-                                          props[[k]][p_idx])
+    # default phenotype is "Others"
+    if (is.null(bg_sample$Phenotype)){
+        bg_sample[, "Phenotype"] <- "Others"
     }
 
-    # assign cell type to each cell in the current image
-    print(p_idx)
-    for (i in seq_len(dim(bg_sample)[1])){
-      r <- stats::runif(1)
-      # if the random number falls in the range of a proportion,
-      # pheno will be the corresponding infiltraiton type
-      n <- 1 # start from the first proportion
-      current_p <- 0
-      while (n <= n_types){
-        current_p <- current_p + props_temp[n]
-        if (r <= current_p) {
-          pheno <- idents[n]
-          break
-        }
-        n <- n+1
-      }
-
-      bg_sample[i, "Phenotype"] <- pheno
-    }
-    
-    sce <- format_sce(bg_sample)
+    # define the plotting properties
     if (plot_image){
-      plot_cells(bg_sample, idents, plot_colours[seq_len(length(idents))], "Phenotype")
+        if (is.null(plot_colours)){
+            plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                              "lightgreen", "yellow", "black", "pink")}}
+
+    n_types <- length(idents)
+
+    # count the image number
+    p_idx <- 0
+    list.images <- list()
+
+    # loop through the proportions of cell types
+    for (prop in props[[1]]){
+        p_idx <- p_idx + 1 # this is the p_idx(th) image (also the p_idx proportion)
+
+        # get the vector of proportions for the current image
+        props_temp <- c(prop)
+        for (k in 2:length(idents)){
+            props_temp <- c(props_temp,
+                            props[[k]][p_idx])
+        }
+
+        # assign cell type to each cell in the current image
+        print(p_idx)
+        for (i in seq_len(dim(bg_sample)[1])){
+            r <- stats::runif(1)
+            # if the random number falls in the range of a proportion,
+            # pheno will be the corresponding infiltraiton type
+            n <- 1 # start from the first proportion
+            current_p <- 0
+            while (n <= n_types){
+                current_p <- current_p + props_temp[n]
+                if (r <= current_p) {
+                    pheno <- idents[n]
+                    break
+                }
+                n <- n+1
+            }
+
+            bg_sample[i, "Phenotype"] <- pheno
+        }
+
+        sce <- format_sce(bg_sample)
+        if (plot_image){
+            plot_cells(bg_sample, idents, plot_colours[seq_len(length(idents))], "Phenotype")
+        }
+        list.images[[p_idx]] <- sce
     }
-    list.images[[p_idx]] <- sce
-  }
-  return(list.images)
+    return(list.images)
 }

@@ -57,101 +57,101 @@
 #' prop_ring_infiltration = seq(0, 0.2,0.05), plot_image = TRUE)
 
 multiple_images_with_immune_rings <- function(bg_sample = bg1,
-                                             cluster_size = 200,
-                                             ring_shape = 1,
-                                             prop_infiltration = 0,
-                                             ring_width = seq(50,100,10),
-                                             cluster_loc_x = 0,
-                                             cluster_loc_y = 0,
-                                             prop_ring_infiltration = seq(0, 0.2,0.05),
-                                             plot_image = TRUE,
-                                             plot_categories = NULL,
-                                             plot_colours = NULL){
-  
-  ## CHECK
-  # is the background sample a dataframe?
-  if (!is.data.frame(bg_sample)) {
-    bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
+                                              cluster_size = 200,
+                                              ring_shape = 1,
+                                              prop_infiltration = 0,
+                                              ring_width = seq(50,100,10),
+                                              cluster_loc_x = 0,
+                                              cluster_loc_y = 0,
+                                              prop_ring_infiltration = seq(0, 0.2,0.05),
+                                              plot_image = TRUE,
+                                              plot_categories = NULL,
+                                              plot_colours = NULL){
 
-  # count the image number
-  i <- 0
-  list.images <- list()
+    ## CHECK
+    # is the background sample a dataframe?
+    if (!is.data.frame(bg_sample)) {
+        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
-  # choose a cluster shape (predefined in the package)
-  if (ring_shape == 1){
-    n_immune_rings <- 3
-    properties_of_immune_rings_temp <- R_shape1
-    # if the cluster size is too small, adjust the locations of some of the sub shapes
-    size_threshold <- 100
-  }
-  else if(ring_shape == 2){
-    n_immune_rings <- 2
-    properties_of_immune_rings_temp <- R_shape2
-    # if the cluster size is too small, adjust the locations of some of the sub shapes
-    size_threshold <- 100
-  }
-  else if(ring_shape == 3){
-    n_immune_rings <- 2
-    properties_of_immune_rings_temp <- R_shape3
-    # if the cluster size is too small, adjust the locations of some of the sub shapes
-    size_threshold <- 100
-  }
+    # count the image number
+    i <- 0
+    list.images <- list()
 
-
-  # loop through the properties
-  for (size in cluster_size){
-    # if the cluster size is too small, adjust the locations of some of the sub shapes
-    if (size < size_threshold) {
+    # choose a cluster shape (predefined in the package)
+    if (ring_shape == 1){
+        n_immune_rings <- 3
+        properties_of_immune_rings_temp <- R_shape1
+        # if the cluster size is too small, adjust the locations of some of the sub shapes
+        size_threshold <- 100
     }
-    for (infil in prop_infiltration){
-      for (width in ring_width){
-        y_idx <- 0
-        for (loc_x in cluster_loc_x) {
-          # find the corresponding y loc
-          y_idx <- y_idx + 1
-          loc_y <- cluster_loc_y[y_idx]
-          for (ring_infil in prop_ring_infiltration){
-            i <- i + 1 # image count
+    else if(ring_shape == 2){
+        n_immune_rings <- 2
+        properties_of_immune_rings_temp <- R_shape2
+        # if the cluster size is too small, adjust the locations of some of the sub shapes
+        size_threshold <- 100
+    }
+    else if(ring_shape == 3){
+        n_immune_rings <- 2
+        properties_of_immune_rings_temp <- R_shape3
+        # if the cluster size is too small, adjust the locations of some of the sub shapes
+        size_threshold <- 100
+    }
 
-            # change the properties of the cluster based on the current loop
-            properties_of_immune_rings <- properties_of_immune_rings_temp
-            for (k in seq_len(length(properties_of_immune_rings))){
-              # change the sizes of the default shape
-              properties_of_immune_rings[[k]]$size <-
-                properties_of_immune_rings[[k]]$size + size
-              # change the default infiltration proportions
-              properties_of_immune_rings[[k]]$infiltration_proportions[1] <- infil
-              # change the default centre locations
-              properties_of_immune_rings[[k]]$centre_loc[1] <-
-                properties_of_immune_rings[[k]]$centre_loc[1] + loc_x
-              properties_of_immune_rings[[k]]$centre_loc[2] <-
-                properties_of_immune_rings[[k]]$centre_loc[2] + loc_y
-              # change the immune ring width
-              properties_of_immune_rings[[k]]$immune_ring_width <- width
-              # change the immune ring infiltration proportion
-              properties_of_immune_rings[[k]]$immune_ring_infiltration_proportions[1] <-
-                ring_infil
-            }
 
-            # simulate the image
-            image <- TIS(bg_sample = bg_sample,
-                         n_immune_rings = n_immune_rings,
-                         properties_of_immune_rings = properties_of_immune_rings,
-                         plot_categories = plot_categories)
-            
-            if (plot_image){
-              if(is.null(plot_categories)) plot_categories <- unique(image$Phenotype)
-              if (is.null(plot_colours)){
-                plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                                  "lightgreen", "yellow", "black", "pink")}
-              phenos <- plot_categories
-              plot_cells(image, phenos, plot_colours[seq_len(length(phenos))], "Phenotype")
-            }
-            list.images[[i]] <- image
-          }
+    # loop through the properties
+    for (size in cluster_size){
+        # if the cluster size is too small, adjust the locations of some of the sub shapes
+        if (size < size_threshold) {
         }
-      }
+        for (infil in prop_infiltration){
+            for (width in ring_width){
+                y_idx <- 0
+                for (loc_x in cluster_loc_x) {
+                    # find the corresponding y loc
+                    y_idx <- y_idx + 1
+                    loc_y <- cluster_loc_y[y_idx]
+                    for (ring_infil in prop_ring_infiltration){
+                        i <- i + 1 # image count
+
+                        # change the properties of the cluster based on the current loop
+                        properties_of_immune_rings <- properties_of_immune_rings_temp
+                        for (k in seq_len(length(properties_of_immune_rings))){
+                            # change the sizes of the default shape
+                            properties_of_immune_rings[[k]]$size <-
+                                properties_of_immune_rings[[k]]$size + size
+                            # change the default infiltration proportions
+                            properties_of_immune_rings[[k]]$infiltration_proportions[1] <- infil
+                            # change the default centre locations
+                            properties_of_immune_rings[[k]]$centre_loc[1] <-
+                                properties_of_immune_rings[[k]]$centre_loc[1] + loc_x
+                            properties_of_immune_rings[[k]]$centre_loc[2] <-
+                                properties_of_immune_rings[[k]]$centre_loc[2] + loc_y
+                            # change the immune ring width
+                            properties_of_immune_rings[[k]]$immune_ring_width <- width
+                            # change the immune ring infiltration proportion
+                            properties_of_immune_rings[[k]]$immune_ring_infiltration_proportions[1] <-
+                                ring_infil
+                        }
+
+                        # simulate the image
+                        image <- TIS(bg_sample = bg_sample,
+                                     n_immune_rings = n_immune_rings,
+                                     properties_of_immune_rings = properties_of_immune_rings,
+                                     plot_categories = plot_categories)
+
+                        if (plot_image){
+                            if(is.null(plot_categories)) plot_categories <- unique(image$Phenotype)
+                            if (is.null(plot_colours)){
+                                plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                                                  "lightgreen", "yellow", "black", "pink")}
+                            phenos <- plot_categories
+                            plot_cells(image, phenos, plot_colours[seq_len(length(phenos))], "Phenotype")
+                        }
+                        list.images[[i]] <- image
+                    }
+                }
+            }
+        }
     }
-  }
-  return(list.images)
+    return(list.images)
 }
