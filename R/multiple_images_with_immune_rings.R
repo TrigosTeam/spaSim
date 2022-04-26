@@ -1,9 +1,12 @@
 #' Simulate multiple images with immune rings
 #'
 #' @description Generate a set of images with different immune ring properties.
-#' @param bg_sample A data.frame or SingleCellExperiment class object
-#'   with locations of points representing background cells. Further cell types
-#'   will be simulated based on this background sample. The data.frame or the
+#'   The default values for the arguments give an example of multiple image
+#'   simulation which enable an automatic multiple image simulation without the
+#'   specification of any argument.
+#' @param bg_sample A data.frame or SingleCellExperiment class object with
+#'   locations of points representing background cells. Further cell types will
+#'   be simulated based on this background sample. The data.frame or the
 #'   metadata of the SCE object should have colnames including
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
@@ -37,9 +40,11 @@
 #' @param plot_image Boolean Whether plot the simulated images or not.Default is
 #'   TRUE.
 #' @param plot_categories String Vector specifying the order of the cell
-#'   cateories to be plotted.
+#'   cateories to be plotted. Default is NULL - the cell categories under the
+#'   "Phenotype" column would be used for plotting.
 #' @param plot_colours String Vector specifying the order of the colours that
-#'   correspond to the `plot_categories` arg.
+#'   correspond to the `plot_categories` arg. Default is NULL - the predefined
+#'   colour vector would be used for plotting.
 #'
 #' @family simulate multiple images functions
 #' @seealso \code{\link{multiple_background_images}} for simulating multiple
@@ -67,10 +72,25 @@ multiple_images_with_immune_rings <- function(bg_sample = bg1,
                                               plot_image = TRUE,
                                               plot_categories = NULL,
                                               plot_colours = NULL){
-
     ## CHECK
-    # is the background sample a dataframe?
-    if (!is.data.frame(bg_sample)) {
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+    }
+    if(!is.numeric(cluster_size) | !is.numeric(prop_infiltration) |
+       !is.numeric(ring_width) | !is.numeric(cluster_loc_x) |
+       !is.numeric(cluster_loc_y) | !is.numeric(prop_ring_infiltration)){
+        stop(" One or more of `cluster_size`, `prop_infiltration`, `ring_width`, `cluster_loc_x`, `cluster_loc_y`, `prop_ring_infiltration` is not numeric!")
+    }
+    if(!(ring_shape %in% c(1, 2, 3))){
+        stop("`ring_shape` must be one of `1`, `2`, and `3`!")
+    }
+    if (!is.null(plot_categories) & !is.null(plot_categories)){
+        if (length(plot_categories) != length(plot_colours)){
+            stop("`plot_categories` and `plot_colours` should be of the same length!")
+        }
+    }
+
+    if (methods::is(bg_sample, "SingleCellExperiment")) {
         bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
     # count the image number
@@ -97,12 +117,8 @@ multiple_images_with_immune_rings <- function(bg_sample = bg1,
         size_threshold <- 100
     }
 
-
     # loop through the properties
     for (size in cluster_size){
-        # if the cluster size is too small, adjust the locations of some of the sub shapes
-        if (size < size_threshold) {
-        }
         for (infil in prop_infiltration){
             for (width in ring_width){
                 y_idx <- 0
@@ -142,16 +158,13 @@ multiple_images_with_immune_rings <- function(bg_sample = bg1,
                         if (plot_image){
                             if(is.null(plot_categories)) plot_categories <- unique(image$Phenotype)
                             if (is.null(plot_colours)){
-                                plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
-                                                  "lightgreen", "yellow", "black", "pink")}
+                                plot_colours <- c("gray","darkgreen", "red",
+                                                  "darkblue", "brown", "purple",
+                                                  "lightblue", "lightgreen",
+                                                  "yellow", "black", "pink")}
                             phenos <- plot_categories
                             plot_cells(image, phenos, plot_colours[seq_len(length(phenos))], "Phenotype")
                         }
-                        list.images[[i]] <- image
-                    }
-                }
-            }
-        }
-    }
+                        list.images[[i]] <- image}}}}}
     return(list.images)
 }

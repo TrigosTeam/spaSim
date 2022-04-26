@@ -1,23 +1,26 @@
 #' Simulate multiple background images (mixed cell types)
 #'
 #' @description Generate a set of background images with different proportions
-#'   of mixed cell types all at once.
+#'   of mixed cell types all at once. The default values for the arguments give
+#'   an example of multiple image simulation which enable an automatic multiple
+#'   image simulation without the specification of any argument.
 #'
-#' @param bg_sample A data.frame or SingleCellExperiment class object
-#'   with locations of points representing background cells. Further cell types
-#'   will be simulated based on this background sample. The data.frame or the
+#' @param bg_sample A data.frame or SingleCellExperiment class object with
+#'   locations of points representing background cells. Further cell types will
+#'   be simulated based on this background sample. The data.frame or the
 #'   metadata of the SCE object should have colnames including
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
 #' @param idents String Vector. Names of the cell types to generate.
-#' @param props List. Each element is a vector of
-#'   proportions of the corresponding cell type. The length of the vector is how
-#'   many images to generate. All vectors should be of the same length, also
-#'   equal to the number of images.
+#' @param props List. Each element is a vector of proportions of the
+#'   corresponding cell type. The length of the vector is how many images to
+#'   generate. All vectors should be of the same length, also equal to the
+#'   number of images.
 #' @param plot_image Boolean. Whether plot the simulated images or not. Default
 #'   is TRUE.
 #' @param plot_colours String Vector. If plot_image is TRUE, this param is the
-#'   corresponding colours for the `idents` arg.
+#'   corresponding colours for the `idents` arg. Default is NULL, the predefined
+#'   colour vector would be used for plotting.
 #'
 #' @family simulate multiple images functions
 #' @seealso \code{\link{multiple_images_with_clusters}} for simulating multiple
@@ -35,18 +38,35 @@
 #' bg_image_list <- multiple_background_images(bg_sample = bg1,
 #' idents = idents, props = list(prop1, prop2, prop3), plot_image = FALSE)
 
-multiple_background_images <- function(bg_sample,
+multiple_background_images <- function(bg_sample = bg1,
                                        idents = c("Tumour", "Immune","Others"),
                                        props = list(rep(0.1, 9),
                                                     seq(0, 0.4, 0.05),
                                                     seq(0.9,0.5,-0.05)),
                                        plot_image = TRUE,
                                        plot_colours = NULL){
-    # CHECK is the background sample a data frame?
-    if (!is.data.frame(bg_sample)) {
+    ## CHECK
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+    }
+    if (length(idents) != length(props)){
+        stop("`idents` and `props` should be of the same length!")
+    }
+    if (!is.character(idents)){
+        stop("`idents` should be character or a character vector!")
+    }
+    if (!is.list(props)){
+        stop("`props` should be a list of numeric vectors. See `?multiple_background_images` for the details of this parameter.")
+    }
+
+    if (!is.null(plot_colours)){
+        if (length(idents) != length(plot_colours)){
+            stop("`idents` and `plot_colours` should be of the same length!")}}
+
+    if (methods::is(bg_sample, "SingleCellExperiment")) {
         bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
-    # default phenotype is "Others"
+    # default phenotype is "Others" (only when there is no "Phenotype" column in bg_sample)
     if (is.null(bg_sample$Phenotype)){
         bg_sample[, "Phenotype"] <- "Others"
     }

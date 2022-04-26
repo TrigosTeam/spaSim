@@ -2,7 +2,9 @@
 #'
 #' @description Based on an existing background image, simulate rings of immune
 #'   cells that surround tumour clusters. The tumour clusters and immune rings
-#'   are simulated at the same time.
+#'   are simulated at the same time. The default values for the arguments give
+#'   an example of immune ring simulation which enable an automatic simulation
+#'   of immune rings without the specification of any argument.
 #'
 #' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
 #'   with locations of points representing background cells. Further cell types
@@ -16,12 +18,15 @@
 #'   `length(ir_properties)`.
 #' @param win (OPTIONAL) owin object output from spatstat.geom::owin function.
 #'   By default is the window of the background image.
-#' @param ir_properties List of properties of the immune rings. Please refer to the examples for the structure of `ir_properties`.
+#' @param ir_properties List of properties of the immune rings. Please refer to
+#'   the examples for the structure of `ir_properties`.
 #' @param plot_image Boolean. Whether the simulated image is plotted.
 #' @param plot_categories String Vector specifying the order of the cell
-#'   categories to be plotted.
+#'   categories to be plotted. Default is NULL - the cell categories under the
+#'   "Phenotype" column would be used for plotting.
 #' @param plot_colours String Vector specifying the order of the colours that
-#'   correspond to the `plot_categories` arg.
+#'   correspond to the `plot_categories` arg. Default is NULL - the predefined
+#'   colour vector would be used for plotting.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -77,12 +82,38 @@ simulate_immune_rings <- function(bg_sample = bg1,
                                   ),
                                   plot_image = TRUE,
                                   plot_categories = NULL,
-                                  plot_colours = NULL
-) {
-
+                                  plot_colours = NULL){
     ## CHECK
-    # is the background sample a dataframe?
-    if (!is.data.frame(bg_sample)) {
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample,"SingleCellExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+    }
+    if (!is.list(ir_properties)){
+        stop("`ir_properties` should be a list of lists where each list contains the properties of an immune ring!")
+    }
+    # check if the immune ring properties are properly defined
+    for (i in seq_len(length(ir_properties))){
+        if (!setequal(names(ir_properties[[i]]),
+                      c("name_of_cluster_cell", "size", "shape", "centre_loc",
+                        "infiltration_types", "infiltration_proportions",
+                        "name_of_ring_cell", "immune_ring_width",
+                        "immune_ring_infiltration_types", "immune_ring_infiltration_proportions"))) {
+            stop("`ir_properties` is a list of lists. Each list under `ir_properties` should contain fields:
+`name_of_cluster_cell`, `size`, `shape`, `centre_loc`, `infiltration_types`, `infiltration_proportions`,
+`name_of_ring_cell`, `immune_ring_width`, `immune_ring_infiltration_types`, `immune_ring_infiltration_proportions`.")
+        }
+        if (length(ir_properties[[i]]$infiltration_types) != length(ir_properties[[i]]$infiltration_proportions)){
+            stop(paste("The", i, "th list of `ir_properties` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+        }
+        if (length(ir_properties[[i]]$immune_ring_infiltration_types) != length(ir_properties[[i]]$immune_ring_infiltration_proportions)){
+            stop(paste("The", i, "th list of `ir_properties` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.", sep = ""))
+        }
+    }
+
+    if (!is.null(plot_colours) & !is.null(plot_categories)){
+        if (length(plot_categories) != length(plot_colours)){
+            stop("`plot_categories` and `plot_colours` should be of the same length!")}}
+
+    if (methods::is(bg_sample,"SingleCellExperiment")) {
         bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
     # check if the specified cluster properties match n_ir
@@ -210,4 +241,3 @@ simulate_immune_rings <- function(bg_sample = bg1,
     }
     return(bg_sample)
 }
-

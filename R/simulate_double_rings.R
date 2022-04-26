@@ -4,7 +4,9 @@
 #'   immune cells that surround tumour clusters. The inner ring is the internal
 #'   margin of a tumour cluster. The outer ring is the external tumour margin.
 #'   The tumour clusters and the double immune rings are simulated at the same
-#'   time.
+#'   time. The default values for the arguments give an example of double ring
+#'   simulation which enable an automatic simulation of double rings without the
+#'   specification of any argument.
 #'
 #' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
 #'   with locations of points representing background cells. Further cell types
@@ -18,13 +20,15 @@
 #'   `length(dr_properties)`.
 #' @param win (OPTIONAL) owin object output from spatstat.geom::owin function.
 #'   By default is the window of the background image.
-#' @param dr_properties List of properties of the double immune
-#'   rings. Please refer to the examples for the structure of `dr_properties`.
+#' @param dr_properties List of properties of the double immune rings. Please
+#'   refer to the examples for the structure of `dr_properties`.
 #' @param plot_image Boolean. Whether the simulated image is plotted.
 #' @param plot_categories String Vector specifying the order of the cell
-#'   categories to be plotted.
+#'   categories to be plotted. Default is NULL - the cell categories under the
+#'   "Phenotype" column would be used for plotting.
 #' @param plot_colours String Vector specifying the order of the colours that
-#'   correspond to the `plot_categories` arg.
+#'   correspond to the `plot_categories` arg. Default is NULL - the predefined
+#'   colour vector would be used for plotting.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -99,8 +103,44 @@ simulate_double_rings <- function(bg_sample = bg1,
                                   plot_colours = NULL) {
 
     ## CHECK
-    # is the background sample a dataframe?
-    if (!is.data.frame(bg_sample)) {
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+    }
+    if (!is.list(dr_properties)){
+        stop("`dr_properties` should be a list of lists where each list contains the properties of a double ring!")
+    }
+    for (i in seq_len(length(dr_properties))){
+        if (!setequal(names(dr_properties[[i]]),
+                      c("name_of_cluster_cell", "size", "shape", "centre_loc",
+                        "infiltration_types", "infiltration_proportions",
+                        "name_of_ring_cell", "immune_ring_width",
+                        "immune_ring_infiltration_types", "immune_ring_infiltration_proportions",
+                        "name_of_double_ring_cell", "double_ring_width",
+                        "double_ring_infiltration_types", "double_ring_infiltration_proportions"))) {
+            stop("`dr_properties` is a list of lists. Each list under `dr_properties` should contain fields:
+`name_of_cluster_cell`, `size`, `shape`, `centre_loc`, `infiltration_types`, `infiltration_proportions`,
+`name_of_ring_cell`, `immune_ring_width`, `immune_ring_infiltration_types`, `immune_ring_infiltration_proportions`,
+`name_of_double_ring_cell`, `double_ring_width`, `double_ring_infiltration_types`, `double_ring_infiltration_proportions`.")
+        }
+        if (length(dr_properties[[i]]$infiltration_types) !=
+            length(dr_properties[[i]]$infiltration_proportions)){
+            stop(paste("The", i, "th list of `dr_properties` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+        }
+        if (length(dr_properties[[i]]$immune_ring_infiltration_types) !=
+            length(dr_properties[[i]]$immune_ring_infiltration_proportions)){
+            stop(paste("The", i, "th list of `dr_properties` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.", sep = ""))
+        }
+        if (length(dr_properties[[i]]$double_ring_infiltration_types) !=
+            length(dr_properties[[i]]$double_ring_infiltration_proportions)){
+            stop(paste("The", i, "th list of `dr_properties` has different length of `double_ring_infiltration_types` and `double_ring_infiltration_proportions`.", sep = ""))
+        }
+    }
+
+    if (!is.null(plot_colours) & !is.null(plot_categories)){
+        if (length(plot_categories) != length(plot_colours)){
+            stop("`plot_categories` and `plot_colours` should be of the same length!")}}
+
+    if (methods::is(bg_sample, "SingleCellExperiment")) {
         bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
     # check if the specified cluster properties match n_dr

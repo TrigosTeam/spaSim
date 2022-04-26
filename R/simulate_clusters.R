@@ -1,6 +1,9 @@
 #' Simulate clusters
 #' @description Based on an existing background image, simulate clusters of
-#'   cells where the same type of cells aggregate.
+#'   cells where the same type of cells aggregate. The default values for the
+#'   arguments give an example of cluster simulation which enable an automatic
+#'   simulation of clusters without the specification of any argument.
+#'
 #' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
 #'   with locations of points representing background cells. Further cell types
 #'   will be simulated based on this background sample. The data.frame or the
@@ -14,13 +17,15 @@
 #'   "Others".
 #' @param win (OPTIONAL) `owin` object output from spatstat.geom::owin function.
 #'   By default is the window of the background image.
-#' @param cluster_properties List of properties of the clusters. See
-#'   examples for the format of this arg.
+#' @param cluster_properties List of properties of the clusters. See examples
+#'   for the format of this arg.
 #' @param plot_image Boolean. Whether the simulated image is plotted.
 #' @param plot_categories String Vector specifying the order of the cell
-#'   categories to be plotted.
+#'   categories to be plotted. Default is NULL - the cell categories under the
+#'   "Phenotype" column would be used for plotting.
 #' @param plot_colours String Vector specifying the order of the colours that
-#'   correspond to the `plot_categories` arg.
+#'   correspond to the `plot_categories` arg. Default is NULL - the predefined
+#'   colour vector would be used for plotting.
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -64,8 +69,33 @@ simulate_clusters <- function(bg_sample = bg1,
                               plot_colours = NULL
 ){
 
-    # CHECK is the background sample a dataframe?
-    if (!is.data.frame(bg_sample)) {
+    ## CHECK
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+    }
+    if (!is.list(cluster_properties)){
+        stop("`cluster_properties` should be a list of lists where each list contains the properties of a cluster!")
+    }
+    if (length(cluster_properties) != n_clusters){
+        stop("`n_clusters` should be the same as the length of `cluster_properties`!")
+    }
+    for (i in seq_len(length(cluster_properties))){
+        if (!setequal(names(cluster_properties[[i]]),
+                      c("name_of_cluster_cell", "size", "shape", "centre_loc",
+                        "infiltration_types", "infiltration_proportions"))) {
+            stop("`cluster_properties` is a list of lists. Each list under `cluster_properties` should contain fields:
+`name_of_cluster_cell`, `size`, `shape`, `centre_loc`, `infiltration_types`, `infiltration_proportions`.")
+        }
+        if (length(cluster_properties[[i]]$infiltration_types) != length(cluster_properties[[i]]$infiltration_proportions)){
+            stop(paste("The", i, "th list of `cluster_properties` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+        }
+    }
+
+    if (!is.null(plot_colours) & !is.null(plot_categories)){
+        if (length(plot_categories) != length(plot_colours)){
+            stop("`plot_categories` and `plot_colours` should be of the same length!")}}
+
+    if (methods::is(bg_sample, "SingleCellExperiment")) {
         bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
     # Get the window

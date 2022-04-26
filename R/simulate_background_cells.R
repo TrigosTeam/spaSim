@@ -11,10 +11,12 @@
 #' @param min_d Numeric. The minimum distance between two cells.
 #' @param oversampling_rate (OPTIONAL) Numeric. The multiplier for oversampling.
 #'   Without oversampling, the simulation deletes cells that are within `min_d`
-#'   from each other, resulting in a less number of cells than specified.
-#'   Default is 1.2.
+#'   from each other, resulting in a less total number of cells than `n_cells`.
+#'   Default is 1.2 (this should be set based on `n_cells` and `min_d`; should
+#'   always be larger than 1).
 #' @param Phenotype (OPTIONAL) String. The name of the background cell type.
-#'   Default is "Others".
+#'   Default is "Others" since there shouldn't be any identity of the background
+#'   cells.
 #'
 #' @family simulate pattern functions
 #' @seealso \code{\link{simulate_mixing}} for mixed background simulation,
@@ -35,6 +37,14 @@
 simulate_background_cells <- function(n_cells, width, height, min_d,
                                       oversampling_rate = 1.2,
                                       Phenotype = "Others"){
+    ## CHECK
+    if(!is.numeric(n_cells) | !is.numeric(width) | !is.numeric(height) |
+       !is.numeric(min_d) | !is.numeric(oversampling_rate)){
+        stop("One or more of `n_cells`, `width`, `height`, `min_d`, `oversampling_rate` is not numeric!")
+    }
+    if (!is.character(Phenotype)){
+        stop("`Phenotype` should be of character type!")
+    }
 
     # need to oversample first
     n_cells_inflated <- n_cells*oversampling_rate
@@ -47,8 +57,6 @@ simulate_background_cells <- function(n_cells, width, height, min_d,
     sample <- spatstat.random::rHardcore(beta = beta,R = min_d, W=win)
 
     # extract point data
-    Cell.X.Position <- sample$x
-    Cell.Y.Position <- sample$y
     sample <- data.frame(Cell.X.Position = sample$x, Cell.Y.Position = sample$y)
 
     # if the sampled data is more than the expected number

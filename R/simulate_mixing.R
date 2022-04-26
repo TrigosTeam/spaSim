@@ -1,6 +1,9 @@
 #' Simulate mixed background image
 #' @description Based on an existing background image, simulate mixed cell types
-#'   with specified cell types and proportions.
+#'   with specified cell types and proportions. The default values for the
+#'   arguments give an example of mixed cell type simulation which enable an
+#'   automatic simulation of mixed cell types without the specification of any
+#'   argument.
 #' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
 #'   with locations of points representing background cells. Further cell types
 #'   will be simulated based on this background sample. The data.frame or the
@@ -8,11 +11,11 @@
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
 #' @param idents String Vector of the mixed cell types.
-#' @param props Numeric Vector of the proportions of the mixed cell
-#'   types.
+#' @param props Numeric Vector of the proportions of the mixed cell types.
 #' @param plot_image Boolean. Whether the simulated image is plotted.
 #' @param plot_colours String Vector specifying the order of the colours that
-#'   correspond to the `idents` arg.
+#'   correspond to the `idents` arg. Default is NULL - the predefined
+#'   colour vector would be used for plotting..
 #'
 #' @family simulate pattern functions
 #' @seealso   \code{\link{simulate_background_cells}} for all cell simulation,
@@ -36,9 +39,18 @@ simulate_mixing <- function(bg_sample = bg1,
                             plot_image = TRUE,
                             plot_colours = NULL) {
 
-    # CHECK is the background sample a dataframe?
-    if (!is.data.frame(bg_sample)) {
-        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
+    ## CHECK
+    if (length(idents) != length(props)){
+        stop("`idents` and `props` should be of the same length!")}
+    if (!is.character(idents)){
+        stop("`idents` should be character or a character vector!")}
+    if (!is.numeric(props)){
+        stop("`props` should be numeric or a numeric vector!")}
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")}
+    if (!is.null(plot_colours)){
+        if (length(idents) != length(plot_colours)){
+            stop("`idents` and `plot_colours` should be of the same length!")}}
 
     # default phenotype is "Others"
     if (is.null(bg_sample$Phenotype)){
