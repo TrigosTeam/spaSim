@@ -291,5 +291,8 @@ simulate_double_rings <- function(bg_sample = bg1,
         plot_cells(bg_sample, phenos, plot_colours[seq_len(length(phenos))], "Cell.Type")
     }
 
+    # delete the "lab" column
+    bg_sample$lab <- NULL
+
     return(bg_sample)
 }
