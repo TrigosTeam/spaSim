@@ -66,3 +66,9 @@ mix_background <- TIS(n_cells = 5000, width = 2000, height = 2000, min_d = 10,
 
 spaSim was created, designed and implemented by Yuzhou Feng. Anna Trigos
 provided supervision and guidance.
+
+## Manuscript submission
+
+Note that the version used in the manuscript under review is v0.99.1.
+The release can be accessed
+[here](https://github.com/TrigosTeam/spaSim/releases/tag/v0.99.1).
