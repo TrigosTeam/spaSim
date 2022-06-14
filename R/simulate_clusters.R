@@ -15,8 +15,6 @@
 #' @param bg_type (OPTIONAL) String. The name of the background cell type if the
 #'   background sample does not have a "Phenotype" column. By default is
 #'   "Others".
-#' @param win (OPTIONAL) `owin` object output from spatstat.geom::owin function.
-#'   By default is the window of the background image.
 #' @param cluster_properties List of properties of the clusters. See examples
 #'   for the format of this arg.
 #' @param plot_image Boolean. Whether the simulated image is plotted.
@@ -48,7 +46,6 @@
 simulate_clusters <- function(bg_sample = bg1,
                               n_clusters = 2,
                               bg_type = "Others",
-                              win = NULL,
                               cluster_properties = list(
                                   C1 = list(
                                       name_of_cluster_cell = "Tumour",
@@ -98,14 +95,10 @@ simulate_clusters <- function(bg_sample = bg1,
     if (methods::is(bg_sample, "SingleCellExperiment")) {
         bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
 
-    # Get the window
-    # if window is specified, use the specified window
-    # otherwise, use the window of the background sample
-    if (is.null(win)) {
-        X <- max(bg_sample$Cell.X.Position)
-        Y <- max(bg_sample$Cell.Y.Position)
-        win <- spatstat.geom::owin(c(0, X), c(0,Y))
-    }
+    # Get the window, use the window of the background sample
+    X <- max(bg_sample$Cell.X.Position)
+    Y <- max(bg_sample$Cell.Y.Position)
+    win <- spatstat.geom::owin(c(0, X), c(0,Y))
 
     # Default phenotype is specified by bg_type
     # (when background sample does not have Phenotype)

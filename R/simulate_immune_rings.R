@@ -16,8 +16,6 @@
 #'   default is "Others".
 #' @param n_ir Number of immune rings. This must match the arg
 #'   `length(ir_properties)`.
-#' @param win (OPTIONAL) owin object output from spatstat.geom::owin function.
-#'   By default is the window of the background image.
 #' @param ir_properties List of properties of the immune rings. Please refer to
 #'   the examples for the structure of `ir_properties`.
 #' @param plot_image Boolean. Whether the simulated image is plotted.
@@ -58,7 +56,6 @@
 simulate_immune_rings <- function(bg_sample = bg1,
                                   bg_type = "Others",
                                   n_ir = 2,
-                                  win = NULL,
                                   ir_properties = list(
                                       I1 = list(
                                           name_of_cluster_cell = "Tumour",
@@ -130,14 +127,10 @@ simulate_immune_rings <- function(bg_sample = bg1,
     # 1 for first ring, 2 for background cells)
     bg_sample$lab <- 2
 
-    ## Get the window
-    # if window is specified, use the specified window
-    # otherwise, use the window of the background sample
-    if (is.null(win)) {
-        X <- max(bg_sample$Cell.X.Position)
-        Y <- max(bg_sample$Cell.Y.Position)
-        win <- spatstat.geom::owin(c(0, X), c(0,Y))
-    }
+    ## Get the window, use the window of the background sample
+    X <- max(bg_sample$Cell.X.Position)
+    Y <- max(bg_sample$Cell.Y.Position)
+    win <- spatstat.geom::owin(c(0, X), c(0,Y))
 
     ## Default phenotype is specified by bg_type
     # (when background sample does not have Phenotype)

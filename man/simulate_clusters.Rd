@@ -8,7 +8,6 @@ simulate_clusters(
   bg_sample = bg1,
   n_clusters = 2,
   bg_type = "Others",
-  win = NULL,
   cluster_properties = list(C1 = list(name_of_cluster_cell = "Tumour", size = 300,
     shape = "Oval", centre_loc = data.frame(x = 500, y = 500), infiltration_types =
     c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05)), C2 =
@@ -34,9 +33,6 @@ metadata of the SCE object should have colnames including
 \item{bg_type}{(OPTIONAL) String. The name of the background cell type if the
 background sample does not have a "Phenotype" column. By default is
 "Others".}
-
-\item{win}{(OPTIONAL) \code{owin} object output from spatstat.geom::owin function.
-By default is the window of the background image.}
 
 \item{cluster_properties}{List of properties of the clusters. See examples
 for the format of this arg.}

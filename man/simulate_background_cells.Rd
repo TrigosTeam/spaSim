@@ -10,7 +10,7 @@ simulate_background_cells(
   height,
   min_d,
   oversampling_rate = 1.2,
-  Phenotype = "Others"
+  Cell.Type = "Others"
 )
 }
 \arguments{
@@ -26,7 +26,7 @@ from each other, resulting in a less total number of cells than \code{n_cells}.
 Default is 1.2 (this should be set based on \code{n_cells} and \code{min_d}; should
 always be larger than 1).}
 
-\item{Phenotype}{(OPTIONAL) String. The name of the background cell type.
+\item{Cell.Type}{(OPTIONAL) String. The name of the background cell type.
 Default is "Others" since there shouldn't be any identity of the background
 cells.}
 }
@@ -37,14 +37,14 @@ A data.frame of the simulated background image
 Simulate cell locations. The 2D locations of the cells are
 simulated and plotted in a rectangular window. Users can specify the window
 size, cell number and the minimum distance between two cells. All cells
-have the same "Phenotype", specified by the "Phenotype" param. This
+have the same cell type, specified by the "Cell.Type" param. This
 function uses \code{rHardcore} \code{\link{spatstat.random}}.
 }
 \examples{
 set.seed(610) # set seed for this background image simulation for reproducibility
 background_image <- simulate_background_cells(n_cells = 5000, width = 2000,
                                               height = 2000, min_d = 10,
-                                              oversampling_rate = 1.5, Phenotype = "Others")
+                                              oversampling_rate = 1.5, Cell.Type = "Others")
 }
 \seealso{
 \code{\link{simulate_mixing}} for mixed background simulation,

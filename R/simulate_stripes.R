@@ -16,8 +16,6 @@
 #'   \code{\link{bg1}} background image.
 #' @param n_stripe_type Number of stripe types. Should be the same as
 #'   `length(stripe_properties`.
-#' @param win (OPTIONAL) `owin` object from spatstat.geom owin method. By
-#'   default it is the window of the background image.
 #' @param stripe_properties List of the properties of the stripes. See examples
 #'   for the format of the properties. Please refer to the examples for the
 #'   structure of `stripe_properties`.
@@ -55,11 +53,10 @@
 #'   infiltration_proportions = c(0.08)))
 #' set.seed(610)
 #' stripe_image <- simulate_stripes(bg_sample = bg1, n_stripe_type=2,
-#' win = NULL, stripe_properties = stripe_properties, plot_image = TRUE)
+#' stripe_properties = stripe_properties, plot_image = TRUE)
 
 simulate_stripes <- function(bg_sample = bg1,
                              n_stripe_type = 2,
-                             win = NULL,
                              stripe_properties = list(
                                  S1 = list(
                                      number_of_stripes = 1,
@@ -110,11 +107,9 @@ simulate_stripes <- function(bg_sample = bg1,
     if (methods::is(bg_sample, "SingleCellExperiment")) {
         bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
     # get the window
-    if (is.null(win)) {
-        X <- max(bg_sample$Cell.X.Position)
-        Y <- max(bg_sample$Cell.Y.Position)
-        win <- spatstat.geom::owin(c(0, X), c(0,Y))
-    }
+    X <- max(bg_sample$Cell.X.Position)
+    Y <- max(bg_sample$Cell.Y.Position)
+    win <- spatstat.geom::owin(c(0, X), c(0,Y))
     # default phenotype is "Others"
     if (is.null(bg_sample$Phenotype)){
         bg_sample[, "Phenotype"] <- "Others"

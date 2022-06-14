@@ -8,7 +8,6 @@ simulate_double_rings(
   bg_sample = bg1,
   bg_type = "Others",
   n_dr = 2,
-  win = NULL,
   dr_properties = list(D1 = list(name_of_cluster_cell = "Tumour", size = 300, shape =
     "Circle", centre_loc = data.frame(x = 1000, y = 1000), infiltration_types =
     c("Immune1", "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
@@ -16,9 +15,10 @@ simulate_double_rings(
     immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions =
     c(0.15), name_of_double_ring_cell = "Immune2", double_ring_width = 100,
     double_ring_infiltration_types = c("Others"), double_ring_infiltration_proportions =
-    c(0.15)),      D2 = list(name_of_cluster_cell = "Tumour", size = 300, shape = "Oval",
-    centre_loc = data.frame(x = 1200, y = 1200), infiltration_types = c("Immune1",
-    "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
+    c(0.15)), 
+     D2 = list(name_of_cluster_cell = "Tumour", size = 300, shape =
+    "Oval", centre_loc = data.frame(x = 1200, y = 1200), infiltration_types =
+    c("Immune1", "Immune2", "Others"), infiltration_proportions = c(0.15, 0.05, 0.05),
     name_of_ring_cell = "Immune1", immune_ring_width = 150,
     immune_ring_infiltration_types = c("Others"), immune_ring_infiltration_proportions =
     c(0.15), name_of_double_ring_cell = "Immune2", double_ring_width = 100,
@@ -42,9 +42,6 @@ default is "Others".}
 
 \item{n_dr}{Number of double immune rings. This must match the
 \code{length(dr_properties)}.}
-
-\item{win}{(OPTIONAL) owin object output from spatstat.geom::owin function.
-By default is the window of the background image.}
 
 \item{dr_properties}{List of properties of the double immune rings. Please
 refer to the examples for the structure of \code{dr_properties}.}

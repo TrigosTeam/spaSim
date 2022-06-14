@@ -7,7 +7,6 @@
 simulate_stripes(
   bg_sample = bg1,
   n_stripe_type = 2,
-  win = NULL,
   stripe_properties = list(S1 = list(number_of_stripes = 1, name_of_stripe_cell =
     "Others", width_of_stripe = 80, infiltration_types = c("Immune"),
     infiltration_proportions = c(0.08)), S2 = list(number_of_stripes = 1,
@@ -28,9 +27,6 @@ metadata of the SCE object should have colnames including
 
 \item{n_stripe_type}{Number of stripe types. Should be the same as
 \verb{length(stripe_properties}.}
-
-\item{win}{(OPTIONAL) \code{owin} object from spatstat.geom owin method. By
-default it is the window of the background image.}
 
 \item{stripe_properties}{List of the properties of the stripes. See examples
 for the format of the properties. Please refer to the examples for the
@@ -75,7 +71,7 @@ S1 = list(
   infiltration_proportions = c(0.08)))
 set.seed(610)
 stripe_image <- simulate_stripes(bg_sample = bg1, n_stripe_type=2,
-win = NULL, stripe_properties = stripe_properties, plot_image = TRUE)
+stripe_properties = stripe_properties, plot_image = TRUE)
 }
 \seealso{
 \code{\link{simulate_background_cells}} for all cell simulation,
