@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   crop = NULL, ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html,
-  fig.width = 4, fig.height = 2.5, out.width = "75%", dpi = 50
+  fig.width = 6, fig.height = 4, out.width = "75%", dpi = 70
 )
 ```
 
@@ -51,13 +51,13 @@ bib <- c(
 
 # Basics
 
-spaSim (**spa**tial **Sim**ulator) is a simulator of tumor immune microenvironment spatial data. It includes a family of functions to simulate a diverse set of cell localization patterns in tissues. Patterns include background cells (one cell type or multiple cell types of different proportions), tumour/immune clusters, immune rings and double immune rings and stripes (blood/lymphatic vessels).
+spaSim (**spa**tial **Sim**ulator) is a simulator of tumour immune microenvironment spatial data. It includes a family of functions to simulate a diverse set of cell localization patterns in tissues. Patterns include background cells (one cell type or multiple cell types of different proportions), tumour/immune clusters, immune rings and double immune rings and stripes (blood/lymphatic vessels).
 
-As quantitative tools for spatial tissue image analysis have been developed and need benchmarking, simulations from spaSim can be applied to test and benchmark these tools and metrics. The output of spaSim are images in SingleCellExperiment object format and can be used with SPIAT (SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues) also developed by our team.
+As quantitative tools for spatial tissue image analysis have been developed and need benchmarking, simulations from spaSim can be applied to test and benchmark these tools and metrics. The output of spaSim are images in `SpatialExperiment` object format and can be used with SPIAT (SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues) also developed by our team.
 
 ## Installing `spaSim`
 
-`r Biocpkg("spaSim")` is a `R` package available via the [Bioconductor](http://bioconductor.org) repository for packages. You can install the lasted development version from Github. You can install spaSim using the following commands in your `R` session:
+`r Biocpkg("spaSim")` is a `R` package available via the [Bioconductor](http://bioconductor.org) repository for packages. You can install the latest development version from Github. You can install spaSim using the following commands in your `R` session:
   
   
 ```{r install, eval = FALSE}
@@ -69,13 +69,15 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) {
 
 BiocManager::install("spaSim")
 
-# install from GitHub
+# install from GitHub the development version
 install.packages("devtools")
 devtools::install_github("TrigosTeam/spaSim")
 ```
 
 ## Citing `spaSim`
+
 We hope that `r Biocpkg("spaSim")` will be useful for your research. Please use the following information to cite the package and the overall approach. Thank you!
+
 ```{r "citation"}
 ## Citation info
 citation("spaSim")
@@ -102,10 +104,10 @@ bg <- simulate_background_cells(n_cells = 5000,
                                 height = 2000,
                                 min_d = 10,
                                 oversampling_rate = 1.6,
-                                Phenotype="Others")
+                                Cell.Type = "Others")
 head(bg)
 # use dim(bg)[1] to check if the same number of cells are simulated. 
-# if not, increase `oversampling_rate`
+# if not, increase `oversampling_rate`.
 dim(bg)[1]
 ```
 
@@ -497,7 +499,7 @@ Here is an example of using `SPIAT` function on `spaSim` image. We use `simulate
 #   SPIAT::plot_cell_categories(sce_object = simulated_image, 
 #                               categories_of_interest = c("Tumour", "Immune1", "Immune2", "Others"),
 #                               colour_vector = c("red", "darkgreen", "darkblue", "lightgray"),
-#                               feature_colname = "Phenotype")
+#                               feature_colname = "Cell.Type")
 #   # calculate average minimum distance of the cells
 #   SPIAT::average_minimum_distance(sce_object = simulated_image)
 #   # You can also try other functions :)
