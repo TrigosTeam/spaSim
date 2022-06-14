@@ -15,7 +15,7 @@ simulations that generate a set of images in one run!
 As quantitative tools for spatial tissue image analysis have been
 developed and need benchmarking, simulations from spaSim can be applied
 to test and benchmark these tools and metrics. The output of spaSim are
-images in SingleCellExperiment object format and can be used with SPIAT.
+images in `SpatialExperiment` object format and can be used with SPIAT.
 SPIAT (**Sp**atial **I**mage **A**nalysis of **T**issues) is also
 developed by our team.
 
