@@ -3,13 +3,13 @@
 \docType{data}
 \name{bg1}
 \alias{bg1}
-\title{Dataframe of background cells 2000*2000.}
+\title{A data frame of background cells.}
 \format{
 A data frame with 4915 rows (cells) and 3 columns:
 \describe{
 \item{Cell.X.Position}{X coordinate}
 \item{Cell.Y.Position}{Y coordinate}
-\item{Phenotype}{cell type}
+\item{Cell.Type}{cell type}
 ...
 }
 }
