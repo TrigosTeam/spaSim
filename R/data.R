@@ -1,4 +1,4 @@
-#' Dataframe of background cells 2000*2000.
+#' A data frame of background cells.
 #'
 #' A data frame containing 4915 background cells on 2000 by 2000 size window
 #'
@@ -6,7 +6,7 @@
 #' \describe{
 #'   \item{Cell.X.Position}{X coordinate}
 #'   \item{Cell.Y.Position}{Y coordinate}
-#'   \item{Phenotype}{cell type}
+#'   \item{Cell.Type}{cell type}
 #'   ...
 #' }
 "bg1"

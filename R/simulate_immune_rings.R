@@ -21,7 +21,7 @@
 #' @param plot_image Boolean. Whether the simulated image is plotted.
 #' @param plot_categories String Vector specifying the order of the cell
 #'   categories to be plotted. Default is NULL - the cell categories under the
-#'   "Phenotype" column would be used for plotting.
+#'   "Cell.Type" column would be used for plotting.
 #' @param plot_colours String Vector specifying the order of the colours that
 #'   correspond to the `plot_categories` arg. Default is NULL - the predefined
 #'   colour vector would be used for plotting.
@@ -132,10 +132,10 @@ simulate_immune_rings <- function(bg_sample = bg1,
     Y <- max(bg_sample$Cell.Y.Position)
     win <- spatstat.geom::owin(c(0, X), c(0,Y))
 
-    ## Default phenotype is specified by bg_type
-    # (when background sample does not have Phenotype)
-    if (is.null(bg_sample$Phenotype)){
-        bg_sample[, "Phenotype"] <- bg_type
+    ## Default `Cell.Type` is specified by bg_type
+    # (when background sample does not have `Cell.Type`)
+    if (is.null(bg_sample$Cell.Type)){
+        bg_sample[, "Cell.Type"] <- bg_type
     }
 
     n_cells <- dim(bg_sample)[1]
@@ -176,7 +176,7 @@ simulate_immune_rings <- function(bg_sample = bg1,
         for (i in seq_len(n_cells)){
             x <- bg_sample[i, "Cell.X.Position"]
             y <- bg_sample[i, "Cell.Y.Position"]
-            pheno <- bg_sample[i, "Phenotype"]
+            pheno <- bg_sample[i, "Cell.Type"]
 
             # squared distance to the cluster centre
             A <- (x - a)^2
@@ -188,7 +188,7 @@ simulate_immune_rings <- function(bg_sample = bg1,
             if (D < R){
                 # assign the primary label of the cell
                 bg_sample[i, "lab"] <- 0
-                # generate random number to decide the phenotype
+                # generate random number to decide the `Cell.Type`
                 random <- stats::runif(1)
                 n_infiltration_types <- length(infiltration_types)
                 pheno <- cluster_cell_type
@@ -209,7 +209,7 @@ simulate_immune_rings <- function(bg_sample = bg1,
                 # than 2, keep the primary label, skip out of the conditional
                 bg_sample[i, "lab"] <- min(1, bg_sample[i, "lab"])
                 if (bg_sample[i , "lab"] == 1){
-                    # generate random number to decide the phenotype
+                    # generate random number to decide the `Cell.Type`
                     random <- stats::runif(1)
                     n_ring_infiltration_types <- length(ring_infiltration_types)
                     pheno <- ring_cell_type
@@ -225,17 +225,17 @@ simulate_immune_rings <- function(bg_sample = bg1,
                     }
                 }
             }
-            bg_sample[i, "Phenotype"] <- pheno
+            bg_sample[i, "Cell.Type"] <- pheno
         }
     }
     if (plot_image){
-        if(is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
+        if(is.null(plot_categories)) plot_categories <- unique(bg_sample$Cell.Type)
         if (is.null(plot_colours)){
             plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
                               "lightgreen", "yellow", "black", "pink")
         }
         phenos <- plot_categories
-        plot_cells(bg_sample, phenos, plot_colours[seq_len(length(phenos))], "Phenotype")
+        plot_cells(bg_sample, phenos, plot_colours[seq_len(length(phenos))], "Cell.Type")
     }
     return(bg_sample)
 }

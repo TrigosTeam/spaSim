@@ -66,9 +66,9 @@ multiple_background_images <- function(bg_sample = bg1,
     if (methods::is(bg_sample, "SpatialExperiment")) {
         bg_sample <- get_colData(bg_sample)}
 
-    # default phenotype is "Others" (only when there is no "Phenotype" column in bg_sample)
-    if (is.null(bg_sample$Phenotype)){
-        bg_sample[, "Phenotype"] <- "Others"
+    # default cell type is "Others" (only when there is no "Cell.Type" column in bg_sample)
+    if (is.null(bg_sample$Cell.Type)){
+        bg_sample[, "Cell.Type"] <- "Others"
     }
 
     # define the plotting properties
@@ -111,12 +111,12 @@ multiple_background_images <- function(bg_sample = bg1,
                 n <- n+1
             }
 
-            bg_sample[i, "Phenotype"] <- pheno
+            bg_sample[i, "Cell.Type"] <- pheno
         }
 
         spe <- format_spe(bg_sample)
         if (plot_image){
-            plot_cells(bg_sample, idents, plot_colours[seq_len(length(idents))], "Phenotype")
+            plot_cells(bg_sample, idents, plot_colours[seq_len(length(idents))], "Cell.Type")
         }
         list.images[[p_idx]] <- spe
     }

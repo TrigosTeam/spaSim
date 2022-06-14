@@ -46,7 +46,7 @@ the examples for the structure of \code{ir_properties}.}
 
 \item{plot_categories}{String Vector specifying the order of the cell
 categories to be plotted. Default is NULL - the cell categories under the
-"Phenotype" column would be used for plotting.}
+"Cell.Type" column would be used for plotting.}
 
 \item{plot_colours}{String Vector specifying the order of the colours that
 correspond to the \code{plot_categories} arg. Default is NULL - the predefined

@@ -41,7 +41,7 @@
 #'   TRUE.
 #' @param plot_categories String Vector specifying the order of the cell
 #'   cateories to be plotted. Default is NULL - the cell categories under the
-#'   "Phenotype" column would be used for plotting.
+#'   "Cell.Type" column would be used for plotting.
 #' @param plot_colours String Vector specifying the order of the colours that
 #'   correspond to the `plot_categories` arg. Default is NULL - the predefined
 #'   colour vector would be used for plotting.
@@ -155,14 +155,14 @@ multiple_images_with_immune_rings <- function(bg_sample = bg1,
                                      plot_categories = plot_categories)
 
                         if (plot_image){
-                            if(is.null(plot_categories)) plot_categories <- unique(image$Phenotype)
+                            if(is.null(plot_categories)) plot_categories <- unique(image$Cell.Type)
                             if (is.null(plot_colours)){
                                 plot_colours <- c("gray","darkgreen", "red",
                                                   "darkblue", "brown", "purple",
                                                   "lightblue", "lightgreen",
                                                   "yellow", "black", "pink")}
                             phenos <- plot_categories
-                            plot_cells(image, phenos, plot_colours[seq_len(length(phenos))], "Phenotype")
+                            plot_cells(image, phenos, plot_colours[seq_len(length(phenos))], "Cell.Type")
                         }
                         list.images[[i]] <- image}}}}}
     return(list.images)

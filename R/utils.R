@@ -49,14 +49,14 @@ format_spe <- function(df) {
 
 #' plot_cells
 #' @description Produces a scatter plot of the cells in the tissue. Cells are
-#'   coloured categorically by Phenotype column. Cell categories not specified
+#'   coloured categorically by `Cell.Type` column. Cell categories not specified
 #'   will be coloured "lightgrey" and labled "Unspecified".
 #' @param spe_object SpatialExperiment object or a data.frame that has cell
-#'   locations and phenotype info.
+#'   locations and cell type info.
 #' @param categories_of_interest String Vector of cell categories to be
 #'   coloured.
 #' @param colour_vector String Vector specifying the colours of each cell
-#'   phenotype.
+#'   type.
 #' @param feature_colname String specifying the column the cell categories
 #'   belong to.
 #' @import dplyr
@@ -65,7 +65,7 @@ format_spe <- function(df) {
 #' @return A plot is returned
 
 plot_cells <- function(spe_object, categories_of_interest = NULL,
-                       colour_vector = NULL, feature_colname = "Phenotype") {
+                       colour_vector = NULL, feature_colname = "Cell.Type") {
 
     # if plotting the structure, users do not have to enter the params
     # we have stored the categories and colours for them
@@ -92,7 +92,7 @@ plot_cells <- function(spe_object, categories_of_interest = NULL,
 
     #CHECK
     if (length(categories_of_interest) != length(colour_vector)) {
-        stop("The colour vector is not the same length as the phenotypes of interest")
+        stop("The colour vector is not the same length as the cell types of interest")
     }
 
     # if some categories are not in the data, delete them from the categories_of_interest vector
@@ -110,10 +110,10 @@ plot_cells <- function(spe_object, categories_of_interest = NULL,
 
     #set all categories of those that aren't in categories_of_interest to be "Unspecified"
     if (any(!formatted_data[[feature_colname]] %in% categories_of_interest)) {
-        formatted_data[!formatted_data$Phenotype %in% categories_of_interest,][[feature_colname]] <- "Unspecified"
+        formatted_data[!formatted_data$Cell.Type %in% categories_of_interest,][[feature_colname]] <- "Unspecified"
     }
 
-    #Assign the colour to corresponding phenotypes in df
+    #Assign the colour to corresponding cell types in df
     formatted_data$color <- ""
     for (category in categories_of_interest) {
         idx <- which(categories_of_interest == category)

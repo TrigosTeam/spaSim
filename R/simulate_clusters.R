@@ -20,7 +20,7 @@
 #' @param plot_image Boolean. Whether the simulated image is plotted.
 #' @param plot_categories String Vector specifying the order of the cell
 #'   categories to be plotted. Default is NULL - the cell categories under the
-#'   "Phenotype" column would be used for plotting.
+#'   "Cell.Type" column would be used for plotting.
 #' @param plot_colours String Vector specifying the order of the colours that
 #'   correspond to the `plot_categories` arg. Default is NULL - the predefined
 #'   colour vector would be used for plotting.
@@ -100,10 +100,10 @@ simulate_clusters <- function(bg_sample = bg1,
     Y <- max(bg_sample$Cell.Y.Position)
     win <- spatstat.geom::owin(c(0, X), c(0,Y))
 
-    # Default phenotype is specified by bg_type
-    # (when background sample does not have Phenotype)
-    if (is.null(bg_sample$Phenotype)){
-        bg_sample[, "Phenotype"] <- bg_type
+    # Default cell type is specified by bg_type
+    # (when background sample does not have `Cell.Type`)
+    if (is.null(bg_sample$Cell.Type)){
+        bg_sample[, "Cell.Type"] <- bg_type
     }
 
     n_cells <- dim(bg_sample)[1]
@@ -139,7 +139,7 @@ simulate_clusters <- function(bg_sample = bg1,
         for (i in seq_len(n_cells)){
             x <- bg_sample[i, "Cell.X.Position"]
             y <- bg_sample[i, "Cell.Y.Position"]
-            pheno <- bg_sample[i, "Phenotype"]
+            pheno <- bg_sample[i, "Cell.Type"]
 
             A <- (x - a)^2
             B <- (y - b)^2
@@ -149,12 +149,12 @@ simulate_clusters <- function(bg_sample = bg1,
                 D <- Circle*(A + B) + Oval*(A + AB + B) + Strip*(A - 1.96*AB + B)
 
                 if (D < R){ # in the region of cluster
-                    # generate random number to decide the phenotype
+                    # generate random number to decide the `Cell.Type`
                     random <- stats::runif(1)
 
                     n_infiltration_types <- length(infiltration_types)
 
-                    # default phenotype is cell type of interest of this cluster
+                    # default `Cell.Type` is cell type of interest of this cluster
                     pheno <- cell_type
                     # if the random number falls in the range of an infiltration proportion,
                     # pheno will be the corresponding infiltraiton type
@@ -184,10 +184,10 @@ simulate_clusters <- function(bg_sample = bg1,
 
                     n_infiltration_types <- length(infiltration_types)
 
-                    # default phenotype is cell type of interest of this cluster
+                    # default `Cell.Type` is cell type of interest of this cluster
                     pheno <- cell_type
                     # if the random number falls in the range of an infiltration proportion,
-                    # pheno will be the corresponding infiltraiton type
+                    # pheno will be the corresponding infiltration type
                     n <- 1 # start from the first proportion
                     current_p <- 0
                     while (n <= n_infiltration_types){
@@ -199,18 +199,18 @@ simulate_clusters <- function(bg_sample = bg1,
                         n <- n+1 }
                 }
             }
-            bg_sample[i, "Phenotype"] <- pheno
+            bg_sample[i, "Cell.Type"] <- pheno
         }
     }
 
     if (plot_image){
-        if(is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
+        if(is.null(plot_categories)) plot_categories <- unique(bg_sample$Cell.Type)
         if (is.null(plot_colours)){
             plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
                               "lightgreen", "yellow", "black", "pink")
         }
         phenos <- plot_categories
-        plot_cells(bg_sample, phenos, plot_colours[seq_len(length(phenos))], "Phenotype")
+        plot_cells(bg_sample, phenos, plot_colours[seq_len(length(phenos))], "Cell.Type")
     }
 
     return(bg_sample)

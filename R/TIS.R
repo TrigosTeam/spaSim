@@ -54,7 +54,7 @@
 #' @param plot_image Boolean. Whether the simulated image is plotted.
 #' @param plot_categories String Vector specifying the order of the cell
 #'   categories to be plotted. Default is NULL - the cell categories under the
-#'   "Phenotype" column would be used for plotting.
+#'   "Cell.Type" column would be used for plotting.
 #' @param plot_colours String Vector specifying the order of the colours that
 #'   correspond to the `plot_categories` arg. Default is NULL - the predefined
 #'   colour vector would be used for plotting.
@@ -108,7 +108,7 @@ TIS <- function(bg_sample = NULL,
         if (length(plot_categories) != length(plot_colours)){
             stop("`plot_categories` and `plot_colours` should be of the same length!")}}
 
-    if (is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
+    if (is.null(plot_categories)) plot_categories <- unique(bg_sample$Cell.Type)
 
     if (methods::is(bg_sample,"SpatialExperiment")) {
         bg_sample <- get_colData(bg_sample)}

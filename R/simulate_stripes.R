@@ -23,7 +23,7 @@
 #'   TRUE.
 #' @param plot_categories String Vector specifying the order of the cell
 #'   categories to be plotted. Default is NULL - the cell categories under the
-#'   "Phenotype" column would be used for plotting.
+#'   "Cell.Type" column would be used for plotting.
 #' @param plot_colours String Vector specifying the order of the colours that
 #'   correspond to the `plot_categories` arg. Default is NULL - the predefined
 #'   colour vector would be used for plotting.
@@ -110,9 +110,9 @@ simulate_stripes <- function(bg_sample = bg1,
     X <- max(bg_sample$Cell.X.Position)
     Y <- max(bg_sample$Cell.Y.Position)
     win <- spatstat.geom::owin(c(0, X), c(0,Y))
-    # default phenotype is "Others"
-    if (is.null(bg_sample$Phenotype)){
-        bg_sample[, "Phenotype"] <- "Others"
+    # default cell type is "Others"
+    if (is.null(bg_sample$Cell.Type)){
+        bg_sample[, "Cell.Type"] <- "Others"
     }
     for (k in seq_len(n_stripe_type)){
         n_stripes <- stripe_properties[[k]]$number_of_stripes
@@ -127,7 +127,7 @@ simulate_stripes <- function(bg_sample = bg1,
         for (i in seq_len(dim(bg_sample)[1])){
             x <- bg_sample[i, "Cell.X.Position"]
             y <- bg_sample[i, "Cell.Y.Position"]
-            pheno <- bg_sample[i, "Phenotype"]
+            pheno <- bg_sample[i, "Cell.Type"]
 
             p <- tryCatch(which(random_nums ==
                                     max(random_nums[which(random_nums<y-x)])),
@@ -149,16 +149,16 @@ simulate_stripes <- function(bg_sample = bg1,
                         }
                         n <- n+1
                     }
-                    bg_sample[i, "Phenotype"] <- pheno}}}}
+                    bg_sample[i, "Cell.Type"] <- pheno}}}}
     if (plot_image){
         if(is.null(plot_categories)) plot_categories <-
-                unique(bg_sample$Phenotype)
+                unique(bg_sample$Cell.Type)
         if (is.null(plot_colours)){
             plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown",
                               "purple", "lightblue", "lightgreen", "yellow",
                               "black", "pink")}
         phenos <- plot_categories
         plot_cells(bg_sample, phenos, plot_colours[seq_len(length(phenos))],
-                   "Phenotype")}
+                   "Cell.Type")}
     return(bg_sample)
 }

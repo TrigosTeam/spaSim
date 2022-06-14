@@ -52,9 +52,9 @@ simulate_mixing <- function(bg_sample = bg1,
             stop("`idents` and `plot_colours` should be of the same length!")}}
     if (methods::is(bg_sample,"SpatialExperiment")) {
         bg_sample <- get_colData(bg_sample)}
-    # default phenotype is "Others"
-    if (is.null(bg_sample$Phenotype)){
-        bg_sample[, "Phenotype"] <- "Others"
+    # default cell type is "Others"
+    if (is.null(bg_sample$Cell.Type)){
+        bg_sample[, "Cell.Type"] <- "Others"
     }
 
     n_types <- length(idents)
@@ -76,14 +76,14 @@ simulate_mixing <- function(bg_sample = bg1,
             }
             n <- n+1
         }
-        bg_sample[i, "Phenotype"] <- pheno
+        bg_sample[i, "Cell.Type"] <- pheno
     }
     if (plot_image){
         if (is.null(plot_colours)){
             plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
                               "lightgreen", "yellow", "black", "pink")
         }
-        plot_cells(bg_sample, idents, plot_colours[seq_len(length(idents))], "Phenotype")
+        plot_cells(bg_sample, idents, plot_colours[seq_len(length(idents))], "Cell.Type")
     }
 
     return(bg_sample)
