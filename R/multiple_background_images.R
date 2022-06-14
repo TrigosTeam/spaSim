@@ -5,10 +5,10 @@
 #'   an example of multiple image simulation which enable an automatic multiple
 #'   image simulation without the specification of any argument.
 #'
-#' @param bg_sample A data.frame or SingleCellExperiment class object with
+#' @param bg_sample A data frame or `SpatialExperiment` class object with
 #'   locations of points representing background cells. Further cell types will
 #'   be simulated based on this background sample. The data.frame or the
-#'   metadata of the SCE object should have colnames including
+#'   `spatialCoords()` of the SPE object should have colnames including
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
 #' @param idents String Vector. Names of the cell types to generate.
@@ -27,7 +27,7 @@
 #'   images with clusters, and \code{\link{multiple_images_with_immune_rings}}
 #'   for simulating multiple images with immune rings.
 #'
-#' @return A list of SCE objects
+#' @return A list of SPE objects
 #' @export
 #' @examples
 #' idents = c("Tumour","Immune","Others")
@@ -46,8 +46,8 @@ multiple_background_images <- function(bg_sample = bg1,
                                        plot_image = TRUE,
                                        plot_colours = NULL){
     ## CHECK
-    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
-        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SpatialExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SpatialExperiment object!")
     }
     if (length(idents) != length(props)){
         stop("`idents` and `props` should be of the same length!")
@@ -63,8 +63,8 @@ multiple_background_images <- function(bg_sample = bg1,
         if (length(idents) != length(plot_colours)){
             stop("`idents` and `plot_colours` should be of the same length!")}}
 
-    if (methods::is(bg_sample, "SingleCellExperiment")) {
-        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
+    if (methods::is(bg_sample, "SpatialExperiment")) {
+        bg_sample <- get_colData(bg_sample)}
 
     # default phenotype is "Others" (only when there is no "Phenotype" column in bg_sample)
     if (is.null(bg_sample$Phenotype)){
@@ -114,11 +114,11 @@ multiple_background_images <- function(bg_sample = bg1,
             bg_sample[i, "Phenotype"] <- pheno
         }
 
-        sce <- format_sce(bg_sample)
+        spe <- format_spe(bg_sample)
         if (plot_image){
             plot_cells(bg_sample, idents, plot_colours[seq_len(length(idents))], "Phenotype")
         }
-        list.images[[p_idx]] <- sce
+        list.images[[p_idx]] <- spe
     }
     return(list.images)
 }

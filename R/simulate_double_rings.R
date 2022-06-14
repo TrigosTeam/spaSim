@@ -8,10 +8,10 @@
 #'   simulation which enable an automatic simulation of double rings without the
 #'   specification of any argument.
 #'
-#' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
+#' @param bg_sample (OPTIONAL) A data frame or `SpatialExperiment` class object
 #'   with locations of points representing background cells. Further cell types
 #'   will be simulated based on this background sample. The data.frame or the
-#'   metadata of the SCE object should have colnames including
+#'   `spatialCoords()` of the SPE object should have colnames including
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
 #' @param bg_type (OPTIONAL) String The name of the background cell type. By
@@ -100,8 +100,8 @@ simulate_double_rings <- function(bg_sample = bg1,
                                   plot_colours = NULL) {
 
     ## CHECK
-    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
-        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SpatialExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SpatialExperiment object!")
     }
     if (!is.list(dr_properties)){
         stop("`dr_properties` should be a list of lists where each list contains the properties of a double ring!")
@@ -137,8 +137,8 @@ simulate_double_rings <- function(bg_sample = bg1,
         if (length(plot_categories) != length(plot_colours)){
             stop("`plot_categories` and `plot_colours` should be of the same length!")}}
 
-    if (methods::is(bg_sample, "SingleCellExperiment")) {
-        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
+    if (methods::is(bg_sample, "SpatialExperiment")) {
+        bg_sample <- get_colData(bg_sample)}
 
     # check if the specified cluster properties match n_dr
     if (as.numeric(length(dr_properties)) != n_dr){

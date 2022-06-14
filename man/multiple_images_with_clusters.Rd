@@ -17,10 +17,10 @@ multiple_images_with_clusters(
 )
 }
 \arguments{
-\item{bg_sample}{A data.frame or SingleCellExperiment class object with
+\item{bg_sample}{A data frame or \code{SpatialExperiment} class object with
 locations of points representing background cells. Further cell types will
 be simulated based on this background sample. The data.frame or the
-metadata of the SCE object should have colnames including
+\code{spatialCoords()} of the SPE object should have colnames including
 "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 \code{\link{bg1}} background image.}
 
@@ -63,7 +63,7 @@ correspond to the \code{plot_categories} arg. Default is NULL - the predefined
 colour vector would be used for plotting.}
 }
 \value{
-A list of SCE objects
+A list of SPE objects
 }
 \description{
 Generate a set of images with different cluster properties.

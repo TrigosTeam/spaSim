@@ -4,10 +4,10 @@
 #'   The default values for the arguments give an example of multiple image
 #'   simulation which enable an automatic multiple image simulation without the
 #'   specification of any argument.
-#' @param bg_sample A data.frame or SingleCellExperiment class object with
+#' @param bg_sample A data frame or `SpatialExperiment` class object with
 #'   locations of points representing background cells. Further cell types will
 #'   be simulated based on this background sample. The data.frame or the
-#'   metadata of the SCE object should have colnames including
+#'   `spatialCoords()` of the SPE object should have colnames including
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
 #' @param cluster_size Numeric Vector. The size of the cluster. If numeric, all
@@ -51,7 +51,7 @@
 #'   mixed background images, and \code{\link{multiple_images_with_clusters}}
 #'   for simulating multiple images with clusters.
 #'
-#' @return A list of sce objects
+#' @return A list of spe objects
 #' @export
 #'
 #' @examples
@@ -72,8 +72,8 @@ multiple_images_with_immune_rings <- function(bg_sample = bg1,
                                               plot_categories = NULL,
                                               plot_colours = NULL){
     ## CHECK
-    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
-        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SpatialExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SpatialExperiment object!")
     }
     if(!is.numeric(cluster_size) | !is.numeric(prop_infiltration) |
        !is.numeric(ring_width) | !is.numeric(cluster_loc_x) |
@@ -89,8 +89,8 @@ multiple_images_with_immune_rings <- function(bg_sample = bg1,
         }
     }
 
-    if (methods::is(bg_sample, "SingleCellExperiment")) {
-        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
+    if (methods::is(bg_sample, "SpatialExperiment")) {
+        bg_sample <- get_colData(bg_sample)}
 
     # count the image number
     i <- 0

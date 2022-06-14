@@ -14,10 +14,10 @@
 #'   \link{simulate_immune_rings} \link{simulate_double_rings}
 #'   \link{simulate_stripes}
 #'
-#' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
+#' @param bg_sample (OPTIONAL) A data frame or `SpatialExperiment` class object
 #'   with locations of points representing background cells. Further cell types
 #'   will be simulated based on this background sample. The data.frame or the
-#'   metadata of the SCE object should have colnames including
+#'   `spatialCoords` of the SPE object should have colnames including
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
 #' @param n_cells (OPTIONAL) Number of background cells to simulate. Only when
@@ -59,7 +59,7 @@
 #'   correspond to the `plot_categories` arg. Default is NULL - the predefined
 #'   colour vector would be used for plotting.
 #'
-#' @return An sce object of the simulated image
+#' @return An spe object of the simulated image
 #' @export
 #' @examples
 #' set.seed(610)
@@ -100,8 +100,8 @@ TIS <- function(bg_sample = NULL,
         Y <- height
     }
     if (!is.null(bg_sample)){
-        if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
-            stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+        if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SpatialExperiment")) {
+            stop("`bg_sample` should be either a data.frame or a SpatialExperiment object!")
         }
     }
     if (!is.null(plot_colours) & !is.null(plot_categories)){
@@ -110,8 +110,8 @@ TIS <- function(bg_sample = NULL,
 
     if (is.null(plot_categories)) plot_categories <- unique(bg_sample$Phenotype)
 
-    if (methods::is(bg_sample,"SingleCellExperiment")) {
-        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
+    if (methods::is(bg_sample,"SpatialExperiment")) {
+        bg_sample <- get_colData(bg_sample)}
 
 
     image <- bg_sample
@@ -272,10 +272,10 @@ TIS <- function(bg_sample = NULL,
         )
     }
     #####
-    # format sce object
-    sce <- format_sce(image)
-    attr(sce, "name") <- image_name
+    # format spe object
+    spe <- format_spe(image)
+    attr(spe, "name") <- image_name
 
-    return(sce)
+    return(spe)
 }
 

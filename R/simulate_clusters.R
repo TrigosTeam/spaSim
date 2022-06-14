@@ -4,16 +4,16 @@
 #'   arguments give an example of cluster simulation which enable an automatic
 #'   simulation of clusters without the specification of any argument.
 #'
-#' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
+#' @param bg_sample (OPTIONAL) A data frame or `SpatialExperiment` class object
 #'   with locations of points representing background cells. Further cell types
 #'   will be simulated based on this background sample. The data.frame or the
-#'   metadata of the SCE object should have colnames including
+#'   `spatialCoords()` of the SPE object should have colnames including
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
 #' @param n_clusters Numeric. Number of clusters. This must match the
 #'   `length(cluster_properties)`.
 #' @param bg_type (OPTIONAL) String. The name of the background cell type if the
-#'   background sample does not have a "Phenotype" column. By default is
+#'   background sample does not have a "Cell.Type" column. By default is
 #'   "Others".
 #' @param cluster_properties List of properties of the clusters. See examples
 #'   for the format of this arg.
@@ -67,8 +67,8 @@ simulate_clusters <- function(bg_sample = bg1,
                               plot_colours = NULL
 ){
     ## CHECK
-    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
-        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SpatialExperiment")) {
+        stop("`bg_sample` should be either a data frame or a SpatialExperiment object!")
     }
     if (!is.list(cluster_properties)){
         stop("`cluster_properties` should be a list of lists where each list contains the properties of a cluster!")
@@ -92,8 +92,8 @@ simulate_clusters <- function(bg_sample = bg1,
         if (length(plot_categories) != length(plot_colours)){
             stop("`plot_categories` and `plot_colours` should be of the same length!")}}
 
-    if (methods::is(bg_sample, "SingleCellExperiment")) {
-        bg_sample <- data.frame(SummarizedExperiment::colData(bg_sample))}
+    if (methods::is(bg_sample, "SpatialExperiment")) {
+        bg_sample <-get_colData(bg_sample)}
 
     # Get the window, use the window of the background sample
     X <- max(bg_sample$Cell.X.Position)

@@ -20,10 +20,10 @@ simulate_clusters(
 )
 }
 \arguments{
-\item{bg_sample}{(OPTIONAL) A data.frame or SingleCellExperiment class object
+\item{bg_sample}{(OPTIONAL) A data frame or \code{SpatialExperiment} class object
 with locations of points representing background cells. Further cell types
 will be simulated based on this background sample. The data.frame or the
-metadata of the SCE object should have colnames including
+\code{spatialCoords()} of the SPE object should have colnames including
 "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 \code{\link{bg1}} background image.}
 
@@ -31,7 +31,7 @@ metadata of the SCE object should have colnames including
 \code{length(cluster_properties)}.}
 
 \item{bg_type}{(OPTIONAL) String. The name of the background cell type if the
-background sample does not have a "Phenotype" column. By default is
+background sample does not have a "Cell.Type" column. By default is
 "Others".}
 
 \item{cluster_properties}{List of properties of the clusters. See examples

@@ -4,10 +4,10 @@
 #'   arguments give an example of mixed cell type simulation which enable an
 #'   automatic simulation of mixed cell types without the specification of any
 #'   argument.
-#' @param bg_sample (OPTIONAL) A data.frame or SingleCellExperiment class object
+#' @param bg_sample (OPTIONAL) A data frame or `SpatialExperiment` class object
 #'   with locations of points representing background cells. Further cell types
 #'   will be simulated based on this background sample. The data.frame or the
-#'   metadata of the SCE object should have colnames including
+#'   `spatialCoords()` of the SPE object should have colnames including
 #'   "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 #'   \code{\link{bg1}} background image.
 #' @param idents String Vector of the mixed cell types.
@@ -45,12 +45,13 @@ simulate_mixing <- function(bg_sample = bg1,
         stop("`idents` should be character or a character vector!")}
     if (!is.numeric(props)){
         stop("`props` should be numeric or a numeric vector!")}
-    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SingleCellExperiment")) {
-        stop("`bg_sample` should be either a data.frame or a SingleCellExperiment object!")}
+    if (!is.data.frame(bg_sample) & !methods::is(bg_sample, "SpatialExperiment")) {
+        stop("`bg_sample` should be either a data.frame or a SpatialExperiment object!")}
     if (!is.null(plot_colours)){
         if (length(idents) != length(plot_colours)){
             stop("`idents` and `plot_colours` should be of the same length!")}}
-
+    if (methods::is(bg_sample,"SpatialExperiment")) {
+        bg_sample <- get_colData(bg_sample)}
     # default phenotype is "Others"
     if (is.null(bg_sample$Phenotype)){
         bg_sample[, "Phenotype"] <- "Others"
