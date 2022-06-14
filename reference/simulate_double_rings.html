@@ -104,32 +104,49 @@ will be simulated based on this background sample. The data.frame or the
 metadata of the SCE object should have colnames including
 "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 <code><a href="bg1.html">bg1</a></code> background image.</p></dd>
+
+
 <dt>bg_type</dt>
 <dd><p>(OPTIONAL) String The name of the background cell type. By
 default is "Others".</p></dd>
+
+
 <dt>n_dr</dt>
 <dd><p>Number of double immune rings. This must match the
 <code>length(dr_properties)</code>.</p></dd>
+
+
 <dt>win</dt>
 <dd><p>(OPTIONAL) owin object output from spatstat.geom::owin function.
 By default is the window of the background image.</p></dd>
+
+
 <dt>dr_properties</dt>
 <dd><p>List of properties of the double immune rings. Please
 refer to the examples for the structure of <code>dr_properties</code>.</p></dd>
+
+
 <dt>plot_image</dt>
 <dd><p>Boolean. Whether the simulated image is plotted.</p></dd>
+
+
 <dt>plot_categories</dt>
 <dd><p>String Vector specifying the order of the cell
 categories to be plotted. Default is NULL - the cell categories under the
 "Phenotype" column would be used for plotting.</p></dd>
+
+
 <dt>plot_colours</dt>
 <dd><p>String Vector specifying the order of the colours that
 correspond to the <code>plot_categories</code> arg. Default is NULL - the predefined
 colour vector would be used for plotting.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data.frame of the simulated image</p>
+    
+
+<p>A data.frame of the simulated image</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -179,7 +196,7 @@ colour vector would be used for plotting.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

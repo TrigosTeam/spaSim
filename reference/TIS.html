@@ -117,67 +117,108 @@ will be simulated based on this background sample. The data.frame or the
 metadata of the SCE object should have colnames including
 "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 <code><a href="bg1.html">bg1</a></code> background image.</p></dd>
+
+
 <dt>n_cells</dt>
 <dd><p>(OPTIONAL) Number of background cells to simulate. Only when
 <code>bg_sample</code> is NULL.</p></dd>
+
+
 <dt>width</dt>
 <dd><p>(OPTIONAL) Number The width of the image.</p></dd>
+
+
 <dt>height</dt>
 <dd><p>(OPTIONAL) Number The height of the image.</p></dd>
+
+
 <dt>min_d</dt>
 <dd><p>(OPTIONAL) Number The minimum distance between two cells.</p></dd>
+
+
 <dt>oversampling_rate</dt>
 <dd><p>(OPTIONAL) Numeric. The multiplier for oversampling.
 Without oversampling, the simulation deletes cells that are within <code>min_d</code>
 from each other, resulting in a less total number of cells than <code>n_cells</code>.
 Default is 1.2 (this should be set based on <code>n_cells</code> and <code>min_d</code>; should
 always be larger than 1).</p></dd>
+
+
 <dt>names_of_bg_cells</dt>
 <dd><p>(OPTIONAL) Vector The cell types of the background
 cells. If NULL, the background cells are of one type.</p></dd>
+
+
 <dt>proportions_of_bg_cells</dt>
 <dd><p>(OPTIONAL) Vector The corresponding proportion
 of each cell type in the background cells.</p></dd>
+
+
 <dt>n_clusters</dt>
 <dd><p>(OPTIONAL) Number of cell clusters. If NULL, no clusters to
 simulate.</p></dd>
+
+
 <dt>properties_of_clusters</dt>
 <dd><p>(OPTIONAL) List of parameters to define the
 clusters.</p></dd>
+
+
 <dt>n_immune_rings</dt>
 <dd><p>(OPTIONAL) Number of immune rings. If NULL, no immune
 rings to simulate.</p></dd>
+
+
 <dt>properties_of_immune_rings</dt>
 <dd><p>(OPTIONAL) List of parameters to define the
 immune rings.</p></dd>
+
+
 <dt>n_double_rings</dt>
 <dd><p>(OPTIONAL) Number of double immune rings. If NULL, no
 double rings to simulate.</p></dd>
+
+
 <dt>properties_of_double_rings</dt>
 <dd><p>(OPTIONAL) List of parameters to define the
 double immune rings.</p></dd>
+
+
 <dt>n_stripe_type</dt>
 <dd><p>(OPTIONAL) Number of stripe (vessel) types. If NULL, no
 stripes to simulate.</p></dd>
+
+
 <dt>properties_of_stripes</dt>
 <dd><p>(OPTIONAL) List of parameters to define the
 stripes.</p></dd>
+
+
 <dt>image_name</dt>
 <dd><p>(OPTIONAL) String to name the output tissue image.</p></dd>
+
+
 <dt>plot_image</dt>
 <dd><p>Boolean. Whether the simulated image is plotted.</p></dd>
+
+
 <dt>plot_categories</dt>
 <dd><p>String Vector specifying the order of the cell
 categories to be plotted. Default is NULL - the cell categories under the
 "Phenotype" column would be used for plotting.</p></dd>
+
+
 <dt>plot_colours</dt>
 <dd><p>String Vector specifying the order of the colours that
 correspond to the <code>plot_categories</code> arg. Default is NULL - the predefined
 colour vector would be used for plotting.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An sce object of the simulated image</p>
+    
+
+<p>An sce object of the simulated image</p>
     </div>
 
     <div class="section level2">
@@ -200,7 +241,7 @@ colour vector would be used for plotting.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>
