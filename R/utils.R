@@ -61,7 +61,6 @@ format_spe <- function(df) {
 #'   belong to.
 #' @import dplyr
 #' @import ggplot2
-#' @importFrom SpatialExperiment colData
 #' @return A plot is returned
 
 plot_cells <- function(spe_object, categories_of_interest = NULL,
@@ -157,3 +156,4 @@ plot_cells <- function(spe_object, categories_of_interest = NULL,
 
     print(p)
 }
+
