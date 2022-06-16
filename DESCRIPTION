@@ -31,7 +31,7 @@ Imports:
     tibble
 Depends: 
     R (>= 4.2.0)
-LazyData: false
+LazyData: true
 Suggests: 
     RefManageR,
     BiocStyle,
