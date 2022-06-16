@@ -32,7 +32,8 @@
 #' set.seed(610) # set seed for this background image simulation for reproducibility
 #' background_image <- simulate_background_cells(n_cells = 5000, width = 2000,
 #'                                               height = 2000, min_d = 10,
-#'                                               oversampling_rate = 1.5, Cell.Type = "Others")
+#'                                               oversampling_rate = 1.5,
+#'                                               Cell.Type = "Others")
 
 simulate_background_cells <- function(n_cells, width, height, min_d,
                                       oversampling_rate = 1.2,
@@ -40,7 +41,8 @@ simulate_background_cells <- function(n_cells, width, height, min_d,
     ## CHECK
     if(!is.numeric(n_cells) | !is.numeric(width) | !is.numeric(height) |
        !is.numeric(min_d) | !is.numeric(oversampling_rate)){
-        stop("One or more of `n_cells`, `width`, `height`, `min_d`, `oversampling_rate` is not numeric!")
+        stop("One or more of `n_cells`, `width`, `height`, `min_d`,
+             `oversampling_rate` is not numeric!")
     }
     if (!is.character(Cell.Type)){
         stop("`Cell.Type` should be of character type!")

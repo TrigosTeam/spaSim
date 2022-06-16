@@ -1,4 +1,4 @@
-#' A data frame of background cells.
+#' Background cells (4915 cells in a 2000*2000 window)
 #'
 #' A data frame containing 4915 background cells on 2000 by 2000 size window
 #'
@@ -7,6 +7,5 @@
 #'   \item{Cell.X.Position}{X coordinate}
 #'   \item{Cell.Y.Position}{Y coordinate}
 #'   \item{Cell.Type}{cell type}
-#'   ...
 #' }
 "bg1"
