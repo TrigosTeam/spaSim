@@ -1,3 +1,10 @@
+# spaSim 0.99.2
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+* Updated the main object class from `SingleCellExperiment` to `SpatialExperiment`.
+* Changed the parameter `Phenotype` to `Cell.Type`.
+
 # spaSim 0.99.1
 
 NEW FEATURES
