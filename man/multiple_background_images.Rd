@@ -44,7 +44,7 @@ an example of multiple image simulation which enable an automatic multiple
 image simulation without the specification of any argument.
 }
 \examples{
-idents = c("Tumour","Immune","Others")
+idents <- c("Tumour","Immune","Others")
 prop1 <- rep(0.1,9)
 prop2 <- seq(0, 0.4, 0.05)
 prop3 <- seq(0.9,0.5,-0.05)

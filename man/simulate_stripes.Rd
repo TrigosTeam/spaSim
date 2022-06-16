@@ -56,7 +56,7 @@ simulation which enable an automatic simulation of vessels without the
 specification of any argument.
 }
 \examples{
-stripe_properties = list(
+stripe_properties <- list(
 S1 = list(
   number_of_stripes = 1,
   name_of_stripe_cell = "Others",

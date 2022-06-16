@@ -144,7 +144,6 @@ cluster_properties <- list(
 clusters <- simulate_clusters(bg_sample = mix_bg,
                               n_clusters = 2,
                               bg_type = "Others",
-                              win = NULL,
                               cluster_properties = cluster_properties,
                               plot_image = TRUE,
                               plot_categories = c("Tumour" , "Immune", "Immune1", "Others"),
@@ -173,7 +172,6 @@ rings <- simulate_immune_rings(
   bg_sample = bg,
   bg_type = "Others",
   n_ir = 1,
-  win = NULL,
   ir_properties = immune_ring_properties,
   plot_image = TRUE,
   plot_categories = c("Tumour", "Immune1", "Immune2", "Others"),
@@ -202,7 +200,6 @@ immune_ring_properties <- list(
 rings <- simulate_immune_rings(bg_sample = bg,
                               bg_type = "Others",
                               n_ir = 2,
-                              win = NULL,
                               ir_properties = immune_ring_properties,
                               plot_image = TRUE,
                               plot_categories = c("Tumour", "Immune1", "Immune2", "Others"),
@@ -241,7 +238,6 @@ double_ring_properties <- list(
 double_rings <- simulate_double_rings(bg_sample = bg1,
                                      bg_type = "Others",
                                      n_dr = 2,
-                                     win = NULL,
                                      dr_properties = double_ring_properties,
                                      plot_image = TRUE,
                                      plot_categories = c("Tumour", "Immune1", "Immune2", "Others"),
@@ -257,7 +253,7 @@ First, we specify the properties of vessel structures such as the number present
 The locations of the vessels are stochastic.
 
 ```{r}
-properties_of_stripes = list(
+properties_of_stripes <- list(
  S1 = list(number_of_stripes = 1, name_of_stripe_cell = "Immune1", 
            width_of_stripe = 40, infiltration_types = c("Others"),
            infiltration_proportions = c(0.08)), 
@@ -266,7 +262,6 @@ properties_of_stripes = list(
            infiltration_proportions = c(0.08)))
 vessles <- simulate_stripes(bg_sample = bg1,
                            n_stripe_type = 2,
-                           win = NULL,
                            stripe_properties = properties_of_stripes,
                            plot_image = TRUE)
 ```
@@ -281,7 +276,7 @@ The example simulates a background sample with a tumour cluster and an immune ri
 ```{r}
 # First specify the cluster and immune ring properties
 ## tumour cluster properties
-properties_of_clusters = list(
+properties_of_clusters <- list(
  C1 = list( name_of_cluster_cell = "Tumour", size = 300, shape = "Oval", 
             centre_loc = data.frame("x" = 500, "y" = 500),
             infiltration_types = c("Immune1", "Others"), 
@@ -307,8 +302,7 @@ immune_ring_properties <- list(
 # `n_cells`, `width`, `height`, `min_d` and `oversampling_rate` are parameters for simulating background cells
 # `n_clusters`, `properties_of_clusters` are parameters for simulating clusters on top of the background cells
 # `plot_image`, `plot_categories`, `plot_colours` are params for plotting
-simulated_image <- 
-TIS(bg_sample = NULL,
+simulated_image <- TIS(bg_sample = NULL,
    n_cells = 5000,
    width = 2000,
    height = 2000,

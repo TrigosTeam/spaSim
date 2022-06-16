@@ -47,7 +47,7 @@ centre_loc_offset <- data.frame("x" = 1000, "y" = 1000)
 infiltration_types <- c("Immune", "Others")
 infiltration_proportions <- c(0, 0.1)
 
-R_shape2 = list(
+R_shape2 <- list(
     I1 = list(
         name_of_cluster_cell = "Tumour",
         size = 100,
@@ -80,7 +80,7 @@ centre_loc_offset <- data.frame("x" = 1000, "y" = 1000)
 infiltration_types <- c("Immune", "Others")
 infiltration_proportions <- c(0, 0.1)
 
-R_shape3 = list(
+R_shape3 <- list(
     I1 = list(
         name_of_cluster_cell = "Tumour",
         size = 100,
