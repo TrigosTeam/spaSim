@@ -104,10 +104,10 @@ simulate_immune_rings <- function(bg_sample = bg1,
 `name_of_ring_cell`, `immune_ring_width`, `immune_ring_infiltration_types`, `immune_ring_infiltration_proportions`.")
         }
         if (length(ir_properties[[i]]$infiltration_types) != length(ir_properties[[i]]$infiltration_proportions)){
-            stop(paste("The", i, "th list of `ir_properties` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+            stop("The ", i, "th list of `ir_properties` has different length of `infiltration_types` and `infiltration_proportions`.")
         }
         if (length(ir_properties[[i]]$immune_ring_infiltration_types) != length(ir_properties[[i]]$immune_ring_infiltration_proportions)){
-            stop(paste("The", i, "th list of `ir_properties` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.", sep = ""))
+            stop("The ", i, "th list of `ir_properties` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.")
         }
     }
 

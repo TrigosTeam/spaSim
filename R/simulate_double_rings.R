@@ -121,15 +121,15 @@ simulate_double_rings <- function(bg_sample = bg1,
         }
         if (length(dr_properties[[i]]$infiltration_types) !=
             length(dr_properties[[i]]$infiltration_proportions)){
-            stop(paste("The", i, "th list of `dr_properties` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+            stop("The ", i, "th list of `dr_properties` has different length of `infiltration_types` and `infiltration_proportions`.")
         }
         if (length(dr_properties[[i]]$immune_ring_infiltration_types) !=
             length(dr_properties[[i]]$immune_ring_infiltration_proportions)){
-            stop(paste("The", i, "th list of `dr_properties` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.", sep = ""))
+            stop("The ", i, "th list of `dr_properties` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.")
         }
         if (length(dr_properties[[i]]$double_ring_infiltration_types) !=
             length(dr_properties[[i]]$double_ring_infiltration_proportions)){
-            stop(paste("The", i, "th list of `dr_properties` has different length of `double_ring_infiltration_types` and `double_ring_infiltration_proportions`.", sep = ""))
+            stop("The ", i, "th list of `dr_properties` has different length of `double_ring_infiltration_types` and `double_ring_infiltration_proportions`.")
         }
     }
 
@@ -171,10 +171,10 @@ simulate_double_rings <- function(bg_sample = bg1,
         centre_loc <- dr_properties[[k]]$centre_loc
         infiltration_types <- dr_properties[[k]]$infiltration_types
         infiltration_proportions <- dr_properties[[k]]$infiltration_proportions
-        ring_cell_type = dr_properties[[k]]$name_of_ring_cell
+        ring_cell_type <- dr_properties[[k]]$name_of_ring_cell
         ring_width <- dr_properties[[k]]$immune_ring_width
-        ring_infiltration_types = dr_properties[[k]]$immune_ring_infiltration_types
-        ring_infiltration_proportions = dr_properties[[k]]$immune_ring_infiltration_proportions
+        ring_infiltration_types <- dr_properties[[k]]$immune_ring_infiltration_types
+        ring_infiltration_proportions <- dr_properties[[k]]$immune_ring_infiltration_proportions
         double_ring_cell_type <- dr_properties[[k]]$name_of_double_ring_cell
         double_ring_width <- dr_properties[[k]]$double_ring_width
         double_ring_infiltration_types <- dr_properties[[k]]$double_ring_infiltration_types

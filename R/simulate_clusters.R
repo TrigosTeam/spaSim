@@ -84,7 +84,7 @@ simulate_clusters <- function(bg_sample = bg1,
 `name_of_cluster_cell`, `size`, `shape`, `centre_loc`, `infiltration_types`, `infiltration_proportions`.")
         }
         if (length(cluster_properties[[i]]$infiltration_types) != length(cluster_properties[[i]]$infiltration_proportions)){
-            stop(paste("The", i, "th list of `cluster_properties` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+            stop("The ", i, "th list of `cluster_properties` has different length of `infiltration_types` and `infiltration_proportions`.")
         }
     }
 

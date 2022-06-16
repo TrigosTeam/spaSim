@@ -38,7 +38,7 @@
 #' @return A data.frame of the simulated image
 #' @export
 #' @examples
-#' stripe_properties = list(
+#' stripe_properties <- list(
 #' S1 = list(
 #'   number_of_stripes = 1,
 #'   name_of_stripe_cell = "Others",
@@ -96,7 +96,7 @@ simulate_stripes <- function(bg_sample = bg1,
         }
         if (length(stripe_properties[[i]]$infiltration_types) !=
             length(stripe_properties[[i]]$infiltration_proportions)){
-            stop(paste("The", i, "th list of `stripe_properties` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+            stop("The ", i, "th list of `stripe_properties` has different length of `infiltration_types` and `infiltration_proportions`.")
         }
     }
 

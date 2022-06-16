@@ -151,7 +151,7 @@ TIS <- function(bg_sample = NULL,
                 stop("`properties_of_clusters` is a list of lists. Each list under `properties_of_clusters` should contain fields:
 `name_of_cluster_cell`, `size`, `shape`, `centre_loc`, `infiltration_types`, `infiltration_proportions`.")}
             if (length(properties_of_clusters[[i]]$infiltration_types) != length(properties_of_clusters[[i]]$infiltration_proportions)){
-                stop(paste("The", i, "th list of `properties_of_clusters` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+                stop("The ", i, "th list of `properties_of_clusters` has different length of `infiltration_types` and `infiltration_proportions`.")
             }
         }
         image <- simulate_clusters(
@@ -182,11 +182,11 @@ TIS <- function(bg_sample = NULL,
             }
             if (length(properties_of_immune_rings[[i]]$infiltration_types) !=
                 length(properties_of_immune_rings[[i]]$infiltration_proportions)){
-                stop(paste("The", i, "th list of `properties_of_immune_rings` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+                stop("The ", i, "th list of `properties_of_immune_rings` has different length of `infiltration_types` and `infiltration_proportions`.")
             }
             if (length(properties_of_immune_rings[[i]]$immune_ring_infiltration_types) !=
                 length(properties_of_immune_rings[[i]]$immune_ring_infiltration_proportions)){
-                stop(paste("The", i, "th list of `properties_of_immune_rings` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.", sep = ""))
+                stop("The ", i, "th list of `properties_of_immune_rings` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.")
             }
         }
         image <- simulate_immune_rings(
@@ -220,15 +220,15 @@ TIS <- function(bg_sample = NULL,
             }
             if (length(properties_of_double_rings[[i]]$infiltration_types) !=
                 length(properties_of_double_rings[[i]]$infiltration_proportions)){
-                stop(paste("The", i, "th list of `properties_of_double_rings` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+                stop("The ", i, "th list of `properties_of_double_rings` has different length of `infiltration_types` and `infiltration_proportions`.")
             }
             if (length(properties_of_double_rings[[i]]$immune_ring_infiltration_types) !=
                 length(properties_of_double_rings[[i]]$immune_ring_infiltration_proportions)){
-                stop(paste("The", i, "th list of `properties_of_double_rings` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.", sep = ""))
+                stop("The ", i, "th list of `properties_of_double_rings` has different length of `immune_ring_infiltration_types` and `immune_ring_infiltration_proportions`.")
             }
             if (length(properties_of_double_rings[[i]]$double_ring_infiltration_types) !=
                 length(properties_of_double_rings[[i]]$double_ring_infiltration_proportions)){
-                stop(paste("The", i, "th list of `properties_of_double_rings` has different length of `double_ring_infiltration_types` and `double_ring_infiltration_proportions`.", sep = ""))
+                stop("The ", i, "th list of `properties_of_double_rings` has different length of `double_ring_infiltration_types` and `double_ring_infiltration_proportions`.")
             }
         }
         image <- simulate_double_rings(
@@ -259,7 +259,7 @@ TIS <- function(bg_sample = NULL,
             }
             if (length(properties_of_stripes[[i]]$infiltration_types) !=
                 length(properties_of_stripes[[i]]$infiltration_proportions)){
-                stop(paste("The", i, "th list of `properties_of_stripes` has different length of `infiltration_types` and `infiltration_proportions`.", sep = ""))
+                stop("The ", i, "th list of `properties_of_stripes` has different length of `infiltration_types` and `infiltration_proportions`.")
             }
         }
         image <- simulate_stripes(

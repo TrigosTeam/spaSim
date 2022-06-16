@@ -99,11 +99,10 @@ plot_cells <- function(spe_object, categories_of_interest = NULL,
     # return a message informing the deleted category
     for (category in categories_of_interest) {
         if (!(category %in% unique(formatted_data[[feature_colname]]))) {
-            #stop(paste(category, "cells were not found"), sep="")
             cat_idx <- match(category, categories_of_interest)
             categories_of_interest <- categories_of_interest[-cat_idx]
             colour_vector <- colour_vector[-cat_idx]
-            print(paste(category, "cells were not found and not plotted"), sep="")
+            show(paste(category, "cells were not found and not plotted."))
         }
     }
 
@@ -154,6 +153,6 @@ plot_cells <- function(spe_object, categories_of_interest = NULL,
               axis.text.y = element_blank(),
               axis.ticks.y = element_blank())
 
-    print(p)
+    show(p)
 }
 
