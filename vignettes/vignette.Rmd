@@ -61,17 +61,17 @@ As quantitative tools for spatial tissue image analysis have been developed and 
   
   
 ```{r install, eval = FALSE}
-## Check that you have a valid Bioconductor installation
-BiocManager::valid()
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
-  }
-
-BiocManager::install("spaSim")
-
-# install from GitHub the development version
-install.packages("devtools")
-devtools::install_github("TrigosTeam/spaSim")
+# ## Check that you have a valid Bioconductor installation
+# BiocManager::valid()
+# if (!requireNamespace("BiocManager", quietly = TRUE)) {
+#       install.packages("BiocManager")
+#   }
+# 
+# BiocManager::install("spaSim")
+# 
+# # install from GitHub the development version
+# install.packages("devtools")
+# devtools::install_github("TrigosTeam/spaSim")
 ```
 
 ## Citing `spaSim`
