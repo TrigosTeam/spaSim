@@ -3,14 +3,13 @@
 \docType{data}
 \name{bg1}
 \alias{bg1}
-\title{A data frame of background cells.}
+\title{Background cells (4915 cells in a 2000*2000 window)}
 \format{
 A data frame with 4915 rows (cells) and 3 columns:
 \describe{
 \item{Cell.X.Position}{X coordinate}
 \item{Cell.Y.Position}{Y coordinate}
 \item{Cell.Type}{cell type}
-...
 }
 }
 \usage{
