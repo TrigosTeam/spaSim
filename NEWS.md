@@ -1,5 +1,9 @@
 # spaSim 0.99.2
 
+NEW FEATURES
+
+* Added `utils.R` file to store internal functions.
+
 SIGNIFICANT USER-VISIBLE CHANGES
 
 * Updated the main object class from `SingleCellExperiment` to `SpatialExperiment`.
