@@ -32,7 +32,7 @@ simulate_stripes"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     
     <a class="navbar-brand me-2" href="../index.html">spaSim</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,10 +111,10 @@ properties see the examples in <a href="simulate_clusters.html">simulate_cluster
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>bg_sample</dt>
-<dd><p>(OPTIONAL) A data.frame or SingleCellExperiment class object
+<dd><p>(OPTIONAL) A data frame or <code>SpatialExperiment</code> class object
 with locations of points representing background cells. Further cell types
 will be simulated based on this background sample. The data.frame or the
-metadata of the SCE object should have colnames including
+<code>spatialCoords</code> of the SPE object should have colnames including
 "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 <code><a href="bg1.html">bg1</a></code> background image.</p></dd>
 
@@ -205,7 +205,7 @@ stripes.</p></dd>
 <dt>plot_categories</dt>
 <dd><p>String Vector specifying the order of the cell
 categories to be plotted. Default is NULL - the cell categories under the
-"Phenotype" column would be used for plotting.</p></dd>
+"Cell.Type" column would be used for plotting.</p></dd>
 
 
 <dt>plot_colours</dt>
@@ -218,7 +218,7 @@ colour vector would be used for plotting.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>An sce object of the simulated image</p>
+<p>An spe object of the simulated image</p>
     </div>
 
     <div class="section level2">

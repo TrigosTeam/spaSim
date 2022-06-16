@@ -18,7 +18,7 @@ of immune rings without the specification of any argument."><!-- mathjax --><scr
     
     <a class="navbar-brand me-2" href="../index.html">spaSim</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,14 +67,14 @@ of immune rings without the specification of any argument.</p>
   bg_sample <span class="op">=</span> <span class="va">bg1</span>,
   bg_type <span class="op">=</span> <span class="st">"Others"</span>,
   n_ir <span class="op">=</span> <span class="fl">2</span>,
-  win <span class="op">=</span> <span class="cn">NULL</span>,
   ir_properties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>I1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name_of_cluster_cell <span class="op">=</span> <span class="st">"Tumour"</span>, size <span class="op">=</span> <span class="fl">600</span>, shape <span class="op">=</span>
     <span class="st">"Circle"</span>, centre_loc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">930</span>, y <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>, infiltration_types <span class="op">=</span>
     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Immune1"</span>, <span class="st">"Immune2"</span>, <span class="st">"Others"</span><span class="op">)</span>, infiltration_proportions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span><span class="op">)</span>,
     name_of_ring_cell <span class="op">=</span> <span class="st">"Immune1"</span>, immune_ring_width <span class="op">=</span> <span class="fl">150</span>,
     immune_ring_infiltration_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Others"</span><span class="op">)</span>, immune_ring_infiltration_proportions <span class="op">=</span>
     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.15</span><span class="op">)</span><span class="op">)</span>, I2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name_of_cluster_cell <span class="op">=</span> <span class="st">"Tumour"</span>, size <span class="op">=</span> <span class="fl">500</span>, shape <span class="op">=</span> <span class="st">"Oval"</span>,
-    centre_loc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1330</span>, y <span class="op">=</span> <span class="fl">1100</span><span class="op">)</span>, infiltration_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Immune1"</span>,     
+    centre_loc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1330</span>, y <span class="op">=</span> <span class="fl">1100</span><span class="op">)</span>, infiltration_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Immune1"</span>, 
+    
     <span class="st">"Immune2"</span>, <span class="st">"Others"</span><span class="op">)</span>, infiltration_proportions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span><span class="op">)</span>,
     name_of_ring_cell <span class="op">=</span> <span class="st">"Immune1"</span>, immune_ring_width <span class="op">=</span> <span class="fl">150</span>,
     immune_ring_infiltration_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Others"</span><span class="op">)</span>, immune_ring_infiltration_proportions <span class="op">=</span>
@@ -88,10 +88,10 @@ of immune rings without the specification of any argument.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>bg_sample</dt>
-<dd><p>(OPTIONAL) A data.frame or SingleCellExperiment class object
+<dd><p>(OPTIONAL) A data frame or <code>SpatialExperiment</code> class object
 with locations of points representing background cells. Further cell types
 will be simulated based on this background sample. The data.frame or the
-metadata of the SCE object should have colnames including
+<code>spatialCoords()</code> of the SPE object should have colnames including
 "Cell.X.Positions" and "Cell.Y.Positions". By default use the internal
 <code><a href="bg1.html">bg1</a></code> background image.</p></dd>
 
@@ -106,11 +106,6 @@ default is "Others".</p></dd>
 <code>length(ir_properties)</code>.</p></dd>
 
 
-<dt>win</dt>
-<dd><p>(OPTIONAL) owin object output from spatstat.geom::owin function.
-By default is the window of the background image.</p></dd>
-
-
 <dt>ir_properties</dt>
 <dd><p>List of properties of the immune rings. Please refer to
 the examples for the structure of <code>ir_properties</code>.</p></dd>
@@ -123,7 +118,7 @@ the examples for the structure of <code>ir_properties</code>.</p></dd>
 <dt>plot_categories</dt>
 <dd><p>String Vector specifying the order of the cell
 categories to be plotted. Default is NULL - the cell categories under the
-"Phenotype" column would be used for plotting.</p></dd>
+"Cell.Type" column would be used for plotting.</p></dd>
 
 
 <dt>plot_colours</dt>
