@@ -1,6 +1,6 @@
 Package: spaSim
 Title: Spatial point data simulator for tissue images
-Version: 0.99.1
+Version: 0.99.2
 Date: 2022-04-26
 Authors@R: 
     c(person("Yuzhou", "Feng", email = "yuzhou.feng@petermac.org", role = c("aut", "cre"),
@@ -18,19 +18,20 @@ BugReports: https://support.bioconductor.org/t/spaSim
 biocViews: StatisticalMethod, Spatial, BiomedicalInformatics
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Imports: 
     ggplot2,
     methods,
     stats,
     dplyr,
     spatstat.geom,
-    SummarizedExperiment,
     spatstat.random,
-    SingleCellExperiment
+    SpatialExperiment,
+    SummarizedExperiment,
+    tibble
 Depends: 
-    R (>= 4.1.0)
-LazyData: true
+    R (>= 4.2.0)
+LazyData: false
 Suggests: 
     RefManageR,
     BiocStyle,
