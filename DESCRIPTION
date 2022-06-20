@@ -1,6 +1,6 @@
 Package: spaSim
 Title: Spatial point data simulator for tissue images
-Version: 0.99.1
+Version: 0.99.3
 Date: 2022-04-26
 Authors@R: 
     c(person("Yuzhou", "Feng", email = "yuzhou.feng@petermac.org", role = c("aut", "cre"),
@@ -8,7 +8,7 @@ Authors@R:
     person("Anna", "Trigos", email = "anna.trigos@petermac.org", role = c("aut"),
            comment = c(ORCID = "0000-0002-5915-2952")))
 Description: A suite of functions for simulating spatial patterns of cells in 
-    tissue images. Output imagesare multitype point data in SingleCellExperiment 
+    tissue images. Output images are multitype point data in SingleCellExperiment 
     format. Each point represents a cell, with its 2D locations and cell type. 
     Potential cell patterns include background cells, tumour/immune cell clusters, 
     immune rings, and blood/lymphatic vessels.
