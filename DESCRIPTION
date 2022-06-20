@@ -1,6 +1,6 @@
 Package: spaSim
 Title: Spatial point data simulator for tissue images
-Version: 0.99.2
+Version: 0.99.1
 Date: 2022-04-26
 Authors@R: 
     c(person("Yuzhou", "Feng", email = "yuzhou.feng@petermac.org", role = c("aut", "cre"),
@@ -27,8 +27,7 @@ Imports:
     spatstat.geom,
     spatstat.random,
     SpatialExperiment,
-    SummarizedExperiment,
-    tibble
+    SummarizedExperiment
 Depends: 
     R (>= 4.2.0)
 LazyData: true
