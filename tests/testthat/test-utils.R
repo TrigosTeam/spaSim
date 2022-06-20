@@ -21,7 +21,6 @@ test_that("get_colData works", {
     expect_setequal(unique(df$Cell.Type),"Others")
 
     # test if df is the same as bg1
-    df <- tibble::column_to_rownames(df, "Cell.ID")
     df <- df[, c("Cell.X.Position", "Cell.Y.Position", "Cell.Type" )]
     expect_equal(df, bg1)
 })
