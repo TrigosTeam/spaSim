@@ -9,4 +9,4 @@ docs
 spaSim.Rproj
 .nojekyll
 .git
-.yml
+*.yml
