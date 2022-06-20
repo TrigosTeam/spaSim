@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://trigosteam.github.io/spaSim/404.html</loc>
+    <loc>/404.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/articles/index.html</loc>
+    <loc>/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/articles/vignette.html</loc>
+    <loc>/articles/vignette.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/authors.html</loc>
+    <loc>/authors.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/index.html</loc>
+    <loc>/index.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/news/index.html</loc>
+    <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/TIS.html</loc>
+    <loc>/reference/TIS.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/bg1.html</loc>
+    <loc>/reference/bg1.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/format_spe.html</loc>
+    <loc>/reference/format_spe.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/index.html</loc>
+    <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/multiple_background_images.html</loc>
+    <loc>/reference/multiple_background_images.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/multiple_images_with_clusters.html</loc>
+    <loc>/reference/multiple_images_with_clusters.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/multiple_images_with_immune_rings.html</loc>
+    <loc>/reference/multiple_images_with_immune_rings.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/plot_cells.html</loc>
+    <loc>/reference/plot_cells.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/simulate_background_cells.html</loc>
+    <loc>/reference/simulate_background_cells.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/simulate_clusters.html</loc>
+    <loc>/reference/simulate_clusters.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/simulate_double_rings.html</loc>
+    <loc>/reference/simulate_double_rings.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/simulate_immune_rings.html</loc>
+    <loc>/reference/simulate_immune_rings.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/simulate_mixing.html</loc>
+    <loc>/reference/simulate_mixing.html</loc>
   </url>
   <url>
-    <loc>https://trigosteam.github.io/spaSim/reference/simulate_stripes.html</loc>
+    <loc>/reference/simulate_stripes.html</loc>
   </url>
 </urlset>
