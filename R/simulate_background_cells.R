@@ -39,7 +39,7 @@
 
 simulate_background_cells <- function(n_cells, width, height, min_d,
                                       oversampling_rate = 1.2,
-                                      Cell.Type = "Others"){
+                                      Cell.Type = "Others", plot_image = TRUE){
     ## CHECK
     if(!is.numeric(n_cells) | !is.numeric(width) | !is.numeric(height) |
        !is.numeric(min_d) | !is.numeric(oversampling_rate)){

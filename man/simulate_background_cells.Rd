@@ -10,7 +10,8 @@ simulate_background_cells(
   height,
   min_d,
   oversampling_rate = 1.2,
-  Cell.Type = "Others"
+  Cell.Type = "Others",
+  plot_image = TRUE
 )
 }
 \arguments{
