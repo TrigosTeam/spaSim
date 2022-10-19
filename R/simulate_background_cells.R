@@ -17,6 +17,7 @@
 #' @param Cell.Type (OPTIONAL) String. The name of the background cell type.
 #'   Default is "Others" since there shouldn't be any identity of the background
 #'   cells.
+#' @param plot_image (OPTIONAL) Boolean. Default is TRUE.
 #'
 #' @family simulate pattern functions
 #' @seealso \code{\link{simulate_mixing}} for mixed background simulation,
@@ -33,7 +34,8 @@
 #' background_image <- simulate_background_cells(n_cells = 5000, width = 2000,
 #'                                               height = 2000, min_d = 10,
 #'                                               oversampling_rate = 1.5,
-#'                                               Cell.Type = "Others")
+#'                                               Cell.Type = "Others",
+#'                                               plot_image = TRUE)
 
 simulate_background_cells <- function(n_cells, width, height, min_d,
                                       oversampling_rate = 1.2,
@@ -71,7 +73,7 @@ simulate_background_cells <- function(n_cells, width, height, min_d,
     sample$Cell.Type <- Cell.Type
 
     # plot
-    plot_cells(sample, Cell.Type, "lightgray", "Cell.Type")
+    if (plot_image) plot_cells(sample, Cell.Type, "lightgray", "Cell.Type")
 
     return(sample)
 }
