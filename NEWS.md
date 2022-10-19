@@ -1,3 +1,9 @@
+# spaSim 0.99.4
+
+SIGNIFICANT USER CHANGE
+
+* Added an optional parameter `plot_image` to `simulate_background_cells()`.
+
 # spaSim 0.99.3
 
 NO SIGNIFICANT CHANGE
