@@ -21,7 +21,7 @@ function uses rHardcore spatstat.random.'><!-- mathjax --><script src="https://c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spaSim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.4</span>
       </span>
     </div>
 
@@ -65,14 +65,15 @@ function uses <code>rHardcore</code> <code>spatstat.random</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">simulate_background_cells</span><span class="op">(</span>
-  <span class="va">n_cells</span>,
-  <span class="va">width</span>,
-  <span class="va">height</span>,
-  <span class="va">min_d</span>,
-  oversampling_rate <span class="op">=</span> <span class="fl">1.2</span>,
-  Cell.Type <span class="op">=</span> <span class="st">"Others"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">simulate_background_cells</span><span class="op">(</span></span>
+<span>  <span class="va">n_cells</span>,</span>
+<span>  <span class="va">width</span>,</span>
+<span>  <span class="va">height</span>,</span>
+<span>  <span class="va">min_d</span>,</span>
+<span>  oversampling_rate <span class="op">=</span> <span class="fl">1.2</span>,</span>
+<span>  Cell.Type <span class="op">=</span> <span class="st">"Others"</span>,</span>
+<span>  plot_image <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -102,6 +103,10 @@ always be larger than 1).</p></dd>
 Default is "Others" since there shouldn't be any identity of the background
 cells.</p></dd>
 
+
+<dt>plot_image</dt>
+<dd><p>(OPTIONAL) Boolean. Default is TRUE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -126,11 +131,12 @@ simulation.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">610</span><span class="op">)</span> <span class="co"># set seed for this background image simulation for reproducibility</span></span>
-<span class="r-in"><span class="va">background_image</span> <span class="op">&lt;-</span> <span class="fu">simulate_background_cells</span><span class="op">(</span>n_cells <span class="op">=</span> <span class="fl">5000</span>, width <span class="op">=</span> <span class="fl">2000</span>,</span>
-<span class="r-in">                                              height <span class="op">=</span> <span class="fl">2000</span>, min_d <span class="op">=</span> <span class="fl">10</span>,</span>
-<span class="r-in">                                              oversampling_rate <span class="op">=</span> <span class="fl">1.5</span>,</span>
-<span class="r-in">                                              Cell.Type <span class="op">=</span> <span class="st">"Others"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">610</span><span class="op">)</span> <span class="co"># set seed for this background image simulation for reproducibility</span></span></span>
+<span class="r-in"><span><span class="va">background_image</span> <span class="op">&lt;-</span> <span class="fu">simulate_background_cells</span><span class="op">(</span>n_cells <span class="op">=</span> <span class="fl">5000</span>, width <span class="op">=</span> <span class="fl">2000</span>,</span></span>
+<span class="r-in"><span>                                              height <span class="op">=</span> <span class="fl">2000</span>, min_d <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>                                              oversampling_rate <span class="op">=</span> <span class="fl">1.5</span>,</span></span>
+<span class="r-in"><span>                                              Cell.Type <span class="op">=</span> <span class="st">"Others"</span>,</span></span>
+<span class="r-in"><span>                                              plot_image <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="simulate_background_cells-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -146,7 +152,7 @@ simulation.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
