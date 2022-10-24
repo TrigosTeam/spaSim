@@ -1,6 +1,6 @@
 Package: spaSim
 Title: Spatial point data simulator for tissue images
-Version: 0.99.4
+Version: 0.99.5
 Date: 2022-04-26
 Authors@R: 
     c(person("Yuzhou", "Feng", email = "yuzhou.feng@petermac.org", role = c("aut", "cre"),

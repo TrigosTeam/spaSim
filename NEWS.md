@@ -1,3 +1,9 @@
+# spaSim 0.99.5
+
+SIGNIFICANT USER CHANGE
+
+* `TIS()` only plots one plot when arg `plot_image` is `TRUE`.
+
 # spaSim 0.99.4
 
 SIGNIFICANT USER CHANGE

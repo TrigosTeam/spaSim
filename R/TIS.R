@@ -131,8 +131,9 @@ TIS <- function(bg_sample = NULL,
             bg_sample = image,
             idents = names_of_bg_cells,
             props = proportions_of_bg_cells,
-            plot_image = plot_image,
-            plot_colours = plot_colours
+            plot_image = FALSE
+            # plot_image = plot_image,
+            # plot_colours = plot_colours
         )
     }
     # simulate clusters ####
@@ -159,9 +160,10 @@ TIS <- function(bg_sample = NULL,
             n_clusters = n_clusters,
             bg_type = "Others",
             cluster_properties = properties_of_clusters,
-            plot_image = plot_image,
-            plot_categories = plot_categories,
-            plot_colours = plot_colours
+            plot_image = FALSE
+            # plot_image = plot_image,
+            # plot_categories = plot_categories,
+            # plot_colours = plot_colours
         )
     }
     # simulate_immune_rings ####
@@ -194,9 +196,10 @@ TIS <- function(bg_sample = NULL,
             n_ir = n_immune_rings,
             bg_type = "Others",
             ir_properties = properties_of_immune_rings,
-            plot_image = plot_image,
-            plot_categories = plot_categories,
-            plot_colours = plot_colours
+            plot_image = FALSE
+            # plot_image = plot_image,
+            # plot_categories = plot_categories,
+            # plot_colours = plot_colours
         )
     }
     # simulate_double_rings ####
@@ -236,9 +239,10 @@ TIS <- function(bg_sample = NULL,
             n_dr = n_double_rings,
             bg_type = "Others",
             dr_properties = properties_of_double_rings,
-            plot_image = plot_image,
-            plot_categories = plot_categories,
-            plot_colours = plot_colours
+            plot_image = FALSE
+            # plot_image = plot_image,
+            # plot_categories = plot_categories,
+            # plot_colours = plot_colours
         )
     }
     # simulate_stripes ####
@@ -266,15 +270,26 @@ TIS <- function(bg_sample = NULL,
             bg_sample = image,
             n_stripe_type = n_stripe_type,
             stripe_properties = properties_of_stripes,
-            plot_image = plot_image,
-            plot_categories = plot_categories,
-            plot_colours = plot_colours
+            plot_image = FALSE
+            # plot_image = plot_image,
+            # plot_categories = plot_categories,
+            # plot_colours = plot_colours
         )
     }
     #####
     # format spe object
     spe <- format_spe(image)
     attr(spe, "name") <- image_name
+
+    if(plot_image){
+        if(is.null(plot_categories)) plot_categories <- unique(spe$Cell.Type)
+        if (is.null(plot_colours)){
+            plot_colours <- c("gray","darkgreen", "red", "darkblue", "brown", "purple", "lightblue",
+                              "lightgreen", "yellow", "black", "pink")
+        }
+        phenos <- plot_categories
+        plot_cells(image, phenos, plot_colours[seq_len(length(phenos))], "Cell.Type")
+    }
 
     return(spe)
 }
