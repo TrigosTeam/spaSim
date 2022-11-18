@@ -8,8 +8,8 @@ simulate_clusters(
   bg_sample = bg1,
   n_clusters = 2,
   bg_type = "Others",
-  cluster_properties = list(C1 = list(name_of_cluster_cell = "Tumour", size = 300,
-    shape = "Oval", centre_loc = data.frame(x = 500, y = 500), infiltration_types =
+  cluster_properties = list(C1 = list(name_of_cluster_cell = "Tumour", size = 300, shape
+    = "Oval", centre_loc = data.frame(x = 500, y = 500), infiltration_types =
     c("Immune1", "Others"), infiltration_proportions = c(0.1, 0.05)), C2 =
     list(name_of_cluster_cell = "Immune1", size = 500, shape = "Irregular", centre_loc =
     data.frame(x = 1500, y = 500), infiltration_types = c("Immune2", "Others"),

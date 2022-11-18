@@ -9,8 +9,10 @@ TIS(
   n_cells = NULL,
   width = NULL,
   height = NULL,
+  bg_method = NULL,
   min_d = NULL,
   oversampling_rate = 1.2,
+  jitter = 0.3,
   names_of_bg_cells = NULL,
   proportions_of_bg_cells = NULL,
   n_clusters = NULL,
@@ -41,6 +43,9 @@ will be simulated based on this background sample. The data.frame or the
 \item{width}{(OPTIONAL) Number The width of the image.}
 
 \item{height}{(OPTIONAL) Number The height of the image.}
+
+\item{bg_method}{(OPTIONAL) String specifying the distribution of the
+background cells. Choose from "Hardcore" and "Even".}
 
 \item{min_d}{(OPTIONAL) Number The minimum distance between two cells.}
 

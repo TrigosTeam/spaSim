@@ -1,13 +1,33 @@
-test_that("simulate_background_cells works", {
+test_that("simulate_background_cells works for Hardcore process", {
     set.seed(610)
     bg <- simulate_background_cells(n_cells = 5000,
                                     width = 2000,
                                     height = 2000,
+                                    method = "Hardcore",
                                     min_d = 10,
                                     oversampling_rate = 1.5,
                                     Cell.Type="Others")
 
     expect_identical(bg, bg1)
+})
+
+test_that("simulate_background_cells works for Evenly spaced distribution", {
+    set.seed(610)
+    bg <- simulate_background_cells(n_cells = 5000,
+                                    width = 2000,
+                                    height = 2000,
+                                    method = "Even",
+                                    jitter = 0.3,
+                                    Cell.Type="Others")
+
+    exp <- data.frame(matrix(nrow = 4, ncol = 4))
+    colnames(exp) <- c("Cell.ID", "Cell.X.Position", "Cell.Y.Position", "Cell.Type")
+    exp$Cell.ID <- 1:4
+    exp$Cell.X.Position <- c(35.10153, 68.26751, 94.19884, 122.34766)
+    exp$Cell.Y.Position <- c(31.37153, 24.56046, 30.47941, 32.81419)
+    exp$Cell.Type <- rep("Others", 4)
+
+    expect_identical(bg[1:4, ], exp, tolerance = 0.001)
 })
 
 test_that("simulate_multiple_background_images works",{
@@ -36,6 +56,7 @@ test_that("TIS works for generating background image", {
                  n_cells = 5000,
                  width = 2000,
                  height = 2000,
+                 bg_method = "Hardcore",
                  min_d = 10,
                  names_of_bg_cells = c("Tumour","Immune", "Others"),
                  proportions_of_bg_cells = c(0.1, 0.3, 0.6),

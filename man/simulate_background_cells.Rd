@@ -8,8 +8,10 @@ simulate_background_cells(
   n_cells,
   width,
   height,
+  method = "Hardcore",
   min_d,
   oversampling_rate = 1.2,
+  jitter = 0.3,
   Cell.Type = "Others",
   plot_image = TRUE
 )
@@ -19,19 +21,28 @@ simulate_background_cells(
 
 \item{width, height}{Numeric. The width and height of the image.}
 
-\item{min_d}{Numeric. The minimum distance between two cells.}
+\item{method}{String. The distribution model for the background cells.
+Options are "Hardcore" for tumour tissues and "Even" for normal tissues.
+Default is "Hardcore".}
 
-\item{oversampling_rate}{(OPTIONAL) Numeric. The multiplier for oversampling.
-Without oversampling, the simulation deletes cells that are within \code{min_d}
-from each other, resulting in a less total number of cells than \code{n_cells}.
-Default is 1.2 (this should be set based on \code{n_cells} and \code{min_d}; should
-always be larger than 1).}
+\item{min_d}{(OPTIONAL) Numeric. Use when \code{method} is "Hardcore". The minimum
+distance between two cells.}
+
+\item{oversampling_rate}{(OPTIONAL) Numeric. Use when \code{method} is "Hardcore".
+The multiplier for oversampling. Without oversampling, the simulation
+deletes cells that are within \code{min_d} from each other, resulting in a less
+total number of cells than \code{n_cells}. Default is 1.2 (this should be set
+based on \code{n_cells} and \code{min_d}; should always be larger than 1).}
 
 \item{Cell.Type}{(OPTIONAL) String. The name of the background cell type.
 Default is "Others" since there shouldn't be any identity of the background
 cells.}
 
 \item{plot_image}{(OPTIONAL) Boolean. Default is TRUE.}
+
+\item{jitter.}{(OPTIONAL) Numeric. Use when \code{method} is "Even". The uniform
+distribution parameter to generate the jitter distance for each cell from
+the vertices of the hexagon.}
 }
 \value{
 A data.frame of the simulated background image
@@ -40,13 +51,30 @@ A data.frame of the simulated background image
 Simulate cell locations. The 2D locations of the cells are
 simulated and plotted in a rectangular window. Users can specify the window
 size, cell number and the minimum distance between two cells. All cells
-have the same cell type, specified by the "Cell.Type" param. This
-function uses \code{rHardcore} \code{\link{spatstat.random}}.
+have the same cell type, specified by the "Cell.Type" param.
+}
+\details{
+There are two options for the background cell distribution model. 1)
+Hardcore model for tumour tissues. This model uses \code{rHardcore}
+\code{\link{spatstat.random}}. Since \code{rHardcore} deletes cells that are within the
+distance of \code{min_d} to another cell, resulting in fewer cell specified by
+users, we here introduce parameter \code{oversampling_rate} to generate more
+cells than specified. 2) Normal tissues use an evenly-spaced model where
+the cells are distributed approximately according to the vertices of a
+hexagon. The function accomplishes this by generating cells on a hexagonal
+grid and individually applying a bounded uniform random jitter. In our
+algorithm, \code{jitter} is the parameter to define the uniform distribution of
+the jitter of the cells from the hexagon vertices. If there is a reference
+image, \code{jitter} can be estimated by comparing the average minimum distance
+between cells of the simulated image and the reference image. If without a
+reference image, We suggest 0.3 as the default value of \code{jitter} as this
+gives a sensible outcome.
 }
 \examples{
 set.seed(610) # set seed for this background image simulation for reproducibility
 background_image <- simulate_background_cells(n_cells = 5000, width = 2000,
-                                              height = 2000, min_d = 10,
+                                              height = 2000, method = "Hardcore",
+                                              min_d = 10,
                                               oversampling_rate = 1.5,
                                               Cell.Type = "Others",
                                               plot_image = TRUE)

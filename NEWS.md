@@ -1,3 +1,13 @@
+# spaSim 1.1.1
+
+SIGIFICANT USER CHANGE
+
+* `simulate_background_cells()` added an option (`method = "Even"`) to simulate
+evenly spaced background images. This change is accompanied with addition of two 
+parameters, `method` - to choose the background cell distribution and `jitter`
+- the parameter to simulate evenly spaced background cells. Tutorials and 
+function `TIS()` were modified accordingly.
+
 # spaSim 0.99.5
 
 SIGNIFICANT USER CHANGE
