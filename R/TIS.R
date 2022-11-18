@@ -24,6 +24,8 @@
 #'   `bg_sample` is NULL.
 #' @param width (OPTIONAL) Number The width of the image.
 #' @param height (OPTIONAL) Number The height of the image.
+#' @param bg_method (OPTIONAL) String specifying the distribution of the
+#'   background cells. Choose from "Hardcore" and "Even".
 #' @param min_d (OPTIONAL) Number The minimum distance between two cells.
 #' @param oversampling_rate (OPTIONAL) Numeric. The multiplier for oversampling.
 #'   Without oversampling, the simulation deletes cells that are within `min_d`
@@ -73,8 +75,10 @@ TIS <- function(bg_sample = NULL,
                 n_cells = NULL,
                 width = NULL,
                 height = NULL,
+                bg_method = NULL,
                 min_d = NULL,
                 oversampling_rate = 1.2,
+                jitter = 0.3,
                 names_of_bg_cells = NULL,
                 proportions_of_bg_cells = NULL,
                 n_clusters = NULL,
@@ -91,11 +95,10 @@ TIS <- function(bg_sample = NULL,
                 plot_colours = NULL) {
     ## CHECK
     if (is.null(bg_sample)) {
-        if(!is.numeric(n_cells) | !is.numeric(width) | !is.numeric(height) |
-           !is.numeric(min_d) | !is.numeric(oversampling_rate)){
-            stop("One or more of `n_cells`, `width`, `height`, `min_d`, `oversampling_rate` is not numeric!")}
-        bg_sample <- simulate_background_cells(n_cells, width, height, min_d,
-                                               oversampling_rate = oversampling_rate)
+        bg_sample <- simulate_background_cells(n_cells, width, height, method = bg_method,
+                                               min_d = min_d,
+                                               oversampling_rate = oversampling_rate,
+                                               jitter = jitter)
         X <- width
         Y <- height
     }

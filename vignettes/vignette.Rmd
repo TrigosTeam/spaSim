@@ -95,13 +95,16 @@ In spaSim, spatial patterns are simulated on separate layers sequentially starti
 ### Simulate background cells
 First we randomly generate the spatial locations of generic 'background cells' (without cell identities). The 'background cells' will serve as the input to the other simulation functions shown below which can assign new identities to these cells in a structured or unstructured way.
 
-Background images are simulated with a Hardcore Process, which is a Poisson process where events (i.e. cells) are maintained at a specific minimum distance from each other. As `rHardcore` from `spatstat.random` package deletes cells based on this requirement, our function uses a `oversampling_rate` to create more cells than the target number of cells (`n_cells`) to ensure the resulting image has the number of cells specified. If the resulting image ends up with slightly fewer cells than specified, increase the `oversampling_rate` argument to account for this. 
+Two options are avaible for background cell simulation. We suggest simulating tumour images with a Hardcore Process (`method = "Hardcore"`), which is a Poisson process where events (i.e. cells) are maintained at a specific minimum distance from each other. As `rHardcore` from `spatstat.random` package deletes cells based on this requirement, our function uses a `oversampling_rate` to create more cells than the target number of cells (`n_cells`) to ensure the resulting image has the number of cells specified. If the resulting image ends up with slightly fewer cells than specified, increase the `oversampling_rate` argument to account for this. 
+
+For normal tissues, we suggest using option `method = "Even"` to simulate the background cells, where the cells approximately locate on the vertices of hexagons with a jitter that follows a uniform distribution applied. This is because normal cells tend to evenly spaced across the image.
 
 ```{r}
 set.seed(610)
 bg <- simulate_background_cells(n_cells = 5000,
                                 width = 2000,
                                 height = 2000,
+                                method = "Hardcore",
                                 min_d = 10,
                                 oversampling_rate = 1.6,
                                 Cell.Type = "Others")
@@ -109,6 +112,21 @@ head(bg)
 # use dim(bg)[1] to check if the same number of cells are simulated. 
 # if not, increase `oversampling_rate`.
 dim(bg)[1]
+```
+
+We also give an example of normal tissue simulation here. The following code is not run within this vignette.
+
+```{r, eval=FALSE}
+set.seed(610)
+bg_normal <- simulate_background_cells(n_cells = 5000,
+                                      width = 2000,
+                                      height = 2000,
+                                      method = "Even",
+                                      min_d = NULL,
+                                      jitter = 0.3,
+                                      Cell.Type = "Others")
+head(bg_normal)
+dim(bg_normal)[1]
 ```
 
 ### Simulate mixed background
@@ -306,6 +324,7 @@ simulated_image <- TIS(bg_sample = NULL,
    n_cells = 5000,
    width = 2000,
    height = 2000,
+   bg_method = "Hardcore",
    min_d = 10,
    oversampling_rate = 1.6, 
    n_clusters = 1,
