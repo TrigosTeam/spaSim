@@ -125,18 +125,19 @@ plot_cells <- function(spe_object, categories_of_interest = NULL,
         all_colours <- colour_vector
     }
 
-    p <- ggplot(formatted_data, aes_string(x = "Cell.X.Position",
-                                           y = "Cell.Y.Position", colour = feature_colname)) +
-        geom_point(aes_string(colour = feature_colname), size = 1)
-    p <- ggplot(formatted_data, aes_string(x = "Cell.X.Position", y = "Cell.Y.Position",
-                                           colour = feature_colname))
+    p <- ggplot(formatted_data, aes(x = Cell.X.Position,
+                                    y = Cell.Y.Position, colour = .data[[feature_colname]])) +
+        geom_point(aes(colour = .data[[feature_colname]]), size = 1)
+    p <- ggplot(formatted_data, aes(x = Cell.X.Position,
+                                    y = Cell.Y.Position,
+                                           colour = .data[[feature_colname]]))
     if (any(formatted_data[[feature_colname]] == "Unspecified")) {
         p <- p + geom_point(data=subset(formatted_data, get(feature_colname) =='Unspecified'),
-                            aes_string(colour = feature_colname), size = 1) +
+                            aes(colour = .data[[feature_colname]]), size = 1) +
             geom_point(data=subset(formatted_data, get(feature_colname) !='Unspecified'),
-                       aes_string(colour = feature_colname), size = 1)
+                       aes(colour = .data[[feature_colname]]), size = 1)
     }else{
-        p <- p + geom_point(aes_string(colour = feature_colname), size = 1)}
+        p <- p + geom_point(aes(colour = .data[[feature_colname]]), size = 1)}
 
     p <- p +
         guides(alpha = "none") +
@@ -155,3 +156,24 @@ plot_cells <- function(spe_object, categories_of_interest = NULL,
     methods::show(p)
 }
 
+
+# Quadratic Formula In R: ####
+# Reference: http://stackoverflow.com/questions/15589601/print-string-and-variable-contents-on-the-same-line-in-r
+# Quadratic equation form of ax^2 + bx + c
+# Create quadratic formula function:
+# The function below is adapted by Yuzhou Feng
+quadraticRoots <- function(a, b, c) {
+
+    discriminant <- (b^2) - (4*a*c)
+
+    if(discriminant < 0) {
+        return(paste0("This quadratic equation has no real numbered roots."))
+    }
+    else if(discriminant > 0) {
+        x_int_plus <- (-b + sqrt(discriminant)) / (2*a)
+        x_int_neg <- (-b - sqrt(discriminant)) / (2*a)
+        return(x_int_plus)
+    }else x_int <- (-b) / (2*a)
+
+    return(x_int)
+}
