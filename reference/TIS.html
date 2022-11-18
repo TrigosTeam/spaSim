@@ -28,7 +28,7 @@ simulate_stripes"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spaSim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -84,8 +84,10 @@ properties see the examples in <a href="simulate_clusters.html">simulate_cluster
 <span>  n_cells <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  width <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  height <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  bg_method <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  min_d <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  oversampling_rate <span class="op">=</span> <span class="fl">1.2</span>,</span>
+<span>  jitter <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>  names_of_bg_cells <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  proportions_of_bg_cells <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  n_clusters <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -125,6 +127,11 @@ will be simulated based on this background sample. The data.frame or the
 
 <dt>height</dt>
 <dd><p>(OPTIONAL) Number The height of the image.</p></dd>
+
+
+<dt>bg_method</dt>
+<dd><p>(OPTIONAL) String specifying the distribution of the
+background cells. Choose from "Hardcore" and "Even".</p></dd>
 
 
 <dt>min_d</dt>
