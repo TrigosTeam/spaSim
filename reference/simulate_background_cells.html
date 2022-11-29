@@ -20,7 +20,7 @@ have the same cell type, specified by the "Cell.Type" param.'><!-- mathjax --><s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spaSim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
@@ -105,6 +105,12 @@ total number of cells than <code>n_cells</code>. Default is 1.2 (this should be 
 based on <code>n_cells</code> and <code>min_d</code>; should always be larger than 1).</p></dd>
 
 
+<dt>jitter</dt>
+<dd><p>(OPTIONAL) Numeric. Use when <code>method</code> is "Even". The uniform
+distribution parameter to generate the jitter distance for each cell from
+the vertices of the hexagon.</p></dd>
+
+
 <dt>Cell.Type</dt>
 <dd><p>(OPTIONAL) String. The name of the background cell type.
 Default is "Others" since there shouldn't be any identity of the background
@@ -113,12 +119,6 @@ cells.</p></dd>
 
 <dt>plot_image</dt>
 <dd><p>(OPTIONAL) Boolean. Default is TRUE.</p></dd>
-
-
-<dt>jitter.</dt>
-<dd><p>(OPTIONAL) Numeric. Use when <code>method</code> is "Even". The uniform
-distribution parameter to generate the jitter distance for each cell from
-the vertices of the hexagon.</p></dd>
 
 </dl></div>
     <div id="value">

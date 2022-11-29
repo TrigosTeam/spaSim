@@ -28,7 +28,7 @@ simulate_stripes"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spaSim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
@@ -144,6 +144,12 @@ Without oversampling, the simulation deletes cells that are within <code>min_d</
 from each other, resulting in a less total number of cells than <code>n_cells</code>.
 Default is 1.2 (this should be set based on <code>n_cells</code> and <code>min_d</code>; should
 always be larger than 1).</p></dd>
+
+
+<dt>jitter</dt>
+<dd><p>(OPTIONAL) Numeric. Use when <code>method</code> is "Even". The uniform
+distribution parameter to generate the jitter distance for each cell from
+the vertices of the hexagon.</p></dd>
 
 
 <dt>names_of_bg_cells</dt>
