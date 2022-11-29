@@ -34,15 +34,15 @@ deletes cells that are within \code{min_d} from each other, resulting in a less
 total number of cells than \code{n_cells}. Default is 1.2 (this should be set
 based on \code{n_cells} and \code{min_d}; should always be larger than 1).}
 
+\item{jitter}{(OPTIONAL) Numeric. Use when \code{method} is "Even". The uniform
+distribution parameter to generate the jitter distance for each cell from
+the vertices of the hexagon.}
+
 \item{Cell.Type}{(OPTIONAL) String. The name of the background cell type.
 Default is "Others" since there shouldn't be any identity of the background
 cells.}
 
 \item{plot_image}{(OPTIONAL) Boolean. Default is TRUE.}
-
-\item{jitter.}{(OPTIONAL) Numeric. Use when \code{method} is "Even". The uniform
-distribution parameter to generate the jitter distance for each cell from
-the vertices of the hexagon.}
 }
 \value{
 A data.frame of the simulated background image

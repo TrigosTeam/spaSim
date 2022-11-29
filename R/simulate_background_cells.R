@@ -33,7 +33,7 @@
 #'   deletes cells that are within `min_d` from each other, resulting in a less
 #'   total number of cells than `n_cells`. Default is 1.2 (this should be set
 #'   based on `n_cells` and `min_d`; should always be larger than 1).
-#' @param jitter. (OPTIONAL) Numeric. Use when `method` is "Even". The uniform
+#' @param jitter (OPTIONAL) Numeric. Use when `method` is "Even". The uniform
 #'   distribution parameter to generate the jitter distance for each cell from
 #'   the vertices of the hexagon.
 #' @param Cell.Type (OPTIONAL) String. The name of the background cell type.
@@ -86,8 +86,8 @@ simulate_background_cells <- function(n_cells, width, height, method = "Hardcore
         n_sim <- x_cells*y_cells
 
         # adding randomness to the locations of the cells
-        jitter_x <- runif(n_sim, -jitter, jitter)
-        jitter_y <- runif(n_sim, -jitter, jitter)
+        jitter_x <- stats::runif(n_sim, -jitter, jitter)
+        jitter_y <- stats::runif(n_sim, -jitter, jitter)
 
         # assume the cells are located on hexagons but have little jittering
         x <- rep(seq(1, x_cells), y_cells) + jitter_x + c(rep(0,y_cells), rep(0.5, y_cells))
