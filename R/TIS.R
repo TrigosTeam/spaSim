@@ -95,6 +95,8 @@ TIS <- function(bg_sample = NULL,
                 plot_colours = NULL) {
     ## CHECK
     if (is.null(bg_sample)) {
+        if (is.null(oversampling_rate)) oversampling_rate <- 1.2
+        if (is.null(jitter)) jitter <- 0.3
         bg_sample <- simulate_background_cells(n_cells, width, height, method = bg_method,
                                                min_d = min_d,
                                                oversampling_rate = oversampling_rate,
@@ -110,8 +112,6 @@ TIS <- function(bg_sample = NULL,
     if (!is.null(plot_colours) & !is.null(plot_categories)){
         if (length(plot_categories) != length(plot_colours)){
             stop("`plot_categories` and `plot_colours` should be of the same length!")}}
-
-    if (is.null(plot_categories)) plot_categories <- unique(bg_sample$Cell.Type)
 
     if (methods::is(bg_sample,"SpatialExperiment")) {
         bg_sample <- get_colData(bg_sample)}
@@ -135,8 +135,6 @@ TIS <- function(bg_sample = NULL,
             idents = names_of_bg_cells,
             props = proportions_of_bg_cells,
             plot_image = FALSE
-            # plot_image = plot_image,
-            # plot_colours = plot_colours
         )
     }
     # simulate clusters ####
@@ -164,9 +162,6 @@ TIS <- function(bg_sample = NULL,
             bg_type = "Others",
             cluster_properties = properties_of_clusters,
             plot_image = FALSE
-            # plot_image = plot_image,
-            # plot_categories = plot_categories,
-            # plot_colours = plot_colours
         )
     }
     # simulate_immune_rings ####
@@ -200,9 +195,6 @@ TIS <- function(bg_sample = NULL,
             bg_type = "Others",
             ir_properties = properties_of_immune_rings,
             plot_image = FALSE
-            # plot_image = plot_image,
-            # plot_categories = plot_categories,
-            # plot_colours = plot_colours
         )
     }
     # simulate_double_rings ####
@@ -243,9 +235,6 @@ TIS <- function(bg_sample = NULL,
             bg_type = "Others",
             dr_properties = properties_of_double_rings,
             plot_image = FALSE
-            # plot_image = plot_image,
-            # plot_categories = plot_categories,
-            # plot_colours = plot_colours
         )
     }
     # simulate_stripes ####
@@ -274,12 +263,9 @@ TIS <- function(bg_sample = NULL,
             n_stripe_type = n_stripe_type,
             stripe_properties = properties_of_stripes,
             plot_image = FALSE
-            # plot_image = plot_image,
-            # plot_categories = plot_categories,
-            # plot_colours = plot_colours
         )
     }
-    #####
+
     # format spe object
     spe <- format_spe(image)
     attr(spe, "name") <- image_name
