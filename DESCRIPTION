@@ -27,7 +27,8 @@ Imports:
     spatstat.geom,
     spatstat.random,
     SpatialExperiment,
-    SummarizedExperiment
+    SummarizedExperiment,
+    RANN
 Depends: 
     R (>= 4.2.0)
 LazyData: true
