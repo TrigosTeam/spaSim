@@ -32,6 +32,9 @@
 #'   from each other, resulting in a less total number of cells than `n_cells`.
 #'   Default is 1.2 (this should be set based on `n_cells` and `min_d`; should
 #'   always be larger than 1).
+#' @param jitter (OPTIONAL) Numeric. Use when `method` is "Even". The uniform
+#'   distribution parameter to generate the jitter distance for each cell from
+#'   the vertices of the hexagon.
 #' @param names_of_bg_cells (OPTIONAL) Vector The cell types of the background
 #'   cells. If NULL, the background cells are of one type.
 #' @param proportions_of_bg_cells (OPTIONAL) Vector The corresponding proportion
