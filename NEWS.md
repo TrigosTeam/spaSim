@@ -1,4 +1,11 @@
-# spaSim 1.1.1
+# spaSim 1.0.2
+
+BUG FIXES
+
+* Fixed documentation of argument `jitter` in `TIS()` and `simulate_background_cells()`.
+* Fixed incorrectly plotted image in README.
+
+# spaSim 1.0.1
 
 SIGIFICANT USER CHANGE
 
