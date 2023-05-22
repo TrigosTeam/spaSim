@@ -6,7 +6,7 @@ bibentry(
     person("Yuzhou", "Feng"),
     person("Anna S", "Trigos")
   ),
-  note = "R package version 1.2.0",
+  note = "R package version 1.2.1",
   year = "2023",
   url = "https://trigosteam.github.io/SPIAT/"),
 bibentry(

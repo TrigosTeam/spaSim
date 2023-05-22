@@ -1,3 +1,11 @@
+# spaSim 1.2.1
+
+Added newly published paper.
+
+# spaSim 1.2.0
+
+Development version in Bioconductor 3.18.
+
 # spaSim 1.1.2
 
 BUG FIXES
