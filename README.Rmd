@@ -65,3 +65,8 @@ mix_background <- TIS(n_cells = 5000, width = 2000, height = 2000,
 
 ## Creators
 spaSim was created, designed and implemented by Yuzhou Feng. Anna Trigos provided supervision and guidance.
+
+## Paper reference
+Please check our latest paper for more information! 
+
+Yuzhou Feng et al, Spatial analysis with SPIAT and spaSim to characterize and simulate tissue microenvironments, Nature Communications (2023). DOI: 10.1038/s41467-023-37822-0
